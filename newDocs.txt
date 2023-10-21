@@ -1,0 +1,32 @@
+-------------------------------------- Truky --------------------------------------
+1 -> Products add attr shops
+2 -> at add Product shop attr not found in postman
+3 -> list roles doesn't working
+
+
+
+
+
+
+
+
+-------------------------------------- Pages Finished --------------------------------------
+1 -> countries  --> add country
+2 -> Province   --> add Province
+3 -> cities     --> add City
+4 -> origin     --> add origin
+5 -> products   --> add product
+5 -> size       --> add size
+5 -> users      --> add user
+
+
+
+
+
+
+
+
+
+
+-------------------------------------- Have Issuses --------------------------------------
+1 -> products list shops attr

@@ -1,0 +1,15 @@
+-------------------------------------- Truky --------------------------------------
+4 -> delete Roaster has id = 4 not working
+5 -> zone id is require at add coffee
+
+
+
+-------------------------------------- Mostafa --------------------------------------
+1 -> First Comment Doesn't Finish
+
+
+
+
+
+-------------------------------------- Nabowy --------------------------------------
+1 -> Add Roaster Doesn't Finished
