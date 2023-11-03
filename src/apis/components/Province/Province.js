@@ -1,11 +1,10 @@
-import { RequestManager, Swal, baseUrl, secondrayUrl } from "../../data";
+import { RequestManager, Swal, secondrayUrl } from "../../data";
 
 class Province {
 
-
     fetchProvinces(state, dispatch) {
 
-        RequestManager.get(`${baseUrl}provinces`)
+        return RequestManager.get(`${secondrayUrl}provinces`)
 
             .then(response => {
 
@@ -20,9 +19,26 @@ class Province {
 
     }
 
+    getProvince(state, id) {
+
+        return RequestManager.get(`${secondrayUrl}provinces/${id}`)
+
+            .then(response => {
+
+                state(response.data.data);
+
+            })
+            .catch(error => {
+
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+
+            })
+
+    }
+
     addProvinces(data) {
 
-        RequestManager.post(`${secondrayUrl}provinces`, data, true)
+        return RequestManager.post(`${secondrayUrl}provinces`, data, true)
 
             .then(response => {
 
@@ -39,9 +55,27 @@ class Province {
 
     }
 
+    editProvinces(data, id) {
+
+        return RequestManager.put(`${secondrayUrl}provinces/${id}`, { name: data.name, country_id: data?.country_id }, true)
+
+            .then(response => {
+
+                Swal.success('Added!', `Your Provinces has been Updated.`).then(res => window.location.href = '/settings/province/list');
+
+                return
+
+            })
+            .catch(error => {
+
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+
+            })
+    }
+
     deleteProvince(id) {
 
-        RequestManager.delete(`${secondrayUrl}provinces/${id}`)
+        return RequestManager.delete(`${secondrayUrl}provinces/${id}`)
 
             .then(response => {
 

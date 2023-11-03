@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-export default function PageContent({ children, title, showActions, url }) {
+export default function PageContent({ children, title, showActions, url, addnewClassNames }) {
     return (
 
         <section className='rounded-[20px] my-10' style={{ boxShadow: "rgba(126, 124, 152, 0.1) 0px -2px 8px 3px" }}>
@@ -27,7 +27,7 @@ export default function PageContent({ children, title, showActions, url }) {
 
                             </button>
 
-                            <Link to={url}>
+                            <Link className={addnewClassNames} to={url}>
 
                                 <button className='flex items-center py-3 px-8 rounded-full bg-[var(--primary-color)] text-white  border border-[var(--primary-color)]'>
 

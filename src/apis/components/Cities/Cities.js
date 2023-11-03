@@ -1,10 +1,10 @@
-import { RequestManager, baseUrl, secondrayUrl, Swal } from "../../data";
+import { RequestManager, secondrayUrl, Swal } from "../../data";
 
 class Cities {
 
     fetchCities(state, dispatch) {
 
-        RequestManager.get(`${baseUrl}cities`)
+        return RequestManager.get(`${secondrayUrl}cities`)
 
             .then(response => {
 
@@ -21,7 +21,7 @@ class Cities {
 
     addCity(data) {
 
-        RequestManager.post(`${secondrayUrl}cities`, data, true)
+        return RequestManager.post(`${secondrayUrl}cities`, data, true)
 
             .then(response => {
 
@@ -38,9 +38,29 @@ class Cities {
 
     }
 
+    editCity(data, id) {
+
+        const sendedData = { name: data?.name, province_id: data?.province_id?.id }
+
+        return RequestManager.put(`${secondrayUrl}cities/${id}`, sendedData, true)
+
+            .then(response => {
+
+                Swal.success('Added!', `Your City has been Updated.`).then(res => window.location.href = '/settings/cities/list');
+
+                return
+
+            })
+            .catch(error => {
+
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+
+            })
+    }
+
     deleteCity(id) {
 
-        RequestManager.delete(`${secondrayUrl}cities/${id}`)
+        return RequestManager.delete(`${secondrayUrl}cities/${id}`)
 
             .then(response => {
 
@@ -59,7 +79,6 @@ class Cities {
     }
 
 }
-const newCity = new Cities();
 
 export {
     Cities

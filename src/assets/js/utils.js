@@ -10,32 +10,17 @@ const handelChange = (state, key, value) => {
 
 };
 
-const renderFlexInputs = (names, placeholders, state, key, asPassword) => {
-    return (
-        <div className='flex items-center justify-between mb-6'>
+const handleDropdownChange = (e, state, formik, key) => {
+    state(e.value);
+    formik?.setFieldValue(key, e.value?.id); // Update the formik values with the selected province ID
+}
 
-            <div className='sm:w-[48%]'>
-
-                <label htmlFor={names[0]} className='text-[18px] text-[#252525] font-medium'>{names[0]}</label>
-
-                <input onChange={e => handelChange(state, key[0], e.target.value)} type={asPassword ? "password" : 'text'} id={names[0]} className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]' placeholder={placeholders[0]} />
-
-            </div>
-
-            <div className='sm:w-[48%]'>
-
-                <label htmlFor={names[1]} className='text-[18px] text-[#252525] font-medium'>{names[1]}</label>
-
-                <input type={asPassword ? "password" : 'text'} onChange={e => handelChange(state, key[1], e.target.value)} id={names[1]} className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]' placeholder={placeholders[1]} />
-
-            </div>
-
-        </div>
-    )
+const getSelectedOption = (list, optionKey, value) => {
+    return list?.filter(item => item[optionKey] == value)[0];
 }
 
 class SwalControlar {
-    
+
     constructor() {
 
     }
@@ -73,7 +58,9 @@ class SecureRequest {
 
         return {
 
-            Authorization: `Bearer ${this.token}`
+            Authorization: `Bearer ${this.token}`,
+
+            'Accept': 'applaction/json'
 
         }
 
@@ -89,7 +76,7 @@ class SecureRequest {
 
             data: data,
 
-            headers: hasAuth ? this.auth() : null
+            headers: this.auth()
 
         })
 
@@ -103,7 +90,23 @@ class SecureRequest {
 
             url: url,
 
-            headers: hasAuth ? this.auth() : null
+            headers: this.auth()
+
+        })
+
+    }
+
+    put(url, data) {
+
+        return axios({
+
+            method: 'put',
+
+            url: url,
+
+            data: data,
+
+            headers: this.auth()
 
         })
 
@@ -129,12 +132,28 @@ class SecureRequest {
 
 }
 
+const fireSwal = (icon, title, text, moreOptions) => {
+    return Swal.fire({
+        icon,
+        title,
+        text,
+        ...moreOptions
+    });
+}
+
+const isLoggedIn = () => {
+    return localStorage.getItem('token');
+}
+
 
 
 export {
     handelChange,
-    renderFlexInputs,
-    SecureRequest
+    SecureRequest,
+    handleDropdownChange,
+    getSelectedOption,
+    fireSwal,
+    isLoggedIn
 }
 
 export default SwalControlar;

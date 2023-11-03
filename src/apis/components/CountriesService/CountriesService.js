@@ -1,10 +1,10 @@
-import { RequestManager, baseUrl, secondrayUrl, Swal } from "../../data";
+import { RequestManager, secondrayUrl, Swal } from "../../data";
 
 class Countries {
 
     fetchCountries(state, dispatch) {
 
-        RequestManager.get(`${baseUrl}countries`)
+        return RequestManager.get(`${secondrayUrl}countries`, true)
 
             .then(response => {
 
@@ -18,10 +18,26 @@ class Countries {
             })
 
     }
+    getCountry(state, id) {
+
+        return RequestManager.get(`${secondrayUrl}countries/${id}`)
+
+            .then(response => {
+
+                state(response.data.data)
+
+            })
+            .catch(error => {
+
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+
+            })
+
+    }
 
     addCountry(data) {
 
-        RequestManager.post(`${secondrayUrl}countries`, data, true)
+        return RequestManager.post(`${secondrayUrl}countries`, data, true)
 
             .then(response => {
 
@@ -37,11 +53,28 @@ class Countries {
             })
 
     }
+    editCountry(data, id) {
+
+        return RequestManager.put(`${secondrayUrl}countries/${id}`, data, true)
+
+            .then(response => {
+
+                Swal.success('Added!', `Your Country has been Updated.`).then(res => window.location.href = '/settings/country/list');
+
+                return
+
+            })
+            .catch(error => {
+
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+
+            })
+    }
 
     deleteCountry(id) {
 
 
-        RequestManager.delete(`${secondrayUrl}countries/${id}`)
+        return RequestManager.delete(`${secondrayUrl}countries/${id}`)
 
             .then(response => {
 

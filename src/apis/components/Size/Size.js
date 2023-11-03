@@ -3,9 +3,26 @@ import { RequestManager, Swal, secondrayUrl } from "../../data";
 class Size {
 
 
+    fetchSizes(state) {
+
+        return RequestManager.get(`${secondrayUrl}sizes`, true)
+
+            .then(response => {
+
+                state(response.data.data);
+
+            })
+            .catch(error => {
+                console.log(error);
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+
+            })
+
+    }
+
     fetchSizeByProvider(state, providerId, hasAuth) {
 
-        RequestManager.get(`${secondrayUrl}providers/${providerId}/sizes`, hasAuth)
+        return RequestManager.get(`${secondrayUrl}providers/${providerId}/sizes`, hasAuth)
 
             .then(response => {
 
@@ -23,11 +40,11 @@ class Size {
 
     addSize(data) {
 
-        RequestManager.post(`${secondrayUrl}sizes`, data, true)
+        return RequestManager.post(`${secondrayUrl}sizes`, data, true)
 
             .then(response => {
 
-                Swal.success('Added!', `Size has been Added.`).then(res => window.location.reload());
+                Swal.success('Added!', `Size has been Added.`).then(res => window.location.href = '/products/plans/size/list');
 
                 return
 
@@ -42,7 +59,7 @@ class Size {
 
     deleteSize(id) {
 
-        RequestManager.delete(`${secondrayUrl}sizes/${id}`)
+        return RequestManager.delete(`${secondrayUrl}sizes/${id}`)
 
             .then(response => {
 

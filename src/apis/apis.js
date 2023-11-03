@@ -10,6 +10,8 @@ import { Plans } from './components/Plans/Plans';
 import { Users } from './components/Users/Users';
 import { Size } from './components/Size/Size';
 import { Roles } from './components/Roles/Roles';
+import { Subscriptions } from './components/Subscriptions/Subscriptions';
+import { Permissions } from './components/Permissions/Permissions';
 
 
 
@@ -26,5 +28,7 @@ export {
     CoffeeShops,
     Size,
     Origins,
-    Roles
+    Roles,
+    Subscriptions,
+    Permissions
 }

@@ -1,17 +1,25 @@
-import React, { Fragment } from 'react'
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from "react-router-dom";
+import { isLoggedIn } from "../../assets/js/utils";
 
-export default function Auth({ children }) {
-    const isLoging = localStorage.getItem('token');
+
+export default function Auth() {
+
+    const isLogin = isLoggedIn();
+
+    const arrOfNotAvilableRoutes = ['/login', '/register', '/join',];
+
+    const location = useLocation().pathname;
+
+
     return (
-        isLoging
+        isLogin
             ?
-            children
+            arrOfNotAvilableRoutes.includes(location)
+                ?
+                <Navigate to={'/'} />
+                :
+                null
             :
-            <Fragment>
-
-                <Navigate to={'/login'} />
-
-            </Fragment>
+            <Navigate to={'/login'} />
     )
 }

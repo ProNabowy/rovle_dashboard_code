@@ -4,7 +4,7 @@ class Products {
 
     fetchProducts(state, hasAuth) {
 
-        RequestManager.get(`${secondrayUrl}products`, hasAuth)
+        return RequestManager.get(`${secondrayUrl}products`, hasAuth)
 
             .then(response => {
 
@@ -12,7 +12,44 @@ class Products {
 
             })
             .catch(error => {
-                console.log(error);
+
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+
+            })
+
+    }
+    getSingleProducts(state, id) {
+
+        return RequestManager.get(`${secondrayUrl}products/${id}`, true)
+
+            .then(response => {
+
+                state(response.data.data);
+
+                return response.data.data;
+
+            })
+            .catch(error => {
+
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+
+            })
+
+    }
+    editProducts(data, id) {
+
+        data.origins = data?.origins.map(item => item?.id || item);
+        data.coffeeShops = data?.coffeeShops.map(item => item?.id || item);
+
+        return RequestManager.put(`${secondrayUrl}products/${id}`, data, id)
+
+            .then(response => {
+
+                return Swal.success('Updated!', `Your Product has been Updated.`).then(res => window.location.href = "/products/list");
+
+            })
+            .catch(error => {
+
                 Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
 
             })
@@ -21,7 +58,7 @@ class Products {
 
     addProduct(data) {
 
-        RequestManager.post(`${secondrayUrl}products`, data, true)
+        return RequestManager.post(`${secondrayUrl}products`, data, true)
 
             .then(response => {
 
@@ -40,7 +77,7 @@ class Products {
 
     deleteProduct(id) {
 
-        RequestManager.delete(`${secondrayUrl}products/${id}`)
+        return RequestManager.delete(`${secondrayUrl}products/${id}`)
 
             .then(response => {
 

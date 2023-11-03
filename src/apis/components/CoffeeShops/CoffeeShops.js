@@ -2,9 +2,9 @@ import { RequestManager, secondrayUrl, Swal } from "../../data";
 
 class CoffeeShops {
 
-    fetchCoffees(state, hasAuth) {
+    fetchCoffees(state) {
 
-        RequestManager.get(`${secondrayUrl}coffee-shops`, hasAuth)
+        return RequestManager.get(`${secondrayUrl}coffee-shops`, true)
 
             .then(response => {
 
@@ -21,7 +21,7 @@ class CoffeeShops {
 
     addCoffee(data) {
 
-        RequestManager.post(`${secondrayUrl}coffee-shops`, data, true)
+        return RequestManager.post(`${secondrayUrl}coffee-shops`, data, true)
 
             .then(response => {
 
@@ -40,7 +40,7 @@ class CoffeeShops {
 
     deleteCoffee(id) {
 
-        RequestManager.delete(`${secondrayUrl}coffee-shops/${id}`)
+        return RequestManager.delete(`${secondrayUrl}coffee-shops/${id}`)
 
             .then(response => {
 

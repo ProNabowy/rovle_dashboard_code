@@ -2,13 +2,29 @@ import { RequestManager, secondrayUrl, Swal } from "../../data";
 
 class Plans {
 
+    fetchPlans(state) {
 
-    fetchPlans(state, id, hasAuth) {
-
-        RequestManager.get(`${secondrayUrl}plans${id ? `/${id}` : ""}`, hasAuth)
+        return RequestManager.get(`${secondrayUrl}plans`, true)
 
             .then(response => {
-                console.log(response);
+
+                state(response.data.data);
+
+            })
+            .catch(error => {
+
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+
+            })
+
+    }
+
+    fetchPlansByProvider(state, id) {
+
+        return RequestManager.get(`${secondrayUrl}providers/${id}/plans`, true)
+
+            .then(response => {
+
                 state(response.data.data);
 
             })
@@ -22,7 +38,7 @@ class Plans {
 
     addPlans(data) {
 
-        RequestManager.post(`${secondrayUrl}plans`, data, true)
+        return RequestManager.post(`${secondrayUrl}plans`, data, true)
 
             .then(response => {
 
@@ -38,10 +54,28 @@ class Plans {
             })
 
     }
+    updatePlan(data, providerId) {
+
+        return RequestManager.put(`${secondrayUrl}plans/${providerId}`, data, true)
+
+            .then(response => {
+
+                Swal.success('Updated!', `Your Plan has been Updated.`).then(res => window.location.href = "/products/plans/list");
+
+                return
+
+            })
+            .catch(error => {
+
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+
+            })
+
+    }
 
     deletePlan(id) {
 
-        RequestManager.delete(`${secondrayUrl}plans/${id}`)
+        return RequestManager.delete(`${secondrayUrl}plans/${id}`)
 
             .then(response => {
 

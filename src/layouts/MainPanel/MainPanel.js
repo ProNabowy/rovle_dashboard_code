@@ -1,10 +1,13 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import "./index.css"
 import MnueHeader from './MnueHeader/MnueHeader'
 import MnueMainContent from './MnueMainContent/MnueMainContent';
+import { isLoggedIn } from '../../assets/js/utils';
 
 
 export default function MainPanel({ isExpanded, setIsExpanded }) {
+
+    const isLogin = isLoggedIn();
 
     // ** Function to handle window resize
     const hendlResize = () => {
@@ -32,8 +35,7 @@ export default function MainPanel({ isExpanded, setIsExpanded }) {
     }, []);
 
     return (
-        <Fragment>
-
+        isLogin ?
             <div className={`main-menu bg-[var(--secondray-color)] menu-fixed menu-accordion ${isExpanded ? "expanded" : ""}`} >
 
                 <MnueHeader isExpanded={isExpanded} setIsExpanded={setIsExpanded}></MnueHeader>
@@ -41,7 +43,6 @@ export default function MainPanel({ isExpanded, setIsExpanded }) {
                 <MnueMainContent isExpanded={isExpanded}></MnueMainContent>
 
             </div>
-
-        </Fragment>
+            : null
     )
 }

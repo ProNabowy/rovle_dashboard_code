@@ -15,7 +15,7 @@ export default function SeeMore({ list, headerName, tamplate }) {
     return (
         <Fragment>
 
-            <Dialog header="Flex Scroll" visible={dialogVisible} style={{ width: '30vw' }} onHide={() => setDialogVisible(false)} footer={dialogFooterTemplate}>
+            <Dialog header="Packages" visible={dialogVisible} style={{ width: '40vw', height: "50vh" }} onHide={() => setDialogVisible(false)} footer={dialogFooterTemplate}>
 
                 <DataTable value={list} scrollable scrollHeight="flex">
 

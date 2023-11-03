@@ -1,10 +1,10 @@
-import { baseUrl, RequestManager, Swal } from "../../data";
+import { RequestManager, Swal } from "../../data";
 
 class PostLogin {
 
     login(data) {
 
-        RequestManager.post(`${baseUrl}auth/login`, data, false).then(response => {
+        return RequestManager.post(`https://rovle.eslamghazy.net/api/v1/auth/login`, data, false).then(response => {
 
             localStorage.setItem('token', response.data.token);
 

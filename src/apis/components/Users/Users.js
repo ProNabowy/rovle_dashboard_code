@@ -1,11 +1,11 @@
-import { RequestManager, Swal, baseUrl, secondrayUrl } from "../../data";
+import { RequestManager, Swal, secondrayUrl } from "../../data";
 
 class Users {
 
 
-    fetchUsers(state, hasAuth) {
+    fetchUsers(state) {
 
-        RequestManager.get(`${secondrayUrl}users`, hasAuth)
+        return RequestManager.get(`${secondrayUrl}users`)
 
             .then(response => {
 
@@ -13,7 +13,24 @@ class Users {
 
             })
             .catch(error => {
-                console.log(error);
+
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+
+            })
+
+    }
+
+    fetchSingleUser(state, id) {
+
+        return RequestManager.get(`${secondrayUrl}users/${id}`)
+            .then(response => {
+                console.log(response);
+
+                state(response.data.data);
+
+            })
+            .catch(error => {
+
                 Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
 
             })
@@ -23,7 +40,7 @@ class Users {
 
     addUser(data) {
 
-        RequestManager.post(`${secondrayUrl}users`, data, true)
+        return RequestManager.post(`${secondrayUrl}users`, data)
 
             .then(response => {
 
@@ -39,10 +56,28 @@ class Users {
             })
 
     }
+    editUser(data, id) {
+
+        return RequestManager.put(`${secondrayUrl}users/${id}`, data)
+
+            .then(response => {
+
+                Swal.success('Added!', `User has been Updated.`)
+
+                return
+
+            })
+            .catch(error => {
+
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+
+            })
+
+    }
 
     deleteUser(id) {
 
-        RequestManager.delete(`${secondrayUrl}users/${id}`)
+        return RequestManager.delete(`${secondrayUrl}users/${id}`)
 
             .then(response => {
 

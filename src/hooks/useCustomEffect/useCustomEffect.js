@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const useReplacePagnitToText = () => {
     useEffect(() => {
@@ -20,21 +19,18 @@ const useReplacePagnitToText = () => {
 }
 
 
-const useNavigateToLogin = (isLoging) => {
-    const locition = useLocation().pathname;
-    const navigate = useNavigate();
+const useTableEntries = (list) => {
 
-    useEffect(() => {
+    const [selectedEntries, setSelectedEntries] = useState({ name: 5, code: 5 });
 
-        if (!isLoging) {
+    const entries = [];
 
-            navigate('/login');
+    // Fetch Entries 
+    list?.map((item, index) => entries.push({ name: index + 1, code: index + 1 }));
 
-        }
-
-    }, [locition]);
+    return { selectedEntries, setSelectedEntries, entries };
 }
 
 export default function useCustomEffect() {
-    return { useReplacePagnitToText, useNavigateToLogin }
+    return { useReplacePagnitToText, useTableEntries }
 }

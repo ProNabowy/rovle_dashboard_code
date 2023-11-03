@@ -31,6 +31,18 @@
     margin: auto;
 }
 
+.transition {
+    transition: 0.5s all ease-in-out;
+}
+
+.p-dialog .p-dialog-header .p-dialog-header-icon {
+    color: white !important;
+}
+
+.p-dialog .p-dialog-header .p-dialog-header-icon:hover {
+    color: black !important;
+}
+
 /* 
     --> PrimeReact Grid System
 */
@@ -170,6 +182,10 @@ div:where(.swal2-container) {
 }
 
 .permission-form .p-accordion .p-accordion-header:not(.p-disabled).p-highlight:hover .p-accordion-header-link,
-.permission-form  .p-accordion .p-accordion-header .p-accordion-header-link {
+.permission-form .p-accordion .p-accordion-header .p-accordion-header-link {
     background-color: transparent !important;
+}
+
+.profile-image:hover .uploade-image {
+    bottom: -150px !important;
 }

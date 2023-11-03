@@ -1,29 +1,21 @@
-import { useEffect, useState } from 'react';
 import { PageContent } from '../../components';
 import { Dropdown } from 'primereact/dropdown';
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Plans } from '../../apis/apis';
+import { useDataGetter } from './data';
 
 export default function Subscriptions() {
 
-    const rosters = useSelector(store => store.rosters);
-
-    const [selectedRosters, setselectedRosters] = useState(null);
-
-    const [selectedPlan, setselectedPlan] = useState(null);
-
-    const [plans, setPlans] = useState([]);
-
-    const plansUtailty = new Plans();
-
-    useEffect(() => {
-
-        selectedRosters?.id && plansUtailty.fetchPlans(setPlans, selectedRosters?.id, true);
-
-    }, [selectedRosters]);
+    const {
+        selectedRosters,
+        setselectedRosters,
+        rosters,
+        selectedPlan,
+        setselectedPlan,
+        plans
+    } = useDataGetter();
 
     return (
+
         <PageContent title={'Subscriptions'} showActions={false} >
 
             <form onSubmit={e => e.preventDefault()}>

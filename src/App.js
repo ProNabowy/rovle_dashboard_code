@@ -1,42 +1,28 @@
-import { Fragment, Suspense, useEffect, useState } from "react";
+import { Suspense } from "react";
 import { MainPanel, MainContent } from './layouts'
-import useCustomEffect from "./hooks/useCustomEffect";
-import { UnAuthenticatedRoutes } from "./routes/components";
-import FetchData from "./hooks/FetchData/FetchData";
+import { Auth, Spiners } from "./components";
+import { useDataAppGetter } from "./data";
 
 export default function App() {
-  const [isExpanded, setIsExpanded] = useState(true);
-  const isLoging = localStorage.getItem('token');
-  const { useNavigateToLogin } = useCustomEffect();
-  const { useFetchCountries } = FetchData();
 
-  useNavigateToLogin(isLoging);
-
-  useFetchCountries(isLoging);
+  const {
+    isLoading,
+    isExpanded,
+    setIsExpanded
+  } = useDataAppGetter();
 
   return (
     <div className="App">
 
-      <Suspense>
+      {isLoading ? <Spiners /> : null}
 
-        {
+      <Auth />
 
-          isLoging
-            ?
 
-            <Fragment>
+      <MainPanel isExpanded={isExpanded} setIsExpanded={setIsExpanded}></MainPanel>
 
-              <MainPanel isExpanded={isExpanded} setIsExpanded={setIsExpanded}></MainPanel>
+      <MainContent isExpanded={isExpanded} setIsExpanded={setIsExpanded} />
 
-              <MainContent isExpanded={isExpanded} setIsExpanded={setIsExpanded} />
-
-            </Fragment>
-            :
-            <UnAuthenticatedRoutes />
-
-        }
-
-      </Suspense>
 
     </div>
   );

@@ -1,15 +1,15 @@
 -------------------------------------- Truky --------------------------------------
-4 -> delete Roaster has id = 4 not working
-5 -> zone id is require at add coffee
+1 -> update Product Pacakges When I Remove it Pacakges doesn't updated
 
-
-
--------------------------------------- Mostafa --------------------------------------
-1 -> First Comment Doesn't Finish
+Subscriptions => Explain Add Pacakges
 
 
 
 
 
--------------------------------------- Nabowy --------------------------------------
-1 -> Add Roaster Doesn't Finished
+
+
+
+
+
+1 -> edit product Shop Select Change it to formik data

@@ -1,17 +1,15 @@
-import { faFileLines } from '@fortawesome/free-regular-svg-icons';
-import { faCompass, faEarthOceania, faGift, faHome, faHouseLaptop, faLockOpen, faUserGroup, faUserSecret, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faAccusoft } from '@fortawesome/free-brands-svg-icons';
+import { faFileLines, faSnowflake } from '@fortawesome/free-regular-svg-icons';
+import { faBaseball, faCompass, faGift, faHouseLaptop, faLockOpen, faUserGroup, faUserSecret, faUsers, faVoicemail } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NavLink } from 'react-router-dom';
 
 const listsData = [
-    { name: "DASHBOARD", children: [{ name: "DASHBOARD", icon: faHome, href: "/" }] },
-    { name: "SETTINGS", children: [{ name: "Country", icon: faEarthOceania, href: "settings/country/list" }, { name: "Province", icon: faCompass, href: "settings/province/list" }, { name: "City", icon: faHouseLaptop, href: "settings/cities/list", }, { name: "Permissions", icon: faLockOpen, href: "settings/permissions/list", }] },
-    { name: "PRODUCTS", children: [{ name: "Products", icon: faGift, href: "/products/list" }, { name: "Origins", icon: faGift, href: "/origins/list" }, , { name: "Plans", icon: faFileLines, href: "/products/plans/list" }] },
+    { name: "SETTINGS", children: [{ name: "Country", icon: faBaseball, href: "settings/country/list" }, { name: "Province", icon: faCompass, href: "settings/province/list" }, { name: "City", icon: faHouseLaptop, href: "settings/cities/list", }, { name: "Permissions", icon: faLockOpen, href: "settings/permissions/list", }] },
+    { name: "PRODUCTS", children: [{ name: "Products", icon: faGift, href: "/products/list" }, { name: "Origins", icon: faVoicemail, href: "/origins/list" }, , { name: "Plans", icon: faFileLines, href: "/products/plans/list" }, { name: "Subscriptions", icon: faSnowflake, href: "/products/plans/subscriptions" }, { name: "Size", icon: faAccusoft, href: "/products/plans/size" }] },
     { name: "GROUPS", children: [{ name: "Users", icon: faUserGroup, href: "groups/users" }, { name: "Roasters", icon: faUsers, href: "groups/roasters" }] },
     { name: "SETUPS", children: [{ name: "Coffee Shop", icon: faUserSecret, href: "setups/coffee-shop" }] },
 ];
-
-
 
 export default function MnueMainContent({ isExpanded }) {
 

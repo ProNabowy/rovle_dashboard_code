@@ -1,12 +1,11 @@
-import { RequestManager, Swal, baseUrl, secondrayUrl } from "../../data";
+import { RequestManager, Swal, secondrayUrl } from "../../data";
 
 class Rosters {
 
 
     fetchRosters(state, dispatch) {
 
-        RequestManager.get(`${baseUrl}providers`)
-
+        return RequestManager.get(`${secondrayUrl}providers`)
             .then(response => {
 
                 dispatch(state(response.data.data));
@@ -22,7 +21,7 @@ class Rosters {
 
     addRoaster(data) {
 
-        RequestManager.post(`${secondrayUrl}providers`, data, true)
+        return RequestManager.post(`${secondrayUrl}providers`, data, true)
 
             .then(response => {
 
@@ -38,10 +37,28 @@ class Rosters {
             })
 
     }
+    updateRoaster(data, id) {
+
+        return RequestManager.put(`${secondrayUrl}providers/${id}`, data)
+
+            .then(response => {
+
+                Swal.success('Updated!', `Your Roaster has been Updated.`).then(res => window.location.href = "/groups/roasters");
+
+                return
+
+            })
+            .catch(error => {
+
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+
+            })
+
+    }
 
     deleteRoaster(id) {
 
-        RequestManager.delete(`${secondrayUrl}providers/${id}`)
+        return RequestManager.delete(`${secondrayUrl}providers/${id}`)
 
             .then(response => {
 

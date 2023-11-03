@@ -4,7 +4,7 @@ class Origins {
 
     fetchOrigins(state, hasAuth) {
 
-        RequestManager.get(`${secondrayUrl}origins`, hasAuth)
+        return RequestManager.get(`${secondrayUrl}origins`, hasAuth)
 
             .then(response => {
 
@@ -21,11 +21,11 @@ class Origins {
 
     addOrigin(data) {
 
-        RequestManager.post(`${secondrayUrl}origins`, data, true)
-
+        console.log(data);
+        return RequestManager.post(`${secondrayUrl}origins`, data, true)
             .then(response => {
 
-                Swal.success('Added!', `Your Origin has been Added.`).then(res => window.location.reload());
+                Swal.success('Added!', `Your Origin has been Added.`).then(res => window.location.href = "/origins/list");
 
                 return
 
@@ -40,7 +40,7 @@ class Origins {
 
     deleteOrigin(id) {
 
-        RequestManager.delete(`${secondrayUrl}origins/${id}`)
+        return RequestManager.delete(`${secondrayUrl}origins/${id}`)
 
             .then(response => {
 
