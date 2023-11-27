@@ -9,7 +9,7 @@ export default function RoastersTable({ children }) {
 
     return (
 
-        <RenderTable columns={columns} list={data} selectedEntries={{ name: 4 }} />
+        <RenderTable columns={columns} list={data} />
 
     )
 };

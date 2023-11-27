@@ -1,7 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Users } from "../../../../apis/apis";
 import Formik from '../../../../hooks/Formik/Formik';
 import { useLocation } from "react-router-dom";
+import { debounce } from "../../../../assets/js/utils";
+import { AppContext } from "../../../../components/AppContext/AppContext";
+import { useDispatch, useSelector } from "react-redux";
 
 const useHandleAddUserLogic = () => {
 
@@ -11,42 +14,53 @@ const useHandleAddUserLogic = () => {
 
     const userId = location.slice(4);
 
-    const handelSubmit = values => userUtailty.editUser(values, userId);
+    const { setIsLoading } = useContext(AppContext);
 
-    const [user, setUser] = useState({});
+    const users = useSelector(store => store.users);
+
+    const dispatch = useDispatch();
+
+    const handelSubmit = values => {
+
+        setIsLoading(true);
+
+        return userUtailty.editUser(values, userId, dispatch, users).finally(_ => setIsLoading(false));
+
+    }
+
+    const [_, setUser] = useState({});
 
     const [initialValues, setInitialValues] = useState({});
 
     useEffect(() => {
 
-        userUtailty.fetchSingleUser(setUser, userId);
+        userUtailty.fetchSingleUser(setUser, userId).then(data => {
 
-    }, []);
+            setInitialValues({
+                user_name: data?.name,
+                user_card_id: data?.card_id,
+                user_email: data?.email,
+                user_address: data?.address,
+                user_phone: data?.phone,
+                user_zip: data?.zip,
+                user_country_id: data?.country_id,
+                user_province_id: data?.province_id,
+                user_city_id: data?.city_id,
+                role_id: data?.role_id,
+            })
 
-    useEffect(() => {
-
-        setInitialValues({
-            user_name: user?.name,
-            user_card_id: user?.card_id,
-            user_email: user?.email,
-            user_address: user?.address,
-            user_phone: user?.phone,
-            user_zip: user?.zip,
-            user_country_id: user?.country_id,
-            user_province_id: user?.province_id,
-            user_city_id: user?.city_id,
-            role_id: user?.role_id,
         })
 
-    }, [user]);
+    }, []);
 
     const { useFormData } = Formik();
 
 
-    const { formik } = useFormData(initialValues, handelSubmit);
+    const { formik } = useFormData(initialValues, null);
 
+    const clickHandler = debounce((_) => handelSubmit(formik.values), 1000);
 
-    return { formik }
+    return { formik, clickHandler }
 }
 
 export {

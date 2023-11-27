@@ -6,9 +6,9 @@ import { useDataGetter } from './data';
 
 export default function CoffeeShopTable({ children }) {
 
-    const { data } = useDataGetter();
+    const { shops } = useDataGetter();
 
     return (
-        <RenderTable columns={columns} list={data} selectedEntries={{ name: 4 }} />
+        <RenderTable columns={columns} list={shops} />
     )
 }

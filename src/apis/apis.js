@@ -12,6 +12,9 @@ import { Size } from './components/Size/Size';
 import { Roles } from './components/Roles/Roles';
 import { Subscriptions } from './components/Subscriptions/Subscriptions';
 import { Permissions } from './components/Permissions/Permissions';
+import { Offers } from './components/Offers/Offers';
+import { Profile } from './components/Profile/Profile';
+import { Orders } from './components/Orders/Orders';
 
 
 
@@ -30,5 +33,8 @@ export {
     Origins,
     Roles,
     Subscriptions,
-    Permissions
+    Permissions,
+    Offers,
+    Profile,
+    Orders
 }

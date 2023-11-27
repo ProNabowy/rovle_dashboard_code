@@ -5,13 +5,13 @@ import { getSelectedOption } from '../../../../assets/js/utils';
 
 export default function AddSize() {
 
-    const { formik, roasters } = useDataGetter();
+    const { formik, roasters, clickHandler } = useDataGetter();
 
     return (
 
         <PageContent title={'Size Form'} showActions={false}>
 
-            <form onSubmit={formik.handleSubmit}>
+            <form onSubmit={e => e.preventDefault()}>
 
                 <div className='p-10 pb-4'>
 
@@ -34,13 +34,13 @@ export default function AddSize() {
 
                     <label htmlFor='weight' className='mb-3 block text-[#234486]'>Weight</label>
 
-                    <input type='text' id="weight" name='weight' value={formik.values?.weight} onChange={formik.handleChange} className='p-3 px-5 placeholder:!text-[#b3b3b3] border-b border-b-[#b3b3b3] w-full' placeholder='Enter Weight' />
+                    <input type='number' id="weight" name='weight' value={formik.values?.weight} onChange={formik.handleChange} className='p-3 px-5 placeholder:!text-[#b3b3b3] border-b border-b-[#b3b3b3] w-full' placeholder='Enter Weight' />
 
                 </div>
 
                 <div className='flex items-center justify-end p-10 pb-5'>
 
-                    <button className='p-4 px-24 rounded-full text-white font-medium bg-[var(--primary-color)]'>
+                    <button onClick={clickHandler} type='submit' className='p-4 px-24 rounded-full text-white font-medium bg-[var(--primary-color)]'>
                         Submit
                     </button>
 

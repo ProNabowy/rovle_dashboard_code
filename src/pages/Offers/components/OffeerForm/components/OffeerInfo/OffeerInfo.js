@@ -1,0 +1,79 @@
+import { faKey, faTag } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React from 'react'
+import { getSelectedOption } from '../../../../../../assets/js/utils'
+import { Activa, Discount } from '../../data'
+import { Dropdown } from 'primereact/dropdown';
+
+
+export default function OffeerInfo({ formik }) {
+
+
+  return (
+    <div className='flex items-center justify-between mb-6'>
+
+      <div className='sm:w-[48%] border border-[#28C76F] p-3 py-8 rounded-[10px]'>
+
+        <div className='mb-6'>
+
+          <h1 className='flex items-center mb-3'>
+            Active
+            <FontAwesomeIcon icon={faKey} className='ms-3 text-[#252525]' />
+          </h1>
+
+          <Dropdown value={getSelectedOption(Activa, 'id', formik?.values?.activation_method)} name='activation_method' onChange={(e) => formik.setFieldValue('activation_method', e.target.value?.id)} options={Activa} optionLabel="name"
+            className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" placeholder='Choose the activation method' />
+
+        </div>
+
+        {
+          formik?.values?.activation_method !== 1
+            ?
+            <div>
+
+              <label htmlFor='Can.ACT' className='flex items-center mb-3'>Can. ACT</label>
+
+              <input type='text' id={'Can.ACT'} value={formik.values.activation_amount} name='activation_amount' onChange={formik.handleChange} className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]' placeholder={'Enter Can.ACT'} />
+
+            </div>
+            :
+            null
+        }
+
+      </div>
+
+      <div className='sm:w-[48%] border border-[#28C76F] p-3 py-8 rounded-[10px]'>
+
+        <div className='mb-6'>
+
+          <h1 className='flex items-center mb-3'>
+            T.Promo
+            <FontAwesomeIcon icon={faTag} className='ms-3 text-[#252525]' />
+          </h1>
+
+          <Dropdown value={getSelectedOption(Discount, 'id', formik?.values?.discount_type)} name='discount_type' onChange={(e) => formik.setFieldValue('discount_type', e.target.value?.id)} options={Discount} optionLabel="name"
+            className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" placeholder='Select Discount' />
+
+        </div>
+
+        {
+          formik?.values?.discount_type === 1
+            ?
+            <div>
+
+              <label htmlFor='C.Oferta' className='flex items-center mb-3'>C. Oferta</label>
+
+              <input type='number' id={'C.Oferta'} value={formik.values.discount} name='discount' onChange={formik.handleChange} className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]' placeholder={'Enter C. OFERTA'} />
+
+            </div>
+            :
+            null
+        }
+
+      </div>
+
+
+    </div>
+  )
+
+}

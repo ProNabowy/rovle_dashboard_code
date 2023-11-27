@@ -1,9 +1,13 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Size } from "../../../../apis/apis";
 import { TableActions } from "../../../../components";
 import { useContext, useEffect, useState } from "react";
-import { useCustomEffect } from "../../../../hooks";
 import { AppContext } from "../../../../components/AppContext/AppContext";
+import { setSizes } from "../../../../store/reduces/sizes";
+import Table from "../../../../assets/js/table";
+
+
+const tableService = new Table();
 
 const useDataGetter = _ => {
 
@@ -13,7 +17,9 @@ const useDataGetter = _ => {
 
     const sizeUtility = new Size();
 
-    const [data, setData] = useState([]);
+    const sizes = useSelector(store => store.sizes);
+
+    const dispatch = useDispatch();
 
     const { setIsLoading } = useContext(AppContext);
 
@@ -21,7 +27,7 @@ const useDataGetter = _ => {
 
         setIsLoading(true); // Show the loader before making the API request
 
-        selectedRosters?.id && sizeUtility.fetchSizeByProvider(setData, selectedRosters?.id, true).finally(() => {
+        selectedRosters?.id && sizeUtility.fetchSizeByProvider(setSizes, selectedRosters?.id, dispatch).finally(() => {
 
             setIsLoading(false); // Hide the loader when the API request is completed
 
@@ -29,14 +35,8 @@ const useDataGetter = _ => {
 
     }, [selectedRosters?.id]);
 
-    const { useReplacePagnitToText, useTableEntries } = useCustomEffect();
 
-    const { selectedEntries, setSelectedEntries, entries } = useTableEntries(data);
-
-    useReplacePagnitToText();
-
-
-    return { rosters, selectedRosters, setselectedRosters, selectedEntries, entries, setSelectedEntries, data };
+    return { rosters, selectedRosters, setselectedRosters, sizes };
 
 }
 
@@ -46,35 +46,29 @@ const weightBodyTemplate = (rowData) => {
 
 };
 
-const idBodyTemplate = (rowData) => {
-
-    return <p className='mb-1 capitalize text-[13px] font-medium'>{rowData?.id}</p>
-
-};
-const characterBodyTemplate = (rowData) => {
-
-    return <p className='mb-1 capitalize text-[13px] font-medium'>{rowData?.name}</p>
-
-};
-
-const dateateBodyTemplate = (rowData) => {
-    return <p className='mb-1 capitalize text-[13px] font-medium'>{rowData.updated_at}</p>
-};
-
-const actionsBodyTemplate = (rowData) => {
+const useActionsBodyTemplate = (rowData) => {
 
     const sizeUtility = new Size();
 
-    return <TableActions disableEdit={true} handelDeleteFunction={sizeUtility.deleteSize} rowData={rowData}></TableActions>
+    const sizes = useSelector(store => store.sizes);
+
+    return <TableActions
+        disableEdit={true}
+        handelDeleteFunction={sizeUtility.deleteSize}
+        rowData={rowData}
+        deleteKey={'dashboard.sizes.destroy'}
+        PagePermissionKey={'Sizes'}
+        list={sizes}
+    ></TableActions>
 
 };
 
 const columns = [
-    { field: "id", header: "ID", classNames: "!px-[15px]", tamplate: idBodyTemplate },
-    { field: "character", header: "Character", classNames: "!px-[0px]", tamplate: characterBodyTemplate },
+    { field: "id", header: "ID", classNames: "!px-[15px]", tamplate: tableService.idBodyTemplate },
+    { field: "name", header: "Character", classNames: "!px-[0px]", tamplate: tableService.nameBodyTemplate },
     { field: "weight", header: "Weight", classNames: "!px-[15px]", tamplate: weightBodyTemplate },
-    { field: "date", header: "Date", classNames: "!px-[15px]", tamplate: dateateBodyTemplate },
-    { field: "status", header: "Action", classNames: "!px-[15px]", tamplate: actionsBodyTemplate },
+    { field: "updated_at", header: "Date", classNames: "!px-[15px]", tamplate: tableService.lastDateBodyTemplate },
+    { field: "status", header: "Action", classNames: "!px-[15px]", tamplate: useActionsBodyTemplate },
 ];
 
 

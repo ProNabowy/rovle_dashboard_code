@@ -1,29 +1,35 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useContext, useState } from "react";
 import { Province } from "../../../../apis/apis";
 import { Formik } from "../../../../hooks";
+import { debounce } from "../../../../assets/js/utils";
+import { AppContext } from "../../../../components/AppContext/AppContext";
+import { useDispatch, useSelector } from "react-redux";
 
 
 const useDataGetter = () => {
-
-    const [selectedCountry, setSelectedCountry] = useState(null);
-
-    const countries = useSelector(store => store.countries);
-
     const provinceUtility = new Province();
+
+    const province = useSelector(store => store.province);
+
+    const dispatch = useDispatch();
 
     const [initialValues, setInitialValues] = useState({
         name: "",
         country_id: ""
     });
 
+    const { setIsLoading } = useContext(AppContext);
+
     const { useFormData } = Formik();
 
-    const handelSubmit = values => provinceUtility.addProvinces(values);
+    const { formik } = useFormData(initialValues, null);
 
-    const { formik } = useFormData(initialValues, handelSubmit);
+    const clickHandler = debounce((_) => {
+        setIsLoading(true);
+        return provinceUtility.addProvinces(formik.values, dispatch, province).finally(_ => setIsLoading(false));
+    }, 1000);
 
-    return { formik, selectedCountry, setSelectedCountry, countries };
+    return { formik, clickHandler };
 
 };
 

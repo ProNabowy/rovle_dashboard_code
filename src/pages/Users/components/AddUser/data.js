@@ -1,12 +1,27 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Users } from "../../../../apis/apis";
 import Formik from '../../../../hooks/Formik/Formik';
+import { debounce } from "../../../../assets/js/utils";
+import { AppContext } from "../../../../components/AppContext/AppContext";
+import { useDispatch, useSelector } from "react-redux";
 
 const useHandleAddUserLogic = () => {
 
     const userUtailty = new Users();
 
-    const handelSubmit = values => userUtailty.addUser(values);
+    const { setIsLoading } = useContext(AppContext);
+
+    const users = useSelector(store => store.users);
+
+    const dispatch = useDispatch();
+
+    const handelSubmit = values => {
+
+        setIsLoading(true);
+
+        return userUtailty.addUser(values, dispatch, users).finally(_ => setIsLoading(false));
+
+    }
 
     const [initialValues, setInitialValues] = useState({
         user_name: "",
@@ -25,11 +40,12 @@ const useHandleAddUserLogic = () => {
 
     const { useFormData } = Formik();
 
+    const { formik } = useFormData(initialValues, null);
 
-    const { formik } = useFormData(initialValues, handelSubmit);
+    const clickHandler = debounce((_) => handelSubmit(formik.values), 1000);
 
 
-    return { formik }
+    return { formik, clickHandler }
 }
 
 export {

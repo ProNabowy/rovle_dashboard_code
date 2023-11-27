@@ -1,7 +1,8 @@
+import { debounce } from "../../../../assets/js/utils";
+import { AppContext } from "../../../../components/AppContext/AppContext";
 import Formik from "../../../../hooks/Formik/Formik";
-
-const { useState } = require("react");
-const { useSelector } = require("react-redux");
+const { useState, useContext } = require("react");
+const { useSelector, useDispatch } = require("react-redux");
 const { Origins } = require("../../../../apis/apis");
 
 const useDataGetter = () => {
@@ -10,16 +11,27 @@ const useDataGetter = () => {
 
     const OriginsUtailty = new Origins();
 
+    const origins = useSelector(store => store.origins);
+
+    const dispatch = useDispatch();
+
     const [initialValues, setInitialValues] = useState({ name: "", provider_id: "" });
+
+    const { setIsLoading } = useContext(AppContext);
 
     const { useFormData } = Formik();
 
-    const handelSubmit = values => OriginsUtailty.addOrigin(values);
+    const { formik } = useFormData(initialValues, null);
 
-    const { formik } = useFormData(initialValues, handelSubmit);
+    const clickHandler = debounce((_) => {
 
+        setIsLoading(true);
 
-    return { formik, roasters }
+        return OriginsUtailty.addOrigin(formik.values, dispatch, origins).finally(_ => setIsLoading(false));
+
+    }, 1000);
+
+    return { formik, roasters, clickHandler }
 
 }
 

@@ -1,12 +1,17 @@
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faAngleDown, faRightFromBracket, faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
+import { Link } from 'react-router-dom'
+import { useDataGetter } from './data'
+import { handleLogOut } from '../../assets/js/utils';
 
 export default function Header({ isExpanded, setIsExpanded }) {
+
+    const { visible, handleOpenMnue, user } = useDataGetter();
+
     return (
         <header className='relative shadow py-3 px-3 mb-5'>
 
-            <div className='container rounded-bl rounded-br overflow-hidden flex items-center justify-between'>
+            <div className='container rounded-bl rounded-br flex items-center justify-between'>
 
                 <span className='me-4 cursor-pointer' onClick={_ => setIsExpanded(!isExpanded)}>
 
@@ -16,10 +21,45 @@ export default function Header({ isExpanded, setIsExpanded }) {
 
                 </span>
 
-                <div className='relative flex-1 border rounded-full overflow-hidden'>
-                    <input type='text' className='w-full p-3 ps-10' placeholder='Search (Ctrl+/)' />
+                <div className='relative flex-1 flex items-center'>
 
-                    <FontAwesomeIcon icon={faSearch} className='absolute left-4 text-[#8B6464] top-[50%] translate-y-[-50%]'></FontAwesomeIcon>
+                    <div className='flex-1 border rounded-full relative overflow-hidden me-5'>
+
+                        <input type='text' className='w-full p-3 ps-10' placeholder='Search (Ctrl+/)' />
+
+                        <FontAwesomeIcon icon={faSearch} className='absolute left-4 text-[#8B6464] top-[50%] translate-y-[-50%]'></FontAwesomeIcon>
+
+                    </div>
+
+                    <div onClick={handleOpenMnue} className='border rounded-full min-w-[200px] flex items-center justify-between p-2 px-5 cursor-pointer relative'>
+
+                        <img src={`https://rovle.eslamghazy.net/public/${user?.image}`} alt='' loading='lazy' width={'fit-content'} height={'fit-content'} className='rounded-full w-[39px] h-[39px] me-2' />
+
+                        <div className='me-5'>
+
+                            <h3 className='text-[#252525] text-[13px] font-medium'>{user?.name}</h3>
+
+                            <h6 className='text-[#252525] font-medium text-[12px]'>{user?.roles && user?.roles[0]?.name}</h6>
+
+                        </div>
+
+                        <FontAwesomeIcon icon={faAngleDown} className='text-[#252525] text-[20px] cursor-pointer' />
+
+                        <div className={`absolute w-full shadow-lg z-[100] bg-white border border-t-[transparent] transition left-0 ${visible ? "bottom-[-95px] visible opacity-100" : "bottom-[-150px] opacity-0 invisible"}`}>
+
+                            <Link to={'/profile'} className='flex items-center  p-2 pb-3 border-b-2'>Profile</Link>
+
+                            <button onClick={_ => handleLogOut(null, true)} className='flex items-center p-2 text-[#FF5C34] font-medium'>
+
+                                <FontAwesomeIcon icon={faRightFromBracket} className='me-3' />
+
+                                <p>Logout</p>
+
+                            </button>
+
+                        </div>
+
+                    </div>
 
                 </div>
 

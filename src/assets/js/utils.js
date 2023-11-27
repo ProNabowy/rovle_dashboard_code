@@ -1,24 +1,24 @@
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const handelChange = (state, key, value) => {
 
-    return state(perv => ({
-        ...perv,
-        [key]: value
-    }))
-
-};
-
-const handleDropdownChange = (e, state, formik, key) => {
-    state(e.value);
-    formik?.setFieldValue(key, e.value?.id); // Update the formik values with the selected province ID
+// Ensures that the last clicked time triggers the function to prevent rapid successive calls.
+function debounce(func, wait) {
+    let timeout;
+    return function () {
+        const context = this;
+        const args = arguments;
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(context, args), 500);
+    };
 }
 
+// Acsspet List And Get the Current Option Form This List
 const getSelectedOption = (list, optionKey, value) => {
     return list?.filter(item => item[optionKey] == value)[0];
 }
 
+// To Customize Swal Services
 class SwalControlar {
 
     constructor() {
@@ -35,6 +35,16 @@ class SwalControlar {
 
     }
 
+    warning(title, message) {
+
+        return Swal.fire({
+            icon: 'warning',
+            title: title || 'Warning...',
+            text: message,
+        })
+
+    }
+
     rejected(title, message) {
 
         return Swal.fire({
@@ -46,6 +56,7 @@ class SwalControlar {
     }
 };
 
+// To Customize axios Services
 class SecureRequest {
 
     constructor(token) {
@@ -54,19 +65,18 @@ class SecureRequest {
 
     }
 
-    auth() {
+    auth(asFormData) {
 
         return {
 
             Authorization: `Bearer ${this.token}`,
 
-            'Accept': 'applaction/json'
-
+            'Content-Type': asFormData ? 'multipart/form-data' : 'applaction/json',
         }
 
     }
 
-    post(url, data, hasAuth) {
+    post(url, data, asFormData) {
 
         return axios({
 
@@ -76,13 +86,13 @@ class SecureRequest {
 
             data: data,
 
-            headers: this.auth()
+            headers: this.auth(asFormData),
 
         })
 
     }
 
-    get(url, hasAuth) {
+    get(url) {
 
         return axios({
 
@@ -132,28 +142,50 @@ class SecureRequest {
 
 }
 
-const fireSwal = (icon, title, text, moreOptions) => {
-    return Swal.fire({
-        icon,
-        title,
-        text,
-        ...moreOptions
-    });
-}
-
+// Check For User Login
 const isLoggedIn = () => {
     return localStorage.getItem('token');
 }
 
+// Control User Permissions
+const hasPermissions = (arrOfPermissions, arrOfUserPermissions, key) => {
+
+    const objectOfPermissions = {};
+
+    arrOfPermissions?.map(item => {
+
+        const newItem = { id: item?.id, name: item?.name };
+
+        objectOfPermissions[item?.name?.trim()] = item?.id;
+
+        return newItem;
+
+    });
+
+    return arrOfUserPermissions.includes(objectOfPermissions && objectOfPermissions[key?.trim()]);
+}
+
+// Handle User Logout
+const handleLogOut = (response, userWant) => {
+
+    if (response?.status == 401 || userWant) {
+
+        window.localStorage.clear();
+
+        return window.location.reload();
+
+    }
+
+}
 
 
 export {
-    handelChange,
     SecureRequest,
-    handleDropdownChange,
     getSelectedOption,
-    fireSwal,
-    isLoggedIn
+    isLoggedIn,
+    debounce,
+    hasPermissions,
+    handleLogOut
 }
 
 export default SwalControlar;

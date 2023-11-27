@@ -1,12 +1,9 @@
-import { useState } from 'react';
 import { RenderTable } from '../../../components';
-import { columns } from '../data';
+import { columns, useDataGetter } from '../data';
 
 
-export default function OfferListTable({ children }) {
+export default function OfferListTable({ children, countOfEntries, data }) {
 
-    const [data, setData] = useState([]);
-
-    return <RenderTable columns={columns} list={data} selectedEntries={{ name: 4 }} />
+    return <RenderTable columns={columns} list={data} selectedEntries={{ name: countOfEntries || 6 }} />
 
 }

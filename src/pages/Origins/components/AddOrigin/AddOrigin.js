@@ -3,15 +3,20 @@ import { PageContent } from '../../../../components';
 import { useDataGetter } from './data';
 import { getSelectedOption } from '../../../../assets/js/utils';
 
+
 export default function AddOrigin() {
 
-    const { formik, roasters } = useDataGetter();
+    const { formik, roasters, clickHandler } = useDataGetter();
 
     return (
 
-        <PageContent title={'Origins Form'} showActions={false} >
+        <PageContent
+            title={'Origins Form'}
+            showActions={false}
+            PermissionsKey={'Origins'}
+            roleKey={'Add'}    >
 
-            <form onSubmit={formik.handleSubmit}>
+            <form onSubmit={e => e.preventDefault()}>
 
                 <div className='p-10 pb-4'>
 
@@ -32,7 +37,7 @@ export default function AddOrigin() {
 
                 <div className='flex items-center justify-end p-10 pb-5'>
 
-                    <button type='submit' className='p-4 px-24 rounded-full text-white font-medium bg-[var(--primary-color)]'>
+                    <button type='submit' onClick={clickHandler} className='p-4 px-24 rounded-full text-white font-medium bg-[var(--primary-color)]'>
                         Submit
                     </button>
 

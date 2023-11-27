@@ -15,11 +15,17 @@ export default function RoastersList() {
 
     return (
 
-        <PageContent url={'add-roaster'} title={'Roasters Form'} showActions={true}>
+        <PageContent
+            url={'add-roaster'}
+            title={'Roasters Form'}
+            showActions={true}
+            PermissionsKey={'Providers'}
+            roleKey={'dashboard.providers.store'}
+        >
 
             <Dialog header="Roasters Form" visible={dialogVisible} style={{ width: '75vw' }} maximizable={true} maximized={true} modal contentStyle={{ height: '300px' }} onHide={() => setDialogVisible(false)} footer={dialogFooterTemplate} >
 
-                <RoastersTable />
+                <RoastersTable selectedEntries={8} />
 
             </Dialog>
 

@@ -1,15 +1,5 @@
--------------------------------------- Truky --------------------------------------
-1 -> update Product Pacakges When I Remove it Pacakges doesn't updated
+add roaster i wanna update the response to be like a list of roasters
 
-Subscriptions => Explain Add Pacakges
+update plan the products have error
 
-
-
-
-
-
-
-
-
-
-1 -> edit product Shop Select Change it to formik data
+orders table doesn't return the price 

@@ -1,18 +1,21 @@
-import { PageContent, RenderTable, TableHeader } from '../../components';
+import { PageContent, RenderTable } from '../../components';
 import { columns, useDataGetter } from './data';
 
 
 export default function UsersList() {
 
-    const { selectedEntries, setSelectedEntries, entries, data } = useDataGetter();
+    const { users } = useDataGetter();
 
     return (
 
-        <PageContent url={'add-user'} title={'List Users'} showActions={true} >
-
-            <TableHeader selectedEntries={selectedEntries} setSelectedEntries={setSelectedEntries} entries={entries} />
-
-            <RenderTable columns={columns} list={data} selectedEntries={selectedEntries} />
+        <PageContent
+            url={'add-user'}
+            title={'List Users'}
+            showActions={true}
+            PermissionsKey={'Users'}
+            roleKey={'dashboard.users.store'}
+        >
+            <RenderTable columns={columns} list={users} />
 
         </PageContent>
 

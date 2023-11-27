@@ -1,7 +1,7 @@
 
 import { useContext, useEffect, useState } from "react";
-import FetchData from "./hooks/FetchData/FetchData";
 import { AppContext } from './components/AppContext/AppContext';
+import { useCustomEffect } from "./hooks";
 
 
 
@@ -9,11 +9,11 @@ const useDataAppGetter = () => {
 
     const [isExpanded, setIsExpanded] = useState(true);
 
-    const { useFetchGloableData } = FetchData();
-
     const { isLoading } = useContext(AppContext);
 
-    useFetchGloableData();
+    const { useSetTitleIcon } = useCustomEffect();
+
+    useSetTitleIcon();
 
     useEffect(() => {
 

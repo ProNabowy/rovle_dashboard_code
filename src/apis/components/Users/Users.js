@@ -1,20 +1,21 @@
+import { handleLogOut } from "../../../assets/js/utils";
+import { setUsers } from "../../../store/reduces/users";
 import { RequestManager, Swal, secondrayUrl } from "../../data";
 
 class Users {
 
-
-    fetchUsers(state) {
+    fetchUsers(state, dispatch) {
 
         return RequestManager.get(`${secondrayUrl}users`)
 
             .then(response => {
 
-                state(response.data.data);
+                dispatch(state(response.data.data));
 
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -24,39 +25,40 @@ class Users {
 
         return RequestManager.get(`${secondrayUrl}users/${id}`)
             .then(response => {
-                console.log(response);
 
                 state(response.data.data);
+
+                return response.data.data;
 
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
 
             })
 
     }
 
 
-    addUser(data) {
+    addUser(data, dispatch, users) {
 
         return RequestManager.post(`${secondrayUrl}users`, data)
 
             .then(response => {
 
-                Swal.success('Added!', `User has been Added.`).then(res => window.location.href = "/groups/users");
+                Swal.success('Added!', `User has been Added.`);
 
-                return
+                return dispatch(setUsers([...users, response.data.data]));
 
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
 
             })
 
     }
-    editUser(data, id) {
+    editUser(data, id, dispatch, users) {
 
         return RequestManager.put(`${secondrayUrl}users/${id}`, data)
 
@@ -64,31 +66,35 @@ class Users {
 
                 Swal.success('Added!', `User has been Updated.`)
 
-                return
+                const updatedUsers = users.map(user => user?.id == id ? response.data.data : user);
+
+                return dispatch(setUsers(updatedUsers));
 
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
 
             })
 
     }
 
-    deleteUser(id) {
+    deleteUser(id, dispatch, users) {
 
         return RequestManager.delete(`${secondrayUrl}users/${id}`)
 
             .then(response => {
 
-                Swal.success('Deleted!', `User has been deleted.`).then(resp => window.location.reload());
+                Swal.success('Deleted!', `User has been deleted.`);
 
-                return
+                const updatedUsers = users.filter(user => user?.id != id);
+
+                return dispatch(setUsers(updatedUsers));
 
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
 
             })
 

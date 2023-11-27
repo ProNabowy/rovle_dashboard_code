@@ -1,25 +1,48 @@
-import { Column } from 'primereact/column'
 import { DataTable } from 'primereact/datatable';
-import NotFound from '../../pages/NotFound/NotFound';
+import { Fragment } from 'react';
+import TableHeader from '../TableHeader/TableHeader';
+import { useDataGetter, FilterFields, data } from './data';
+import useExportTable from '../../hooks/ExportTable/useExportTable';
 
-const data = (columns) => {
+export default function RenderTable({
+    columns,
+    list,
+}) {
 
-    return columns?.map(column => {
+    const {
+        selectedEntries,
+        setSelectedEntries,
+        entries,
+        filters,
+        onGlobalFilterChange,
+        globalFilterValue
+    } = useDataGetter(list);
 
-        return <Column field={column?.field} header={column?.header} className={column?.classNames} body={column?.tamplate} />;
+    const { exportExcel, exportPDF } = useExportTable(columns, list);
 
-    })
+    return (
 
-}
+        <Fragment>
 
-export default function RenderTable({ columns, list, selectedEntries, emptyMessage }) {
+            <TableHeader
+                entries={entries}
+                setSelectedEntries={setSelectedEntries}
+                selectedEntries={selectedEntries}
+                globalFilterValue={globalFilterValue}
+                onGlobalFilterChange={onGlobalFilterChange}
+            />
 
+            <DataTable DataTable value={list} filters={filters}
+                globalFilterFields={FilterFields}
+                paginator={list?.length > +selectedEntries?.name} rows={selectedEntries?.name} dataKey="id"
+                emptyMessage={<h1 className='text-center my-5'>No Data Found</h1>} className='px-8' >
 
-    return <DataTable DataTable value={list} paginator={list?.length > +selectedEntries?.name} rows={selectedEntries?.name} dataKey="id"
-        emptyMessage={<NotFound classNames={'!h-fit'} title={emptyMessage || 'data not found'} hideButton={true} />} className='px-8' >
+                {data(columns)}
 
-        {data(columns)}
+            </DataTable>
 
-    </DataTable>
+        </Fragment>
+
+    )
 
 }

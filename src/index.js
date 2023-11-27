@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import './assets/style/index.css';
 import App from './App';
-import './App.css';
+import './assets/style/App.css';
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
 import { BrowserRouter } from 'react-router-dom';

@@ -1,9 +1,25 @@
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
+import { hasPermissions } from '../../assets/js/utils';
 
-export default function PageContent({ children, title, showActions, url, addnewClassNames }) {
+export default function PageContent({
+    children,
+    title,
+    showActions,
+    url,
+    addnewClassNames,
+    PermissionsKey,
+    roleKey,
+}) {
+
+    const user_access = useSelector(store => store?.userPeressmisons);
+    const PagePermissions = useSelector(store => store.permissions);
+
+    const isHasPermissions = hasPermissions(PagePermissions[PermissionsKey], user_access, roleKey);
+
     return (
 
         <section className='rounded-[20px] my-10' style={{ boxShadow: "rgba(126, 124, 152, 0.1) 0px -2px 8px 3px" }}>
@@ -27,18 +43,24 @@ export default function PageContent({ children, title, showActions, url, addnewC
 
                             </button>
 
-                            <Link className={addnewClassNames} to={url}>
+                            {
+                                isHasPermissions
+                                    ?
 
-                                <button className='flex items-center py-3 px-8 rounded-full bg-[var(--primary-color)] text-white  border border-[var(--primary-color)]'>
+                                    <Link className={addnewClassNames} to={url}>
 
-                                    <FontAwesomeIcon icon={faPlus} className='text-[20px]' />
+                                        <button className='flex items-center py-3 px-8 rounded-full bg-[var(--primary-color)] text-white  border border-[var(--primary-color)]'>
 
-                                    <span className='ms-3 text-whitefont-medium'>Add New</span>
+                                            <FontAwesomeIcon icon={faPlus} className='text-[20px]' />
 
-                                </button>
+                                            <span className='ms-3 text-whitefont-medium'>Add New</span>
 
-                            </Link>
+                                        </button>
 
+                                    </Link>
+                                    :
+                                    null
+                            }
 
                         </div>
                         :

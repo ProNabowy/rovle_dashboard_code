@@ -4,13 +4,19 @@ import { TableActions } from "../../components";
 import React, { useState, Fragment } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { fireSwal } from "../../assets/js/utils";
+import SwalControlar from "../../assets/js/utils";
+import { useSelector } from "react-redux";
+import Table from "../../assets/js/table";
 
 const rolesUtility = new Roles();
 
+const tableService = new Table();
+
+const Swal = new SwalControlar();
+
 const handleClick = (userId) => {
 
-    return fireSwal('warning', 'Are you sure?', "You won't be able to revert this!", {
+    return Swal.warning('warning', 'Are you sure?', "You won't be able to revert this!", {
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
@@ -21,13 +27,10 @@ const handleClick = (userId) => {
 
             rolesUtility.deleteUser(userId);
 
-            fireSwal(
-                'success',
+            Swal.success(
                 'Deleted!',
                 'Your file has been deleted.',
-            ).then(_ => {
-                return window.location.reload();
-            })
+            );
         }
     })
 
@@ -58,7 +61,7 @@ const useAccountsBodyTemplate = (rowData) => {
 
                             <div className="flex items-center">
 
-                                <img src={item?.image || require('../../assets/images/nabowy.jpg')} className="w-[56px] h-[56px] rounded-full object-fill me-5" />
+                                <img src={item?.image} className="w-[56px] h-[56px] rounded-full object-fill me-5" />
 
                                 <h3 className="font-medium">{item?.name}</h3>
 
@@ -90,29 +93,27 @@ const useAccountsBodyTemplate = (rowData) => {
 
 };
 
-const nameBodyTemplate = (rowData) => {
+const useActionsBodyTemplate = (rowData) => {
 
-    return <p className='mb-1 capitalize text-[13px] font-medium'>{rowData?.name}</p>
+    const roles = useSelector(store => store.roles);
 
-};
-
-const dateateBodyTemplate = (rowData) => {
-
-    return <p className='mb-1 capitalize text-[13px] font-medium'>{rowData.updated_at}</p>
-
-};
-
-const actionsBodyTemplate = (rowData) => {
-
-    return <TableActions path={`/settings/permissions/list/edit-permission?id=${rowData?.id}`} handelDeleteFunction={rolesUtility.deleteRole} rowData={rowData}></TableActions>
+    return <TableActions
+        path={`/settings/permissions/list/edit-permission?id=${rowData?.id}`}
+        handelDeleteFunction={rolesUtility.deleteRole}
+        rowData={rowData}
+        editKey={'dashboard.roles.update'}
+        deleteKey={'dashboard.roles.destroy'}
+        PagePermissionKey={'Roles'}
+        list={roles}
+    ></TableActions>
 
 };
 
 const columns = [
-    { field: "name", header: "Role Name", classNames: "!px-[15px]", tamplate: nameBodyTemplate },
-    { field: "accounts", header: "Accounts", classNames: "!px-[0px]", tamplate: useAccountsBodyTemplate },
-    { field: "date", header: "Last Date", classNames: "!px-[15px]", tamplate: dateateBodyTemplate },
-    { field: "status", header: "Action", classNames: "!px-[15px]", tamplate: actionsBodyTemplate },
+    { field: "name", header: "Role Name", classNames: "!px-[15px]", tamplate: tableService.nameBodyTemplate },
+    { field: "name", header: "Accounts", classNames: "!px-[0px]", tamplate: useAccountsBodyTemplate },
+    { field: "updated_at", header: "Last Date", classNames: "!px-[15px]", tamplate: tableService.lastDateBodyTemplate },
+    { field: "status", header: "Action", classNames: "!px-[15px]", tamplate: useActionsBodyTemplate },
 ];
 
 

@@ -1,16 +1,25 @@
 import { useLocation } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
 import { Products } from "../../../../apis/apis";
-import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { debounce } from "../../../../assets/js/utils";
+import { AppContext } from "../../../../components/AppContext/AppContext";
+import { useDispatch, useSelector } from "react-redux";
 import Formik from "../../../../hooks/Formik/Formik";
+
 
 const useEditProduct = () => {
 
+    const location = useLocation().search;
+
+    const [product, setProduct] = useState();
+
+    const products = useSelector(store => store.products);
+
     const productUtailty = new Products();
 
-    const rosters = useSelector(store => store?.rosters);
+    const dispatch = useDispatch();
 
-    const location = useLocation().search;
+    const { setIsLoading } = useContext(AppContext);
 
     const productId = location.slice(4);
 
@@ -20,14 +29,20 @@ const useEditProduct = () => {
 
     const handelSubmit = values => {
 
-        return productUtailty.editProducts(values, productId);
+        const updatedData = { ...values };
+
+        // Convert Objects To Arr Of Ids
+        updatedData.origins = updatedData?.origins.map(item => item?.id || item);
+        updatedData.coffeeShops = updatedData?.coffeeShops.map(item => item?.id || item);
+
+        setIsLoading(true);
+
+        return productUtailty.editProducts(updatedData, productId, products, dispatch).finally(_ => setIsLoading(false));
 
     }
-    const { formik } = useFormData(initialValues, handelSubmit);
+    const { formik } = useFormData(initialValues, null);
 
-    const [product, setProduct] = useState();
-
-
+    const clickHandler = debounce((_) => handelSubmit(formik.values), 1000);
 
     useEffect(() => {
 
@@ -50,20 +65,21 @@ const useEditProduct = () => {
                 origins: data?.origins,
                 coffeeShops: data?.coffee_shops
             });
+        });
 
-        })
+        // Clean up
+        return () => { };
 
     }, []);
 
+    useEffect(() => {
 
-    const inputsData = [
-        { names: ['Product Name', 'Code'], placeholders: ['Enter Name', 'Enter Code'], values: [formik?.values?.trade_name, formik.values?.code], nameAttr: ['trade_name', 'code'], disableChange: formik.handleChange, key: ['trade_name', 'code'] },
-        { names: ['Nombre Comercial', 'Region'], placeholders: ['Enter Nombre Comercial', 'Enter Region'], key: ['commercial_name', 'region'], values: [formik?.values?.commercial_name, formik.values?.region], nameAttr: ['commercial_name', 'region'], disableChange: formik.handleChange, },
-        { names: ['Finca', 'Puntunaction Sca s'], placeholders: ['Enter Finca', 'Enter Puntunaction Sca s'], key: ['farm', 'sca_score'], values: [formik?.values?.farm, formik.values?.sca_score], nameAttr: ['farm', 'sca_score'], disableChange: formik.handleChange, },
-        { names: ['Altitude', 'Process'], placeholders: ['Enter Altitude', 'Enter Process'], key: ['altitude', 'process'], values: [formik?.values?.altitude, formik.values?.process], nameAttr: ['altitude', 'process'], disableChange: formik.handleChange, },
-    ]
+        setInitialValues(perv => ({ ...perv, presentations: product?.presentations }))
 
-    return { formik, rosters, product, inputsData }
+    }, [product]);
+
+
+    return { formik, clickHandler, }
 
 }
 

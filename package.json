@@ -13,8 +13,11 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.5.1",
+    "file-saver": "^2.0.5",
     "formik": "^2.4.5",
     "google-maps-react": "^2.0.6",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.7.1",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
     "primereact": "^9.6.2",
@@ -25,7 +28,8 @@
     "react-scripts": "5.0.1",
     "sort-by": "^1.2.0",
     "sweetalert2": "^11.7.31",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "xlsx": "^0.18.5"
   },
   "scripts": {
     "start": "react-scripts start",

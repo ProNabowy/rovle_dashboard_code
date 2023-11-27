@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Size } from "../../../../apis/apis";
-import { getSelectedOption } from "../../../../assets/js/utils";
+import { debounce, getSelectedOption } from "../../../../assets/js/utils";
 import { AppContext } from "../../../../components/AppContext/AppContext";
 import Formik from "../../../../hooks/Formik/Formik";
 
@@ -10,6 +10,10 @@ const useDataGetter = () => {
     const roasters = useSelector(store => store.rosters);
 
     const sizeUtility = new Size();
+
+    const dispatch = useDispatch();
+
+    const sizes = useSelector(store => store.sizes);
 
     const [initialValues, setInitialValues] = useState({
         name: "",
@@ -26,11 +30,19 @@ const useDataGetter = () => {
         setIsLoading(true);
 
 
-        return sizeUtility.addSize(values).finally(_ => setIsLoading(false));
+        return sizeUtility.addSize(values, dispatch, sizes).finally(_ => {
+
+            setIsLoading(false);
+
+            sessionStorage.setItem('selected-roaster', JSON.stringify(getSelectedOption(roasters, 'id', values?.provider_id)));
+
+        });
 
     };
 
-    const { formik } = useFormData(initialValues, handelSubmit);
+    const { formik } = useFormData(initialValues, null);
+
+    const clickHandler = debounce((_) => handelSubmit(formik.values), 1000);
 
     useEffect(() => {
 
@@ -38,7 +50,7 @@ const useDataGetter = () => {
 
     }, [formik.values?.provider_id]);
 
-    return { formik, roasters };
+    return { formik, roasters, clickHandler };
 
 }
 

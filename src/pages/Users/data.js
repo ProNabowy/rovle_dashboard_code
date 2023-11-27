@@ -1,20 +1,20 @@
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useContext } from "react";
 import { Users } from "../../apis/apis";
 import { TableActions } from "../../components";
-import { useCustomEffect } from "../../hooks";
 import { AppContext } from "../../components/AppContext/AppContext";
+import { setUsers } from "../../store/reduces/users";
+import { useDispatch, useSelector } from "react-redux";
+import Table from "../../assets/js/table";
+
+const tableService = new Table();
 
 const useDataGetter = _ => {
 
     const userUtailty = new Users();
 
-    const [data, setData] = useState([]);
+    const users = useSelector(store => store.users);
 
-    const { useReplacePagnitToText, useTableEntries } = useCustomEffect();
-
-    const { selectedEntries, setSelectedEntries, entries } = useTableEntries(data);
-
-    useReplacePagnitToText();
+    const dispatch = useDispatch();
 
     const { setIsLoading } = useContext(AppContext);
 
@@ -22,7 +22,7 @@ const useDataGetter = _ => {
 
         setIsLoading(true); // Show the loader before making the API request
 
-        userUtailty.fetchUsers(setData, true).finally(() => {
+        userUtailty.fetchUsers(setUsers, dispatch).finally(() => {
 
             setIsLoading(false); // Hide the loader when the API request is completed
 
@@ -30,33 +30,9 @@ const useDataGetter = _ => {
 
     }, []);
 
-    return { selectedEntries, setSelectedEntries, entries, data };
+    return { users };
 
 }
-
-
-const idBodyTemplate = (rowData) => {
-    return <h2 className='text-[#6f6b7d]'>{rowData.id}</h2>
-};
-
-
-const nameBodyTemplate = (rowData) => {
-
-    return <p className='mb-1 capitalize text-[13px] font-medium'>{rowData.name}</p>
-
-};
-
-const emailBodyTemplate = (rowData) => {
-
-    return <p className='mb-1 text-[13px] font-medium'>{rowData.email}</p>
-
-};
-
-const addressBodyTemplate = (rowData) => {
-
-    return <p className='mb-1 capitalize text-[13px] font-medium '>{rowData.address}</p>
-
-};
 
 const cardIdBodyTemplate = (rowData) => {
 
@@ -70,29 +46,32 @@ const permissionBodyTemplate = (rowData) => {
 
 };
 
-const lastDateBodyTemplate = (rowData) => {
-
-    return <p className='mb-1 capitalize text-[13px] font-medium '>{rowData.updated_at}</p>
-
-};
-
-
-const actionsBodyTemplate = (rowData) => {
+const useActionsBodyTemplate = (rowData) => {
 
     const usersUtility = new Users();
 
-    return <TableActions path={`/groups/users/edit-user?id=${rowData?.id}`} handelDeleteFunction={usersUtility.deleteUser} rowData={rowData}></TableActions>
+    const users = useSelector(store => store.users);
+
+    return <TableActions
+        path={`/groups/users/edit-user?id=${rowData?.id}`}
+        handelDeleteFunction={usersUtility.deleteUser}
+        rowData={rowData}
+        editKey={'dashboard.users.update'}
+        deleteKey={'dashboard.users.destroy'}
+        PagePermissionKey={'Users'}
+        list={users}
+    ></TableActions>
 
 };
 const columns = [
-    { field: "id", header: "ID", classNames: "!px-[15px]", tamplate: idBodyTemplate },
-    { field: "name", header: "Name", classNames: "!px-[0px]", tamplate: nameBodyTemplate },
-    { field: "email", header: "Email", classNames: "!px-[15px]", tamplate: emailBodyTemplate },
-    { field: "address", header: "Address", classNames: "!px-[15px]", tamplate: addressBodyTemplate },
-    { field: "cardId", header: "Card Id", classNames: "!px-[15px]", tamplate: cardIdBodyTemplate },
-    { field: "role", header: "Role", classNames: "!px-[15px]", tamplate: permissionBodyTemplate },
-    { field: "lastDate", header: "Last Date", classNames: "!px-[15px]", tamplate: lastDateBodyTemplate },
-    { field: "actions", header: "Actions", classNames: "!px-[15px]", tamplate: actionsBodyTemplate },
+    { field: "id", header: "ID", classNames: "!px-[15px]", tamplate: tableService.idBodyTemplate },
+    { field: "name", header: "Name", classNames: "!px-[0px]", tamplate: tableService.nameBodyTemplate },
+    { field: "email", header: "Email", classNames: "!px-[15px]", tamplate: tableService.emailBodyTemplate },
+    { field: "address", header: "Address", classNames: "!px-[15px]", tamplate: tableService.addressBodyTemplate },
+    { field: "card_id", header: "Card Id", classNames: "!px-[15px]", tamplate: cardIdBodyTemplate },
+    { field: "name", header: "Role", classNames: "!px-[15px]", tamplate: permissionBodyTemplate },
+    { field: "updated_at", header: "Last Date", classNames: "!px-[15px]", tamplate: tableService.lastDateBodyTemplate },
+    { field: "actions", header: "Actions", classNames: "!px-[15px]", tamplate: useActionsBodyTemplate },
 ];
 
 export {

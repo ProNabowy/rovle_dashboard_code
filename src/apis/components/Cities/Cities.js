@@ -1,3 +1,5 @@
+import { handleLogOut } from "../../../assets/js/utils";
+import { setCities } from "../../../store/reduces/cities";
 import { RequestManager, secondrayUrl, Swal } from "../../data";
 
 class Cities {
@@ -12,33 +14,33 @@ class Cities {
 
             })
             .catch(error => {
-                console.log(error);
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
 
             })
 
     }
 
-    addCity(data) {
+    addCity(data, dispatch, cities) {
 
         return RequestManager.post(`${secondrayUrl}cities`, data, true)
 
             .then(response => {
 
-                Swal.success('Added!', `Your City has been Added.`).then(res => window.location.href = "/settings/cities/list");
+                Swal.success('Added!', `Your City has been Added.`);
 
-                return
+                return dispatch(setCities([...cities, response.data.data]));
 
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
 
             })
 
     }
 
-    editCity(data, id) {
+    editCity(data, id, cities, dispatch) {
 
         const sendedData = { name: data?.name, province_id: data?.province_id?.id }
 
@@ -46,32 +48,36 @@ class Cities {
 
             .then(response => {
 
-                Swal.success('Added!', `Your City has been Updated.`).then(res => window.location.href = '/settings/cities/list');
+                Swal.success('Updated!', `Your City has been Updated.`);
 
-                return
+                const updatedCities = cities.map(city => city?.id == id ? response.data.data : city);
+
+                return dispatch(setCities(updatedCities));
 
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
 
             })
     }
 
-    deleteCity(id) {
+    deleteCity(id, dispatch, cities) {
 
         return RequestManager.delete(`${secondrayUrl}cities/${id}`)
 
             .then(response => {
 
-                Swal.success('Deleted!', `Your City has been deleted.`).then(resp => window.location.reload());
+                Swal.success('Deleted!', `Your City has been deleted.`);
 
-                return
+                const updatedCities = cities.filter(city => city?.id != id);
+
+                return dispatch(setCities(updatedCities));
 
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
 
             })
 

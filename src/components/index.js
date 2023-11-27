@@ -6,3 +6,7 @@ export { default as RenderTable } from './RenderTable';
 export { default as TableHeader } from './TableHeader';
 export { default as InputsGroup } from './InputsGroup';
 export { default as Spiners } from './Spiners';
+export { default as AddOrigin } from './AddOrigin';
+export { default as AddPackage } from './AddPackage';
+export { default as ChipsList } from './ChipsList';
+export { default as AddPackageByDropdown } from './AddPackageByDropdown';

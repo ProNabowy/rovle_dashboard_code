@@ -1,14 +1,19 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Rosters } from "../../../../apis/apis";
 import Formik from "../../../../hooks/Formik/Formik";
-import { useSelector } from "react-redux";
-
+import { debounce } from "../../../../assets/js/utils";
+import { AppContext } from "../../../../components/AppContext/AppContext";
+import { useDispatch, useSelector } from "react-redux";
 
 const useDataGetter = _ => {
 
     const roasterUtailty = new Rosters();
 
-    const store = useSelector(store => store);
+    const { setIsLoading } = useContext(AppContext);
+
+    const roasters = useSelector(store => store.rosters);
+
+    const dispatch = useDispatch();
 
     const [initialValues, setInitialValues] = useState({
         user_name: "",
@@ -29,12 +34,17 @@ const useDataGetter = _ => {
 
     const { useFormData } = Formik();
 
-    const handelSubmit = values => roasterUtailty.addRoaster(values);
+    const { formik } = useFormData(initialValues, null);
 
-    const { formik } = useFormData(initialValues, handelSubmit);
+    const clickHandler = debounce((_) => {
 
+        setIsLoading(true);
 
-    return { formik, store }
+        return roasterUtailty.addRoaster(formik.values, dispatch, roasters).finally(_ => setIsLoading(false));
+
+    }, 1000);
+
+    return { formik, clickHandler }
 
 }
 export {

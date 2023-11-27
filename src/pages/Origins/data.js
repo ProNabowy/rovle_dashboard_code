@@ -1,20 +1,20 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { Origins } from '../../apis/apis';
 import TableActions from '../../components/TableActions/TableActions';
-import useCustomEffect from '../../hooks/useCustomEffect/useCustomEffect';
 import { AppContext } from '../../components/AppContext/AppContext';
+import { setOrigins } from '../../store/reduces/origins';
+import { useDispatch, useSelector } from 'react-redux';
+import Table from '../../assets/js/table';
+
+const tableService = new Table();
 
 const useDataGetter = _ => {
 
-    const [data, setData] = useState([]);
+    const origins = useSelector(store => store.origins);
 
     const OriginsUtailty = new Origins();
 
-    const { useReplacePagnitToText, useTableEntries } = useCustomEffect();
-
-    const { selectedEntries, setSelectedEntries, entries } = useTableEntries(data);
-
-    useReplacePagnitToText();
+    const dispatch = useDispatch();
 
     const { setIsLoading } = useContext(AppContext);
 
@@ -22,7 +22,7 @@ const useDataGetter = _ => {
 
         setIsLoading(true); // Show the loader before making the API request
 
-        OriginsUtailty.fetchOrigins(setData, true).finally(() => {
+        OriginsUtailty.fetchOrigins(setOrigins, dispatch).finally(() => {
 
             setIsLoading(false); // Hide the loader when the API request is completed
 
@@ -30,41 +30,37 @@ const useDataGetter = _ => {
 
     }, []);
 
-    return { selectedEntries, setSelectedEntries, entries, data }
+    return { origins }
 
 }
 
-const idBodyTemplate = (rowData) => {
-    return <h2 className='text-[#6f6b7d]'>{rowData.id}</h2>
-};
-
-const nameBodyTemplate = (rowData) => {
-    return <p className='mb-1 capitalize text-[13px] font-medium'>{rowData.name}</p>
-};
-
-
 const hostBodyTemplate = (rowData) => {
-    return <p className='mb-1 capitalize text-[13px] font-medium'>{rowData?.provider?.official_name}</p>
+    return <p className='mb-1 capitalize text-[13px] font-medium'>{rowData?.provider?.commercial_name}</p>
 };
 
-const dateBodyTemplate = (rowData) => {
-    return <p className='mb-1 capitalize text-[13px] font-medium'>{rowData?.created_at?.toString()}</p>
-};
-
-const actionsBodyTemplate = (rowData) => {
+const useActionsBodyTemplate = (rowData) => {
 
     const OriginsUtailty = new Origins();
 
-    return <TableActions disableEdit={true} handelDeleteFunction={OriginsUtailty.deleteOrigin} rowData={rowData}></TableActions>
+    const origins = useSelector(store => store.origins);
+
+    return <TableActions
+        disableEdit={true}
+        handelDeleteFunction={OriginsUtailty.deleteOrigin}
+        rowData={rowData}
+        deleteKey={'dashboard.origins.destroy'}
+        PagePermissionKey={'Origins'}
+        list={origins}
+    ></TableActions>
 };
 
 
 const columns = [
-    { field: "id", header: "ID", classNames: "!px-[15px]", tamplate: idBodyTemplate },
-    { field: "name", header: "Name", classNames: "!px-[0px]", tamplate: nameBodyTemplate },
-    { field: "host", header: "Host", classNames: "!px-[15px]", tamplate: hostBodyTemplate },
-    { field: "date", header: "Date", classNames: "!px-[15px]", tamplate: dateBodyTemplate },
-    { field: "status", header: "Action", classNames: "!px-[15px]", tamplate: actionsBodyTemplate },
+    { field: "id", header: "ID", tamplate: tableService.idBodyTemplate },
+    { field: "name", header: "Name", tamplate: tableService.nameBodyTemplate },
+    { field: "provider.commercial_name", header: "Host", tamplate: hostBodyTemplate },
+    { field: "created_at", header: "Date", tamplate: tableService.startDateBodyTemplate },
+    { field: "status", header: "Action", tamplate: useActionsBodyTemplate },
 ];
 
 

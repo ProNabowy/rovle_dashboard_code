@@ -1,20 +1,20 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { Plans } from "../../apis/apis";
 import { SeeMore, TableActions } from "../../components";
-import useCustomEffect from "../../hooks/useCustomEffect/useCustomEffect";
 import { AppContext } from "../../components/AppContext/AppContext";
+import { useDispatch, useSelector } from "react-redux";
+import { setPlans } from "../../store/reduces/plans";
+import Table from "../../assets/js/table";
+
+const tableService = new Table();
 
 const useDataGetter = _ => {
 
     const plansUtailty = new Plans();
 
-    const [data, setData] = useState([]);
+    const plans = useSelector(store => store.plans);
 
-    const { useReplacePagnitToText, useTableEntries } = useCustomEffect();
-
-    const { selectedEntries, setSelectedEntries, entries } = useTableEntries(data);
-
-    useReplacePagnitToText();
+    const dispatch = useDispatch();
 
     const { setIsLoading } = useContext(AppContext);
 
@@ -22,7 +22,7 @@ const useDataGetter = _ => {
 
         setIsLoading(true); // Show the loader before making the API request
 
-        plansUtailty.fetchPlans(setData, true).finally(() => {
+        plansUtailty.fetchPlans(setPlans, dispatch).finally(() => {
 
             setIsLoading(false); // Hide the loader when the API request is completed
 
@@ -30,34 +30,21 @@ const useDataGetter = _ => {
 
     }, []);
 
-    return { selectedEntries, setSelectedEntries, entries, data };
+    return { plans };
 
 }
 
-const idBodyTemplate = (rowData) => {
-    return <h2 className='text-[#6f6b7d]'>{rowData.id}</h2>
-};
-
 const roasterNameBodyTemplate = (rowData) => {
 
-    return <p className='mb-1 capitalize text-[13px] font-medium'>{rowData?.provider?.user?.name}</p>
-};
+    return <p className='mb-1 capitalize text-[13px] font-medium'>{rowData?.provider?.commercial_name}</p>
 
-const nameBodyTemplate = (rowData) => {
-
-    return <p className='mb-1 capitalize text-[13px] font-medium'>{rowData?.name}</p>
-
-};
-
-const lastDateBodyTemplate = (rowData) => {
-    return <p className='mb-1 capitalize text-[13px] font-medium'>{rowData.updated_at}</p>
 };
 
 const sizeBodyTemplate = (rowData) => {
 
-    const sizes = rowData?.presentations;
+    const sizes = rowData?.sizes;
 
-    const itemBodyTamplate = (item, classNames) => <p key={item.index} className={`capitalize text-[13px] font-medium mb-1 rounded-[5px] text-[#58291E] ${classNames}`}>{parseInt(item?.weight)} gm = {parseInt(item?.price)} Euro</p>;
+    const itemBodyTamplate = (item, classNames) => <p key={item.index} className={`capitalize text-[13px] font-medium mb-1 rounded-[5px] text-[#58291E] ${classNames}`}>-{item?.size?.name} = {parseInt(item?.price)} Euro</p>;
 
     const renderPackages = sizes?.slice(0, 3)?.map((item, index) => {
 
@@ -83,22 +70,31 @@ const statusBodyTemplate = (rowData) => {
     return <p className={`mb-1 capitalize text-[13px] font-medium ${rowData.status === "active" ? "text-[#28C76F]" : "text-[#FF5C34]"}`}>{rowData.status}</p>
 };
 
-const actionsBodyTemplate = (rowData) => {
+const useActionsBodyTemplate = (rowData) => {
 
     const plansUtailty = new Plans();
+    const plans = useSelector(store => store.plans);
 
-    return <TableActions path={`/products/plans/edit-plan?id=${rowData?.id}`} handelDeleteFunction={plansUtailty.deletePlan} rowData={rowData}></TableActions>
+    return <TableActions
+        path={`/products/plans/edit-plan?id=${rowData?.id}`}
+        handelDeleteFunction={plansUtailty.deletePlan}
+        rowData={rowData}
+        editKey={'dashboard.plans.update'}
+        deleteKey={'dashboard.plans.destroy'}
+        PagePermissionKey={'Plans'}
+        list={plans}
+    ></TableActions>
 
 };
 
 const columns = [
-    { field: "id", header: "ID", classNames: "!px-[15px]", tamplate: idBodyTemplate },
-    { field: "name", header: "Plan Name", classNames: "!px-[0px]", tamplate: nameBodyTemplate },
-    { field: "roaster-name", header: "Roaster Name", classNames: "!px-[15px]", tamplate: roasterNameBodyTemplate },
+    { field: "id", header: "ID", classNames: "!px-[15px]", tamplate: tableService.idBodyTemplate },
+    { field: "name", header: "Plan Name", classNames: "!px-[0px]", tamplate: tableService.nameBodyTemplate },
+    { field: "provider.commercial_name", header: "Roaster Name", classNames: "!px-[15px]", tamplate: roasterNameBodyTemplate },
     { field: "status", header: "Status", classNames: "!px-[15px]", tamplate: statusBodyTemplate },
-    { field: "size", header: "Sizes", classNames: "!px-[15px]", tamplate: sizeBodyTemplate },
-    { field: "last-date", header: "Last Date", classNames: "!px-[15px]", tamplate: lastDateBodyTemplate },
-    { field: "action", header: "Action", classNames: "!px-[15px]", tamplate: actionsBodyTemplate },
+    { field: "provider.commercial_name", header: "Sizes", classNames: "!px-[15px]", tamplate: sizeBodyTemplate },
+    { field: "rowData.updated_at", header: "Last Date", classNames: "!px-[15px]", tamplate: tableService.lastDateBodyTemplate },
+    { field: "action", header: "Action", classNames: "!px-[15px]", tamplate: useActionsBodyTemplate },
 ];
 
 export {

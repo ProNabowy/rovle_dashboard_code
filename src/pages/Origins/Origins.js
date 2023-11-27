@@ -1,20 +1,21 @@
-import { PageContent, RenderTable, TableHeader } from '../../components';
+import { PageContent, RenderTable } from '../../components';
 import { columns, useDataGetter } from './data';
 
 
 export default function OriginsList() {
 
-    const { selectedEntries, setSelectedEntries, entries, data } = useDataGetter();
+    const {  origins } = useDataGetter();
 
     return (
+        <PageContent
+            url={'add-origin'}
+            title={'All Origin'}
+            PermissionsKey={'Origins'}
+            roleKey={'dashboard.origins.store'}
+            showActions={true}>
 
-        <PageContent url={'add-origin'} title={'All Origins'} showActions={true}>
-
-            <TableHeader selectedEntries={selectedEntries} setSelectedEntries={setSelectedEntries} entries={entries} />
-
-            <RenderTable columns={columns} list={data} selectedEntries={selectedEntries} />
+            <RenderTable columns={columns} list={origins} />
 
         </PageContent>
-
     )
 }

@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import { Rosters } from "../../../../apis/apis";
-import Formik from "../../../../hooks/Formik/Formik";
-import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
-import { getSelectedOption } from "../../../../assets/js/utils";
+import { debounce, getSelectedOption } from "../../../../assets/js/utils";
 import { AppContext } from "../../../../components/AppContext/AppContext";
+import Formik from "../../../../hooks/Formik/Formik";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
+import { Rosters } from "../../../../apis/apis";
 
 
 const useDataGetter = _ => {
@@ -14,6 +14,8 @@ const useDataGetter = _ => {
     const store = useSelector(store => store);
 
     const location = useLocation().search;
+
+    const dispatch = useDispatch();
 
     const roasterId = location.slice(4);
 
@@ -48,14 +50,15 @@ const useDataGetter = _ => {
 
         setIsLoading(true);
 
-        roasterUtailty.updateRoaster(values, roasterId).finally(_ => setIsLoading(false))
+        roasterUtailty.updateRoaster(values, roasterId, dispatch, store.rosters).finally(_ => setIsLoading(false))
 
     };
 
-    const { formik } = useFormData(initialValues, handelSubmit);
+    const { formik } = useFormData(initialValues, null);
 
+    const clickHandler = debounce((_) => handelSubmit(formik.values), 1000);
 
-    return { formik, store }
+    return { formik, clickHandler }
 
 }
 export {

@@ -1,27 +1,47 @@
+import { handleLogOut } from "../../../assets/js/utils";
+import { setPlans } from "../../../store/reduces/plans";
 import { RequestManager, secondrayUrl, Swal } from "../../data";
 
 class Plans {
 
-    fetchPlans(state) {
+    fetchPlans(state, dispatch) {
 
         return RequestManager.get(`${secondrayUrl}plans`, true)
 
             .then(response => {
 
-                state(response.data.data);
+                dispatch(state(response.data.data));
 
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
 
             })
 
     }
 
+    showPlan(state, id) {
+
+        return RequestManager.get(`${secondrayUrl}plans/${id}`, true)
+
+            .then(response => {
+
+                state(response.data.data);
+
+                return response.data.data;
+
+            })
+            .catch(error => {
+
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+
+            })
+
+    }
     fetchPlansByProvider(state, id) {
 
-        return RequestManager.get(`${secondrayUrl}providers/${id}/plans`, true)
+        return RequestManager.get(`${secondrayUrl}plans?provider_id=${id}`, true)
 
             .then(response => {
 
@@ -30,63 +50,67 @@ class Plans {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
 
             })
 
     }
 
-    addPlans(data) {
+    addPlans(data, dispatch, plans) {
 
         return RequestManager.post(`${secondrayUrl}plans`, data, true)
 
             .then(response => {
 
-                Swal.success('Added!', `Your Plan has been Added.`).then(res => window.location.href = "/products/plans/list");
+                Swal.success('Added!', `Your Plan has been Added.`);
 
-                return
+                return dispatch(setPlans([...plans, response.data.data]));
 
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
 
             })
 
     }
-    updatePlan(data, providerId) {
+    updatePlan(data, id, plans, dispatch) {
 
-        return RequestManager.put(`${secondrayUrl}plans/${providerId}`, data, true)
+        return RequestManager.put(`${secondrayUrl}plans/${id}`, data, true)
 
             .then(response => {
 
-                Swal.success('Updated!', `Your Plan has been Updated.`).then(res => window.location.href = "/products/plans/list");
+                Swal.success('Updated!', `Your Plan has been Updated.`);
 
-                return
+                const updatedPlans = plans.map(plan => plan?.id == id ? response.data.data : plan);
+
+                return dispatch(setPlans(updatedPlans));
 
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
 
             })
 
     }
 
-    deletePlan(id) {
+    deletePlan(id, dispatch, plans) {
 
         return RequestManager.delete(`${secondrayUrl}plans/${id}`)
 
             .then(response => {
 
-                Swal.success('Deleted!', `Your Plan has been deleted.`).then(resp => window.location.reload());
+                Swal.success('Deleted!', `Your Plan has been deleted.`);
 
-                return
+                const updatedPlans = plans.filter(plan => plan?.id != id);
+
+                return dispatch(setPlans(updatedPlans));
 
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
 
             })
 

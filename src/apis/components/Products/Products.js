@@ -1,19 +1,21 @@
+import { handleLogOut } from "../../../assets/js/utils";
+import { setProducts } from "../../../store/reduces/products";
 import { RequestManager, secondrayUrl, Swal } from "../../data";
 
 class Products {
 
-    fetchProducts(state, hasAuth) {
+    fetchProducts(dispatch, state) {
 
-        return RequestManager.get(`${secondrayUrl}products`, hasAuth)
+        return RequestManager.get(`${secondrayUrl}products`)
 
             .then(response => {
 
-                state(response.data.data);
+                dispatch(state(response.data.data));
 
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -31,64 +33,67 @@ class Products {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
 
             })
 
     }
-    editProducts(data, id) {
-
-        data.origins = data?.origins.map(item => item?.id || item);
-        data.coffeeShops = data?.coffeeShops.map(item => item?.id || item);
+    editProducts(data, id, products, dispatch) {
 
         return RequestManager.put(`${secondrayUrl}products/${id}`, data, id)
 
             .then(response => {
 
-                return Swal.success('Updated!', `Your Product has been Updated.`).then(res => window.location.href = "/products/list");
+                Swal.success('Updated!', `Your Product has been Updated.`);
+
+                const updatedProducts = products.map(product => product?.id == id ? response.data.data : product);
+
+                return dispatch(setProducts(updatedProducts));
 
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
 
             })
 
     }
 
-    addProduct(data) {
+    addProduct(data, dispatch, products) {
 
         return RequestManager.post(`${secondrayUrl}products`, data, true)
 
             .then(response => {
 
-                Swal.success('Added!', `Your Product has been Added.`).then(res => window.location.href = "/products/list");
+                Swal.success('Added!', `Your Product has been Added.`);
 
-                return
+                return dispatch(setProducts([...products, response.data.data]));
 
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
 
             })
 
     }
 
-    deleteProduct(id) {
+    deleteProduct(id, dispatch, products) {
 
         return RequestManager.delete(`${secondrayUrl}products/${id}`)
 
             .then(response => {
 
-                Swal.success('Deleted!', `Your Product has been deleted.`).then(resp => window.location.reload());
+                Swal.success('Deleted!', `Your Product has been deleted.`);
 
-                return
+                const updatedProducts = products.filter(product => product?.id != id);
+
+                dispatch(setProducts(updatedProducts));
 
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
 
             })
 

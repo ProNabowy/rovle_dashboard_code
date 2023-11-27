@@ -1,3 +1,5 @@
+import { handleLogOut } from "../../../assets/js/utils";
+import { setProvince } from "../../../store/reduces/province";
 import { RequestManager, Swal, secondrayUrl } from "../../data";
 
 class Province {
@@ -13,7 +15,7 @@ class Province {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -30,63 +32,67 @@ class Province {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
 
             })
 
     }
 
-    addProvinces(data) {
+    addProvinces(data, dispatch, province) {
 
         return RequestManager.post(`${secondrayUrl}provinces`, data, true)
 
             .then(response => {
 
-                Swal.success('Added!', `Your Provinces has been Added.`).then(res => window.location.href = "/settings/province/list");
+                Swal.success('Added!', `Your Provinces has been Added.`);
 
-                return
+                return dispatch(setProvince([...province, response.data.data]));
 
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
 
             })
 
     }
 
-    editProvinces(data, id) {
+    editProvinces(data, id, dispatch, provinces) {
 
         return RequestManager.put(`${secondrayUrl}provinces/${id}`, { name: data.name, country_id: data?.country_id }, true)
 
             .then(response => {
 
-                Swal.success('Added!', `Your Provinces has been Updated.`).then(res => window.location.href = '/settings/province/list');
+                Swal.success('Added!', `Your Provinces has been Updated.`);
 
-                return
+                const updatedProvinces = provinces.map(province => province?.id == id ? response.data.data : province);
+
+                return dispatch(setProvince(updatedProvinces));
 
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
 
             })
     }
 
-    deleteProvince(id) {
+    deleteProvince(id, dispatch, provinces) {
 
         return RequestManager.delete(`${secondrayUrl}provinces/${id}`)
 
             .then(response => {
 
-                Swal.success('Deleted!', `Your Province has been deleted.`).then(resp => window.location.reload());
+                Swal.success('Deleted!', `Your Province has been deleted.`);
 
-                return
+                const updatedProvinces = provinces.filter(province => province?.id != id);
+
+                return dispatch(setProvince(updatedProvinces));
 
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
 
             })
 

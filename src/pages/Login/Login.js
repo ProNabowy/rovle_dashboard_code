@@ -1,25 +1,16 @@
-import React, { useState } from 'react'
-import imageSrc from '../../assets/images/Login.png'
 import { Link } from 'react-router-dom'
 import { Checkbox } from "primereact/checkbox";
-import { handelChange } from '../../assets/js/utils';
-import { PostLogin } from '../../apis/apis';
+import { useDataGetter } from './data';
 
 
 export default function Login() {
 
-    const [checked, setChecked] = useState(false);
-    const [data, setData] = useState({
-        email: "",
-        password: ""
-    });
-    const postLogin = new PostLogin();
-
-
-    const handelSubmit = (e) => {
-        e.preventDefault();
-        postLogin.login(data);
-    }
+    const {
+        checked,
+        setChecked,
+        setData,
+        handelSubmit
+    } = useDataGetter();
 
     return (
         <div className='login w-full h-[100vh] bg-red-500 flex items-center justify-center'
@@ -50,7 +41,7 @@ export default function Login() {
 
                                 <label className='block font-medium' htmlFor='email'>Email address</label>
 
-                                <input onChange={e => handelChange(setData, 'email', e.target.value)} id='email' type='email' className='w-[400px] h-[40px] px-5 rounded-[8px]' style={{ background: 'linear-gradient(120deg, #FFF -45.57%, rgba(217, 217, 217, 0.00) 134.89%)', backdropFilter: 'blur(12.343469619750977px)' }} />
+                                <input autoFocus onChange={e => setData(perv => ({ ...perv, email: e.target.value }))} id='email' type='email' className='w-[400px] h-[40px] px-5 rounded-[8px]' style={{ background: 'linear-gradient(120deg, #FFF -45.57%, rgba(217, 217, 217, 0.00) 134.89%)', backdropFilter: 'blur(12.343469619750977px)' }} />
 
                             </div>
 
@@ -58,7 +49,7 @@ export default function Login() {
 
                                 <label className='block font-medium' htmlFor='password'>Password</label>
 
-                                <input onChange={e => handelChange(setData, 'password', e.target.value)} id='password' type='password' className='w-[400px] h-[40px] px-5 rounded-[8px]' style={{ background: 'linear-gradient(120deg, #FFF -45.57%, rgba(217, 217, 217, 0.00) 134.89%)', backdropFilter: 'blur(12.343469619750977px)' }} />
+                                <input onChange={e => setData(perv => ({ ...perv, password: e.target.value }))} id='password' type='password' className='w-[400px] h-[40px] px-5 rounded-[8px]' style={{ background: 'linear-gradient(120deg, #FFF -45.57%, rgba(217, 217, 217, 0.00) 134.89%)', backdropFilter: 'blur(12.343469619750977px)' }} />
 
                             </div>
 

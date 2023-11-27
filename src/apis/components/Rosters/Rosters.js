@@ -1,3 +1,5 @@
+import { handleLogOut } from "../../../assets/js/utils";
+import { setRosters } from "../../../store/reduces/rosters";
 import { RequestManager, Swal, secondrayUrl } from "../../data";
 
 class Rosters {
@@ -6,6 +8,7 @@ class Rosters {
     fetchRosters(state, dispatch) {
 
         return RequestManager.get(`${secondrayUrl}providers`)
+
             .then(response => {
 
                 dispatch(state(response.data.data));
@@ -13,63 +16,66 @@ class Rosters {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
 
             })
 
     }
-
-    addRoaster(data) {
+    addRoaster(data, dispatch, roasters) {
 
         return RequestManager.post(`${secondrayUrl}providers`, data, true)
 
             .then(response => {
 
-                Swal.success('Added!', `Your Roaster has been Added.`).then(res => window.location.href = "/groups/roasters");
+                Swal.success('Added!', `Your Roaster has been Added.`)
 
-                return
+                return dispatch(setRosters([...roasters, response.data.data]));
 
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
 
             })
 
     }
-    updateRoaster(data, id) {
+    updateRoaster(data, id, dispatch, roasters) {
 
         return RequestManager.put(`${secondrayUrl}providers/${id}`, data)
 
             .then(response => {
 
-                Swal.success('Updated!', `Your Roaster has been Updated.`).then(res => window.location.href = "/groups/roasters");
+                Swal.success('Updated!', `Your Roaster has been Updated.`)
 
-                return
+                const updatedRoasters = roasters.map(roaster => roaster?.id == id ? response.data.data : roaster);
+
+                return dispatch(setRosters(updatedRoasters));
 
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
 
             })
 
     }
 
-    deleteRoaster(id) {
+    deleteRoaster(id, dispatch, roasters) {
 
         return RequestManager.delete(`${secondrayUrl}providers/${id}`)
 
             .then(response => {
 
-                Swal.success('Deleted!', `Your Roaster has been deleted.`).then(resp => window.location.reload());
+                Swal.success('Deleted!', `Your Roaster has been deleted.`)
 
-                return
+                const updatedRoasters = roasters.filter(roaster => roaster?.id != id);
+
+                return dispatch(setRosters(updatedRoasters));
 
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
 
             })
 

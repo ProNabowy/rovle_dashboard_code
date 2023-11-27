@@ -1,7 +1,7 @@
-import { Suspense } from "react";
 import { MainPanel, MainContent } from './layouts'
 import { Auth, Spiners } from "./components";
 import { useDataAppGetter } from "./data";
+import { useSelector } from 'react-redux';
 
 export default function App() {
 
@@ -11,6 +11,9 @@ export default function App() {
     setIsExpanded
   } = useDataAppGetter();
 
+  const store = useSelector(store => store);
+
+
   return (
     <div className="App">
 
@@ -18,11 +21,9 @@ export default function App() {
 
       <Auth />
 
-
       <MainPanel isExpanded={isExpanded} setIsExpanded={setIsExpanded}></MainPanel>
 
       <MainContent isExpanded={isExpanded} setIsExpanded={setIsExpanded} />
-
 
     </div>
   );

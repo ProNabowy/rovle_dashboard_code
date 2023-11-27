@@ -35,16 +35,20 @@ import {
     EditRoaster,
     CoffeShopList,
     AddCoffee,
+    EditCoffee,
     OffersList,
     AddOffer,
+    EditOffer,
     Profile,
+    Orders,
+    OrdersDetails,
     NotFound,
 } from './data';
 import { Suspense } from 'react';
 import { Spiners } from '../components';
 
 
-export default function routes() {
+export default function routes(isHasPermissions) {
 
     return (
 
@@ -54,61 +58,66 @@ export default function routes() {
 
                 <Route path='/login' element={<Login />} />
 
-                <Route path="/settings/country/list" element={<CountryList />} />
-                <Route path="/settings/country/list/add-country" element={<AddCountry />} />
-                <Route path="/settings/country/list/edit-country" element={<EditCountry />} />
+                <Route path="/settings/country/list" element={isHasPermissions('Countries', 'dashboard.countries.index') ? <CountryList /> : <NotFound />} />
+                <Route path="/settings/country/list/add-country" element={isHasPermissions('Countries', 'dashboard.countries.store') ? <AddCountry /> : <NotFound />} />
+                <Route path="/settings/country/list/edit-country" element={isHasPermissions('Countries', 'dashboard.countries.update') ? <EditCountry /> : <NotFound />} />
 
 
-                <Route path="/settings/province/list" element={<ProvinceList />} />
-                <Route path="/settings/province/list/add-province" element={<AddProvince />} />
-                <Route path="/settings/province/list/edit-province" element={<EditProvince />} />
+                <Route path="/settings/province/list" element={isHasPermissions('Provinces', 'dashboard.provinces.index') ? <ProvinceList /> : <NotFound />} />
+                <Route path="/settings/province/list/add-province" element={isHasPermissions('Provinces', 'dashboard.provinces.store') ? <AddProvince /> : <NotFound />} />
+                <Route path="/settings/province/list/edit-province" element={isHasPermissions('Provinces', 'dashboard.provinces.update') ? <EditProvince /> : <NotFound />} />
 
 
-                <Route path="/settings/cities/list" element={<CitiesList />} />
-                <Route path="/settings/cities/list/add-city" element={<AddCity />} />
-                <Route path="/settings/cities/list/edit-city" element={<EditCity />} />
+                <Route path="/settings/cities/list" element={isHasPermissions('Cities', 'dashboard.cities.index') ? <CitiesList /> : <NotFound />} />
+                <Route path="/settings/cities/list/add-city" element={isHasPermissions('Cities', 'dashboard.cities.store') ? <AddCity /> : <NotFound />} />
+                <Route path="/settings/cities/list/edit-city" element={isHasPermissions('Cities', 'dashboard.cities.update') ? <EditCity /> : <NotFound />} />
 
-                <Route path="settings/permissions/list" element={<PermissionList />} />
-                <Route path="/settings/permissions/list/add-permission" element={<AddPermission />} />
-                <Route path="/settings/permissions/list/edit-permission" element={<EditPermissions />} />
-
-
-                <Route path="/products/list" element={<ProductsList />} />
-                <Route path="/products/list/add-product" element={<AddProduct />} />
-                <Route path="/products/list/edit-product" element={<EditProduct />} />
-
-                <Route path="/origins/list" element={<OriginsList />} />
-                <Route path="/origins/list/add-origin" element={<AddOrigin />} />
+                <Route path="settings/permissions/list" element={isHasPermissions('Roles', 'dashboard.roles.index') ? <PermissionList /> : <NotFound />} />
+                <Route path="/settings/permissions/list/add-permission" element={isHasPermissions('Roles', 'dashboard.roles.store') ? <AddPermission /> : <NotFound />} />
+                <Route path="/settings/permissions/list/edit-permission" element={isHasPermissions('Roles', 'dashboard.roles.update') ? <EditPermissions /> : <NotFound />} />
 
 
-                <Route path="/products/plans/list" element={<PlansList />} />
-                <Route path="/products/plans/add-plan" element={<AddPlan />} />
-                <Route path="/products/plans/edit-plan" element={<EditPlan />} />
+                <Route path="/products/list" element={isHasPermissions('Products', 'dashboard.products.index') ? <ProductsList /> : <NotFound />} />
+                <Route path="/products/list/add-product" element={isHasPermissions('Products', 'dashboard.products.store') ? <AddProduct /> : <NotFound />} />
+                <Route path="/products/list/edit-product" element={isHasPermissions('Products', 'dashboard.products.update') ? <EditProduct /> : <NotFound />} />
+
+                <Route path="/origins/list" element={isHasPermissions('Origins', 'dashboard.origins.index') ? <OriginsList /> : <NotFound />} />
+                <Route path="/origins/list/add-origin" element={isHasPermissions('Origins', 'dashboard.origins.store') ? <AddOrigin /> : <NotFound />} />
 
 
-                <Route path="/products/plans/subscriptions" element={<Subscriptions />} />
-                <Route path="/products/plans/subscriptions/list" element={<SubscriptionsList />} />
-
-                <Route path="/products/plans/size" element={<SizeManagement />} />
-                <Route path="/products/plans/size/list" element={<SizeList />} />
-                <Route path="/products/plans/size/list/add-size" element={<AddSize />} />
+                <Route path="/products/plans/list" element={isHasPermissions('Plans', 'dashboard.plans.index') ? <PlansList /> : <NotFound />} />
+                <Route path="/products/plans/add-plan" element={isHasPermissions('Plans', 'dashboard.plans.store') ? <AddPlan /> : <NotFound />} />
+                <Route path="/products/plans/edit-plan" element={isHasPermissions('Plans', 'dashboard.plans.update') ? <EditPlan /> : <NotFound />} />
 
 
-                <Route path="/groups/users" element={<UsersList />} />
-                <Route path="/groups/users/add-user" element={<AddUser />} />
-                <Route path="/groups/users/edit-user" element={<EditUser />} />
+                <Route path="/products/plans/subscriptions" element={isHasPermissions('Subscription', 'dashboard.plans.subscriptions') ? <Subscriptions /> : <NotFound />} />
+                <Route path="/products/plans/subscriptions/list" element={isHasPermissions('Subscription', 'dashboard.plans.subscriptions') ? <SubscriptionsList /> : <NotFound />} />
+
+                <Route path="/products/plans/size" element={isHasPermissions('Sizes', 'dashboard.sizes.index') ? <SizeManagement /> : <NotFound />} />
+                <Route path="/products/plans/size/list" element={isHasPermissions('Sizes', 'dashboard.sizes.index') ? <SizeList /> : <NotFound />} />
+                <Route path="/products/plans/size/list/add-size" element={isHasPermissions('Sizes', 'dashboard.sizes.store') ? <AddSize /> : <NotFound />} />
 
 
-                <Route path="/groups/roasters" element={<Roasters />} />
-                <Route path="/groups/roasters/add-roaster" element={<AddRoasters />} />
-                <Route path="/groups/roasters/edit-roaster" element={<EditRoaster />} />
-
-                <Route path="/setups/coffee-shop" element={<CoffeShopList />} />
-                <Route path="/setups/coffee-shop/add-coffee" element={<AddCoffee />} />
+                <Route path="/groups/users" element={isHasPermissions('Users', 'dashboard.users.index') ? <UsersList /> : <NotFound />} />
+                <Route path="/groups/users/add-user" element={isHasPermissions('Users', 'dashboard.users.store') ? <AddUser /> : <NotFound />} />
+                <Route path="/groups/users/edit-user" element={isHasPermissions('Users', 'dashboard.users.update') ? <EditUser /> : <NotFound />} />
 
 
-                <Route path="/products/list/offers" element={<OffersList />} />
-                <Route path="/products/list/offers/add-offer" element={<AddOffer />} />
+                <Route path="/groups/roasters" element={isHasPermissions('Providers', 'dashboard.providers.index') ? <Roasters /> : <NotFound />} />
+                <Route path="/groups/roasters/add-roaster" element={isHasPermissions('Providers', 'dashboard.providers.store') ? <AddRoasters /> : <NotFound />} />
+                <Route path="/groups/roasters/edit-roaster" element={isHasPermissions('Providers', 'dashboard.providers.update') ? <EditRoaster /> : <NotFound />} />
+
+                <Route path="groups/orders" element={isHasPermissions('Orders', 'dashboard.orders.index') ? <Orders /> : <NotFound />} />
+                <Route path="groups/orders/order-details" element={isHasPermissions('Orders', 'dashboard.orders.index') ? <OrdersDetails /> : <NotFound />} />
+
+                <Route path="/setups/coffee-shop" element={isHasPermissions('Coffee Shops', 'dashboard.coffeeShops.index') ? <CoffeShopList /> : <NotFound />} />
+                <Route path="/setups/coffee-shop/add-coffee" element={isHasPermissions('Coffee Shops', 'dashboard.coffeeShops.store') ? <AddCoffee /> : <NotFound />} />
+                <Route path="/setups/coffee-shop/edit-coffee" element={isHasPermissions('Coffee Shops', 'dashboard.coffeeShops.update') ? <EditCoffee /> : <NotFound />} />
+
+
+                <Route path="/setups/offers" element={isHasPermissions('Passports', 'dashboard.passports.index') ? <OffersList /> : <NotFound />} />
+                <Route path="/setups/offers/add-offer" element={isHasPermissions('Passports', 'dashboard.passports.store') ? <AddOffer /> : <NotFound />} />
+                <Route path="/setups/offers/edit-offer" element={isHasPermissions('Passports', 'dashboard.passports.update') ? <EditOffer /> : <NotFound />} />
 
 
                 <Route path="/profile" element={<Profile />} />

@@ -1,18 +1,22 @@
-import { PageContent, RenderTable, TableHeader } from '../../components';
+import { PageContent, RenderTable } from '../../components';
 import { columns, useDataGetter } from './data';
 
 
 export default function PlansList() {
 
-    const { selectedEntries, setSelectedEntries, entries, data } = useDataGetter();
+    const { plans } = useDataGetter();
 
     return (
 
-        <PageContent url={'/products/plans/add-plan'} title={'All Plan'} showActions={true} >
+        <PageContent
+            url={'/products/plans/add-plan'}
+            title={'All Plan'}
+            showActions={true}
+            PermissionsKey={'Plans'}
+            roleKey={'dashboard.plans.store'}
+        >
 
-            <TableHeader selectedEntries={selectedEntries} setSelectedEntries={setSelectedEntries} entries={entries} />
-
-            <RenderTable columns={columns} list={data} selectedEntries={selectedEntries} />
+            <RenderTable columns={columns} list={plans} />
 
         </PageContent>
 

@@ -1,16 +1,17 @@
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useContext, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Province } from "../../../../apis/apis";
 import { Formik } from "../../../../hooks";
 import { useLocation } from "react-router-dom";
-import { getSelectedOption } from "../../../../assets/js/utils";
+import { debounce, getSelectedOption } from "../../../../assets/js/utils";
+import { AppContext } from "../../../../components/AppContext/AppContext";
 
 
 const useDataGetter = () => {
 
-    const [selectedCountry, setSelectedCountry] = useState(null);
+    const province = useSelector(store => store.province);
 
-    const countries = useSelector(store => store.countries);
+    const dispatch = useDispatch();
 
     const provinceUtility = new Province();
 
@@ -18,7 +19,7 @@ const useDataGetter = () => {
 
     const provinceId = +location.slice(4);
 
-    const [data, setData] = useState({});
+    const { setIsLoading } = useContext(AppContext);
 
     const [initialValues, setInitialValues] = useState({
         name: "",
@@ -27,25 +28,23 @@ const useDataGetter = () => {
 
     useEffect(() => {
 
-        provinceUtility.getProvince(setData, provinceId);
+        setInitialValues(getSelectedOption(province, 'id', provinceId));
 
-    }, []);
-
-    useEffect(() => {
-
-        setInitialValues(data);
-
-        setSelectedCountry(getSelectedOption(countries, 'id', data?.country_id));
-
-    }, [data]);
+    }, [province]);
 
     const { useFormData } = Formik();
 
-    const handelSubmit = values => provinceUtility.editProvinces(values, provinceId);
+    const { formik } = useFormData(initialValues, null);
 
-    const { formik } = useFormData(initialValues, handelSubmit);
+    const clickHandler = debounce((_) => {
 
-    return { formik, selectedCountry, setSelectedCountry, countries };
+        setIsLoading(true);
+
+        return provinceUtility.editProvinces(formik.values, provinceId, dispatch, province).finally(_ => setIsLoading(false));
+
+    }, 1000);
+
+    return { formik, clickHandler };
 
 };
 

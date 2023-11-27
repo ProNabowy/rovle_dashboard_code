@@ -1,16 +1,17 @@
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Cities } from "../../../../apis/apis";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Formik } from "../../../../hooks";
 import { useLocation } from "react-router-dom";
-import { getSelectedOption } from "../../../../assets/js/utils";
+import { debounce } from "../../../../assets/js/utils";
+import { AppContext } from "../../../../components/AppContext/AppContext";
 
 const useDataGetter = () => {
 
     const [initialValues, setInitialValues] = useState({
         name: "",
-        province_id: '',
+        province_id: '2',
     });
 
     const location = useLocation().search;
@@ -19,34 +20,39 @@ const useDataGetter = () => {
 
     const citiesUtility = new Cities();
 
-    const province = useSelector(store => store.province);
-
     const cities = useSelector(store => store.cities);
 
-    const [selectedCity, setSelectedCity] = useState({});
+    const dispatch = useDispatch();
 
-    const handelSubmit = values => values?.province_id && citiesUtility.editCity(values, cityId);
+    const { setIsLoading } = useContext(AppContext);
+
+    const clickHandler = debounce((_) => {
+
+        setIsLoading(true);
+
+        return citiesUtility.editCity(formik.values, cityId, cities, dispatch).finally(_ => setIsLoading(false));
+
+    }, 1000);
 
     useEffect(() => {
 
-        setSelectedCity(getSelectedOption(cities, 'id', cityId));
-
-    }, [cities]);
-
-    useEffect(() => {
+        const currentCity = cities?.filter(city => city?.id == cityId)[0];
 
         setInitialValues({
-            name: selectedCity?.name,
-            province_id: getSelectedOption(province, 'id', selectedCity?.province_id),
+
+            name: currentCity?.name,
+            province_id: currentCity?.province?.id,
+
         })
 
-    }, [selectedCity]);
-
+    }, [cities]);
+    
     const { useFormData } = Formik();
 
-    const { formik } = useFormData(initialValues, handelSubmit);
+    const { formik } = useFormData(initialValues, null);
 
-    return { formik, province };
+
+    return { formik, clickHandler };
 
 }
 

@@ -1,9 +1,15 @@
 import BreadcrumbNav from '../BreadcrumbNav/BreadcrumbNav'
+import { hasPermissions, isLoggedIn } from '../../assets/js/utils';
+import { useSelector } from 'react-redux';
 import Header from '../Header/Header'
 import routes from '../../routes';
-import { isLoggedIn } from '../../assets/js/utils';
 
 export default function MainContent({ isExpanded, setIsExpanded }) {
+
+    const permissions = useSelector(store => store.permissions);
+    const user_access = useSelector(store => store?.userPeressmisons);
+
+    const isHasPermissions = (PagePermissions, permissionKey) => hasPermissions(permissions[PagePermissions], user_access, permissionKey);
 
     const isLogin = isLoggedIn();
 
@@ -19,11 +25,12 @@ export default function MainContent({ isExpanded, setIsExpanded }) {
 
                     <BreadcrumbNav></BreadcrumbNav>
 
-                    {routes()}
+                    {routes(isHasPermissions)}
 
                 </div>
 
             </div>
-            : routes()
+            :
+            routes(isHasPermissions)
     )
 }

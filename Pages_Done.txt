@@ -1,5 +1,0 @@
-1 -> countries
-2 -> Province
-3 -> cities
-4 -> Permissions
-5 -> Origins

@@ -52,11 +52,17 @@ const Roasters = lazy(() => import('../pages/Roasters'));
 const AddRoasters = lazy(() => import('../pages/Roasters/components/AddRoasters'));
 const EditRoaster = lazy(() => import('../pages/Roasters/components/EditRoasters'));
 
+
+const Orders = lazy(() => import('../pages/Orders'));
+const OrdersDetails = lazy(() => import('../pages/Orders/components/OrderDetails'));
+
 const CoffeShopList = lazy(() => import('../pages/CoffeShop'));
 const AddCoffee = lazy(() => import('../pages/CoffeShop/components/AddCoffee'));
+const EditCoffee = lazy(() => import('../pages/CoffeShop/components/EditCoffee'));
 
 const OffersList = lazy(() => import('../pages/Offers'));
 const AddOffer = lazy(() => import('../pages/Offers/components/AddOffer'));
+const EditOffer = lazy(() => import('../pages/Offers/components/EditOffer'));
 
 const Profile = lazy(() => import('../pages/Profile'));
 
@@ -98,9 +104,13 @@ export {
     EditRoaster,
     CoffeShopList,
     AddCoffee,
+    EditCoffee,
     OffersList,
     AddOffer,
+    EditOffer,
     Profile,
+    Orders,
+    OrdersDetails,
     NotFound
 }
 

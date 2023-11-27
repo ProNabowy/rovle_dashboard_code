@@ -8,7 +8,6 @@ import React, { useState } from 'react';
 
 export default function CoffeShopList() {
 
-
     const [dialogVisible, setDialogVisible] = useState(false);
 
     const dialogFooterTemplate = () => {
@@ -17,7 +16,13 @@ export default function CoffeShopList() {
 
     return (
 
-        <PageContent url={'add-coffee'} title={'Roasters Form'} showActions={true} >
+        <PageContent
+            url={'add-coffee'}
+            title={'Roasters Form'}
+            showActions={true}
+            PermissionsKey={'Coffee Shops'}
+            roleKey={'dashboard.coffeeShops.store'}
+        >
 
             <Dialog header="Roasters Form" visible={dialogVisible} style={{ width: '75vw' }} maximizable={true} maximized={true} modal contentStyle={{ height: '300px' }} onHide={() => setDialogVisible(false)} footer={dialogFooterTemplate} >
 

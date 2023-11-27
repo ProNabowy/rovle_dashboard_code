@@ -1,3 +1,5 @@
+import { handleLogOut } from "../../../assets/js/utils";
+import { setRoles } from "../../../store/reduces/roles";
 import { RequestManager, Swal, secondrayUrl } from "../../data";
 
 class Roles {
@@ -11,14 +13,36 @@ class Roles {
 
                 dispatch(state(response.data.data));
 
+                return response.data.data;
+
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
 
             })
 
     }
+
+    getSingleRole(state, roleId) {
+
+        return RequestManager.get(`${secondrayUrl}roles/${roleId}`, true)
+
+            .then(response => {
+
+                state(response.data.data?.permissions);
+
+                return response.data.data;
+
+            })
+            .catch(error => {
+
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+
+            })
+
+    }
+
     fetchUsers(state, roleId) {
 
         return RequestManager.get(`${secondrayUrl}roles/${roleId}/accounts`, true)
@@ -30,7 +54,7 @@ class Roles {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -46,45 +70,67 @@ class Roles {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
 
             })
 
     }
 
-    addRole(data) {
+    editRole(data, roleId, dispatch, roles) {
+
+        return RequestManager.put(`${secondrayUrl}roles/${roleId}`, data, true)
+
+            .then(response => {
+
+                Swal.success('Updated!', `Permissions has been Updated.`);
+
+                const updatedRoles = roles.map(role => role?.id == roleId ? response.data.data : role);
+
+                return dispatch(setRoles(updatedRoles));
+
+            })
+            .catch(error => {
+
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+
+            })
+
+    }
+
+    addRole(data, dispatch, roles) {
 
         return RequestManager.post(`${secondrayUrl}roles`, data, true)
 
             .then(response => {
 
-                Swal.success('Added!', `Role has been Added.`).then(res => window.location.href = "/settings/province/list");
+                Swal.success('Added!', `Role has been Added.`);
 
-                return
+                return dispatch(setRoles([...roles, response.data.data]));
 
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
 
             })
 
     }
 
-    deleteRole(id) {
+    deleteRole(id, dispatch, roles) {
 
         return RequestManager.delete(`${secondrayUrl}roles/${id}`)
 
             .then(response => {
 
-                Swal.success('Deleted!', `The Role has been deleted.`).then(resp => window.location.reload());
+                Swal.success('Deleted!', `The Role has been deleted.`);
 
-                return
+                const updatedRoles = roles.filter(role => role?.id != id);
 
+                return dispatch(setRoles(updatedRoles));
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`);
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
 
             })
 
