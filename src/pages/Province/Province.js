@@ -1,10 +1,10 @@
 import { PageContent, RenderTable } from '../../components';
-import { useSelector } from 'react-redux';
-import { columns } from './data';
+import { columns, useDataGetter } from './data';
 
 export default function Province() {
 
-    const province = useSelector(store => store.province);
+    const { province } = useDataGetter();
+
     return (
 
         <PageContent
@@ -12,7 +12,11 @@ export default function Province() {
             title={'All Province'}
             roleKey={'dashboard.provinces.store'}
             PermissionsKey={'Provinces'}
-            showActions={true} >
+            showActions={true}
+            columns={columns}
+            list={province}
+            saveName={'Province'}
+        >
 
 
             <RenderTable columns={columns} list={province} />

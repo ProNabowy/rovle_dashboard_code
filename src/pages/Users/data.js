@@ -42,7 +42,7 @@ const cardIdBodyTemplate = (rowData) => {
 
 const permissionBodyTemplate = (rowData) => {
 
-    return <p className='mb-1 capitalize text-[13px] font-medium '>{rowData?.roles[0]?.name}</p>
+    return <p className='mb-1 capitalize text-[13px] font-medium '>{rowData?.roles && rowData?.roles[0]?.name}</p>
 
 };
 

@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Plans, Subscriptions } from "../../apis/apis";
 import { useContext, useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { AppContext } from "../../components/AppContext/AppContext";
 import { setSubscriptions } from "../../store/reduces/subscriptions";
+import { Swal } from "../../apis/data";
 
 const useDataGetter = () => {
 
@@ -21,12 +22,19 @@ const useDataGetter = () => {
 
     const dispatch = useDispatch();
 
+    const navigate = useNavigate();
+
     const plansUtailty = new Plans();
 
     const subscriptionsUtailty = new Subscriptions();
 
     const { setIsLoading } = useContext(AppContext);
 
+    const handleShowButton = () => {
+
+        return (!selectedPlan?.id) ? Swal.warning('Warning', `Please Select Plan`) : navigate('/products/plans/subscriptions/list');
+
+    }
 
     useEffect(() => {
 
@@ -62,6 +70,7 @@ const useDataGetter = () => {
         setselectedPlan,
         subscriptionsList,
         plans,
+        handleShowButton
     };
 
 }

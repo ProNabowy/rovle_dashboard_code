@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Roles } from "../../../../apis/apis";
 import { Formik } from "../../../../hooks";
 import { AppContext } from "../../../../components/AppContext/AppContext";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { debounce } from "../../../../assets/js/utils";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -22,6 +22,8 @@ const useDataGetter = asEdit => {
 
     const roleId = location.slice(4);
 
+    const navigate = useNavigate();
+
     const [role, setRole] = useState([]);
 
     const [initialValues, setInitialValues] = useState({ name: "", permissions: [] });
@@ -34,7 +36,7 @@ const useDataGetter = asEdit => {
 
         setIsLoading(true);
 
-        return asEdit ? rolesUtailty.editRole(values, roleId, dispatch, roles).finally(_ => setIsLoading(false)) : rolesUtailty.addRole(values, dispatch, roles).finally(_ => setIsLoading(false));
+        return asEdit ? rolesUtailty.editRole(values, roleId, dispatch, roles).finally(_ => setIsLoading(false)) : rolesUtailty.addRole(values, dispatch, roles, navigate).finally(_ => setIsLoading(false));
 
     };
 

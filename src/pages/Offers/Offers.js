@@ -1,14 +1,17 @@
 import { PageContent } from '../../components';
 import React, { Fragment, useState } from "react";
 import OfferListTable from './OffersListTable/OfferListTable';
-import { useDataGetter } from './data';
+import { columns, useDataGetter } from './data';
 import TableHeader from './TableHeader/TableHeader';
+import { useSelector } from 'react-redux';
 
 export default function OfferList() {
 
     const [ingredients, setIngredients] = useState([0]);
 
     const { offers, level_one, level_two, level_three } = useDataGetter();
+
+    const offeers = useSelector(store => store.offeers);
 
     return (
 
@@ -18,6 +21,9 @@ export default function OfferList() {
             showActions={true}
             PermissionsKey={'Passports'}
             roleKey={'dashboard.passports.store'}
+            columns={columns}
+            list={offeers}
+            saveName={'Offers'}
         >
 
             <TableHeader data={offers} ingredients={ingredients} setIngredients={setIngredients} />

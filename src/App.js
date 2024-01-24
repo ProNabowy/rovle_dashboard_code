@@ -13,7 +13,6 @@ export default function App() {
 
   const store = useSelector(store => store);
 
-
   return (
     <div className="App">
 

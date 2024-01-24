@@ -13,7 +13,7 @@ export default function OffeerForm({ formik, clickHandler }) {
     return (
         <form onSubmit={e => e.preventDefault()} className='px-10 add-offer-form'>
 
-            <div className='flex items-center justify-between mb-6'>
+            <div className='flex items-center justify-between mb-8'>
 
                 <div className='sm:w-[48%]'>
 
@@ -47,7 +47,7 @@ export default function OffeerForm({ formik, clickHandler }) {
 
             </div>
 
-            <div className='mb-6'>
+            <div className='mb-8'>
 
                 <label htmlFor={'name'} className='text-[18px] text-[#252525] font-medium'>Usuario</label>
 
@@ -58,22 +58,22 @@ export default function OffeerForm({ formik, clickHandler }) {
 
             <OffeerInfo formik={formik} />
 
-            <div className='mb-6'>
+            <div className='mb-8'>
 
-                <label htmlFor={'name'} className='text-[18px] text-[#252525] font-medium'>Recurren</label>
+                <label htmlFor={'duration'} className='text-[18px] text-[#252525] font-medium'>Recurren</label>
 
-                <Dropdown value={getSelectedOption(Recurren, 'id', formik?.values?.offer_place)} name='offer_place' onChange={(e) => formik.setFieldValue('offer_place', e.target.value?.id)} options={Recurren} optionLabel="name"
-                    className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" placeholder='Select Discount' />
+                <Dropdown value={getSelectedOption(Recurren, 'id', formik?.values?.duration)} name='duration' onChange={(e) => formik.setFieldValue('duration', e.target.value?.id)} options={Recurren} optionLabel="name"
+                    inputId='duration' className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" placeholder='Select Recurren' />
 
             </div>
 
             <Date formik={formik} />
 
-            <div className='mb-6'>
+            <div className='mb-8'>
 
                 <label htmlFor={'Fisico'} className='text-[18px] text-[#252525] font-medium'>Fisico</label>
 
-                <Dropdown value={getSelectedOption(Fisico, 'id', formik?.values?.duration)} name='duration' onChange={(e) => formik.setFieldValue('duration', e.target.value?.id)} options={Fisico} optionLabel="name"
+                <Dropdown value={getSelectedOption(Fisico, 'id', formik?.values?.offer_place)} name='offer_place' onChange={(e) => formik.setFieldValue('offer_place', e.target.value?.id)} options={Fisico} optionLabel="name"
                     className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" placeholder='Select Fisico' />
 
             </div>

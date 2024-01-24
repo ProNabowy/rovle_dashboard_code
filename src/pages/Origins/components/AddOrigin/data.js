@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { debounce } from "../../../../assets/js/utils";
 import { AppContext } from "../../../../components/AppContext/AppContext";
 import Formik from "../../../../hooks/Formik/Formik";
@@ -17,6 +18,8 @@ const useDataGetter = () => {
 
     const [initialValues, setInitialValues] = useState({ name: "", provider_id: "" });
 
+    const navigate = useNavigate();
+
     const { setIsLoading } = useContext(AppContext);
 
     const { useFormData } = Formik();
@@ -27,7 +30,7 @@ const useDataGetter = () => {
 
         setIsLoading(true);
 
-        return OriginsUtailty.addOrigin(formik.values, dispatch, origins).finally(_ => setIsLoading(false));
+        return OriginsUtailty.addOrigin(formik.values, dispatch, origins, navigate).finally(_ => setIsLoading(false));
 
     }, 1000);
 

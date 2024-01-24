@@ -8,11 +8,15 @@ export default function ProductsList() {
     return (
 
         <PageContent
-            url={'add-product'}
+            url={'add-product/choose-owner'}
             title={'All Products'}
             showActions={true}
             PermissionsKey={'Products'}
-            roleKey={'dashboard.products.store'} >
+            roleKey={'dashboard.products.store'}
+            columns={columns}
+            list={products}
+            saveName={'Products'}
+        >
 
             <RenderTable columns={columns} list={products} />
 

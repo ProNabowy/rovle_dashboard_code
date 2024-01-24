@@ -21,13 +21,13 @@ class Origins {
 
     }
 
-    addOrigin(data, dispatch, origins) {
+    addOrigin(data, dispatch, origins, navigate) {
 
         return RequestManager.post(`${secondrayUrl}origins`, data)
 
             .then(response => {
 
-                Swal.success('Added!', `Your Origin has been Added.`);
+                Swal.success('Added!', `Your Origin has been Added.`).then(_ => navigate('/origins/list'));
 
                 return dispatch(setOrigins([...origins, response.data.data]));
 

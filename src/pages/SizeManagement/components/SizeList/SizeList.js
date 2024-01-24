@@ -22,6 +22,9 @@ export default function SizeList() {
                 showActions={true}
                 PermissionsKey={'Sizes'}
                 roleKey={'dashboard.sizes.store'}
+                columns={columns}
+                list={sizes}
+                saveName={'Sizes'}
             >
 
                 <div className='w-full my-5 px-10'>

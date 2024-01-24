@@ -11,7 +11,7 @@ function ChipsList({ options, title, url, optionLabel, formik, dataKey }) {
     const { selectedShop, handleDuplicatedValue, handleRemove, renderChipsItem } = useGetShopData(formik, dataKey, optionLabel);
 
     return (
-        <div className='relative mb-6'>
+        <div className='relative mb-8'>
 
             <div className='flex items-center justify-between'>
 

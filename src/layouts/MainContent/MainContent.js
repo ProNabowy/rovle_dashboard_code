@@ -22,7 +22,6 @@ export default function MainContent({ isExpanded, setIsExpanded }) {
 
                 <div className='container'>
 
-
                     <BreadcrumbNav></BreadcrumbNav>
 
                     {routes(isHasPermissions)}

@@ -25,7 +25,7 @@ const useDataGetter = _ => {
 
     useEffect(() => {
 
-        setIsLoading(true); // Show the loader before making the API request
+        selectedRosters?.id && setIsLoading(true); // Show the loader before making the API request
 
         selectedRosters?.id && sizeUtility.fetchSizeByProvider(setSizes, selectedRosters?.id, dispatch).finally(() => {
 

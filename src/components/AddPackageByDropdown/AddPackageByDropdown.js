@@ -32,7 +32,7 @@ export default function AddPackageByDropdown({
             <form onSubmit={e => e.preventDefault()} className='col-span-6'>
 
 
-                <div className='mb-6'>
+                <div className='mb-8'>
 
                     {
                         hasAddButton
@@ -64,7 +64,7 @@ export default function AddPackageByDropdown({
 
                 </div>
 
-                <div className='mb-6'>
+                <div className='mb-8'>
 
                     <label htmlFor={'PriceEuro'} className='text-[18px] text-[#252525] font-medium'>{inputLabel}</label>
 

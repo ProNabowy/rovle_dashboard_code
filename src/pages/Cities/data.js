@@ -1,9 +1,44 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Cities } from '../../apis/apis';
 import TableActions from '../../components/TableActions/TableActions';
 import Table from '../../assets/js/table';
+import { AppContext } from '../../components/AppContext/AppContext';
+import { useContext, useEffect } from 'react';
+import { setCities } from '../../store/reduces/cities';
+import { hasPermissions } from '../../assets/js/utils';
 
 const tableService = new Table();
+
+const citiesUtility = new Cities();
+
+const useDataGetter = () => {
+
+    const permissions = useSelector(store => store.permissions);
+
+    const user_access = useSelector(store => store?.userPeressmisons);
+
+    const dispatch = useDispatch();
+
+    const { setIsLoading } = useContext(AppContext);
+
+    const cities = useSelector(store => store.cities);
+
+    useEffect(() => {
+
+        if (hasPermissions(permissions.Cities, user_access, 'dashboard.cities.index')) {
+
+            setIsLoading(true);
+
+            citiesUtility.fetchCities(setCities, dispatch).finally(_ => setIsLoading(false));
+
+        }
+
+        return () => { };
+
+    }, [permissions, user_access]);
+
+    return { cities };
+}
 
 const provinceBodyTemplate = (rowData) => {
     return <p className='mb-1 capitalize text-[13px] font-medium'>{rowData.province?.name}</p>
@@ -11,7 +46,6 @@ const provinceBodyTemplate = (rowData) => {
 
 const useActionsBodyTemplate = (rowData) => {
 
-    const citiesUtility = new Cities();
     const cities = useSelector(store => store.cities);
 
     return <TableActions
@@ -37,5 +71,6 @@ const columns = [
 
 
 export {
-    columns
+    columns,
+    useDataGetter
 }

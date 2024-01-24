@@ -59,13 +59,13 @@ class Products {
 
     }
 
-    addProduct(data, dispatch, products) {
+    addProduct(data, dispatch, products, navigate) {
 
         return RequestManager.post(`${secondrayUrl}products`, data, true)
 
             .then(response => {
 
-                Swal.success('Added!', `Your Product has been Added.`);
+                Swal.success('Added!', `Your Product has been Added.`).then(_ => navigate('/products/list'))
 
                 return dispatch(setProducts([...products, response.data.data]));
 

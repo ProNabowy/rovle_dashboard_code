@@ -4,6 +4,7 @@ import Formik from "../../../../hooks/Formik/Formik";
 import { debounce } from "../../../../assets/js/utils";
 import { AppContext } from "../../../../components/AppContext/AppContext";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const useDataGetter = _ => {
 
@@ -14,6 +15,8 @@ const useDataGetter = _ => {
     const roasters = useSelector(store => store.rosters);
 
     const dispatch = useDispatch();
+
+    const navigate = useNavigate();
 
     const [initialValues, setInitialValues] = useState({
         user_name: "",
@@ -40,7 +43,7 @@ const useDataGetter = _ => {
 
         setIsLoading(true);
 
-        return roasterUtailty.addRoaster(formik.values, dispatch, roasters).finally(_ => setIsLoading(false));
+        return roasterUtailty.addRoaster(formik.values, dispatch, roasters, navigate).finally(_ => setIsLoading(false));
 
     }, 1000);
 

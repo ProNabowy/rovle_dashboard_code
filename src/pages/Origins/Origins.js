@@ -4,7 +4,7 @@ import { columns, useDataGetter } from './data';
 
 export default function OriginsList() {
 
-    const {  origins } = useDataGetter();
+    const { origins } = useDataGetter();
 
     return (
         <PageContent
@@ -12,7 +12,11 @@ export default function OriginsList() {
             title={'All Origin'}
             PermissionsKey={'Origins'}
             roleKey={'dashboard.origins.store'}
-            showActions={true}>
+            showActions={true}
+            columns={columns}
+            list={origins}
+            saveName={'Origins'}
+        >
 
             <RenderTable columns={columns} list={origins} />
 

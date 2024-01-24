@@ -1,11 +1,10 @@
 import { PageContent, RenderTable } from '../../components';
-import { useSelector } from 'react-redux';
-import { columns } from './data';
+import { columns, useDataGetter } from './data';
 
 
 export default function Cities() {
 
-    const cities = useSelector(store => store.cities);
+    const { cities } = useDataGetter();
 
     return (
 
@@ -15,6 +14,9 @@ export default function Cities() {
             showActions={true}
             PermissionsKey={'Cities'}
             roleKey={'dashboard.cities.store'}
+            columns={columns}
+            list={cities}
+            saveName={'Cities'}
         >
 
             <RenderTable list={cities} columns={columns} />

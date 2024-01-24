@@ -22,6 +22,27 @@ class Profile {
 
     }
 
+    getRoasterProfile(state, dispatch) {
+
+        return RequestManager.get(`${secondrayUrl}profile`)
+
+            .then(response => {
+
+                const user = JSON.parse(localStorage.getItem('user'));
+
+                localStorage.setItem('user', JSON.stringify({ ...user, ...response.data.data }));
+
+                dispatch && dispatch(state([response.data.data?.provider]));
+
+            })
+            .catch(error => {
+
+                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+
+            })
+
+    }
+
     editProfile(data) {
 
         return RequestManager.post(`${secondrayUrl}profile`, data, true)

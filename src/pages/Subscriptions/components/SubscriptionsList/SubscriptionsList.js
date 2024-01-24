@@ -21,7 +21,15 @@ export default function SubscriptionsList() {
 
         selectedPlan?.id
             ?
-            <PageContent url={'/products/plans/add-plan'} addnewClassNames={'hidden'} title={'Subscriptions'} showActions={true} >
+            <PageContent
+                url={'/products/plans/add-plan'}
+                addnewClassNames={'hidden'}
+                title={'Subscriptions'}
+                showActions={true}
+                columns={columns}
+                list={subscriptionsList}
+                saveName={'Subscriptions'}
+            >
 
                 <div className='grid grid-cols-12 gap-5 w-full my-5 px-10'>
 
@@ -30,7 +38,7 @@ export default function SubscriptionsList() {
                         <label htmlFor='name-input' className='mb-3 block font-medium text-[#234486]'>Roaster</label>
 
                         <Dropdown value={selectedRosters && selectedRosters} onChange={(e) => setselectedRosters(e.value)} options={rosters} optionLabel="commercial_name"
-                            placeholder="Select Province" className="w-full p-3 !border-r-[0] !border-l-[0] !border-t-[0] !border-b !border-b-[#b3b3b3] !shadow-none !rounded-none" />
+                            placeholder="Select Provider" className="w-full p-3 !border-r-[0] !border-l-[0] !border-t-[0] !border-b !border-b-[#b3b3b3] !shadow-none !rounded-none" />
 
                     </div>
 
@@ -39,7 +47,7 @@ export default function SubscriptionsList() {
                         <label htmlFor='name-input' className='mb-3 block font-medium text-[#234486]'>Plan Name</label>
 
                         <Dropdown value={selectedPlan && selectedPlan} onChange={(e) => setselectedPlan(e.value)} options={Array.from(plans)} optionLabel="name"
-                            placeholder="Select Province" className="w-full p-3 !border-r-[0] !border-l-[0] !border-t-[0] !border-b !border-b-[#b3b3b3] !shadow-none !rounded-none" />
+                            placeholder="Select Plan" className="w-full p-3 !border-r-[0] !border-l-[0] !border-t-[0] !border-b !border-b-[#b3b3b3] !shadow-none !rounded-none" />
 
                     </div>
 

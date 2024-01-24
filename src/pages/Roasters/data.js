@@ -6,7 +6,7 @@ import Table from '../../assets/js/table';
 const tableService = new Table();
 
 const emailBodyTemplate = (rowData) => {
-    return <p className='mb-1 capitalize text-[13px] font-medium'>{rowData?.user?.email}</p>
+    return <p className='mb-1 text-[13px] font-medium'>{rowData?.user?.email}</p>
 };
 
 const officialNameBodyTemplate = (rowData) => {

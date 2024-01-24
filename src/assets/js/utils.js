@@ -71,7 +71,7 @@ class SecureRequest {
 
             Authorization: `Bearer ${this.token}`,
 
-            'Content-Type': asFormData ? 'multipart/form-data' : 'applaction/json',
+            'Content-Type': asFormData ? 'multipart/form-data' : 'application/json',
         }
 
     }

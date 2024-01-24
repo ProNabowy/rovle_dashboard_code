@@ -6,7 +6,7 @@ import { Dropdown } from 'primereact/dropdown';
 import React, { useRef } from 'react';
 import { useGetOriginData } from './data';
 
-function AddOrigin({ formik, provider_id }) {
+function AddOrigin({ formik, provider_id, classNames }) {
 
     const dropdownRef = useRef();
 
@@ -35,7 +35,7 @@ function AddOrigin({ formik, provider_id }) {
 
     return (
 
-        <div className='sm:w-[48%] relative'>
+        <div className={`sm:w-[48%] relative ${classNames}`}>
 
             <div className='flex items-center justify-between'>
 

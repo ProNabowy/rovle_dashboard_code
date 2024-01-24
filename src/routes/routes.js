@@ -15,7 +15,9 @@ import {
     AddPermission,
     EditPermissions,
     ProductsList,
+    ChooseOwner,
     AddProduct,
+    AddProductByOtherOwner,
     EditProduct,
     OriginsList,
     AddOrigin,
@@ -24,6 +26,7 @@ import {
     EditPlan,
     SubscriptionsList,
     Subscriptions,
+    ManagePackage,
     SizeManagement,
     SizeList,
     AddSize,
@@ -50,11 +53,15 @@ import { Spiners } from '../components';
 
 export default function routes(isHasPermissions) {
 
+    const isAdmin = JSON.parse(localStorage.getItem('user'))?.roles?.[0]?.name === 'admin';
+
     return (
 
         <Suspense fallback={<Spiners />}>
 
             <Routes>
+
+                <Route path='' element={<p></p>} />
 
                 <Route path='/login' element={<Login />} />
 
@@ -78,7 +85,9 @@ export default function routes(isHasPermissions) {
 
 
                 <Route path="/products/list" element={isHasPermissions('Products', 'dashboard.products.index') ? <ProductsList /> : <NotFound />} />
+                <Route path="/products/list/add-product/choose-owner" element={isHasPermissions('Products', 'dashboard.products.store') ? <ChooseOwner /> : <NotFound />} />
                 <Route path="/products/list/add-product" element={isHasPermissions('Products', 'dashboard.products.store') ? <AddProduct /> : <NotFound />} />
+                <Route path="/products/list/add-product/another-owner" element={isHasPermissions('Products', 'dashboard.products.store') ? <AddProductByOtherOwner /> : <NotFound />} />
                 <Route path="/products/list/edit-product" element={isHasPermissions('Products', 'dashboard.products.update') ? <EditProduct /> : <NotFound />} />
 
                 <Route path="/origins/list" element={isHasPermissions('Origins', 'dashboard.origins.index') ? <OriginsList /> : <NotFound />} />
@@ -92,6 +101,7 @@ export default function routes(isHasPermissions) {
 
                 <Route path="/products/plans/subscriptions" element={isHasPermissions('Subscription', 'dashboard.plans.subscriptions') ? <Subscriptions /> : <NotFound />} />
                 <Route path="/products/plans/subscriptions/list" element={isHasPermissions('Subscription', 'dashboard.plans.subscriptions') ? <SubscriptionsList /> : <NotFound />} />
+                <Route path="/products/plans/subscriptions/manage-package" element={isHasPermissions('Subscription', 'dashboard.plans.subscriptions') ? <ManagePackage /> : <NotFound />} />
 
                 <Route path="/products/plans/size" element={isHasPermissions('Sizes', 'dashboard.sizes.index') ? <SizeManagement /> : <NotFound />} />
                 <Route path="/products/plans/size/list" element={isHasPermissions('Sizes', 'dashboard.sizes.index') ? <SizeList /> : <NotFound />} />
@@ -103,9 +113,9 @@ export default function routes(isHasPermissions) {
                 <Route path="/groups/users/edit-user" element={isHasPermissions('Users', 'dashboard.users.update') ? <EditUser /> : <NotFound />} />
 
 
-                <Route path="/groups/roasters" element={isHasPermissions('Providers', 'dashboard.providers.index') ? <Roasters /> : <NotFound />} />
-                <Route path="/groups/roasters/add-roaster" element={isHasPermissions('Providers', 'dashboard.providers.store') ? <AddRoasters /> : <NotFound />} />
-                <Route path="/groups/roasters/edit-roaster" element={isHasPermissions('Providers', 'dashboard.providers.update') ? <EditRoaster /> : <NotFound />} />
+                <Route path="/groups/roasters" element={isHasPermissions('Providers', 'dashboard.providers.index') && isAdmin ? <Roasters /> : <NotFound />} />
+                <Route path="/groups/roasters/add-roaster" element={isHasPermissions('Providers', 'dashboard.providers.store') && isAdmin ? <AddRoasters /> : <NotFound />} />
+                <Route path="/groups/roasters/edit-roaster" element={isHasPermissions('Providers', 'dashboard.providers.update') && isAdmin ? <EditRoaster /> : <NotFound />} />
 
                 <Route path="groups/orders" element={isHasPermissions('Orders', 'dashboard.orders.index') ? <Orders /> : <NotFound />} />
                 <Route path="groups/orders/order-details" element={isHasPermissions('Orders', 'dashboard.orders.index') ? <OrdersDetails /> : <NotFound />} />
@@ -120,7 +130,7 @@ export default function routes(isHasPermissions) {
                 <Route path="/setups/offers/edit-offer" element={isHasPermissions('Passports', 'dashboard.passports.update') ? <EditOffer /> : <NotFound />} />
 
 
-                <Route path="/profile" element={<Profile />} />
+                <Route path="/profile" element={isHasPermissions('Profile', 'dashboard.profile.index') ? <Profile /> : <NotFound />} />
 
                 <Route path="*" element={<NotFound />} />
 

@@ -1,8 +1,14 @@
 import { useSelector } from "react-redux";
 import { hasPermissions } from "../../../assets/js/utils";
-import { faAccusoft } from '@fortawesome/free-brands-svg-icons';
-import { faFileLines, faSnowflake } from '@fortawesome/free-regular-svg-icons';
-import { faBaseball, faCartShopping, faCompass, faGift, faHouseLaptop, faLockOpen, faTrowelBricks, faUserGroup, faUserSecret, faUsers, faVoicemail } from '@fortawesome/free-solid-svg-icons';
+import { NavLink } from "react-router-dom";
+import country from '../images/country.svg';
+import province from '../images/province.svg';
+import city from '../images/city.svg';
+import permission from '../images/permission.svg';
+import shops from '../images/shops.svg';
+import products from '../images/products.svg';
+import plans from '../images/plans.svg';
+import roasters from '../images/roasters.svg';
 
 
 const useDataGetter = (isExpanded) => {
@@ -12,7 +18,7 @@ const useDataGetter = (isExpanded) => {
 
     const isHasPermissions = (PagePermissions, permissionKey) => hasPermissions(permissions[PagePermissions], user_access, permissionKey);
 
-    const linkStyle = `w-full rounded-[6px] text-[#b3b3b3] flex items-center ${isExpanded ? "justify-between" : "justify-center"} p-2 py-1`;
+    const linkStyle = `w-full rounded-[6px] text-[#b3b3b3] text-[15px] flex items-center ${isExpanded ? "justify-between" : "justify-center"} py-1`;
 
     // Check If The User Has anyone of this pages permissions to render a mnue
     const SETTINGS_FULL_ACCESS =
@@ -27,13 +33,15 @@ const useDataGetter = (isExpanded) => {
     const PRODUCTS_FULL_ACCESS =
         isHasPermissions('Products', 'dashboard.products.index')
         ||
-        isHasPermissions('Origins', 'dashboard.origins.index"')
+        isHasPermissions('Origins', 'dashboard.origins.index')
         ||
         isHasPermissions('Plans', 'dashboard.plans.index')
         ||
         isHasPermissions('Subscription', 'dashboard.plans.subscriptions')
         ||
-        isHasPermissions('Sizes', 'dashboard.sizes.index');
+        isHasPermissions('Sizes', 'dashboard.sizes.index')
+        ||
+        isHasPermissions('Passports', 'dashboard.passports.index');
 
     const GROUPS_FULL_ACCESS =
         isHasPermissions('Users', 'dashboard.users.index')
@@ -44,8 +52,6 @@ const useDataGetter = (isExpanded) => {
 
     const SETUPS_FULL_ACCESS =
         isHasPermissions('Coffee Shops', 'dashboard.coffeeShops.index')
-        ||
-        isHasPermissions('Passports', 'dashboard.passports.index');
 
     const isRenderRouteCollactions = [SETTINGS_FULL_ACCESS, PRODUCTS_FULL_ACCESS, GROUPS_FULL_ACCESS, SETUPS_FULL_ACCESS];
 
@@ -53,41 +59,228 @@ const useDataGetter = (isExpanded) => {
 
 }
 
-// Render Routes As Group Of Childrens 
-const routesData = [
-    {
-        name: "SETTINGS", children: [
-            { name: "Country", PagePermissions: "Countries", PermissionKey: "dashboard.countries.index", icon: faBaseball, href: "settings/country/list" },
-            { name: "Province", PagePermissions: "Provinces", PermissionKey: "dashboard.provinces.index", icon: faCompass, href: "settings/province/list" },
-            { name: "City", PagePermissions: "Cities", PermissionKey: "dashboard.cities.index", icon: faHouseLaptop, href: "settings/cities/list", },
-            { name: "Permissions", PagePermissions: "Roles", PermissionKey: "dashboard.roles.index", icon: faLockOpen, href: "settings/permissions/list", }
+const settings = {
+    name: "SETTINGS", children: [
+        { name: "Country", PagePermissions: "Countries", PermissionKey: "dashboard.countries.index", icon: country, href: "settings/country/list" },
+        { name: "Province", PagePermissions: "Provinces", PermissionKey: "dashboard.provinces.index", icon: province, href: "settings/province/list" },
+        { name: "City", PagePermissions: "Cities", PermissionKey: "dashboard.cities.index", icon: city, href: "settings/cities/list", },
+        { name: "Permissions", PagePermissions: "Roles", PermissionKey: "dashboard.roles.index", icon: permission, href: "settings/permissions/list", }
+    ]
+};
+
+const setups = {
+    name: "SETUPS", children: [
+        { name: "Coffee Shop", PagePermissions: "Coffee Shops", PermissionKey: "dashboard.coffeeShops.index", icon: shops, href: "setups/coffee-shop" },
+    ]
+}
+
+const renderCollaction = (isHasPermissions, isExpanded, item, linkStyle) => {
+
+    return <li className='mb-5'>
+
+        {isExpanded && <h3 className='text-[#7c7c7c] font-medium  px-2'>{item.name}</h3>}
+
+        {item.children.map((child, i) => {
+            return (
+                isHasPermissions(child.PagePermissions, child.PermissionKey)
+                    ?
+                    <NavLink to={child.href} key={i} className={`${linkStyle} block px-2`}>
+
+                        <div className={`rounded-[6px] flex items-center ${isExpanded ? "ms-5" : ""}`}>
+
+                            <div className='nav-icon w-[35px] h-[35px] rounded-full flex items-center justify-center'>
+
+                                <img src={child.icon} alt="" className="w-[20px] h-[20px]" />
+
+                            </div>
+
+                            {isExpanded && <span className='ms-3 font-medium'>{child.name}</span>}
+                        </div>
+
+                    </NavLink>
+                    :
+                    null
+            )
+        })}
+    </li>
+
+}
+
+const ProductsRoutes = isHasPermissions => {
+
+    const renderProduct =
+        isHasPermissions('Products', 'dashboard.products.index')
+        ||
+        isHasPermissions('Origins', 'dashboard.origins.index');
+
+    const renderPlan =
+        isHasPermissions('Plans', 'dashboard.plans.index')
+        ||
+        isHasPermissions('Subscription', 'dashboard.plans.subscriptions')
+        ||
+        isHasPermissions('Sizes', 'dashboard.sizes.index');
+
+    return (
+        [
+            (renderProduct &&
+            {
+                expanded: false,
+                label: <div className='flex items-center'>
+
+                    <div className={`block px-2`}>
+
+                        <div className={`rounded-[6px] flex items-center ms-[10px]`}>
+
+                            <div className='nav-icon w-[35px] h-[35px] rounded-full flex items-center justify-center'>
+
+                                <img src={products} alt="" className="w-[20px] h-[20px]" />
+
+                            </div>
+
+                            <span className='ms-3 font-medium'>Products</span>
+                        </div>
+
+                    </div>
+
+                </div>,
+                items: [
+                    {
+                        label: isHasPermissions('Products', 'dashboard.products.index') && <NavLink to={'products/list'} className='flex items-center text-[#FFFFFFA6] p-2 !w-full mnue-link'>
+
+                            <span className='ms-10'>Product List</span>
+
+                        </NavLink>,
+
+                    },
+                    {
+                        label: isHasPermissions('Origins', 'dashboard.origins.index') && <NavLink to={'origins/list'} className='flex items-center text-[#FFFFFFA6] p-2 !w-full mnue-link'>
+
+                            <span className='ms-10 !py-0'>Origin List</span>
+
+                        </NavLink>,
+
+                    }
+                ]
+            }
+            ),
+            (renderPlan &&
+            {
+                expanded: false,
+                label: <div className='flex items-center'>
+
+                    <div className={`block px-2`}>
+
+                        <div className={`rounded-[6px] flex items-center ms-[10px]`}>
+
+                            <div className='nav-icon w-[35px] h-[35px] rounded-full flex items-center justify-center'>
+
+                                <img src={plans} alt="" className="w-[20px] h-[20px]" />
+
+                            </div>
+
+                            <span className='ms-3 font-medium'>Plans</span>
+                        </div>
+
+                    </div>
+
+                </div>,
+                items: [
+                    {
+                        label: isHasPermissions('Plans', 'dashboard.plans.index') && <NavLink to={'products/plans/list'} className='flex items-center text-[#FFFFFFA6] p-2 !w-full mnue-link'>
+
+                            <span className='ms-10'>List</span>
+
+                        </NavLink>,
+
+                    },
+                    {
+                        label: isHasPermissions('Subscription', 'dashboard.plans.subscriptions') && <NavLink to={'products/plans/subscriptions'} className='flex items-center text-[#FFFFFFA6] p-2 !w-full mnue-link' >
+
+                            <span className='ms-10 !py-0'>Subscriptions</span>
+
+                        </NavLink >,
+
+                    },
+                    {
+                        label: isHasPermissions('Sizes', 'dashboard.sizes.index') && <NavLink to={'products/plans/size'} className='flex items-center text-[#FFFFFFA6] p-2 !w-full mnue-link'>
+
+                            <span className='ms-10 !py-0'>Size management</span>
+
+                        </NavLink>,
+
+                    },
+                ]
+            }
+            )
         ]
-    },
-    {
-        name: "PRODUCTS", children: [
-            { name: "Products", PagePermissions: "Products", PermissionKey: "dashboard.products.index", icon: faGift, href: "/products/list" },
-            { name: "Origins", PagePermissions: "Origins", PermissionKey: "dashboard.origins.index", icon: faVoicemail, href: "/origins/list" },
-            { name: "Plans", PagePermissions: "Plans", PermissionKey: "dashboard.plans.index", icon: faFileLines, href: "/products/plans/list" },
-            { name: "Subscriptions", PagePermissions: "Subscription", PermissionKey: "dashboard.plans.subscriptions", icon: faSnowflake, href: "/products/plans/subscriptions" },
-            { name: "Size", PagePermissions: "Sizes", PermissionKey: "dashboard.sizes.index", icon: faAccusoft, href: "/products/plans/size" }
+    )
+}
+
+const GroupsRoutes = isHasPermissions => {
+
+    const isAdmin = JSON.parse(localStorage.getItem('user'))?.roles?.[0]?.name === 'admin';
+
+    const renderRoasters =
+        isHasPermissions('Providers', 'dashboard.providers.index')
+        ||
+        isHasPermissions('Orders', 'dashboard.orders.index');
+
+
+    return (
+        [
+            (renderRoasters
+                &&
+            {
+                expanded: false,
+                label: <div className='flex items-center'>
+
+                    <div className={`block px-2`}>
+
+                        <div className={`rounded-[6px] flex items-center ms-[10px]`}>
+
+                            <div className='nav-icon w-[35px] h-[35px] rounded-full flex items-center justify-center'>
+
+                                <img src={roasters} alt="" className="w-[20px] h-[20px]" />
+
+                            </div>
+
+                            <span className='ms-3 font-medium'>Roasters</span>
+                        </div>
+
+                    </div>
+
+                </div>,
+                items: [
+                    {
+                        label: isHasPermissions('Providers', 'dashboard.providers.index') && isAdmin && <NavLink to={'groups/roasters'} className='flex items-center text-[#FFFFFFA6] p-2 !w-full mnue-link'>
+
+                            <span className='ms-10'>List</span>
+
+                        </NavLink>,
+
+                    },
+                    {
+                        label: isHasPermissions('Orders', 'dashboard.orders.index') && <NavLink to={'groups/orders'} className='flex items-center text-[#FFFFFFA6] p-2 !w-full mnue-link'>
+
+                            <span className='ms-10 !py-0'>Orders</span>
+
+                        </NavLink>,
+
+                    }
+                ]
+            }
+            )
         ]
-    },
-    {
-        name: "GROUPS", children: [
-            { name: "Users", PagePermissions: "Users", PermissionKey: "dashboard.users.index", icon: faUserGroup, href: "groups/users" },
-            { name: "Roasters", PagePermissions: "Providers", PermissionKey: "dashboard.providers.index", icon: faUsers, href: "groups/roasters" },
-            { name: "Orders", PagePermissions: "Orders", PermissionKey: "dashboard.orders.index", icon: faCartShopping, href: "groups/orders" }
-        ]
-    },
-    {
-        name: "SETUPS", children: [
-            { name: "Coffee Shop", PagePermissions: "Coffee Shops", PermissionKey: "dashboard.coffeeShops.index", icon: faUserSecret, href: "setups/coffee-shop" },
-            { name: "Passport", PagePermissions: "Passports", PermissionKey: "dashboard.passports.index", icon: faTrowelBricks, href: "/setups/offers" }
-        ]
-    },
-];
+    )
+
+}
+
 
 export {
     useDataGetter,
-    routesData
+    renderCollaction,
+    settings,
+    setups,
+    ProductsRoutes,
+    GroupsRoutes
 }

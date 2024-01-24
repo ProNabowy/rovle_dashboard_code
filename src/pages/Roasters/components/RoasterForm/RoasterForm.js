@@ -1,5 +1,5 @@
 import { Dropdown } from 'primereact/dropdown';
-import { InputsGroup } from '../../../../components';
+import { CitiesDropdown, InputsGroup, ProvincesDropDown } from '../../../../components';
 import { getSelectedOption } from '../../../../assets/js/utils';
 import { useSelector } from 'react-redux';
 import RedioGroup from '../RedioGroup/RedioGroup';
@@ -7,7 +7,7 @@ import RedioGroup from '../RedioGroup/RedioGroup';
 
 export default function RoasterForm({ formik, clickHandler, isRenderPassword }) {
 
-    const store = useSelector(store => store);
+    const countries = useSelector(store => store.countries);
 
     return (
 
@@ -70,48 +70,37 @@ export default function RoasterForm({ formik, clickHandler, isRenderPassword }) 
             } />
 
 
-            <div className='flex items-center justify-between mb-6'>
+            <div className='flex items-center justify-between mb-8'>
 
                 <div className='sm:w-[48%]'>
 
                     <h2 className='text-[18px] text-[#252525] font-medium'>Country</h2>
 
                     <Dropdown
-                        value={getSelectedOption(store?.countries, 'id', formik?.values?.provider_country_id)}
+                        value={getSelectedOption(countries, 'id', formik?.values?.provider_country_id)}
                         onChange={(e) => formik.setFieldValue('provider_country_id', e.target.value?.id)}
-                        options={store?.countries} optionLabel="name"
+                        options={countries} optionLabel="name"
                         placeholder="Select Country" className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
 
                 </div>
 
-                <div className='sm:w-[48%]'>
-
-                    <h2 className='text-[18px] text-[#252525] font-medium'>City</h2>
-
-                    <Dropdown
-                        value={getSelectedOption(store?.cities, 'id', formik?.values?.provider_city_id)}
-                        onChange={(e) => formik.setFieldValue('provider_city_id', e.target.value?.id)}
-                        options={store?.cities} optionLabel="name"
-                        placeholder="Select City" className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
-
-                </div>
+                <ProvincesDropDown
+                    formik={formik}
+                    country_Key={'provider_country_id'}
+                    province_Key={'provider_province_id'}
+                />
 
             </div>
 
-            <div className='flex items-center justify-between mb-6'>
+            <div className='flex items-center justify-between mb-8'>
 
 
-                <div className='sm:w-[48%]'>
-
-                    <h2 className='text-[18px] text-[#252525] font-medium'>Province</h2>
-
-                    <Dropdown
-                        value={getSelectedOption(store?.province, 'id', formik?.values?.provider_province_id)}
-                        onChange={(e) => formik.setFieldValue('provider_province_id', e.target.value?.id)}
-                        options={store?.province} optionLabel="name"
-                        placeholder="Select Permission" className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
-
-                </div>
+                <CitiesDropdown
+                    formik={formik}
+                    provinces={getSelectedOption(countries, 'id', formik?.values?.provider_country_id)?.provinces}
+                    province_Key={'provider_province_id'}
+                    city_Key={'provider_city_id'}
+                />
 
                 <RedioGroup formik={formik} />
 

@@ -1,10 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { Users } from "../../../../apis/apis";
-import Formik from '../../../../hooks/Formik/Formik';
 import { useLocation } from "react-router-dom";
 import { debounce } from "../../../../assets/js/utils";
 import { AppContext } from "../../../../components/AppContext/AppContext";
 import { useDispatch, useSelector } from "react-redux";
+import Formik from '../../../../hooks/Formik/Formik';
+import { Swal } from "../../../../apis/data";
+
 
 const useHandleAddUserLogic = () => {
 
@@ -22,9 +24,17 @@ const useHandleAddUserLogic = () => {
 
     const handelSubmit = values => {
 
-        setIsLoading(true);
+        if (values?.user_password !== values?.user_password_confirmation || !values.user_password) {
 
-        return userUtailty.editUser(values, userId, dispatch, users).finally(_ => setIsLoading(false));
+            return Swal.warning('Warning', 'Password And Confirem Password Must Be The Same');
+
+        } else {
+
+            setIsLoading(true);
+
+            return userUtailty.editUser(values, userId, dispatch, users).finally(_ => setIsLoading(false));
+
+        }
 
     }
 
@@ -54,7 +64,6 @@ const useHandleAddUserLogic = () => {
     }, []);
 
     const { useFormData } = Formik();
-
 
     const { formik } = useFormData(initialValues, null);
 

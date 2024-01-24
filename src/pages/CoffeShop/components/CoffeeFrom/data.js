@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { CoffeeShops } from "../../../../apis/apis";
 import Formik from "../../../../hooks/Formik/Formik";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { debounce } from "../../../../assets/js/utils";
 import { AppContext } from "../../../../components/AppContext/AppContext";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,6 +19,8 @@ const useDataGetter = (asEdit) => {
     const location = useLocation().search;
 
     const coffeeShopId = location.slice(4);
+
+    const navigate = useNavigate();
 
     const [_, setCoffee] = useState([]);
 
@@ -70,7 +72,7 @@ const useDataGetter = (asEdit) => {
 
         setIsLoading(true);
 
-        return asEdit ? coffeeUtailty.editCoffee(formik.values, coffeeShopId, dispatch, shops).finally(_ => setIsLoading(false)) : coffeeUtailty.addCoffee(formik.values, dispatch, shops).finally(_ => setIsLoading(false))
+        return asEdit ? coffeeUtailty.editCoffee(formik.values, coffeeShopId, dispatch, shops).finally(_ => setIsLoading(false)) : coffeeUtailty.addCoffee(formik.values, dispatch, shops, navigate).finally(_ => setIsLoading(false))
 
     }, 1000);
 

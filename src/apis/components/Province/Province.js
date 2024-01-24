@@ -38,13 +38,13 @@ class Province {
 
     }
 
-    addProvinces(data, dispatch, province) {
+    addProvinces(data, dispatch, province, navigate) {
 
         return RequestManager.post(`${secondrayUrl}provinces`, data, true)
 
             .then(response => {
 
-                Swal.success('Added!', `Your Provinces has been Added.`);
+                Swal.success('Added!', `Your Provinces has been Added.`).then(_ => navigate('/settings/province/list'));
 
                 return dispatch(setProvince([...province, response.data.data]));
 

@@ -37,13 +37,13 @@ class Countries {
 
     }
 
-    addCountry(data, dispatch, countries) {
+    addCountry(data, dispatch, countries, navigate) {
 
         return RequestManager.post(`${secondrayUrl}countries`, data, true)
 
             .then(response => {
 
-                Swal.success('Added!', `Your Country has been Added.`);
+                Swal.success('Added!', `Your Country has been Added.`).then(_ => navigate('/settings/country/list'));
 
                 return dispatch(setCountries([...countries, response.data.data]));
 

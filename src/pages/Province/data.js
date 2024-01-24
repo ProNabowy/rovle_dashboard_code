@@ -1,13 +1,47 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Province } from '../../apis/apis';
 import TableActions from '../../components/TableActions/TableActions';
 import Table from '../../assets/js/table';
+import { hasPermissions } from '../../assets/js/utils';
+import { setProvince } from '../../store/reduces/province';
+import { useContext, useEffect } from 'react';
+import { AppContext } from '../../components/AppContext/AppContext';
+
+const ProvinceUtility = new Province();
+
+const useDataGetter = () => {
+
+    const permissions = useSelector(store => store.permissions);
+
+    const user_access = useSelector(store => store?.userPeressmisons);
+
+    const dispatch = useDispatch();
+
+    const { setIsLoading } = useContext(AppContext);
+
+    const province = useSelector(store => store.province);
+
+    useEffect(() => {
+
+        if (hasPermissions(permissions.Provinces, user_access, 'dashboard.provinces.index')) {
+
+            setIsLoading(true);
+
+            ProvinceUtility.fetchProvinces(setProvince, dispatch).finally(_ => setIsLoading(false));
+
+        }
+
+        return () => { };
+
+    }, [permissions, user_access]);
+
+    return { province };
+}
 
 const tableService = new Table();
 
 const useActionsBodyTemplate = (rowData) => {
 
-    const ProvinceUtility = new Province();
     const provinces = useSelector(store => store.province);
 
     return <TableActions
@@ -26,15 +60,16 @@ const useActionsBodyTemplate = (rowData) => {
 
 
 const columns = [
-    { field: "id", header: "ID", classNames: "!px-[15px]", tamplate: tableService.idBodyTemplate },
-    { field: "name", header: "Name", classNames: "!px-[0px]", tamplate: tableService.nameBodyTemplate },
-    { field: "country.name", header: "Country", classNames: "!px-[15px]", tamplate: tableService.countryBodyTemplate },
-    { field: "created_at", header: "Date", classNames: "!px-[15px]", tamplate: tableService.startDateBodyTemplate },
-    { field: "updated_at", header: "Last Date", classNames: "!px-[15px]", tamplate: tableService.lastDateBodyTemplate },
-    { field: "status", header: "Action", classNames: "!px-[15px]", tamplate: useActionsBodyTemplate },
+    { field: "id", header: "ID", tamplate: tableService.idBodyTemplate },
+    { field: "name", header: "Name", tamplate: tableService.nameBodyTemplate },
+    { field: "country.name", header: "Country", tamplate: tableService.countryBodyTemplate },
+    { field: "created_at", header: "Date", tamplate: tableService.startDateBodyTemplate },
+    { field: "updated_at", header: "Last Date", tamplate: tableService.lastDateBodyTemplate },
+    { field: "status", header: "Action", tamplate: useActionsBodyTemplate },
 ];
 
 
 export {
-    columns
+    columns,
+    useDataGetter
 };

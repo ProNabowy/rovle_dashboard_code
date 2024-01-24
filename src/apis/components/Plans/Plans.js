@@ -56,13 +56,13 @@ class Plans {
 
     }
 
-    addPlans(data, dispatch, plans) {
+    addPlans(data, dispatch, plans, navigate) {
 
         return RequestManager.post(`${secondrayUrl}plans`, data, true)
 
             .then(response => {
 
-                Swal.success('Added!', `Your Plan has been Added.`);
+                Swal.success('Added!', `Your Plan has been Added.`).then(_ => navigate('/products/plans/list'));
 
                 return dispatch(setPlans([...plans, response.data.data]));
 

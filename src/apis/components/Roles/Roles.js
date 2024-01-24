@@ -97,13 +97,13 @@ class Roles {
 
     }
 
-    addRole(data, dispatch, roles) {
+    addRole(data, dispatch, roles, navigate) {
 
         return RequestManager.post(`${secondrayUrl}roles`, data, true)
 
             .then(response => {
 
-                Swal.success('Added!', `Role has been Added.`);
+                Swal.success('Added!', `Role has been Added.`).then(_ => navigate('/settings/permissions/list'));
 
                 return dispatch(setRoles([...roles, response.data.data]));
 

@@ -1,16 +1,20 @@
 import { Dropdown } from 'primereact/dropdown';
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { InputsGroup } from '../../../../components';
+import { CitiesDropdown, InputsGroup, ProvincesDropDown } from '../../../../components';
 import { getSelectedOption } from '../../../../assets/js/utils';
 import { useSelector } from 'react-redux';
 import { useDataGetter } from './data';
+import { Link } from 'react-router-dom';
 
 export default function CoffeeFrom({ asEdit }) {
 
-    const store = useSelector(store => store);
+    const countries = useSelector(store => store.countries);
+
+    const roasters = useSelector(store => store.rosters);
 
     const { formik, clickHandler } = useDataGetter(asEdit);
+
     return (
 
         <form onSubmit={e => e.preventDefault()} className='px-10'>
@@ -25,7 +29,7 @@ export default function CoffeeFrom({ asEdit }) {
                 }
             } />
 
-            <div className='mb-6'>
+            <div className='mb-8'>
 
                 <label htmlFor={'Address'} className='text-[18px] text-[#252525] font-medium'>Address</label>
 
@@ -33,7 +37,7 @@ export default function CoffeeFrom({ asEdit }) {
 
             </div>
 
-            <div className='flex items-center justify-between mb-6'>
+            <div className='flex items-center justify-between mb-8'>
 
                 <div className='sm:w-[48%]'>
 
@@ -43,7 +47,7 @@ export default function CoffeeFrom({ asEdit }) {
 
                         <div className='flex items-center cursor-pointer'>
 
-                            <h2 className='font-medium underline text-[#45B8EA] me-3'>Add Roster</h2>
+                            <Link to={'/groups/roasters'} className='font-medium underline text-[#45B8EA] me-3'>Add Roster</Link>
 
                             <FontAwesomeIcon icon={faArrowUpRightFromSquare} className='text-[#45B8EA]' />
 
@@ -52,9 +56,9 @@ export default function CoffeeFrom({ asEdit }) {
                     </div>
 
                     <Dropdown
-                        value={getSelectedOption(store.rosters, 'id', formik?.values?.provider_id)}
+                        value={getSelectedOption(roasters, 'id', formik?.values?.provider_id)}
                         onChange={(e) => formik.setFieldValue('provider_id', e.target.value?.id)}
-                        options={store.rosters} optionLabel="commercial_name"
+                        options={roasters} optionLabel="commercial_name"
                         placeholder="Select Roaster" className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
 
 
@@ -65,41 +69,29 @@ export default function CoffeeFrom({ asEdit }) {
                     <label htmlFor={'Country'} className='text-[18px] text-[#252525] font-medium'>Country</label>
 
                     <Dropdown
-                        value={getSelectedOption(store.countries, 'id', formik?.values?.country_id)}
+                        value={getSelectedOption(countries, 'id', formik?.values?.country_id)}
                         onChange={(e) => formik.setFieldValue('country_id', e.target.value?.id)}
-                        options={store.countries} optionLabel="name"
+                        options={countries} optionLabel="name"
                         placeholder="Select Country Name" className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
 
                 </div>
 
             </div>
 
-            <div className='flex items-center justify-between mb-6'>
+            <div className='flex items-center justify-between mb-8'>
 
-                <div className='sm:w-[48%]'>
+                <ProvincesDropDown
+                    formik={formik}
+                    country_Key={'country_id'}
+                    province_Key={'province_id'}
+                />
 
-                    <label htmlFor={'Province'} className='text-[18px] text-[#252525] font-medium'>Province</label>
-
-                    <Dropdown
-                        value={getSelectedOption(store.province, 'id', formik?.values?.province_id)}
-                        onChange={(e) => formik.setFieldValue('province_id', e.target.value?.id)}
-                        options={store.province} optionLabel="name"
-                        placeholder="Select Province" className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
-
-                </div>
-
-                <div className='sm:w-[48%]'>
-
-                    <label htmlFor={'City'} className='text-[18px] text-[#252525] font-medium'>City</label>
-
-                    <Dropdown
-                        value={getSelectedOption(store.cities, 'id', formik?.values?.city_id)}
-                        onChange={(e) => formik.setFieldValue('city_id', e.target.value?.id)}
-                        options={store.cities} optionLabel="name"
-                        placeholder="Select City" className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
-
-
-                </div>
+                <CitiesDropdown
+                    formik={formik}
+                    provinces={getSelectedOption(countries, 'id', formik?.values?.country_id)?.provinces}
+                    province_Key={'province_id'}
+                    city_Key={'city_id'}
+                />
 
             </div>
 

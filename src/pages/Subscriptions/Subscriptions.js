@@ -1,6 +1,5 @@
 import { PageContent } from '../../components';
 import { Dropdown } from 'primereact/dropdown';
-import { Link } from 'react-router-dom';
 import { useDataGetter } from './data';
 
 export default function Subscriptions() {
@@ -11,7 +10,8 @@ export default function Subscriptions() {
         rosters,
         selectedPlan,
         setselectedPlan,
-        plans
+        plans,
+        handleShowButton
     } = useDataGetter();
 
     return (
@@ -25,7 +25,7 @@ export default function Subscriptions() {
                     <label htmlFor='name-input' className='mb-3 block text-[#234486]'>Roaster</label>
 
                     <Dropdown value={selectedRosters} onChange={(e) => setselectedRosters(e.value)} options={rosters} optionLabel="commercial_name"
-                        placeholder="Select Province" className="w-full p-3 !border-r-[0] !border-l-[0] !border-t-[0] !border-b !border-b-[#b3b3b3] !shadow-none !rounded-none" />
+                        placeholder="Select Provider" className="w-full p-3 !border-r-[0] !border-l-[0] !border-t-[0] !border-b !border-b-[#b3b3b3] !shadow-none !rounded-none" />
 
                 </div>
 
@@ -40,9 +40,9 @@ export default function Subscriptions() {
 
                 <div className='flex items-center justify-end p-10 pb-5'>
 
-                    <Link to={'/products/plans/subscriptions/list'} className='p-4 px-24 rounded-full text-white font-medium bg-[var(--primary-color)]'>
+                    <button onClick={handleShowButton} className='p-4 px-24 rounded-full text-white font-medium bg-[var(--primary-color)]'>
                         Show
-                    </Link>
+                    </button>
 
                 </div>
 

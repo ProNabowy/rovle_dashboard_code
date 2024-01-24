@@ -14,6 +14,9 @@ export default function UsersList() {
             showActions={true}
             PermissionsKey={'Users'}
             roleKey={'dashboard.users.store'}
+            columns={columns}
+            list={users}
+            saveName={'Users'}
         >
             <RenderTable columns={columns} list={users} />
 

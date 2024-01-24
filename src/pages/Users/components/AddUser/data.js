@@ -4,6 +4,8 @@ import Formik from '../../../../hooks/Formik/Formik';
 import { debounce } from "../../../../assets/js/utils";
 import { AppContext } from "../../../../components/AppContext/AppContext";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { Swal } from "../../../../apis/data";
 
 const useHandleAddUserLogic = () => {
 
@@ -15,11 +17,21 @@ const useHandleAddUserLogic = () => {
 
     const dispatch = useDispatch();
 
+    const navigate = useNavigate();
+
     const handelSubmit = values => {
 
-        setIsLoading(true);
+        if (values?.user_password !== values?.user_password_confirmation || !values.user_password) {
 
-        return userUtailty.addUser(values, dispatch, users).finally(_ => setIsLoading(false));
+            return Swal.warning('Warning', 'Password And Confirem Password Must Be The Same');
+
+        } else {
+
+            setIsLoading(true);
+
+            return userUtailty.addUser(values, dispatch, users, navigate).finally(_ => setIsLoading(false));
+
+        }
 
     }
 
@@ -43,7 +55,6 @@ const useHandleAddUserLogic = () => {
     const { formik } = useFormData(initialValues, null);
 
     const clickHandler = debounce((_) => handelSubmit(formik.values), 1000);
-
 
     return { formik, clickHandler }
 }

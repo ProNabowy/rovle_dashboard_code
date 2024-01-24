@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const products = createSlice({
 
-    name: "province",
+    name: "products",
 
     initialState: [],
 

@@ -4,6 +4,7 @@ import { Size } from "../../../../apis/apis";
 import { debounce, getSelectedOption } from "../../../../assets/js/utils";
 import { AppContext } from "../../../../components/AppContext/AppContext";
 import Formik from "../../../../hooks/Formik/Formik";
+import { useNavigate } from "react-router-dom";
 
 const useDataGetter = () => {
 
@@ -14,6 +15,8 @@ const useDataGetter = () => {
     const dispatch = useDispatch();
 
     const sizes = useSelector(store => store.sizes);
+
+    const navigate = useNavigate();
 
     const [initialValues, setInitialValues] = useState({
         name: "",
@@ -30,7 +33,7 @@ const useDataGetter = () => {
         setIsLoading(true);
 
 
-        return sizeUtility.addSize(values, dispatch, sizes).finally(_ => {
+        return sizeUtility.addSize(values, dispatch, sizes, navigate).finally(_ => {
 
             setIsLoading(false);
 

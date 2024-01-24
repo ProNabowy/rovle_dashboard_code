@@ -1,4 +1,4 @@
-import { InputsGroup, PageContent } from '../../components'
+import { InputsGroup, PageContent, ProvincesDropDown } from '../../components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faImage } from '@fortawesome/free-solid-svg-icons'
 import { useDataGetter } from './data'
@@ -19,7 +19,7 @@ export default function Profile() {
 
                 <div className='w-[250px] h-[250px] shadow-lg mb-20 m-auto rounded-full flex items-center justify-center relative profile-image overflow-hidden'>
 
-                    <img src={typeof formik.values.image === "object" ? URL.createObjectURL(formik.values?.image) : `https://rovle.eslamghazy.net/public/${data?.image}`} alt='' className='w-full h-full object-cover rounded-full' />
+                    <img src={typeof formik.values.image === "object" ? URL.createObjectURL(formik.values?.image) : `${data?.image}`} alt='' className='w-full h-full object-cover rounded-full' />
 
                     <div className='w-[250px] h-[250px] flex items-start justify-center rounded-full bg-[#45b9eae1] absolute left-0 z-20 transition bottom-[-250px] uploade-image'>
 
@@ -66,7 +66,7 @@ export default function Profile() {
                     }
                 } />
 
-                <div className='flex items-center justify-between mb-6'>
+                <div className='flex items-center justify-between mb-8'>
 
                     <div className='w-[48%]'>
 
@@ -81,21 +81,15 @@ export default function Profile() {
 
                     </div>
 
-                    <div className='w-[48%]'>
-
-                        <label className='text-[18px] text-[#252525] font-medium block'>Province</label>
-
-                        <Dropdown
-                            value={getSelectedOption(store.province, 'id', formik?.values?.province_id)}
-                            onChange={(e) => formik.setFieldValue('province_id', e.target.value?.id)}
-                            options={store.province} optionLabel="name"
-                            placeholder="Select Province Name" className="p-2 w-full !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
-
-                    </div>
+                    <ProvincesDropDown
+                        formik={formik}
+                        country_Key={'country_id'}
+                        province_Key={'province_id'}
+                    />
 
                 </div>
 
-                <div className='flex items-center justify-between mb-6'>
+                <div className='flex items-center justify-between mb-8'>
 
                     <div className='w-[48%]'>
 

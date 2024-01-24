@@ -1,10 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCountries } from "../../store/reduces/countries";
-import { Cities, Countries, Permissions, Province, Roles, Rosters } from "../../apis/apis";
-import { setProvince } from "../../store/reduces/province";
+import { Countries, Permissions, Profile, Roles, Rosters } from "../../apis/apis";
 import { setRosters } from "../../store/reduces/rosters";
-import { setCities } from "../../store/reduces/cities";
 import { setRoles } from "../../store/reduces/roles";
 import { hasPermissions, isLoggedIn } from "../../assets/js/utils";
 import { setPermissions } from "../../store/reduces/permissions";
@@ -18,15 +16,15 @@ const useFetchGloableData = (setIsLoading) => {
 
     const user_access = useSelector(store => store?.userPeressmisons);
 
+    const roles = useSelector(store => store?.roles);
+
     const permissionsUtility = new Permissions();
 
     const countriesUtility = new Countries();
 
-    const provinceUtility = new Province();
+    const profileUtility = new Profile();
 
     const rostersUtility = new Rosters();
-
-    const citiesUtility = new Cities();
 
     const rolesUtility = new Roles();
 
@@ -61,32 +59,6 @@ const useFetchGloableData = (setIsLoading) => {
 
                 }
 
-                if (hasPermissions(permissions.Provinces, user_access, 'dashboard.provinces.index')) {
-
-                    const province = await provinceUtility.fetchProvinces(setProvince, dispatch);;
-
-                }
-
-                if (hasPermissions(permissions.Providers, user_access, 'dashboard.providers.index')) {
-
-                    const providers = await rostersUtility.fetchRosters(setRosters, dispatch);
-
-                } else {
-
-                    //  Don't Forget To Handle Provider Login
-                    const user = JSON.parse(localStorage.getItem('user'));
-
-                    // IF The User Doesn't Have Permission To List Users i set the his info as a default user 
-                    dispatch(setRosters([user]));
-
-                }
-
-                if (hasPermissions(permissions.Cities, user_access, 'dashboard.cities.index')) {
-
-                    const cities = await citiesUtility.fetchCities(setCities, dispatch);;
-
-                }
-
                 if (hasPermissions(permissions.Roles, user_access, 'dashboard.roles.index')) {
 
                     const roles = await rolesUtility.fetchRoles(setRoles, dispatch);
@@ -99,7 +71,45 @@ const useFetchGloableData = (setIsLoading) => {
         }
 
         fetchData();
+
+        return () => { };
+
     }, [user_access, permissions]);
+
+
+    useEffect(() => {
+
+        if (isLogin) {
+
+            if (hasPermissions(permissions.Providers, user_access, 'dashboard.providers.index')) {
+
+                const providers = rostersUtility.fetchRosters(setRosters, dispatch);
+
+            } if (hasPermissions(permissions.Profile, user_access, 'dashboard.profile.index')) {
+
+                //  Don't Forget To Handle Provider Login
+                const user = JSON.parse(localStorage.getItem('user'));
+
+                if (user?.provider) {
+
+                    const providers = rostersUtility.fetchRosters(setRosters, dispatch);
+
+                } else {
+
+                    // IF The User Doesn't Have Permission To List Users i set the info as a default user 
+                    dispatch(setRosters([user]));
+
+                    profileUtility.getRoasterProfile();
+
+                }
+
+            }
+
+        }
+
+        return () => { };
+
+    }, [user_access, permissions, roles]);
 
 }
 export default function FetchData() {

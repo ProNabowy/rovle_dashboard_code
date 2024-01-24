@@ -14,6 +14,9 @@ export default function PlansList() {
             showActions={true}
             PermissionsKey={'Plans'}
             roleKey={'dashboard.plans.store'}
+            columns={columns}
+            list={plans}
+            saveName={'Plans'}
         >
 
             <RenderTable columns={columns} list={plans} />

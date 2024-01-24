@@ -14,7 +14,10 @@ const roasterNameBodyTemplate = (rowData) => {
 };
 
 const recurrenBodyTemplate = (rowData) => {
-    return <p className='mb-1 capitalize text-[13px] font-medium'>{rowData.recurren}</p>
+
+    const recurren = rowData.duration == 0 ? "DIA" : rowData.duration == 1 ? "Week" : rowData?.duration == 2 ? "MES" : rowData?.duration == 3 ? "AÑO" : "UNA VEZ"
+
+    return <p className='mb-1 capitalize text-[13px] font-medium'>{recurren}</p>
 };
 
 
@@ -54,13 +57,17 @@ const useDataGetter = _ => {
 
     }, []);
 
-    const level_one = offers.filter(item => item?.level_id === 1);
-    const level_two = offers.filter(item => item?.level_id === 2);
-    const level_three = offers.filter(item => item?.level_id === 3);
+    const level_one = offers.filter(item => item?.level_id === 1 || item?.level_id === 'auto');
+    const level_two = offers.filter(item => item?.level_id === 2 || item?.level_id === 'auto');
+    const level_three = offers.filter(item => item?.level_id === 3 || item?.level_id === 'auto');
 
     return { offers, level_one, level_two, level_three };
 
 }
+
+const lastDateBodyTemplate = (rowData) => {
+    return <p className='mb-1 capitalize text-[13px] font-medium'>{rowData.updated_at || "Auto"}</p>
+};
 
 const columns = [
     { field: "id", header: "ID", classNames: "!px-[15px]", tamplate: tableService.idBodyTemplate },
@@ -68,7 +75,7 @@ const columns = [
     { field: "name", header: "Roaster Name", classNames: "!px-[15px]", tamplate: roasterNameBodyTemplate },
     { field: "recurren", header: "Recurren", classNames: "!px-[15px]", tamplate: recurrenBodyTemplate },
     { field: "created_at", header: "Start Date", classNames: "!px-[15px]", tamplate: tableService.startDateBodyTemplate },
-    { field: "updated_at", header: "Last Date", classNames: "!px-[15px]", tamplate: tableService.lastDateBodyTemplate },
+    { field: "updated_at", header: "Last Date", classNames: "!px-[15px]", tamplate: lastDateBodyTemplate },
     { field: "status", header: "Action", classNames: "!px-[15px]", tamplate: useActionsBodyTemplate },
 ];
 

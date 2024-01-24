@@ -13,7 +13,11 @@ export default function Permission() {
             title={'Permissions'}
             showActions={true}
             PermissionsKey={'Roles'}
-            roleKey={'dashboard.roles.store'}>
+            roleKey={'dashboard.roles.store'}
+            columns={columns}
+            list={roles}
+            saveName={'Roles'}
+        >
 
             <RenderTable columns={columns} list={roles} />
 

@@ -52,11 +52,7 @@ export default function Login() {
                                 <input onChange={e => setData(perv => ({ ...perv, password: e.target.value }))} id='password' type='password' className='w-[400px] h-[40px] px-5 rounded-[8px]' style={{ background: 'linear-gradient(120deg, #FFF -45.57%, rgba(217, 217, 217, 0.00) 134.89%)', backdropFilter: 'blur(12.343469619750977px)' }} />
 
                             </div>
-
-                            <Link to={'forget-password'} className='text-[#252525] text-[12px] font-medium underline'>
-                                Forget Password ?
-                            </Link>
-
+                            
                             <button className='w-full h-[45px] mt-[16px] text-center rounded-[8px] text-white bg-[#45B8EA]' style={{ backdropFilter: 'blur(12.343469619750977px)' }}>
                                 Log in
                             </button>

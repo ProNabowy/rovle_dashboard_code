@@ -101,7 +101,8 @@ const useActionsBodyTemplate = (rowData) => {
     const productsUtility = new Products();
 
     return <TableActions
-        path={`/products/list/edit-product?id=${rowData?.id}`}
+        path={`/products/list/edit-product?id=${rowData?.id}${rowData?.owner_name ? "?new-owner=true" : ""}`}
+        disableEdit={rowData?.parent_id}
         handelDeleteFunction={productsUtility.deleteProduct}
         rowData={rowData}
         editKey={'dashboard.products.update'}

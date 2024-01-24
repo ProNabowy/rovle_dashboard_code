@@ -40,13 +40,13 @@ class CoffeeShops {
 
     }
 
-    addCoffee(data, dispatch, coffeeShops) {
+    addCoffee(data, dispatch, coffeeShops, navigate) {
 
         return RequestManager.post(`${secondrayUrl}coffee-shops`, data, true)
 
             .then(response => {
 
-                Swal.success('Added!', `Your coffee has been Added.`);
+                Swal.success('Added!', `Your coffee has been Added.`).then(_ => navigate('/setups/coffee-shop'))
 
                 return dispatch(setShops([...coffeeShops, response.data.data]));
 

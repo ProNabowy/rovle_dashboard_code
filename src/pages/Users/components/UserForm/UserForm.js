@@ -1,12 +1,13 @@
 import { Dropdown } from 'primereact/dropdown';
-import { InputsGroup } from '../../../../components';
+import { CitiesDropdown, InputsGroup, ProvincesDropDown } from '../../../../components';
 import { getSelectedOption } from '../../../../assets/js/utils';
 import { useSelector } from 'react-redux';
 
 
-export default function UserForm({ formik, renderPassword, clickHandler }) {
+export default function UserForm({ formik, clickHandler }) {
 
-    const store = useSelector(store => store);
+    const countries = useSelector(store => store.countries);
+    const roles = useSelector(store => store.roles);
 
     return (
 
@@ -22,21 +23,16 @@ export default function UserForm({ formik, renderPassword, clickHandler }) {
                 }
             } />
 
-            {
-                renderPassword
-                    ?
-                    <InputsGroup data={
-                        {
-                            names: ['Password', 'Password Confirmation'],
-                            placeholders: ['Enter Password', 'Enter Password Confirmation'],
-                            onChange: formik.handleChange,
-                            nameAttr: ['user_password', 'user_password_confirmation'],
-                            types: ["password", 'password']
-                        }
-                    } />
-                    :
-                    null
-            }
+
+            <InputsGroup data={
+                {
+                    names: ['Password', 'Password Confirmation'],
+                    placeholders: ['Enter Password', 'Enter Password Confirmation'],
+                    onChange: formik.handleChange,
+                    nameAttr: ['user_password', 'user_password_confirmation'],
+                    types: ["password", 'password']
+                }
+            } />
 
             <InputsGroup data={
                 {
@@ -58,54 +54,45 @@ export default function UserForm({ formik, renderPassword, clickHandler }) {
                 }
             } />
 
-            <div className='flex items-center justify-between mb-6'>
+            <div className='flex items-center justify-between mb-8'>
 
                 <div className='sm:w-[48%]'>
 
                     <h2 className='text-[18px] text-[#252525] font-medium'>Country</h2>
 
                     <Dropdown
-                        value={getSelectedOption(store?.countries, 'id', formik?.values?.user_country_id)}
+                        value={getSelectedOption(countries, 'id', formik?.values?.user_country_id)}
                         onChange={(e) => formik.setFieldValue('user_country_id', e.target.value?.id)}
-                        options={store?.countries} optionLabel="name"
+                        options={countries} optionLabel="name"
                         placeholder="Select Country" className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
 
                 </div>
-                <div className='sm:w-[48%]'>
 
-                    <h2 className='text-[18px] text-[#252525] font-medium'>Province</h2>
-
-                    <Dropdown
-                        value={getSelectedOption(store?.province, 'id', formik?.values?.user_province_id)}
-                        onChange={(e) => formik.setFieldValue('user_province_id', e.target.value?.id)}
-                        options={store?.province} optionLabel="name"
-                        placeholder="Select Province" className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
-
-                </div>
+                <ProvincesDropDown
+                    formik={formik}
+                    country_Key={'user_country_id'}
+                    province_Key={'user_province_id'}
+                />
 
             </div>
 
-            <div className='flex items-center justify-between mb-6'>
+            <div className='flex items-center justify-between mb-8'>
 
-                <div className='sm:w-[48%]'>
+                <CitiesDropdown
+                    formik={formik}
+                    provinces={getSelectedOption(countries, 'id', formik?.values?.user_country_id)?.provinces}
+                    province_Key={'user_province_id'}
+                    city_Key={'user_city_id'}
+                />
 
-                    <h2 className='text-[18px] text-[#252525] font-medium'>City</h2>
-
-                    <Dropdown
-                        value={getSelectedOption(store?.cities, 'id', formik?.values?.user_city_id)}
-                        onChange={(e) => formik.setFieldValue('user_city_id', e.target.value?.id)}
-                        options={store?.cities} optionLabel="name"
-                        placeholder="Select City" className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
-
-                </div>
                 <div className='sm:w-[48%]'>
 
                     <h2 className='text-[18px] text-[#252525] font-medium'>Permissions</h2>
 
                     <Dropdown
-                        value={getSelectedOption(store?.roles, 'id', formik?.values?.role_id)}
+                        value={getSelectedOption(roles, 'id', formik?.values?.role_id)}
                         onChange={(e) => formik.setFieldValue('role_id', e.target.value?.id)}
-                        options={store?.roles} optionLabel="name"
+                        options={roles} optionLabel="name"
                         placeholder="Select Permission" className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
 
                 </div>

@@ -5,6 +5,7 @@ import { Formik } from "../../../../hooks";
 import { debounce } from "../../../../assets/js/utils";
 import { AppContext } from "../../../../components/AppContext/AppContext";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const useDataGetter = () => {
 
@@ -17,6 +18,8 @@ const useDataGetter = () => {
 
     const { setIsLoading } = useContext(AppContext);
 
+    const navigate = useNavigate();
+
     const citiesUtility = new Cities();
 
     const dispatch = useDispatch();
@@ -25,7 +28,7 @@ const useDataGetter = () => {
 
         setIsLoading(true);
 
-        return citiesUtility.addCity(formik.values, dispatch, cities).finally(_ => setIsLoading(false));
+        return citiesUtility.addCity(formik.values, dispatch, cities, navigate).finally(_ => setIsLoading(false));
 
     }, 1000);
 

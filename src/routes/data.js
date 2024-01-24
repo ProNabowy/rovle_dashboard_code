@@ -22,8 +22,10 @@ const EditPermissions = lazy(() => import('../pages/Permission/components/EditPe
 
 
 const ProductsList = lazy(() => import('../pages/Products'));
-const AddProduct = lazy(() => import('../pages/Products/components/AddProduct'));
-const EditProduct = lazy(() => import('../pages/Products/components/EditProduct'));
+const ChooseOwner = lazy(() => import('../pages/Products/components/ChooseOwner'));
+const AddProduct = lazy(() => import('../pages/Products/components/ProductUtailty/AddProduct'));
+const AddProductByOtherOwner = lazy(() => import('../pages/Products/components/AddProductByOtherOwner/AddProductByOtherOwner'));
+const EditProduct = lazy(() => import('../pages/Products/components/ProductUtailty/EditProduct'));
 
 
 const OriginsList = lazy(() => import('../pages/Origins'));
@@ -37,6 +39,7 @@ const EditPlan = lazy(() => import('../pages/Plans/components/EditPlan'));
 
 const Subscriptions = lazy(() => import('../pages/Subscriptions'));
 const SubscriptionsList = lazy(() => import('../pages/Subscriptions/components/SubscriptionsList'));
+const ManagePackage = lazy(() => import('../pages/ManagePackage'));
 
 
 const SizeManagement = lazy(() => import('../pages/SizeManagement'));
@@ -84,7 +87,9 @@ export {
     AddPermission,
     EditPermissions,
     ProductsList,
+    ChooseOwner,
     AddProduct,
+    AddProductByOtherOwner,
     EditProduct,
     OriginsList,
     AddOrigin,
@@ -93,6 +98,7 @@ export {
     EditPlan,
     SubscriptionsList,
     Subscriptions,
+    ManagePackage,
     SizeManagement,
     SizeList,
     AddSize,

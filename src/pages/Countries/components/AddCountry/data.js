@@ -4,6 +4,7 @@ import { Formik } from "../../../../hooks";
 import { debounce } from "../../../../assets/js/utils";
 import { AppContext } from "../../../../components/AppContext/AppContext";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 
 const useDataGetter = _ => {
@@ -22,11 +23,13 @@ const useDataGetter = _ => {
 
     const { formik } = useFormData(initialValues, null);
 
+    const navigate = useNavigate();
+
     const clickHandler = debounce((_) => {
 
         setIsLoading(true);
 
-        return countries.addCountry(formik.values, dispatch, countriesList).finally(_ => setIsLoading(false));
+        return countries.addCountry(formik.values, dispatch, countriesList , navigate).finally(_ => setIsLoading(false));
 
     }, 1000);
 

@@ -46,7 +46,7 @@ export default function OrderDetails({ visible, setVisible, row }) {
 
                                 <div className='col-span-6'>
 
-                                    <h5 className='text-[#58291E] text-[16px] font-medium'>American coffee </h5>
+                                    <h5 className='text-[#58291E] text-[16px] font-medium'>{item?.presentation?.product?.commercial_name}</h5>
 
                                 </div>
 

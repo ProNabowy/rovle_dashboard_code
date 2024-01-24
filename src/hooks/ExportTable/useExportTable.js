@@ -2,9 +2,9 @@ import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
 import 'jspdf-autotable';
 
-export default function useExportTable(columns,countries) {
+export default function useExportTable(columns, list, saveName) {
 
-  const exportColumns = columns.map((col) => ({
+  const exportColumns = columns?.map((col) => ({
     title: col.header,
     dataKey: col.field,
   }));
@@ -22,7 +22,7 @@ export default function useExportTable(columns,countries) {
   };
 
   const exportExcel = () => {
-    const workSheet = XLSX.utils.json_to_sheet(countries);
+    const workSheet = XLSX.utils.json_to_sheet(list);
     const workBook = {
       Sheets: { data: workSheet },
       SheetNames: ['data'],
@@ -31,7 +31,7 @@ export default function useExportTable(columns,countries) {
       bookType: 'xlsx',
       type: 'array',
     });
-    saveAsExcelFile(excelBuffer, 'countries');
+    saveAsExcelFile(excelBuffer, saveName);
   };
 
 
@@ -39,8 +39,8 @@ export default function useExportTable(columns,countries) {
     import("jspdf").then((jsPDF) => {
       import("jspdf-autotable").then(() => {
         const doc = new jsPDF.default(0, 0);
-        doc.autoTable(exportColumns, countries);
-        doc.save("countries.pdf");
+        doc.autoTable(exportColumns, list);
+        doc.save(`${saveName}.pdf`);
       });
     });
   };

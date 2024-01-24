@@ -39,13 +39,13 @@ class Size {
     }
 
 
-    addSize(data, dispatch, sizes) {
+    addSize(data, dispatch, sizes, navigate) {
 
         return RequestManager.post(`${secondrayUrl}sizes`, data, true)
 
             .then(response => {
 
-                Swal.success('Added!', `Size has been Added.`);
+                Swal.success('Added!', `Size has been Added.`).then(_ => navigate('/products/plans/size'));
 
                 return dispatch(setSizes([...sizes, response.data.data]));
 

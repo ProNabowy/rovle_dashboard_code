@@ -1,7 +1,7 @@
 export default function InputsGroup({ data }) {
     const keys = { names: [], placeholders: [], state: 'Function', key: 'string', onChange: "", values: [] }
     return (
-        <div className='flex items-center justify-between mb-6'>
+        <div className='flex items-center justify-between mb-8'>
 
             <div className='sm:w-[48%]'>
 

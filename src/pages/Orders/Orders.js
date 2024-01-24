@@ -13,6 +13,9 @@ export default function Orders() {
             roleKey={'dashboard.orders.store'}
             title={'All Orders'}
             showActions={true}
+            columns={columns}
+            list={orders}
+            saveName={'Orders'}
         >
 
             <RenderTable columns={columns} list={orders} />

@@ -1,7 +1,8 @@
 import OrderDetails from './components/OrderDetails/OrderDetails';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useContext, useEffect, useState } from 'react';
 import { Orders } from '../../apis/apis';
 import Table from '../../assets/js/table';
+import { AppContext } from '../../components/AppContext/AppContext';
 
 const tableService = new Table();
 
@@ -11,9 +12,13 @@ const useDataGetter = () => {
 
     const [orders, setOrders] = useState([]);
 
+    const { setIsLoading } = useContext(AppContext);
+
     useEffect(() => {
 
-        ordersUtailty.fetchOrders(setOrders);
+        setIsLoading(true);
+
+        ordersUtailty.fetchOrders(setOrders).finally(_ => setIsLoading(false));
 
     }, []);
     return { orders }

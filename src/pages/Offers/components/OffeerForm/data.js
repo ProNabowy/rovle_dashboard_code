@@ -28,7 +28,7 @@ const useDataGetter = formik => {
 
         if (e.checked) {
 
-            formik.setFieldValue('end_date', new Date());
+            formik.setFieldValue('end_date', 'auto');
 
 
         } else {
@@ -66,19 +66,19 @@ const Activa = [
 ]
 
 const Discount = [
-    { id: 0, name: "% DESC" },
-    { id: 1, name: "CAFÉ GRATIS" },
+    { id: 'percentage', name: "% DESC" },
+    { id: 'freeCoffee', name: "CAFÉ GRATIS" },
 ]
 const Recurren = [
-    { id: 0, name: "SIEMPRE" },
-    { id: 1, name: "DIA" },
+    { id: 0, name: "DIA" },
+    { id: 1, name: "Week" },
     { id: 2, name: "MES" },
     { id: 3, name: "AÑO" },
     { id: 4, name: "UNA VEZ" },
 ]
 const Fisico = [
     { id: 'auto', name: "OMNI" },
-    { id: 'coffee_shop', name: "FISICO" },
+    { id: 'coffeeShop', name: "FISICO" },
     { id: 'app', name: "SOLO APP" },
 ]
 

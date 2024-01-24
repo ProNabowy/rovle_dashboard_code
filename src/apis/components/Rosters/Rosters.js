@@ -4,7 +4,6 @@ import { RequestManager, Swal, secondrayUrl } from "../../data";
 
 class Rosters {
 
-
     fetchRosters(state, dispatch) {
 
         return RequestManager.get(`${secondrayUrl}providers`)
@@ -21,13 +20,14 @@ class Rosters {
             })
 
     }
-    addRoaster(data, dispatch, roasters) {
+
+    addRoaster(data, dispatch, roasters, navigate) {
 
         return RequestManager.post(`${secondrayUrl}providers`, data, true)
 
             .then(response => {
 
-                Swal.success('Added!', `Your Roaster has been Added.`)
+                Swal.success('Added!', `Your Roaster has been Added.`).then(_ => navigate('/groups/roasters'));
 
                 return dispatch(setRosters([...roasters, response.data.data]));
 

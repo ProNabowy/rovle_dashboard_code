@@ -4,6 +4,7 @@ import { Offers } from "../../../../apis/apis";
 import { AppContext } from "../../../../components/AppContext/AppContext";
 import { debounce } from "../../../../assets/js/utils";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const useDataGetter = _ => {
 
@@ -12,6 +13,8 @@ const useDataGetter = _ => {
     const { setIsLoading } = useContext(AppContext);
 
     const dispatch = useDispatch();
+
+    const navigate = useNavigate();
 
     const offeers = useSelector(store => store.offeers);
 
@@ -34,7 +37,7 @@ const useDataGetter = _ => {
 
     const { formik } = useFormData(initialValues, null);
 
-    const clickHandler = debounce((_) => offeerUtaitly.addOffer(formik.values, dispatch, offeers).finally(_ => setIsLoading(false)), 1000);
+    const clickHandler = debounce((_) => offeerUtaitly.addOffer(formik.values, dispatch, offeers, navigate).finally(_ => setIsLoading(false)), 1000);
 
     return { formik, clickHandler }
 

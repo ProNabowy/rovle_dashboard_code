@@ -21,15 +21,16 @@ class Cities {
 
     }
 
-    addCity(data, dispatch, cities) {
+    addCity(data, dispatch, cities, navigate) {
 
         return RequestManager.post(`${secondrayUrl}cities`, data, true)
 
             .then(response => {
 
-                Swal.success('Added!', `Your City has been Added.`);
+                Swal.success('Added!', `Your City has been Added.`).then(_ => navigate('/settings/cities/list'));
 
                 return dispatch(setCities([...cities, response.data.data]));
+
 
             })
             .catch(error => {

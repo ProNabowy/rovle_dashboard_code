@@ -13,11 +13,11 @@ export default function Date({ formik }) {
     } = useDataGetter(formik);
 
     return (
-        <div className='flex items-center justify-between mb-6'>
+        <div className='flex items-center justify-between mb-8'>
 
             <div className='w-[48%]'>
 
-                <label htmlFor={'name'} className='text-[18px] text-[#252525] font-medium flex items-center justify-between'>
+                <label htmlFor={'checkbox-1'} className='text-[18px] text-[#252525] font-medium flex items-center justify-between'>
 
                     <h3>Fecha INI</h3>
 
@@ -31,13 +31,13 @@ export default function Date({ formik }) {
 
                 </label>
 
-                <Calendar value={formik.values.start_date} onChange={formik.handleChange} name='start_date' placeholder={formik.values.start_date || 'Enter Fecha INI'} className='w-full my-2' showIcon />
+                <Calendar value={formik.values.start_date} disabled={autoSelectStartData} onChange={formik.handleChange} name='start_date' placeholder={formik.values.start_date || 'Enter Fecha INI'} className='w-full my-2' showIcon />
 
             </div>
 
             <div className='w-[48%]'>
 
-                <label htmlFor={'name'} className='text-[18px] text-[#252525] font-medium flex items-center justify-between'>
+                <label htmlFor={'checkbox-2'} className='text-[18px] text-[#252525] font-medium flex items-center justify-between'>
 
                     <h3>Fecha FIN</h3>
 
@@ -51,7 +51,7 @@ export default function Date({ formik }) {
 
                 </label>
 
-                <Calendar value={formik.values.end_date} onChange={formik.handleChange} name='end_date' placeholder={formik.values.end_date || 'Enter Fecha FIN'} className='w-full my-2' showIcon />
+                <Calendar value={formik.values.end_date} disabled={autoSelectEndData} onChange={formik.handleChange} name='end_date' placeholder={formik.values.end_date || 'Enter Fecha FIN'} className='w-full my-2' showIcon />
 
             </div>
 

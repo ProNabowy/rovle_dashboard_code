@@ -15,13 +15,11 @@ export default function PlanForm({ formik, clickHandler }) {
         handleChangeProvider
     } = useAddPlan(formik);
 
-
-
     return (
 
         <form onSubmit={e => e.preventDefault()} className='px-10'>
 
-            <div className='flex items-center justify-between mb-6'>
+            <div className='flex items-center justify-between mb-8'>
 
                 <div className='sm:w-[48%]'>
 
@@ -36,7 +34,7 @@ export default function PlanForm({ formik, clickHandler }) {
             </div>
 
 
-            <div className='mb-6'>
+            <div className='mb-8'>
 
                 <div className='flex items-center justify-between'>
 
@@ -58,7 +56,7 @@ export default function PlanForm({ formik, clickHandler }) {
 
             </div>
 
-            <div className='mb-6'>
+            <div className='mb-8'>
 
                 <label htmlFor={'Description'} className='text-[18px] text-[#252525] font-medium'>Description</label>
 
@@ -89,6 +87,7 @@ export default function PlanForm({ formik, clickHandler }) {
                 formik={formik}
                 options={sizes}
                 optionLabel={'name'}
+                inputLabel={"Price"}
                 hasAddButton={true}
             />
 

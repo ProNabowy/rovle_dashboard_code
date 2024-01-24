@@ -33,7 +33,7 @@ export default function Header({ isExpanded, setIsExpanded }) {
 
                     <div onClick={handleOpenMnue} className='border rounded-full min-w-[200px] flex items-center justify-between p-2 px-5 cursor-pointer relative'>
 
-                        <img src={`https://rovle.eslamghazy.net/public/${user?.image}`} alt='' loading='lazy' width={'fit-content'} height={'fit-content'} className='rounded-full w-[39px] h-[39px] me-2' />
+                        <img src={`${user?.image}`} alt='' loading='lazy' width={'fit-content'} height={'fit-content'} className='rounded-full w-[39px] h-[39px] me-2' />
 
                         <div className='me-5'>
 

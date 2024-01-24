@@ -9,7 +9,7 @@ class PostLogin {
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('user', JSON.stringify(response.data.user));
 
-            Swal.success(null, `You're Loged in successfuly`).then(response => window.location.href = '/');
+            Swal.success(null, `You're Loged in successfuly`).then(response => window.location.href = '/products/list');
 
         })
             .catch(error => {

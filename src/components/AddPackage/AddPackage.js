@@ -21,7 +21,7 @@ export default function AddPackage({ formik, provider_id }) {
             <form onSubmit={e => e.preventDefault()} className='col-span-6'>
 
 
-                <div className='mb-6'>
+                <div className='mb-8'>
 
                     <label htmlFor={'Weight /gm'} className='text-[18px] text-[#252525] font-medium'>Weight</label>
 
@@ -29,7 +29,7 @@ export default function AddPackage({ formik, provider_id }) {
 
                 </div>
 
-                <div className='mb-6'>
+                <div className='mb-8'>
 
                     <label htmlFor={'PriceEuro'} className='text-[18px] text-[#252525] font-medium'>Price</label>
 
@@ -40,7 +40,7 @@ export default function AddPackage({ formik, provider_id }) {
                 {
                     getSelectedOption(roasters, 'id', provider_id)?.manage_stock
                         ?
-                        <div className='mb-6'>
+                        <div className='mb-8'>
 
                             <label htmlFor={'Units'} className='text-[18px] text-[#252525] font-medium'>Quantity</label>
 

@@ -1,6 +1,6 @@
 import { faKey, faTag } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { getSelectedOption } from '../../../../../../assets/js/utils'
 import { Activa, Discount } from '../../data'
 import { Dropdown } from 'primereact/dropdown';
@@ -9,12 +9,28 @@ import { Dropdown } from 'primereact/dropdown';
 export default function OffeerInfo({ formik }) {
 
 
+  useEffect(() => {
+
+    formik.setFieldValue('activation_amount', '');
+
+    return () => { };
+
+  }, [formik?.values?.activation_method]);
+
+  useEffect(() => {
+
+    formik.setFieldValue('discount', '');
+
+    return () => { };
+
+  }, [formik?.values?.discount_type]);
+
   return (
-    <div className='flex items-center justify-between mb-6'>
+    <div className='flex items-center justify-between mb-8'>
 
       <div className='sm:w-[48%] border border-[#28C76F] p-3 py-8 rounded-[10px]'>
 
-        <div className='mb-6'>
+        <div className='mb-8'>
 
           <h1 className='flex items-center mb-3'>
             Active
@@ -27,7 +43,7 @@ export default function OffeerInfo({ formik }) {
         </div>
 
         {
-          formik?.values?.activation_method !== 1
+          ['visit', 'points'].includes(formik?.values?.activation_method)
             ?
             <div>
 
@@ -44,7 +60,7 @@ export default function OffeerInfo({ formik }) {
 
       <div className='sm:w-[48%] border border-[#28C76F] p-3 py-8 rounded-[10px]'>
 
-        <div className='mb-6'>
+        <div className='mb-8'>
 
           <h1 className='flex items-center mb-3'>
             T.Promo
@@ -57,7 +73,7 @@ export default function OffeerInfo({ formik }) {
         </div>
 
         {
-          formik?.values?.discount_type === 1
+          formik?.values?.discount_type === 'percentage'
             ?
             <div>
 

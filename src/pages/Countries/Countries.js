@@ -16,6 +16,9 @@ export default function Countries() {
             url={'add-country'}
             title={'All Countries'}
             showActions={true}
+            columns={columns}
+            list={countries}
+            saveName={'countries'}
         >
 
             <RenderTable columns={columns} list={countries} />

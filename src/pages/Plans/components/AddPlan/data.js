@@ -4,6 +4,7 @@ import { Plans } from "../../../../apis/apis";
 import { debounce } from "../../../../assets/js/utils";
 import { AppContext } from "../../../../components/AppContext/AppContext";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const useAddPlan = () => {
 
@@ -22,6 +23,8 @@ const useAddPlan = () => {
         coffee_shops: [],
         products: []
     });
+
+    const navigate = useNavigate();
 
     const { useFormData } = Formik();
 
@@ -46,7 +49,7 @@ const useAddPlan = () => {
             return item?.id || item;
         });
 
-        return plansUtailty.addPlans(updatedData, dispatch, plans).finally(_ => setIsLoading(false));
+        return plansUtailty.addPlans(updatedData, dispatch, plans, navigate).finally(_ => setIsLoading(false));
 
     }, 1000);
 

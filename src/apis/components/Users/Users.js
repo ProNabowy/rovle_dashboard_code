@@ -40,13 +40,13 @@ class Users {
     }
 
 
-    addUser(data, dispatch, users) {
+    addUser(data, dispatch, users, navigate) {
 
         return RequestManager.post(`${secondrayUrl}users`, data)
 
             .then(response => {
 
-                Swal.success('Added!', `User has been Added.`);
+                Swal.success('Added!', `User has been Added.`).then(_ => navigate('/groups/users'));
 
                 return dispatch(setUsers([...users, response.data.data]));
 

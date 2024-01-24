@@ -6,7 +6,7 @@ import { useDataGetter } from "./data";
 export default function CityForm({ formik, clickHandler }) {
 
     const { province } = useDataGetter();
-console.log(formik.values);
+ 
     return (
 
         <form onSubmit={e => e.preventDefault()}>

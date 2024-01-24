@@ -63,13 +63,13 @@ class Offers {
     }
 
 
-    addOffer(data, dispatch, offeers) {
+    addOffer(data, dispatch, offeers, navigate) {
 
         return RequestManager.post(`${secondrayUrl}passports`, data, true)
 
             .then(response => {
 
-                Swal.success('Added!', `Your Offeer has been Added.`).then(res => window.location.href = "/setups/offers");
+                Swal.success('Added!', `Your Offeer has been Added.`).then(_ => navigate("/setups/offers"));
 
                 return dispatch(setOffeers([...offeers, response.data.data]));
 
