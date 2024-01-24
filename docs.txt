@@ -1,5 +1,2 @@
-add roaster i wanna update the response to be like a list of roasters
-
-update plan the products have error
-
-orders table doesn't return the price 
+user have Permission of Products can update delete list any products of another user
+the same idea of the country and cities
