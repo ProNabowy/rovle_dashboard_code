@@ -27,7 +27,7 @@ export default function ManagePackage() {
 
     return (
         <PageContent
-            title={`Manage Packages ( ${subscriptionItem?.user?.name} / ${subscriptionItem?.total} = ${subscriptionItem?.price} )`}
+            title={`Manage Packages ( ${subscriptionItem?.user?.name} / ${subscriptionItem?.plan_size?.size?.weight} = ${subscriptionItem?.price} )`}
             showActions={false}>
 
             <div className={`grid grid-cols-12 gap-10 p-4 px-10`}>
@@ -84,7 +84,7 @@ export default function ManagePackage() {
 
             <div className='flex flex-col items-end justify-center px-10 mt-3 mb-10'>
 
-                <h3 className='text-[24px] text-[#58291E] mb-24'>{totalWeightOfPersentations} / {subscriptionItem.total} gm</h3>
+                <h3 className='text-[24px] text-[#58291E] mb-24'>{totalWeightOfPersentations} / {subscriptionItem?.plan_size?.size?.weight} gm</h3>
 
 
                 <button onClick={clickHandler} type='submit' className='p-4 px-24 rounded-full text-white font-medium bg-[var(--primary-color)]'>
