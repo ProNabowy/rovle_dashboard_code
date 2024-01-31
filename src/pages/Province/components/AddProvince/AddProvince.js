@@ -9,7 +9,7 @@ export default function AddProvince() {
 
     return (
 
-            <PageContent title={'Add Province'} showActions={false}>
+            <PageContent title={'Formulario de Provincia'} showActions={false}>
 
                 <ProvinceForm formik={formik} clickHandler={clickHandler} />
 

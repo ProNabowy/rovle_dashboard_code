@@ -7,9 +7,9 @@ import { useNavigate } from 'react-router-dom'
 export default function ChooseOwner() {
 
     const options = [
-        'My Products',
-        'Other Owner',
-        'New Owner',
+        'Mis Productos',
+        'Otro Propietario',
+        'Nuevo Propietario',
     ]
 
     const navigate = useNavigate();
@@ -17,15 +17,15 @@ export default function ChooseOwner() {
     const [selectedOption, setSelectedOption] = useState('');
 
     const handelClick = () => {
-        if (selectedOption === 'My Products') {
+        if (selectedOption === 'Mis Productos') {
 
             return navigate('/products/list/add-product');
 
-        } else if (selectedOption === 'Other Owner') {
+        } else if (selectedOption === 'Otro Propietario') {
 
             return navigate('/products/list/add-product/another-owner');
 
-        } else if (selectedOption === 'New Owner') {
+        } else if (selectedOption === 'Nuevo Propietario') {
 
             return navigate('/products/list/add-product?new-owner=true');
 
@@ -34,23 +34,23 @@ export default function ChooseOwner() {
     }
 
     return (
-        <PageContent title={'Choose Owner'} showActions={false} >
+        <PageContent title={'Elegir Propietario'} showActions={false} >
 
             <form onSubmit={e => e.preventDefault()}>
 
                 <div className='px-10 py-3'>
 
-                    <label htmlFor='name-input' className='mb-3 block text-[#234486]'>Product Owner</label>
+                    <label htmlFor='name-input' className='mb-3 block text-[#234486]'>Dueño del Producto</label>
 
                     <Dropdown value={selectedOption} onChange={(e) => setSelectedOption(e.value)} options={options} optionLabel=""
-                        placeholder="Select Owner" className="w-full p-3 !border-r-[0] !border-l-[0] !border-t-[0] !border-b !border-b-[#b3b3b3] !shadow-none !rounded-none" />
+                        placeholder="Seleccionar Propietario" className="w-full p-3 !border-r-[0] !border-l-[0] !border-t-[0] !border-b !border-b-[#b3b3b3] !shadow-none !rounded-none" />
 
                 </div>
 
                 <div className='flex items-center justify-end p-10 pb-5'>
 
                     <button onClick={handelClick} className='p-4 px-24 rounded-full text-white font-medium bg-[var(--primary-color)]'>
-                        Show
+                        Mostrar
                     </button>
 
                 </div>

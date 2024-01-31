@@ -5,7 +5,7 @@ export default function OrderDetails({ visible, setVisible, row }) {
 
     return (
 
-        <Dialog header={`Order details (${row?.name})`} headerClassName='text-center !bg-[#58291E] !text-white' visible={visible} style={{ width: '50vw' }} onHide={() => setVisible(false)}>
+        <Dialog header={`Detalles del pedido (${row?.name})`} headerClassName='text-center !bg-[#58291E] !text-white' visible={visible} style={{ width: '50vw' }} onHide={() => setVisible(false)}>
 
             <div className='grid grid-cols-12 gap-5 mt-5'>
 
@@ -13,26 +13,26 @@ export default function OrderDetails({ visible, setVisible, row }) {
 
                     <div className='col-span-6'>
 
-                        <h3 className='text-[#252525] opacity-70 mb-[32px]'>Product name</h3>
+                        <h3 className='text-[#252525] opacity-70 mb-[32px]'>Nombre del Producto</h3>
 
                     </div>
 
                     <div className='col-span-2'>
 
-                        <h3 className='text-[#252525] opacity-70 mb-[32px]'>Weight</h3>
+                        <h3 className='text-[#252525] opacity-70 mb-[32px]'>Peso</h3>
 
                     </div>
 
                     <div className='col-span-2'>
 
-                        <h3 className='text-[#252525] opacity-70 mb-[32px]'>Amount</h3>
+                        <h3 className='text-[#252525] opacity-70 mb-[32px]'>Cantidad</h3>
 
                     </div>
 
 
                     <div className='col-span-2'>
 
-                        <h3 className='text-[#252525] opacity-70 mb-[32px]'>Price</h3>
+                        <h3 className='text-[#252525] opacity-70 mb-[32px]'>Precio</h3>
 
                     </div>
 
@@ -58,7 +58,7 @@ export default function OrderDetails({ visible, setVisible, row }) {
 
                                 <div className='col-span-2'>
 
-                                    <h5 className='text-[#58291E] text-[16px] font-medium'>{item?.units} package</h5>
+                                    <h5 className='text-[#58291E] text-[16px] font-medium'>{item?.units} Paquete</h5>
 
                                 </div>
 
@@ -81,9 +81,9 @@ export default function OrderDetails({ visible, setVisible, row }) {
 
                 </h2>
 
-                <h2 className='col-span-12 mt-3'>Note:</h2>
+                <h2 className='col-span-12 mt-3'>Nota:</h2>
 
-                <p className='p-3 border border-[#252525ac] col-span-12 rounded-[5px]'>Necessitatibus eum necessitatibus quia et ducimus necessitatibus ipsam neque ut. Consequatur quia doloribus quaerat veniam. Et harum maxime laboriosam consequatur iure voluptate quo. Omnis autem nam odit quos fugit ratione voluptatem.</p>
+                <p className='p-3 border border-[#252525ac] col-span-12 rounded-[5px]'>Tu mensaje parece ser un texto en latín o una combinación de palabras que no forman una oración coherente en español. Si puedes proporcionar más contexto o aclarar tu solicitud, estaré encantado de ayudarte.</p>
 
             </div>
 

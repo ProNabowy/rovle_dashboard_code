@@ -9,7 +9,7 @@ export default function AddPlan() {
 
     return (
 
-        <PageContent title={'Plan Form'} showActions={false}  >
+        <PageContent title={'Formulario de Plan'} showActions={false}  >
 
             <PlanForm formik={formik} clickHandler={clickHandler} />
 

@@ -15,8 +15,8 @@ export default function RoasterForm({ formik, clickHandler, isRenderPassword }) 
 
             <InputsGroup data={
                 {
-                    names: ['Name', 'Email'],
-                    placeholders: ['Enter Name', 'Enter Email'],
+                    names: ['Nombre', 'Correo electrónico'],
+                    placeholders: ['Ingresar Nombre', 'Ingresar Correo electrónico'],
                     values: [formik.values?.user_name, formik.values?.user_email],
                     onChange: formik.handleChange,
                     nameAttr: ['user_name', 'user_email']
@@ -28,8 +28,8 @@ export default function RoasterForm({ formik, clickHandler, isRenderPassword }) 
                     ?
                     <InputsGroup data={
                         {
-                            names: ['Password', 'Password Confirmation'],
-                            placeholders: ['Enter Password', 'Enter Password Confirmation'],
+                            names: ['Contraseña', 'Confirmación de contraseña'],
+                            placeholders: ['Ingresar Contraseña', 'Ingresar Confirmación de contraseña'],
                             onChange: formik.handleChange,
                             nameAttr: ['user_password', 'user_password_confirmation'],
                             types: ["password", 'password']
@@ -42,7 +42,7 @@ export default function RoasterForm({ formik, clickHandler, isRenderPassword }) 
             <InputsGroup data={
                 {
                     names: ['NIF', 'Commercial Name'],
-                    placeholders: ['Enter NIF', 'Enter Commercial Name'],
+                    placeholders: ['Ingresar NIF', 'Ingresar Commercial Name'],
                     values: [formik.values?.provider_nif, formik.values?.provider_commercial_name],
                     onChange: formik.handleChange,
                     nameAttr: ['provider_nif', 'provider_commercial_name']
@@ -51,8 +51,8 @@ export default function RoasterForm({ formik, clickHandler, isRenderPassword }) 
 
             <InputsGroup data={
                 {
-                    names: ['Official Name', 'Address'],
-                    placeholders: ['Enter Official Name', 'Enter Address'],
+                    names: ['Nombre oficial', 'Dirección'],
+                    placeholders: ['Ingresar Nombre oficial', 'Ingresar Dirección'],
                     values: [formik.values?.provider_official_name, formik.values?.provider_address],
                     onChange: formik.handleChange,
                     nameAttr: ['provider_official_name', 'provider_address']
@@ -61,8 +61,8 @@ export default function RoasterForm({ formik, clickHandler, isRenderPassword }) 
 
             <InputsGroup data={
                 {
-                    names: ['Zip', 'Phone'],
-                    placeholders: ['Enter Zip', 'Enter Phone'],
+                    names: ['Código postal', 'Teléfono'],
+                    placeholders: ['Ingresar Código postal', 'Ingresar Teléfono'],
                     values: [formik.values?.provider_zip, formik.values?.provider_phone],
                     onChange: formik.handleChange,
                     nameAttr: ['provider_zip', 'provider_phone']
@@ -74,13 +74,13 @@ export default function RoasterForm({ formik, clickHandler, isRenderPassword }) 
 
                 <div className='sm:w-[48%]'>
 
-                    <h2 className='text-[18px] text-[#252525] font-medium'>Country</h2>
+                    <h2 className='text-[18px] text-[#252525] font-medium'>País</h2>
 
                     <Dropdown
                         value={getSelectedOption(countries, 'id', formik?.values?.provider_country_id)}
                         onChange={(e) => formik.setFieldValue('provider_country_id', e.target.value?.id)}
                         options={countries} optionLabel="name"
-                        placeholder="Select Country" className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
+                        placeholder="Seleccionar País" className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
 
                 </div>
 
@@ -109,7 +109,7 @@ export default function RoasterForm({ formik, clickHandler, isRenderPassword }) 
 
             <div className='flex items-center justify-end mt-10'>
 
-                <button onClick={clickHandler} type='submit' className='bg-[#45B8EA] text-white py-[16px] px-32 rounded-full'>Submit</button>
+                <button onClick={clickHandler} type='submit' className='bg-[#45B8EA] text-white py-[16px] px-32 rounded-full'>Enviar</button>
 
             </div>
 

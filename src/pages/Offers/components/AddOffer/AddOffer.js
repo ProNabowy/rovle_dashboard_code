@@ -8,7 +8,7 @@ export default function AddOffer() {
     const { formik, clickHandler } = useDataGetter();
 
     return (
-        <PageContent title={'Offer Form'} showActions={false} >
+        <PageContent title={'Formulario de oferta'} showActions={false} >
             <OffeerForm formik={formik} clickHandler={clickHandler} />
         </PageContent>
     )

@@ -1,4 +1,3 @@
-import React from 'react'
 import { PageContent } from '../../components'
 import { useDataGetter, useAddPackage } from './data'
 import { Dropdown } from 'primereact/dropdown';
@@ -27,7 +26,7 @@ export default function ManagePackage() {
 
     return (
         <PageContent
-            title={`Manage Packages ( ${subscriptionItem?.user?.name} / ${subscriptionItem?.plan_size?.size?.weight} = ${subscriptionItem?.price} )`}
+            title={`Gestionar paquetes ( ${subscriptionItem?.user?.name} / ${subscriptionItem?.plan_size?.size?.weight} = ${subscriptionItem?.price} )`}
             showActions={false}>
 
             <div className={`grid grid-cols-12 gap-10 p-4 px-10`}>
@@ -36,7 +35,7 @@ export default function ManagePackage() {
 
                     <div className='mb-8'>
 
-                        <label className='text-[18px] text-[#252525] font-medium'>Product name</label>
+                        <label className='text-[18px] text-[#252525] font-medium'>Nombre del Producto</label>
 
                         <Dropdown
                             value={selectedProduct}
@@ -45,13 +44,13 @@ export default function ManagePackage() {
                                 setSelectProduct(e.value);
                             }}
                             options={subscriptionItem?.plan?.products} optionLabel={"commercial_name"}
-                            placeholder={"Select Product"} className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
+                            placeholder={"Seleccionar Producto"} className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
 
                     </div>
 
                     <div className='mb-8'>
 
-                        <label htmlFor={'weight'} className='text-[18px] text-[#252525] font-medium'>weight / gm </label>
+                        <label htmlFor={'weight'} className='text-[18px] text-[#252525] font-medium'>Peso / gm </label>
 
                         {/* Don't Forget To Ask What U render Here */}
                         <Dropdown
@@ -61,19 +60,20 @@ export default function ManagePackage() {
                                 setSelectWeight(e.value)
                             }}
                             options={selectedProduct?.presentations} optionLabel={"weight"}
-                            placeholder={"Select Weight"} className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
+                            placeholder={"Seleccionar Peso"} className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
 
                     </div>
 
                     <div className='mb-8'>
 
-                        <label htmlFor={'Quantity'} className='text-[18px] text-[#252525] font-medium'>Quantity</label>
+                        <label htmlFor={'Quantity'} className='text-[18px] text-[#252525] font-medium'>Cantidad</label>
 
-                        <input ref={inputWeightRef} onChange={e => setAddNewPackage(prev => ({ ...prev, units: e.target.value }))} type='number' id={'Quantity'} className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]' placeholder={'Quantity'} />
+                        <input ref={inputWeightRef} onChange={e => setAddNewPackage(prev => ({ ...prev, units: e.target.value }))} type='number' id={'Quantity'}
+                            className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]' placeholder={'Cantidad'} />
 
                     </div>
 
-                    <button type='button' onClick={handelAddNewPackage} className='bg-[#58291E] text-[20px] text-center text-white font-medium w-full py-[16px] px-[24px] rounded-full'>Add Package</button>
+                    <button type='button' onClick={handelAddNewPackage} className='bg-[#58291E] text-[20px] text-center text-white font-medium w-full py-[16px] px-[24px] rounded-full'>Agregar paquete</button>
 
                 </form>
 
@@ -88,7 +88,7 @@ export default function ManagePackage() {
 
 
                 <button onClick={clickHandler} type='submit' className='p-4 px-24 rounded-full text-white font-medium bg-[var(--primary-color)]'>
-                    Submit
+                    Enviar
                 </button>
 
             </div>

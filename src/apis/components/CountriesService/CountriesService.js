@@ -15,7 +15,7 @@ class Countries {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -31,7 +31,7 @@ class Countries {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -43,14 +43,14 @@ class Countries {
 
             .then(response => {
 
-                Swal.success('Added!', `Your Country has been Added.`).then(_ => navigate('/settings/country/list'));
+                Swal.success('Añadido!', `Tu país ha sido añadido.`).then(_ => navigate('/settings/country/list'));
 
                 return dispatch(setCountries([...countries, response.data.data]));
 
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -62,7 +62,7 @@ class Countries {
 
             .then(response => {
 
-                Swal.success('Added!', `Your Country has been Updated.`);
+                Swal.success('Actualizado!', `Tu país ha sido actualizado.`);
 
                 const updatedCountry = countries.map(Country => Country?.id == id ? response.data.data : Country);
 
@@ -71,7 +71,7 @@ class Countries {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
     }
@@ -82,7 +82,7 @@ class Countries {
 
             .then(response => {
 
-                Swal.success('Deleted!', `Your Country has been deleted.`);
+                Swal.success('Borrado!', `Tu país ha sido eliminado`);
 
                 const updatedCountry = countries.filter(country => country?.id != id);
 
@@ -91,7 +91,7 @@ class Countries {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 

@@ -21,15 +21,7 @@ export default function Header({ isExpanded, setIsExpanded }) {
 
                 </span>
 
-                <div className='relative flex-1 flex items-center'>
-
-                    <div className='flex-1 border rounded-full relative overflow-hidden me-5'>
-
-                        <input type='text' className='w-full p-3 ps-10' placeholder='Search (Ctrl+/)' />
-
-                        <FontAwesomeIcon icon={faSearch} className='absolute left-4 text-[#8B6464] top-[50%] translate-y-[-50%]'></FontAwesomeIcon>
-
-                    </div>
+                <div className='relative flex items-center'>
 
                     <div onClick={handleOpenMnue} className='border rounded-full min-w-[200px] flex items-center justify-between p-2 px-5 cursor-pointer relative'>
 
@@ -47,13 +39,13 @@ export default function Header({ isExpanded, setIsExpanded }) {
 
                         <div className={`absolute w-full shadow-lg z-[100] bg-white border border-t-[transparent] transition left-0 ${visible ? "bottom-[-95px] visible opacity-100" : "bottom-[-150px] opacity-0 invisible"}`}>
 
-                            <Link to={'/profile'} className='flex items-center  p-2 pb-3 border-b-2'>Profile</Link>
+                            <Link to={'/profile'} className='flex items-center  p-2 pb-3 border-b-2'>Perfil</Link>
 
                             <button onClick={_ => handleLogOut(null, true)} className='flex items-center p-2 text-[#FF5C34] font-medium'>
 
                                 <FontAwesomeIcon icon={faRightFromBracket} className='me-3' />
 
-                                <p>Logout</p>
+                                <p>Cerrar sesión</p>
 
                             </button>
 

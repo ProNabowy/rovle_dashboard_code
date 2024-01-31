@@ -15,8 +15,8 @@ export default function UserForm({ formik, clickHandler }) {
 
             <InputsGroup data={
                 {
-                    names: ['Name', 'Email'],
-                    placeholders: ['Enter Name', 'Enter Email'],
+                    names: ['Nombre', 'Correo electrónico'],
+                    placeholders: ['Ingresar Nombre', 'Ingresar Correo electrónico'],
                     values: [formik.values?.user_name, formik.values?.user_email],
                     onChange: formik.handleChange,
                     nameAttr: ['user_name', 'user_email'],
@@ -26,8 +26,8 @@ export default function UserForm({ formik, clickHandler }) {
 
             <InputsGroup data={
                 {
-                    names: ['Password', 'Password Confirmation'],
-                    placeholders: ['Enter Password', 'Enter Password Confirmation'],
+                    names: ['Contraseña', 'Confirmación de contraseña'],
+                    placeholders: ['Ingresar Password', 'Ingresar Confirmación de contraseña'],
                     onChange: formik.handleChange,
                     nameAttr: ['user_password', 'user_password_confirmation'],
                     types: ["password", 'password']
@@ -36,8 +36,8 @@ export default function UserForm({ formik, clickHandler }) {
 
             <InputsGroup data={
                 {
-                    names: ['Address', 'Phone'],
-                    placeholders: ['Enter Address', 'Enter Phone Number'],
+                    names: ['Dirección', 'Teléfono'],
+                    placeholders: ['Ingresar Address', 'Ingresar Teléfono'],
                     values: [formik.values?.user_address, formik.values?.user_phone],
                     onChange: formik.handleChange,
                     nameAttr: ['user_address', 'user_phone']
@@ -46,8 +46,8 @@ export default function UserForm({ formik, clickHandler }) {
 
             <InputsGroup data={
                 {
-                    names: ['Zip', 'Card ID'],
-                    placeholders: ['Enter Zip', 'Enter Card ID'],
+                    names: ['Código postal', 'Identificación de tarjeta'],
+                    placeholders: ['Ingresar Código postal', 'Ingresar Identificación de tarjeta'],
                     values: [formik.values?.user_zip, formik.values?.user_card_id],
                     onChange: formik.handleChange,
                     nameAttr: ['user_zip', 'user_card_id']
@@ -58,13 +58,13 @@ export default function UserForm({ formik, clickHandler }) {
 
                 <div className='sm:w-[48%]'>
 
-                    <h2 className='text-[18px] text-[#252525] font-medium'>Country</h2>
+                    <h2 className='text-[18px] text-[#252525] font-medium'>País</h2>
 
                     <Dropdown
                         value={getSelectedOption(countries, 'id', formik?.values?.user_country_id)}
                         onChange={(e) => formik.setFieldValue('user_country_id', e.target.value?.id)}
                         options={countries} optionLabel="name"
-                        placeholder="Select Country" className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
+                        placeholder="Seleccionar País" className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
 
                 </div>
 
@@ -87,13 +87,13 @@ export default function UserForm({ formik, clickHandler }) {
 
                 <div className='sm:w-[48%]'>
 
-                    <h2 className='text-[18px] text-[#252525] font-medium'>Permissions</h2>
+                    <h2 className='text-[18px] text-[#252525] font-medium'>Permisos</h2>
 
                     <Dropdown
                         value={getSelectedOption(roles, 'id', formik?.values?.role_id)}
                         onChange={(e) => formik.setFieldValue('role_id', e.target.value?.id)}
                         options={roles} optionLabel="name"
-                        placeholder="Select Permission" className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
+                        placeholder="Seleccionar Permiso" className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
 
                 </div>
 
@@ -102,7 +102,7 @@ export default function UserForm({ formik, clickHandler }) {
 
             <div className='flex items-center justify-end mt-10'>
 
-                <button onClick={clickHandler} type='submit' className='bg-[#45B8EA] text-white py-[16px] px-32 rounded-full'>Submit</button>
+                <button onClick={clickHandler} type='submit' className='bg-[#45B8EA] text-white py-[16px] px-32 rounded-full'>Enviar</button>
 
             </div>
 

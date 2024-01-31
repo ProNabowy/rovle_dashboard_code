@@ -18,7 +18,7 @@ class Roles {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -37,7 +37,7 @@ class Roles {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -54,7 +54,7 @@ class Roles {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -70,7 +70,7 @@ class Roles {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -91,7 +91,7 @@ class Roles {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -103,14 +103,14 @@ class Roles {
 
             .then(response => {
 
-                Swal.success('Added!', `Role has been Added.`).then(_ => navigate('/settings/permissions/list'));
+                Swal.success('Añadido!', `Se ha añadido el rol.`).then(_ => navigate('/settings/permissions/list'));
 
                 return dispatch(setRoles([...roles, response.data.data]));
 
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -122,7 +122,7 @@ class Roles {
 
             .then(response => {
 
-                Swal.success('Deleted!', `The Role has been deleted.`);
+                Swal.success('Borrado!', `El rol ha sido eliminado.`);
 
                 const updatedRoles = roles.filter(role => role?.id != id);
 
@@ -130,7 +130,7 @@ class Roles {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 

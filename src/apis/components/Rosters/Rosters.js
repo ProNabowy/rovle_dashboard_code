@@ -15,7 +15,7 @@ class Rosters {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -27,14 +27,14 @@ class Rosters {
 
             .then(response => {
 
-                Swal.success('Added!', `Your Roaster has been Added.`).then(_ => navigate('/groups/roasters'));
+                Swal.success('Añadido!', `Tu tostador ha sido añadido.`).then(_ => navigate('/groups/roasters'));
 
                 return dispatch(setRosters([...roasters, response.data.data]));
 
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -45,7 +45,7 @@ class Rosters {
 
             .then(response => {
 
-                Swal.success('Updated!', `Your Roaster has been Updated.`)
+                Swal.success('Actualizado!', `Tu tostador ha sido actualizado.`)
 
                 const updatedRoasters = roasters.map(roaster => roaster?.id == id ? response.data.data : roaster);
 
@@ -54,7 +54,7 @@ class Rosters {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -66,7 +66,7 @@ class Rosters {
 
             .then(response => {
 
-                Swal.success('Deleted!', `Your Roaster has been deleted.`)
+                Swal.success('Borrado!', `Tu tostador ha sido eliminado.`)
 
                 const updatedRoasters = roasters.filter(roaster => roaster?.id != id);
 
@@ -75,7 +75,7 @@ class Rosters {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 

@@ -10,13 +10,13 @@ const useReplacePagnitToText = () => {
 
         if (perv) {
 
-            perv.innerHTML = "Previous";
+            perv.innerHTML = "Anterior";
 
         }
 
         if (next) {
 
-            next.innerHTML = "Next";
+            next.innerHTML = "Siguiente";
 
         }
 

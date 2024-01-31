@@ -7,7 +7,7 @@ export default function AddPermissions() {
 
     return (
 
-        <PageContent title={'Permission Form'} showActions={false}>
+        <PageContent title={'Formulario de Permisos'} showActions={false}>
 
             <PermissionsForm asEdit={false} />
 

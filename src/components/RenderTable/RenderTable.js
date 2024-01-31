@@ -26,7 +26,7 @@ export default function RenderTable({
 
             <div className='relative ms-8 mb-5 w-[400px]'>
 
-                <input type='text' placeholder='Search (Ctrl+/)' value={globalFilterValue} onChange={onGlobalFilterChange} className='px-10 py-3 rounded-full border w-full' />
+                <input type='text' placeholder='Búsqueda (Ctrl+/)' value={globalFilterValue} onChange={onGlobalFilterChange} className='px-10 py-3 rounded-full border w-full' />
 
                 <FontAwesomeIcon icon={faSearch} className='text-[#252525] text-[13px] absolute left-4 top-[50%] translate-y-[-50%]' />
 
@@ -35,7 +35,7 @@ export default function RenderTable({
             <DataTable DataTable value={list} filters={filters}
                 globalFilterFields={FilterFields}
                 paginator={showPaginator} rows={selectedEntries?.name} dataKey="id"
-                emptyMessage={<h1 className='text-center my-5'>No Data Found</h1>} className='px-8' >
+                emptyMessage={<h1 className='text-center my-5'>No se encontraron datos</h1>} className='px-8' >
 
                 {data(columns)}
 
@@ -46,7 +46,7 @@ export default function RenderTable({
                     ?
                     <div className={`flex items-center w-fit absolute ${showPaginator ? "bottom-5" : "-bottom-5"} left-8`}>
 
-                        <h3 className='text-[#252525] font-medium me-3'>Show</h3>
+                        <h3 className='text-[#252525] font-medium me-3'>Mostrar</h3>
 
                         {
                             entries?.length < selectedEntries?.name
@@ -54,10 +54,10 @@ export default function RenderTable({
                                 <h2 className='text-[#252525] font-medium'>{entries?.length}</h2>
                                 :
                                 <Dropdown value={selectedEntries} onChange={(e) => setSelectedEntries(e.value)} options={entries} optionLabel="name"
-                                    placeholder="" className="w-[89px] ps-2 !rounded-full" emptyMessage={'Table Is Empty'} />
+                                    placeholder="" className="w-[89px] ps-2 !rounded-full" emptyMessage={'La tabla está vacía'} />
                         }
 
-                        <h3 className='text-[#252525] font-medium ms-3'>entries</h3>
+                        <h3 className='text-[#252525] font-medium ms-3'>entradas</h3>
 
                     </div>
                     :

@@ -10,7 +10,7 @@ export default function Permission() {
 
         <PageContent
             url={'/settings/permissions/list/add-permission'}
-            title={'Permissions'}
+            title={'Permisos'}
             showActions={true}
             PermissionsKey={'Roles'}
             roleKey={'dashboard.roles.store'}

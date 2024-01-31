@@ -98,7 +98,9 @@ label {
     color: white !important;
 }
 
-.p-dialog .p-dialog-header .p-dialog-header-icon:hover {
+
+.p-dialog .p-dialog-header .p-dialog-header-icon:hover,
+.p-dialog .p-dialog-header.origin .p-dialog-header-icon {
     color: black !important;
 }
 

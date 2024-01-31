@@ -9,7 +9,7 @@ export default function ProductsList() {
 
         <PageContent
             url={'add-product/choose-owner'}
-            title={'All Products'}
+            title={'Todos los Productos'}
             showActions={true}
             PermissionsKey={'Products'}
             roleKey={'dashboard.products.store'}

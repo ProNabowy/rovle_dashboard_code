@@ -15,7 +15,7 @@ class Province {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -32,7 +32,7 @@ class Province {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -44,14 +44,14 @@ class Province {
 
             .then(response => {
 
-                Swal.success('Added!', `Your Provinces has been Added.`).then(_ => navigate('/settings/province/list'));
+                Swal.success('Añadido!', `Tus provincias han sido añadidas.`).then(_ => navigate('/settings/province/list'));
 
                 return dispatch(setProvince([...province, response.data.data]));
 
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -63,7 +63,7 @@ class Province {
 
             .then(response => {
 
-                Swal.success('Added!', `Your Provinces has been Updated.`);
+                Swal.success('Actualizado!', `Tus provincias han sido actualizadas.`);
 
                 const updatedProvinces = provinces.map(province => province?.id == id ? response.data.data : province);
 
@@ -72,7 +72,7 @@ class Province {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
     }
@@ -83,7 +83,7 @@ class Province {
 
             .then(response => {
 
-                Swal.success('Deleted!', `Your Province has been deleted.`);
+                Swal.success('Borrado!', `Tu provincia ha sido eliminada.`);
 
                 const updatedProvinces = provinces.filter(province => province?.id != id);
 
@@ -92,7 +92,7 @@ class Province {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 

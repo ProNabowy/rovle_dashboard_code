@@ -61,11 +61,11 @@ const useActionsBodyTemplate = (rowData) => {
 
 const columns = [
     { field: "id", header: "ID", tamplate: tableService.idBodyTemplate },
-    { field: "name", header: "Name", tamplate: tableService.nameBodyTemplate },
-    { field: "country.name", header: "Country", tamplate: tableService.countryBodyTemplate },
-    { field: "created_at", header: "Date", tamplate: tableService.startDateBodyTemplate },
-    { field: "updated_at", header: "Last Date", tamplate: tableService.lastDateBodyTemplate },
-    { field: "status", header: "Action", tamplate: useActionsBodyTemplate },
+    { field: "name", header: "Nombre", tamplate: tableService.nameBodyTemplate },
+    { field: "country.name", header: "País", tamplate: tableService.countryBodyTemplate },
+    { field: "created_at", header: "Fecha", tamplate: tableService.startDateBodyTemplate },
+    { field: "updated_at", header: "Última Fecha", tamplate: tableService.lastDateBodyTemplate },
+    { field: "status", header: "Acción", tamplate: useActionsBodyTemplate },
 ];
 
 

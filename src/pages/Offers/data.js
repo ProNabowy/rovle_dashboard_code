@@ -71,12 +71,12 @@ const lastDateBodyTemplate = (rowData) => {
 
 const columns = [
     { field: "id", header: "ID", classNames: "!px-[15px]", tamplate: tableService.idBodyTemplate },
-    { field: "name", header: "Offer Name", classNames: "!px-[0px]", tamplate: tableService.nameBodyTemplate },
-    { field: "name", header: "Roaster Name", classNames: "!px-[15px]", tamplate: roasterNameBodyTemplate },
+    { field: "name", header: "Nombre de la oferta", classNames: "!px-[0px]", tamplate: tableService.nameBodyTemplate },
+    { field: "name", header: "Nombre del tostador", classNames: "!px-[15px]", tamplate: roasterNameBodyTemplate },
     { field: "recurren", header: "Recurren", classNames: "!px-[15px]", tamplate: recurrenBodyTemplate },
-    { field: "created_at", header: "Start Date", classNames: "!px-[15px]", tamplate: tableService.startDateBodyTemplate },
-    { field: "updated_at", header: "Last Date", classNames: "!px-[15px]", tamplate: lastDateBodyTemplate },
-    { field: "status", header: "Action", classNames: "!px-[15px]", tamplate: useActionsBodyTemplate },
+    { field: "created_at", header: "Fecha de inicio", classNames: "!px-[15px]", tamplate: tableService.startDateBodyTemplate },
+    { field: "updated_at", header: "Fecha de finalización", classNames: "!px-[15px]", tamplate: lastDateBodyTemplate },
+    { field: "status", header: "Acción", classNames: "!px-[15px]", tamplate: useActionsBodyTemplate },
 ];
 
 

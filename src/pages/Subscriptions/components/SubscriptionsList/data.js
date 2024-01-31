@@ -27,13 +27,13 @@ const actionBodyTemplate = (rowData) => {
 
 
 const columns = [
-    { field: "name", header: "Name", tamplate: tableService.nameBodyTemplate },
-    { field: "address", header: "Address", tamplate: tableService.addressBodyTemplate },
-    { field: "created_at", header: "Start date", tamplate: tableService.startDateBodyTemplate },
-    { field: "updated_at", header: "Last date", tamplate: tableService.lastDateBodyTemplate },
-    { field: "status", header: "Status", tamplate: statusBodyTemplate },
-    { field: "name", header: "Package", tamplate: usePackageBodyTemplate },
-    { field: "action", header: "Action", tamplate: actionBodyTemplate },
+    { field: "name", header: "Nombre", tamplate: tableService.nameBodyTemplate },
+    { field: "address", header: "Dirección", tamplate: tableService.addressBodyTemplate },
+    { field: "created_at", header: "Fecha de inicio", tamplate: tableService.startDateBodyTemplate },
+    { field: "updated_at", header: "Fecha de finalización", tamplate: tableService.lastDateBodyTemplate },
+    { field: "status", header: "Estado", tamplate: statusBodyTemplate },
+    { field: "name", header: "Paquete", tamplate: usePackageBodyTemplate },
+    { field: "action", header: "Acción", tamplate: actionBodyTemplate },
 ];
 
 

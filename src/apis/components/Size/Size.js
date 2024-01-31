@@ -15,7 +15,7 @@ class Size {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -32,7 +32,7 @@ class Size {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -45,14 +45,14 @@ class Size {
 
             .then(response => {
 
-                Swal.success('Added!', `Size has been Added.`).then(_ => navigate('/products/plans/size'));
+                Swal.success('Añadido!', `El tamaño ha sido añadido.`).then(_ => navigate('/products/plans/size'));
 
                 return dispatch(setSizes([...sizes, response.data.data]));
 
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -64,16 +64,17 @@ class Size {
 
             .then(response => {
 
-                Swal.success('Deleted!', `Size has been deleted.`)
+                Swal.success('Borrado!', `
+                El tamaño ha sido eliminado.`)
 
                 const updatedSizes = sizes.filter(size => size?.id != id);
-                console.log(updatedSizes, sizes);
+
                 return dispatch(setSizes(updatedSizes));
 
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 

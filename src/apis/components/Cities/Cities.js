@@ -15,7 +15,7 @@ class Cities {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -27,7 +27,7 @@ class Cities {
 
             .then(response => {
 
-                Swal.success('Added!', `Your City has been Added.`).then(_ => navigate('/settings/cities/list'));
+                Swal.success('Añadido!', `Tu ciudad ha sido añadida.`).then(_ => navigate('/settings/cities/list'));
 
                 return dispatch(setCities([...cities, response.data.data]));
 
@@ -35,7 +35,7 @@ class Cities {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -49,7 +49,7 @@ class Cities {
 
             .then(response => {
 
-                Swal.success('Updated!', `Your City has been Updated.`);
+                Swal.success('Actualizado!', `Tu ciudad ha sido actualizada.`);
 
                 const updatedCities = cities.map(city => city?.id == id ? response.data.data : city);
 
@@ -58,7 +58,7 @@ class Cities {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
     }
@@ -69,7 +69,7 @@ class Cities {
 
             .then(response => {
 
-                Swal.success('Deleted!', `Your City has been deleted.`);
+                Swal.success('Borrado!', `Tu ciudad ha sido eliminada.`);
 
                 const updatedCities = cities.filter(city => city?.id != id);
 
@@ -78,7 +78,7 @@ class Cities {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 

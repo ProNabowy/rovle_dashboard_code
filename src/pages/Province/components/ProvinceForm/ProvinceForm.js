@@ -12,25 +12,26 @@ export default function ProvinceForm({ formik, clickHandler }) {
 
             <div className='p-10 pb-2'>
 
-                <label htmlFor='name-input' className='mb-3 block text-[#234486]'>Name</label>
+                <label htmlFor='name-input' className='mb-3 block text-[#234486]'>Nombre</label>
 
-                <input type='text' name="name" value={formik?.values?.name} onChange={formik.handleChange} className='p-3 px-5 placeholder:!text-[#b3b3b3] border-b border-b-[#b3b3b3] w-full' placeholder='Enter Country Name' />
+                <input type='text' name="name" value={formik?.values?.name} onChange={formik.handleChange}
+                    className='p-3 px-5 placeholder:!text-[#b3b3b3] border-b border-b-[#b3b3b3] w-full' placeholder='Ingresar nombre del país' />
 
             </div>
 
             <div className='p-10 pt-2 my-6'>
 
-                <label htmlFor='name-input' className='mb-3 block text-[#234486]'>Country</label>
+                <label htmlFor='name-input' className='mb-3 block text-[#234486]'>País</label>
 
                 <Dropdown value={getSelectedOption(countries, 'id', formik?.values?.country_id)} name='country_id' onChange={(e) => formik.setFieldValue('country_id', e.target.value?.id)} options={countries} optionLabel="name"
-                    placeholder='Select Country' className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
+                    placeholder='Seleccionar País' className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
 
             </div>
 
             <div className='flex items-center justify-end p-10 pb-5'>
 
                 <button onClick={clickHandler} type='submit' className='p-4 px-24 rounded-full text-white font-medium bg-[var(--primary-color)]'>
-                    Submit
+                    Enviar
                 </button>
 
             </div>

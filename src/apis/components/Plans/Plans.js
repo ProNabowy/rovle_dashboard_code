@@ -15,7 +15,7 @@ class Plans {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -34,7 +34,7 @@ class Plans {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -50,7 +50,7 @@ class Plans {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -62,14 +62,14 @@ class Plans {
 
             .then(response => {
 
-                Swal.success('Added!', `Your Plan has been Added.`).then(_ => navigate('/products/plans/list'));
+                Swal.success('Añadido!', `Tu plan ha sido añadido.`).then(_ => navigate('/products/plans/list'));
 
                 return dispatch(setPlans([...plans, response.data.data]));
 
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -80,7 +80,7 @@ class Plans {
 
             .then(response => {
 
-                Swal.success('Updated!', `Your Plan has been Updated.`);
+                Swal.success('Actualizado!', `Tu plan ha sido actualizado.`);
 
                 const updatedPlans = plans.map(plan => plan?.id == id ? response.data.data : plan);
 
@@ -89,7 +89,7 @@ class Plans {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -101,7 +101,7 @@ class Plans {
 
             .then(response => {
 
-                Swal.success('Deleted!', `Your Plan has been deleted.`);
+                Swal.success('Borrado!', `Tu plan ha sido eliminado.`);
 
                 const updatedPlans = plans.filter(plan => plan?.id != id);
 
@@ -110,7 +110,7 @@ class Plans {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 

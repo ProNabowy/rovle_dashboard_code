@@ -24,7 +24,7 @@ export default function GROUPSRoutes({
                 ?
                 <li className='mb-8'>
 
-                    {isExpanded && <h3 className='text-[#7c7c7c] font-medium  px-2'>GROUPS</h3>}
+                    {isExpanded && <h3 className='text-[#7c7c7c] font-medium  px-2'>GRUPOS</h3>}
 
                     {
                         isHasPermissions('Users', 'dashboard.users.index') &&
@@ -38,7 +38,7 @@ export default function GROUPSRoutes({
 
                                 </div>
 
-                                <span className='ms-3 font-medium'>Users</span>
+                                <span className='ms-3 font-medium'>Usuarios</span>
 
                             </div>
 
@@ -94,7 +94,7 @@ export default function GROUPSRoutes({
                                     {
                                         isHasPermissions('Providers', 'dashboard.providers.index') && isAdmin && <NavLink to={'groups/roasters'} className='flex items-center text-[black] p-2 !w-full mnue-link'>
 
-                                            <span>List</span>
+                                            <span>Lista</span>
 
                                         </NavLink>
                                     }
@@ -102,7 +102,7 @@ export default function GROUPSRoutes({
                                     {
                                         isHasPermissions('Orders', 'dashboard.orders.index') && <NavLink to={'groups/orders'} className='flex items-center text-[black] p-2 !w-full mnue-link'>
 
-                                            <span>Orders</span>
+                                            <span>Pedidos</span>
 
                                         </NavLink>
                                     }

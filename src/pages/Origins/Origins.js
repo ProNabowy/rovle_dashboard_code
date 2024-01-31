@@ -9,7 +9,7 @@ export default function OriginsList() {
     return (
         <PageContent
             url={'add-origin'}
-            title={'All Origin'}
+            title={'Todos los Orígenes'}
             PermissionsKey={'Origins'}
             roleKey={'dashboard.origins.store'}
             showActions={true}

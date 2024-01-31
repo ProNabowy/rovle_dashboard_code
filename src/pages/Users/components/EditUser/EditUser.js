@@ -9,7 +9,7 @@ export default function EditUser() {
 
     return (
 
-        <PageContent title={'User Form'} showActions={false} >
+        <PageContent title={'Formulario de usuario'} showActions={false} >
 
             <UserForm formik={formik} clickHandler={clickHandler} />
 

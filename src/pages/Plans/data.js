@@ -58,7 +58,7 @@ const sizeBodyTemplate = (rowData) => {
 
             {renderPackages}
 
-            {sizes?.length > 2 && <SeeMore list={sizes} headerName="Packages" tamplate={itemBodyTamplate} />}
+            {sizes?.length > 2 && <SeeMore list={sizes} headerName="Paquetes" tamplate={itemBodyTamplate} />}
 
         </div>
 
@@ -89,12 +89,12 @@ const useActionsBodyTemplate = (rowData) => {
 
 const columns = [
     { field: "id", header: "ID", classNames: "!px-[15px]", tamplate: tableService.idBodyTemplate },
-    { field: "name", header: "Plan Name", classNames: "!px-[0px]", tamplate: tableService.nameBodyTemplate },
-    { field: "provider.commercial_name", header: "Roaster Name", classNames: "!px-[15px]", tamplate: roasterNameBodyTemplate },
-    { field: "status", header: "Status", classNames: "!px-[15px]", tamplate: statusBodyTemplate },
-    { field: "provider.commercial_name", header: "Sizes", classNames: "!px-[15px]", tamplate: sizeBodyTemplate },
-    { field: "rowData.updated_at", header: "Last Date", classNames: "!px-[15px]", tamplate: tableService.lastDateBodyTemplate },
-    { field: "action", header: "Action", classNames: "!px-[15px]", tamplate: useActionsBodyTemplate },
+    { field: "name", header: "Nombre Planes", classNames: "!px-[0px]", tamplate: tableService.nameBodyTemplate },
+    { field: "provider.commercial_name", header: "Nombre del Tostador", classNames: "!px-[15px]", tamplate: roasterNameBodyTemplate },
+    { field: "status", header: "Estado", classNames: "!px-[15px]", tamplate: statusBodyTemplate },
+    { field: "provider.commercial_name", header: "Tallas", classNames: "!px-[15px]", tamplate: sizeBodyTemplate },
+    { field: "rowData.updated_at", header: "Fecha de finalización", classNames: "!px-[15px]", tamplate: tableService.lastDateBodyTemplate },
+    { field: "action", header: "Acción", classNames: "!px-[15px]", tamplate: useActionsBodyTemplate },
 ];
 
 export {

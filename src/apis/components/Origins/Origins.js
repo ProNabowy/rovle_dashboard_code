@@ -15,7 +15,7 @@ class Origins {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -27,14 +27,14 @@ class Origins {
 
             .then(response => {
 
-                Swal.success('Added!', `Your Origin has been Added.`).then(_ => navigate('/origins/list'));
+                Swal.success('Añadido!', `Tu origen ha sido añadido.`).then(_ => navigate('/origins/list'));
 
                 return dispatch(setOrigins([...origins, response.data.data]));
 
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -46,7 +46,7 @@ class Origins {
 
             .then(response => {
 
-                Swal.success('Deleted!', `Your coffee has been deleted.`);
+                Swal.success('Borrado!', `Tu café ha sido eliminado.`);
 
                 const updatedOrigins = origins.filter(origin => origin?.id != id);
 
@@ -55,7 +55,7 @@ class Origins {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 

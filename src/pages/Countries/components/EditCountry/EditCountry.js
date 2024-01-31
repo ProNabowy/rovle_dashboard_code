@@ -8,7 +8,7 @@ export default function EditCountry() {
 
     return (
 
-        <PageContent title={'Country Form'} showActions={false}>
+        <PageContent title={'Formulario de País'} showActions={false}>
 
             <CountryForm formik={formik} clickHandler={clickHandler} />
 

@@ -9,7 +9,7 @@ export default function Province() {
 
         <PageContent
             url={'add-province'}
-            title={'All Province'}
+            title={'Todas las Provincias'}
             roleKey={'dashboard.provinces.store'}
             PermissionsKey={'Provinces'}
             showActions={true}

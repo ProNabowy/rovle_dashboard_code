@@ -9,7 +9,7 @@ export default function AddCity() {
 
     return (
 
-        <PageContent title={'City Form'} showActions={false}>
+        <PageContent title={'Formulario de Ciudad'} showActions={false}>
 
             <CityForm formik={formik} clickHandler={clickHandler} />
 

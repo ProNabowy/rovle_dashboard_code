@@ -23,17 +23,18 @@ export default function AddPackage({ formik, provider_id }) {
 
                 <div className='mb-8'>
 
-                    <label htmlFor={'Weight /gm'} className='text-[18px] text-[#252525] font-medium'>Weight</label>
+                    <label htmlFor={'Weight /gm'} className='text-[18px] text-[#252525] font-medium'>Peso</label>
 
-                    <input ref={inputWeightRef} onChange={e => setAddNewPackage(prev => ({ ...prev, weight: e.target.value }))} type='number' id={'Weight /gm'} className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]' placeholder={'Enter Weight /gm'} />
+                    <input ref={inputWeightRef} onChange={e => setAddNewPackage(prev => ({ ...prev, weight: e.target.value }))} type='number' id={'Weight /gm'}
+                        className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]' placeholder={'Ingresar Peso /gr'} />
 
                 </div>
 
                 <div className='mb-8'>
 
-                    <label htmlFor={'PriceEuro'} className='text-[18px] text-[#252525] font-medium'>Price</label>
+                    <label htmlFor={'PriceEuro'} className='text-[18px] text-[#252525] font-medium'>Precio</label>
 
-                    <input ref={inputPriceRef} onChange={e => setAddNewPackage(prev => ({ ...prev, price: e.target.value }))} type='number' id={'PriceEuro'} className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]' placeholder={'Enter Price /Euro'} />
+                    <input ref={inputPriceRef} onChange={e => setAddNewPackage(prev => ({ ...prev, price: e.target.value }))} type='number' id={'PriceEuro'} className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]' placeholder={'Ingresar Precio /Euro'} />
 
                 </div>
 
@@ -42,16 +43,17 @@ export default function AddPackage({ formik, provider_id }) {
                         ?
                         <div className='mb-8'>
 
-                            <label htmlFor={'Units'} className='text-[18px] text-[#252525] font-medium'>Quantity</label>
+                            <label htmlFor={'Units'} className='text-[18px] text-[#252525] font-medium'>Cantidad</label>
 
-                            <input ref={inputQuntiyRef} onChange={e => setAddNewPackage(prev => ({ ...prev, units: e.target.value }))} type='number' id={'Units'} className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]' placeholder={'Quantity'} />
+                            <input ref={inputQuntiyRef} onChange={e => setAddNewPackage(prev => ({ ...prev, units: e.target.value }))} type='number' id={'Units'}
+                                className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]' placeholder={'Cantidad'} />
 
                         </div>
                         :
                         null
                 }
 
-                <button type='button' onClick={handelAddNewPackage} className='bg-[#58291E] text-[20px] text-center text-white font-medium w-full py-[16px] px-[24px] rounded-full'>Add Package</button>
+                <button type='button' onClick={handelAddNewPackage} className='bg-[#58291E] text-[20px] text-center text-white font-medium w-full py-[16px] px-[24px] rounded-full'>Añadir Paquete</button>
 
             </form>
 

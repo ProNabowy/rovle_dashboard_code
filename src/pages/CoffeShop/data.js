@@ -29,12 +29,12 @@ const useActionsBodyTemplate = (rowData) => {
 
 const columns = [
     { field: "id", header: "ID", classNames: "!px-[15px]", tamplate: tableService.idBodyTemplate },
-    { field: "name", header: "Name", classNames: "!px-[0px]", tamplate: tableService.nameBodyTemplate },
-    { field: "post_code", header: "Post Code", classNames: "!px-[15px]", tamplate: postCodeBodyTemplate },
-    { field: "address", header: "Address", classNames: "!px-[15px]", tamplate: tableService.addressBodyTemplate },
-    { field: "address", header: "location", classNames: "!px-[15px]", tamplate: tableService.fullLocationBodyTemplate },
-    { field: "updated_at", header: "Last Date", classNames: "!px-[15px]", tamplate: tableService.lastDateBodyTemplate },
-    { field: "status", header: "Action", classNames: "!px-[15px]", tamplate: useActionsBodyTemplate },
+    { field: "name", header: "Nombre", classNames: "!px-[0px]", tamplate: tableService.nameBodyTemplate },
+    { field: "post_code", header: "Código postal", classNames: "!px-[15px]", tamplate: postCodeBodyTemplate },
+    { field: "address", header: "Dirección", classNames: "!px-[15px]", tamplate: tableService.addressBodyTemplate },
+    { field: "address", header: "Ubicaciones", classNames: "!px-[15px]", tamplate: tableService.fullLocationBodyTemplate },
+    { field: "updated_at", header: "Fecha de finalización", classNames: "!px-[15px]", tamplate: tableService.lastDateBodyTemplate },
+    { field: "status", header: "Acción", classNames: "!px-[15px]", tamplate: useActionsBodyTemplate },
 ];
 
 

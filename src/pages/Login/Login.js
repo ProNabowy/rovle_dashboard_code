@@ -39,7 +39,7 @@ export default function Login() {
 
                             <div className='mb-[16px]'>
 
-                                <label className='block font-medium' htmlFor='email'>Email address</label>
+                                <label className='block font-medium' htmlFor='email'>Dirección de correo electrónico</label>
 
                                 <input autoFocus onChange={e => setData(perv => ({ ...perv, email: e.target.value }))} id='email' type='email' className='w-[400px] h-[40px] px-5 rounded-[8px]' style={{ background: 'linear-gradient(120deg, #FFF -45.57%, rgba(217, 217, 217, 0.00) 134.89%)', backdropFilter: 'blur(12.343469619750977px)' }} />
 
@@ -47,20 +47,20 @@ export default function Login() {
 
                             <div className='mb-[8px]'>
 
-                                <label className='block font-medium' htmlFor='password'>Password</label>
+                                <label className='block font-medium' htmlFor='password'>Contraseña</label>
 
                                 <input onChange={e => setData(perv => ({ ...perv, password: e.target.value }))} id='password' type='password' className='w-[400px] h-[40px] px-5 rounded-[8px]' style={{ background: 'linear-gradient(120deg, #FFF -45.57%, rgba(217, 217, 217, 0.00) 134.89%)', backdropFilter: 'blur(12.343469619750977px)' }} />
 
                             </div>
-                            
+
                             <button className='w-full h-[45px] mt-[16px] text-center rounded-[8px] text-white bg-[#45B8EA]' style={{ backdropFilter: 'blur(12.343469619750977px)' }}>
-                                Log in
+                                Iniciar sesión
                             </button>
 
 
                             <div className="flex items-center mt-[8px]">
                                 <Checkbox inputId='rememberMe' onChange={e => setChecked(e.checked)} checked={checked}></Checkbox>
-                                <label htmlFor="rememberMe" className="ml-2 cursor-pointer text-[#252525]">Remember me</label>
+                                <label htmlFor="rememberMe" className="ml-2 cursor-pointer text-[#252525]">Recuérdame</label>
                             </div>
 
                         </form>

@@ -43,7 +43,7 @@ export default function ProductsForm({ formik, clickHandler, originsList, packag
                         onChange={(e) => setSelectedProvider(getSelectedOption(rosters, 'id', e.target.value?.id))}
                         options={rosters} optionLabel="commercial_name"
                         inputId='owner'
-                        placeholder="Select Roaster" className="w-full p-2  !shadow-none !rounded-none border-[#b3b3b3] !border-t-transparent !border-l-transparent !border-r-transparent" />
+                        placeholder="Seleccionar Tostador" className="w-full p-2  !shadow-none !rounded-none border-[#b3b3b3] !border-t-transparent !border-l-transparent !border-r-transparent" />
 
                 </div>
 
@@ -63,7 +63,8 @@ export default function ProductsForm({ formik, clickHandler, originsList, packag
 
                 <label htmlFor={'Variedad'} className='text-[18px] text-[#252525] font-medium'>Variedad</label>
 
-                <input value={formik?.values?.grades} name={'grades'} type={'text'} onChange={formik.handleChange} id={'Variedad'} className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]' placeholder={'Enter Variedad'} />
+                <input value={formik?.values?.grades} name={'grades'} type={'text'} onChange={formik.handleChange} id={'Variedad'}
+                    className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]' placeholder={'Ingresar Variedad'} />
 
             </div>
 
@@ -72,15 +73,16 @@ export default function ProductsForm({ formik, clickHandler, originsList, packag
                 formik={formik}
                 dataKey={'coffeeShops'}
                 url={'/setups/coffee-shop/add-coffee'}
-                title={'Coffees'}
+                title={'Cafés'}
                 options={coffee}
             />
 
             <div>
 
-                <label htmlFor={'Description'} className='text-[18px] text-[#252525] font-medium'>Description</label>
+                <label htmlFor={'Description'} className='text-[18px] text-[#252525] font-medium'>Descripción</label>
 
-                <textarea rows={5} onChange={formik.handleChange} type='text' value={formik?.values?.description} name='description' id={'Description'} className='p-3 w-full border rounded-[5px] mt-5 resize-none border-[#b3b3b3] placeholder:text-[#b3b3b3]' placeholder={'Enter Description'} />
+                <textarea rows={5} onChange={formik.handleChange} type='text' value={formik?.values?.description} name='description' id={'Description'}
+                    className='p-3 w-full border rounded-[5px] mt-5 resize-none border-[#b3b3b3] placeholder:text-[#b3b3b3]' placeholder={'Ingresar Descripción'} />
 
             </div>
 
@@ -88,7 +90,7 @@ export default function ProductsForm({ formik, clickHandler, originsList, packag
 
             <div className='flex items-center justify-end mt-10'>
 
-                <button onClick={clickHandler} type='submit' className='bg-[#45B8EA] text-white py-[16px] px-32 rounded-full'>Submit</button>
+                <button onClick={clickHandler} type='submit' className='bg-[#45B8EA] text-white py-[16px] px-32 rounded-full'>Enviar</button>
 
             </div>
 

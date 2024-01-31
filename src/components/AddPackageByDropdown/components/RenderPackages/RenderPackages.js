@@ -18,7 +18,7 @@ function RenderPackages({ formik, removePackage }) {
                         return (
                             <div key={index} id={item.id} className='flex items-center justify-between p-3 rounded-[5px] border border-[#252525] mb-5'>
 
-                                <p className='font-medium text-[#252525]'>{item.price} Euro per {item.weight || getSelectedOption(sizes, 'id', item?.size_id)?.weight} gm</p>
+                                <p className='font-medium text-[#252525]'>{item.price} Euro por {item.weight || getSelectedOption(sizes, 'id', item?.size_id)?.weight} gm</p>
 
                                 <FontAwesomeIcon icon={faClose} onClick={_ => formik.setFieldValue('sizes', removePackage(item.id))} className='text-[#252525] text-[20px] cursor-pointer' />
 

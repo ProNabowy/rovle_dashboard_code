@@ -16,7 +16,7 @@ class Offers {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -35,7 +35,7 @@ class Offers {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -47,7 +47,7 @@ class Offers {
 
             .then(response => {
 
-                Swal.success('Deleted!', `Your Offer has been deleted.`);
+                Swal.success('Borrado!', `Tu oferta ha sido eliminada.`);
 
                 const updatedOffeers = offeers.filter(offer => offer?.id != id);
 
@@ -56,7 +56,7 @@ class Offers {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -69,14 +69,14 @@ class Offers {
 
             .then(response => {
 
-                Swal.success('Added!', `Your Offeer has been Added.`).then(_ => navigate("/setups/offers"));
+                Swal.success('Añadido!', `Tu oferta ha sido añadida.`).then(_ => navigate("/setups/offers"));
 
                 return dispatch(setOffeers([...offeers, response.data.data]));
 
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -88,7 +88,7 @@ class Offers {
 
             .then(response => {
 
-                Swal.success('Updated!', `Your Offeer has been Updated.`);
+                Swal.success('Actualizado!', `Tu oferta ha sido actualizada.`);
 
                 const updatedOffeers = offeers.map(offer => offer?.id == id ? response.data.data : offer);
 

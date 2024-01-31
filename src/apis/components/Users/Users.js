@@ -15,7 +15,7 @@ class Users {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -33,7 +33,7 @@ class Users {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -46,14 +46,14 @@ class Users {
 
             .then(response => {
 
-                Swal.success('Added!', `User has been Added.`).then(_ => navigate('/groups/users'));
+                Swal.success('Añadido!', `El usuario ha sido añadido.`).then(_ => navigate('/groups/users'));
 
                 return dispatch(setUsers([...users, response.data.data]));
 
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -64,7 +64,7 @@ class Users {
 
             .then(response => {
 
-                Swal.success('Added!', `User has been Updated.`)
+                Swal.success('Actualizado!', `El usuario ha sido actualizado.`)
 
                 const updatedUsers = users.map(user => user?.id == id ? response.data.data : user);
 
@@ -73,7 +73,7 @@ class Users {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -85,7 +85,7 @@ class Users {
 
             .then(response => {
 
-                Swal.success('Deleted!', `User has been deleted.`);
+                Swal.success('Borrado!', `El usuario ha sido eliminado.`);
 
                 const updatedUsers = users.filter(user => user?.id != id);
 
@@ -94,7 +94,7 @@ class Users {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 

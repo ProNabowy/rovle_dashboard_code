@@ -9,7 +9,7 @@ export default function EditRoaster() {
 
     return (
 
-        <PageContent title={'Roasters Form'} showActions={false} >
+        <PageContent title={'Formulario de tostadores'} showActions={false} >
 
             <RoasterForm formik={formik} clickHandler={clickHandler} />
 

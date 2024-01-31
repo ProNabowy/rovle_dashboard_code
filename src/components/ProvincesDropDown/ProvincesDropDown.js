@@ -10,7 +10,7 @@ export default function ProvincesDropDown({ formik, country_Key, province_Key })
     return (
         <div className='sm:w-[48%]'>
 
-            <label htmlFor='provinces' className='text-[18px] text-[#252525] font-medium'>Province</label>
+            <label htmlFor='provinces' className='text-[18px] text-[#252525] font-medium'>Provincia</label>
 
             <Dropdown
                 value={getSelectedOption(getSelectedOption(countries, 'id', formik?.values[country_Key])?.provinces, 'id', formik?.values[province_Key])}
@@ -18,7 +18,7 @@ export default function ProvincesDropDown({ formik, country_Key, province_Key })
                 options={getSelectedOption(countries, 'id', formik?.values?.[country_Key])?.provinces}
                 optionLabel="name"
                 inputId='provinces'
-                placeholder="Select Province" className="w-full p-2 !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
+                placeholder="Seleccionar Provincia" className="w-full p-2 !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
 
         </div>
     )

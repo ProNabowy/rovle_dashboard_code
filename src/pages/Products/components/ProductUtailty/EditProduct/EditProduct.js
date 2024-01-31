@@ -9,7 +9,7 @@ export default function EditProduct() {
 
     return (
 
-        <PageContent title={'Product Form'} showActions={false}>
+        <PageContent title={'Formulario de Producto'} showActions={false}>
 
             <ProductsForm formik={formik} clickHandler={clickHandler} />
 

@@ -17,7 +17,7 @@ export default function OfferList() {
 
         <PageContent
             url={'add-offer'}
-            title={'All Offers'}
+            title={'Todas las ofertas'}
             showActions={true}
             PermissionsKey={'Passports'}
             roleKey={'dashboard.passports.store'}
@@ -41,7 +41,7 @@ export default function OfferList() {
                     ?
                     <Fragment>
 
-                        <div className='text-center bg-[#FFF8F4] p-3 text-[#58291E] font-medium text-[25px] my-10'>Level 2</div>
+                        <div className='text-center bg-[#FFF8F4] p-3 text-[#58291E] font-medium text-[25px] my-10'>Nivel 2</div>
 
                         <OfferListTable data={level_two} />
 
@@ -55,7 +55,7 @@ export default function OfferList() {
                     ?
                     <Fragment>
 
-                        <div className='text-center bg-[#FFF8F4] p-3 text-[#58291E] font-medium text-[25px] my-10'>Level 3</div>
+                        <div className='text-center bg-[#FFF8F4] p-3 text-[#58291E] font-medium text-[25px] my-10'>Nivel 3</div>
 
                         <OfferListTable data={level_three} />
 

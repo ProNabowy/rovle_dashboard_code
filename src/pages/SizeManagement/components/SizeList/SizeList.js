@@ -18,7 +18,7 @@ export default function SizeList() {
         selectedRosters?.id ?
             <PageContent
                 url={'/products/plans/size/list/add-size'}
-                title={'Size Management'}
+                title={'Gestión de tamaño'}
                 showActions={true}
                 PermissionsKey={'Sizes'}
                 roleKey={'dashboard.sizes.store'}
@@ -29,10 +29,10 @@ export default function SizeList() {
 
                 <div className='w-full my-5 px-10'>
 
-                    <label htmlFor='name-input' className='mb-3 block font-medium text-[#234486]'>Roasters</label>
+                    <label htmlFor='name-input' className='mb-3 block font-medium text-[#234486]'>Tostadors</label>
 
                     <Dropdown value={selectedRosters} onChange={(e) => setselectedRosters(e.value)} options={rosters} optionLabel="commercial_name"
-                        placeholder="Select Province" className="w-full p-3 !border-r-[0] !border-l-[0] !border-t-[0] !border-b !border-b-[#b3b3b3] !shadow-none !rounded-none" />
+                        placeholder="Seleccionar Tostadors" className="w-full p-3 !border-r-[0] !border-l-[0] !border-t-[0] !border-b !border-b-[#b3b3b3] !shadow-none !rounded-none" />
 
                 </div>
 

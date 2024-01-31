@@ -7,7 +7,7 @@ export default function CitiesDropdown({ provinces, formik, province_Key, city_K
 
         <div className={`sm:w-[48%] ${classNames}`}>
 
-            <label htmlFor={'cities'} className='text-[18px] text-[#252525] font-medium'>City</label>
+            <label htmlFor={'cities'} className='text-[18px] text-[#252525] font-medium'>Ciudad</label>
 
             <Dropdown
                 value={getSelectedOption(getSelectedOption(provinces, 'id', formik?.values[province_Key])?.cities, 'id', formik?.values[city_Key])}
@@ -15,7 +15,7 @@ export default function CitiesDropdown({ provinces, formik, province_Key, city_K
                 options={getSelectedOption(provinces, 'id', formik?.values?.[province_Key])?.cities}
                 optionLabel="name"
                 inputId='cities'
-                placeholder="Select City" className="w-full p-2 !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
+                placeholder="Seleccionar Ciudad" className="w-full p-2 !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
 
         </div>
 

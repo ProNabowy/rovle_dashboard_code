@@ -25,7 +25,7 @@ export default function SettingsRoutes({
                 ?
                 <li className='mb-8'>
 
-                    {isExpanded && <h3 className='text-[#7c7c7c] font-medium  px-2'>PRODUCTS</h3>}
+                    {isExpanded && <h3 className='text-[#7c7c7c] font-medium  px-2'>PRODUCTOS</h3>}
 
                     <PanelMenu model={ProductsRoutes(isHasPermissions)} multiple={true} className="w-full" />
 
@@ -41,7 +41,7 @@ export default function SettingsRoutes({
 
                                 </div>
 
-                                <span className='ms-3 font-medium'>Passport</span>
+                                <span className='ms-3 font-medium'>Pasaporte</span>
                             </div>
 
                         </NavLink>
@@ -75,7 +75,7 @@ export default function SettingsRoutes({
                                     {
                                         isHasPermissions('Products', 'dashboard.products.index') && <NavLink to={'products/list'} className='block text-[black] p-2 !w-full'>
 
-                                            <span>Product List</span>
+                                            <span>Lista de productos</span>
 
                                         </NavLink>
                                     }
@@ -83,7 +83,7 @@ export default function SettingsRoutes({
                                     {
                                         isHasPermissions('Origins', 'dashboard.origins.index') && <NavLink to={'origins/list'} className='block text-[black] p-2 !w-full'>
 
-                                            <span>Origin List</span>
+                                            <span>Lista de orígenes</span>
 
                                         </NavLink>
                                     }
@@ -123,7 +123,7 @@ export default function SettingsRoutes({
                                     {
                                         isHasPermissions('Plans', 'dashboard.plans.index') && <NavLink to={'products/plans/list'} className='block text-[black] p-2 !w-full mnue-link'>
 
-                                            <span>List</span>
+                                            <span>Lista</span>
 
                                         </NavLink>
                                     }
@@ -131,7 +131,7 @@ export default function SettingsRoutes({
                                     {
                                         isHasPermissions('Subscription', 'dashboard.plans.subscriptions') && <NavLink to={'products/plans/subscriptions'} className='block text-[black] p-2 !w-full mnue-link' >
 
-                                            <span>Subscriptions</span>
+                                            <span>Suscripciones</span>
 
                                         </NavLink >
                                     }
@@ -139,7 +139,7 @@ export default function SettingsRoutes({
                                     {
                                         isHasPermissions('Sizes', 'dashboard.sizes.index') && <NavLink to={'products/plans/size'} className='block text-[black] p-2 !w-full mnue-link'>
 
-                                            <span>Size management</span>
+                                            <span>Administración de tallas</span>
 
                                         </NavLink>
                                     }

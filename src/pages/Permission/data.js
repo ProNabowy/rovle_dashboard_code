@@ -16,11 +16,11 @@ const Swal = new SwalControlar();
 
 const handleClick = (userId) => {
 
-    return Swal.warning('warning', 'Are you sure?', "You won't be able to revert this!", {
+    return Swal.warning('warning', '¿Estás seguro/a?', "¡No podrás revertir esto!", {
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonText: 'Sí, bórralo.'
     }).then((result) => {
 
         if (result.isConfirmed) {
@@ -110,10 +110,10 @@ const useActionsBodyTemplate = (rowData) => {
 };
 
 const columns = [
-    { field: "name", header: "Role Name", classNames: "!px-[15px]", tamplate: tableService.nameBodyTemplate },
-    { field: "name", header: "Accounts", classNames: "!px-[0px]", tamplate: useAccountsBodyTemplate },
-    { field: "updated_at", header: "Last Date", classNames: "!px-[15px]", tamplate: tableService.lastDateBodyTemplate },
-    { field: "status", header: "Action", classNames: "!px-[15px]", tamplate: useActionsBodyTemplate },
+    { field: "name", header: "Nombre del Rol", classNames: "!px-[15px]", tamplate: tableService.nameBodyTemplate },
+    { field: "name", header: "Cuentas", classNames: "!px-[0px]", tamplate: useAccountsBodyTemplate },
+    { field: "updated_at", header: "Fecha última", classNames: "!px-[15px]", tamplate: tableService.lastDateBodyTemplate },
+    { field: "status", header: "Acción", classNames: "!px-[15px]", tamplate: useActionsBodyTemplate },
 ];
 
 

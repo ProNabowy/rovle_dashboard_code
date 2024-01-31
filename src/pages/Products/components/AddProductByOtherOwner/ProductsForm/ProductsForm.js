@@ -36,7 +36,7 @@ export default function ProductsForm() {
                         onChange={(e) => setSelectedProvider(getSelectedOption(rosters, 'id', e.target.value?.id))}
                         options={roasterFrom} optionLabel="commercial_name"
                         inputId='owner'
-                        placeholder="Select Roaster" className="w-full p-2  !shadow-none !rounded-none border-[#b3b3b3] !border-t-transparent !border-l-transparent !border-r-transparent" />
+                        placeholder="Seleccionar Tostador" className="w-full p-2  !shadow-none !rounded-none border-[#b3b3b3] !border-t-transparent !border-l-transparent !border-r-transparent" />
 
                 </div>
 
@@ -49,7 +49,7 @@ export default function ProductsForm() {
                         onChange={(e) => setCurrentRoaster(getSelectedOption(rosters, 'id', e.target.value?.id))}
                         options={roasterTo} optionLabel="commercial_name"
                         inputId='owner'
-                        placeholder="Select Roaster" className="w-full p-2  !shadow-none !rounded-none border-[#b3b3b3] !border-t-transparent !border-l-transparent !border-r-transparent" />
+                        placeholder="Seleccionar Tostador" className="w-full p-2  !shadow-none !rounded-none border-[#b3b3b3] !border-t-transparent !border-l-transparent !border-r-transparent" />
 
                 </div>
 
@@ -57,14 +57,14 @@ export default function ProductsForm() {
 
             <div className='mb-8'>
 
-                <label htmlFor={'name'} className='text-[18px] text-[#252525] font-medium'>Product Name</label>
+                <label htmlFor={'name'} className='text-[18px] text-[#252525] font-medium'>Nombre del Producto</label>
 
                 <Dropdown
                     value={selectedProduct}
                     onChange={(e) => setSelectedProduct(getSelectedOption(selectedProvider?.products, 'id', e.target.value.id))}
                     options={selectedProvider?.products} optionLabel="commercial_name"
                     inputId='name'
-                    placeholder="Select Product Name" className="w-full p-2  !shadow-none !rounded-none border-[#b3b3b3] !border-t-transparent !border-l-transparent !border-r-transparent" />
+                    placeholder="Seleccionar Nombre del Producto" className="w-full p-2  !shadow-none !rounded-none border-[#b3b3b3] !border-t-transparent !border-l-transparent !border-r-transparent" />
 
             </div>
 
@@ -76,14 +76,14 @@ export default function ProductsForm() {
 
                             <div className='w-[48%]'>
 
-                                <label htmlFor={'Code'} className='text-[18px] text-[#252525] font-medium'>Code</label>
+                                <label htmlFor={'Code'} className='text-[18px] text-[#252525] font-medium'>Código</label>
 
                                 <input
                                     value={productInfo?.code}
                                     disabled type={'text'}
                                     id={'Code'}
                                     className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]'
-                                    placeholder={'Enter Code'}
+                                    placeholder={'Ingresar Código'}
                                 />
 
                             </div>
@@ -97,7 +97,7 @@ export default function ProductsForm() {
                                     disabled type={'text'}
                                     id={'Region'}
                                     className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]'
-                                    placeholder={'Enter Region'}
+                                    placeholder={'Ingresar Region'}
                                 />
 
                             </div>
@@ -106,7 +106,7 @@ export default function ProductsForm() {
 
                         <div className='mb-8'>
 
-                            <label htmlFor={'Origin'} className='text-[18px] text-[#252525] font-medium'>Origin</label>
+                            <label htmlFor={'Origin'} className='text-[18px] text-[#252525] font-medium'>Origen</label>
 
                             <input
                                 value={productInfo?.origin}
@@ -114,7 +114,7 @@ export default function ProductsForm() {
                                 type={'text'}
                                 id={'Origin'}
                                 className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]'
-                                placeholder={'Enter Origin'}
+                                placeholder={'Ingresar Origen'}
                             />
 
                         </div>
@@ -131,7 +131,7 @@ export default function ProductsForm() {
                                     type={'text'}
                                     id={'Finca'}
                                     className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]'
-                                    placeholder={'Enter Finca'}
+                                    placeholder={'Ingresar Finca'}
                                 />
 
                             </div>
@@ -146,7 +146,7 @@ export default function ProductsForm() {
                                     type={'text'}
                                     id={'Nombre'}
                                     className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]'
-                                    placeholder={'Enter Nombre Comercial'}
+                                    placeholder={'Ingresar Nombre Comercial'}
                                 />
 
                             </div>
@@ -165,14 +165,14 @@ export default function ProductsForm() {
                                     type={'text'}
                                     id={'Sca'}
                                     className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]'
-                                    placeholder={'Enter Puntuación Sca s'}
+                                    placeholder={'Ingresar Puntuación Sca s'}
                                 />
 
                             </div>
 
                             <div className='w-[48%]'>
 
-                                <label htmlFor={'Altitud'} className='text-[18px] text-[#252525] font-medium'>Altitude</label>
+                                <label htmlFor={'Altitud'} className='text-[18px] text-[#252525] font-medium'>Altitud</label>
 
                                 <input
                                     value={productInfo?.altitude}
@@ -180,7 +180,7 @@ export default function ProductsForm() {
                                     type={'text'}
                                     id={'Altitud'}
                                     className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]'
-                                    placeholder={'Enter Altitud'}
+                                    placeholder={'Ingresar Altitud'}
                                 />
 
                             </div>
@@ -191,7 +191,7 @@ export default function ProductsForm() {
 
                             <div className='w-[48%]'>
 
-                                <label htmlFor={'Variedad'} className='text-[18px] text-[#252525] font-medium'>Variedad</label>
+                                <label htmlFor={'Variedad'} className='text-[18px] text-[#252525] font-medium'>Variety</label>
 
                                 <input
                                     value={productInfo?.grades}
@@ -199,7 +199,7 @@ export default function ProductsForm() {
                                     type={'text'}
                                     id={'Variedad'}
                                     className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]'
-                                    placeholder={'Enter Variedad'}
+                                    placeholder={'Ingresar Variety'}
                                 />
 
                             </div>
@@ -214,7 +214,7 @@ export default function ProductsForm() {
                                     type={'text'}
                                     id={'Proceso'}
                                     className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]'
-                                    placeholder={'Enter Proceso'}
+                                    placeholder={'Ingresar Proceso'}
                                 />
 
                             </div>
@@ -223,7 +223,7 @@ export default function ProductsForm() {
 
                         <div className='mb-8'>
 
-                            <label htmlFor={'Description'} className='text-[18px] text-[#252525] font-medium'>Description</label>
+                            <label htmlFor={'Description'} className='text-[18px] text-[#252525] font-medium'>Descripción</label>
 
                             <textarea
                                 rows={5}
@@ -232,14 +232,14 @@ export default function ProductsForm() {
                                 disabled
                                 id={'Description'}
                                 className='p-3 w-full border-b bg-white mt-5 resize-none border-[#b3b3b3] placeholder:text-[#b3b3b3]'
-                                placeholder={'Enter Description'}
+                                placeholder={'Ingresar Descripción'}
                             />
 
                         </div>
 
                         <div className='w-full mb-8'>
 
-                            <label htmlFor={'Presentation'} className='text-[18px] mb-2 text-[#252525] font-medium'>Presentation</label>
+                            <label htmlFor={'Presentation'} className='text-[18px] mb-2 text-[#252525] font-medium'>Presentación</label>
 
                             <div className='border border-[b3b3b3] p-10 px-20 rounded-[20px] grid grid-cols-12 gap-5'>
 
@@ -248,7 +248,7 @@ export default function ProductsForm() {
 
                                         return (
                                             <div className='col-span-6 border border-[#58291E] text-center rounded-[5px] p-2'>
-                                                {item?.price} Euro per {item?.weight} gm
+                                                {item?.price} Euro por {item?.weight} gm
                                             </div>
                                         )
 
@@ -264,7 +264,7 @@ export default function ProductsForm() {
                             formik={formik}
                             dataKey={'coffeeShops'}
                             url={'/setups/coffee-shop/add-coffee'}
-                            title={'Your Shop'}
+                            title={'Tu Tienda'}
                             options={currentRoaster?.coffee_shops}
                         />
 
@@ -274,7 +274,7 @@ export default function ProductsForm() {
                                 onClick={clickHandler}
                                 type='submit'
                                 className='bg-[#45B8EA] text-white py-[16px] px-32 rounded-full'>
-                                Submit
+                                Enviar
                             </button>
 
                         </div>

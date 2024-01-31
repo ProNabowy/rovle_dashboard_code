@@ -54,11 +54,11 @@ const priceBodyTemplate = (rowData) => {
 
 const columns = [
     { field: "id", header: "ID", tamplate: tableService.idBodyTemplate },
-    { field: "name", header: "User name", tamplate: nameBodyTemplate },
-    { field: "address", header: "Address", tamplate: addressBodyTemplate },
-    { field: "stauts", header: "Status", tamplate: useStatusBodyTemplate },
-    { field: "price", header: "Price", tamplate: priceBodyTemplate },
-    { field: "created_at", header: "Last Date", tamplate: tableService.startDateBodyTemplate },
+    { field: "name", header: "Nombre de usuario", tamplate: nameBodyTemplate },
+    { field: "address", header: "Dirección", tamplate: addressBodyTemplate },
+    { field: "stauts", header: "Estado", tamplate: useStatusBodyTemplate },
+    { field: "price", header: "Precio", tamplate: priceBodyTemplate },
+    { field: "created_at", header: "Fecha de finalización", tamplate: tableService.startDateBodyTemplate },
 ];
 
 

@@ -65,10 +65,10 @@ const useActionsBodyTemplate = (rowData) => {
 
 const columns = [
     { field: "id", header: "ID", classNames: "!px-[15px]", tamplate: tableService.idBodyTemplate },
-    { field: "name", header: "Character", classNames: "!px-[0px]", tamplate: tableService.nameBodyTemplate },
-    { field: "weight", header: "Weight", classNames: "!px-[15px]", tamplate: weightBodyTemplate },
-    { field: "updated_at", header: "Date", classNames: "!px-[15px]", tamplate: tableService.lastDateBodyTemplate },
-    { field: "status", header: "Action", classNames: "!px-[15px]", tamplate: useActionsBodyTemplate },
+    { field: "name", header: "Personaje", classNames: "!px-[0px]", tamplate: tableService.nameBodyTemplate },
+    { field: "weight", header: "Peso", classNames: "!px-[15px]", tamplate: weightBodyTemplate },
+    { field: "updated_at", header: "Fecha", classNames: "!px-[15px]", tamplate: tableService.lastDateBodyTemplate },
+    { field: "status", header: "Acción", classNames: "!px-[15px]", tamplate: useActionsBodyTemplate },
 ];
 
 

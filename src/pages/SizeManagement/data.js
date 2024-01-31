@@ -19,7 +19,7 @@ const useDataGetter = () => {
 
     const handleShowButton = () => {
 
-        return (!selectedRosters?.id) ? Swal.warning('Warning', `Please Select Roaster`) : navigate('/products/plans/size/list');
+        return (!selectedRosters?.id) ? Swal.warning('Warning', `Please Seleccionar Tostador`) : navigate('/products/plans/size/list');
 
     }
 

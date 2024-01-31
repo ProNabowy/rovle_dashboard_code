@@ -10,7 +10,7 @@ export default function UsersList() {
 
         <PageContent
             url={'add-user'}
-            title={'List Users'}
+            title={'Listar usuarios'}
             showActions={true}
             PermissionsKey={'Users'}
             roleKey={'dashboard.users.store'}

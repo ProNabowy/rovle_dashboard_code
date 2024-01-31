@@ -20,7 +20,7 @@ function ChipsList({ options, title, url, optionLabel, formik, dataKey }) {
                 </label>
 
                 <Link to={url} className='flex items-center cursor-pointer'>
-                    <h2 className='font-medium underline text-[#45B8EA] me-3'>Add {title}</h2>
+                    <h2 className='font-medium underline text-[#45B8EA] me-3'>Añadir {title}</h2>
                 </Link>
 
             </div>

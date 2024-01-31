@@ -15,7 +15,7 @@ class Products {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -33,7 +33,7 @@ class Products {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -44,7 +44,7 @@ class Products {
 
             .then(response => {
 
-                Swal.success('Updated!', `Your Product has been Updated.`);
+                Swal.success('Actualizado!', `Tu producto ha sido actualizado.`);
 
                 const updatedProducts = products.map(product => product?.id == id ? response.data.data : product);
 
@@ -53,7 +53,7 @@ class Products {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -65,14 +65,14 @@ class Products {
 
             .then(response => {
 
-                Swal.success('Added!', `Your Product has been Added.`).then(_ => navigate('/products/list'))
+                Swal.success('Añadido!', `Tu producto ha sido añadido.`).then(_ => navigate('/products/list'))
 
                 return dispatch(setProducts([...products, response.data.data]));
 
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -84,7 +84,7 @@ class Products {
 
             .then(response => {
 
-                Swal.success('Deleted!', `Your Product has been deleted.`);
+                Swal.success('Borrado!', `Tu producto ha sido eliminado.`);
 
                 const updatedProducts = products.filter(product => product?.id != id);
 
@@ -93,7 +93,7 @@ class Products {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 

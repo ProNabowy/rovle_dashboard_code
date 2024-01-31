@@ -4,7 +4,7 @@ export default function AddProductByOtherOwner() {
 
     return (
 
-        <PageContent title={'Product Form'} showActions={false}>
+        <PageContent title={'Formulario de Producto'} showActions={false}>
 
             <ProductsForm />
 

@@ -13,7 +13,7 @@ export default function Profile() {
 
     return (
 
-        <PageContent title={'My Profile'} showActions={false}>
+        <PageContent title={'Mi perfil'} showActions={false}>
 
             <form onSubmit={e => e.preventDefault()} className='px-10'>
 
@@ -37,8 +37,8 @@ export default function Profile() {
 
                 <InputsGroup data={
                     {
-                        names: ['Name', 'Email'],
-                        placeholders: ['Enter Your Name', 'example@gmail.com'],
+                        names: ['Nombre', 'Correo electrónico'],
+                        placeholders: ['Ingresar Nombre', 'example@gmail.com'],
                         values: [formik.values?.name, formik.values?.email],
                         onChange: formik.handleChange,
                         nameAttr: ['name', 'emil'],
@@ -49,8 +49,8 @@ export default function Profile() {
 
                 <InputsGroup data={
                     {
-                        names: ['Address', 'Phone'],
-                        placeholders: ['Enter Your Address', 'Enter Your Phone'],
+                        names: ['Dirección', 'Teléfono'],
+                        placeholders: ['Ingresar Dirección', 'Ingresar Teléfono'],
                         values: [formik.values?.address, formik.values?.phone],
                         onChange: formik.handleChange,
                         nameAttr: ['address', 'phone'],
@@ -58,8 +58,8 @@ export default function Profile() {
                 } />
                 <InputsGroup data={
                     {
-                        names: ['zip', 'card_id'],
-                        placeholders: ['Enter Your Zip Code', 'Enter Your Card ID'],
+                        names: ['Código postal', 'Identificación de tarjeta'],
+                        placeholders: ['Ingresar Código postal', 'Ingresar Identificación de tarjeta'],
                         values: [formik.values?.zip, formik.values?.card_id],
                         onChange: formik.handleChange,
                         nameAttr: ['zip', 'card_id'],
@@ -70,13 +70,13 @@ export default function Profile() {
 
                     <div className='w-[48%]'>
 
-                        <label className='text-[18px] text-[#252525] font-medium block'>Country</label>
+                        <label className='text-[18px] text-[#252525] font-medium block'>País</label>
 
                         <Dropdown
                             value={getSelectedOption(store.countries, 'id', formik?.values?.country_id)}
                             onChange={(e) => formik.setFieldValue('country_id', e.target.value?.id)}
                             options={store.countries} optionLabel="name"
-                            placeholder="Select Country Name" className="p-2 w-full !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
+                            placeholder="Seleccionar nombre de país" className="p-2 w-full !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
 
 
                     </div>
@@ -93,21 +93,22 @@ export default function Profile() {
 
                     <div className='w-[48%]'>
 
-                        <label className='text-[18px] text-[#252525] font-medium block'>City</label>
+                        <label className='text-[18px] text-[#252525] font-medium block'>Ciudad</label>
 
                         <Dropdown
                             value={getSelectedOption(store.cities, 'id', formik?.values?.city_id)}
                             onChange={(e) => formik.setFieldValue('city_id', e.target.value?.id)}
                             options={store.cities} optionLabel="name"
-                            placeholder="Select City Name" className="w-full p-2 !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
+                            placeholder="Seleccionar nombre de la ciudad" className="w-full p-2 !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
 
                     </div>
 
                     <div className='w-[48%]'>
 
-                        <label htmlFor='Permissions' className='text-[18px] text-[#252525] font-medium block'>Permissions</label>
+                        <label htmlFor='Permissions' className='text-[18px] text-[#252525] font-medium block'>Permisos</label>
 
-                        <input disabled={true} value={formik.values.roles && formik.values.roles[0]?.name} type='text' id={'Permissions'} className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]' />
+                        <input disabled={true} value={formik.values.roles && formik.values.roles[0]?.name} type='text' id={'Permissions'}
+                            className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]' />
 
                     </div>
 
@@ -115,7 +116,7 @@ export default function Profile() {
 
                 <div className='flex items-center justify-end mt-10'>
 
-                    <button onClick={clickHandler} className='bg-[#45B8EA] text-white py-[16px] px-32 rounded-full'>Save Changes</button>
+                    <button onClick={clickHandler} className='bg-[#45B8EA] text-white py-[16px] px-32 rounded-full'>Guardar cambios</button>
 
                 </div>
 

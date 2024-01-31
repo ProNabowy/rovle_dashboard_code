@@ -14,6 +14,43 @@ export default function BreadcrumbNav() {
     // Split the `getLocation` variable into an array called `improvePathname`
     const improvePathname = getLocation.split('/');
 
+    const spanishPaths = {
+        list: 'Lista',
+        ['add-country']: 'Añadir país',
+        ['edit-country']: 'Editar país',
+        ['add-province']: 'Agregar provincia',
+        ['edit-province']: 'Editar provincia',
+        ['add-city']: 'Agregar ciudad',
+        ['edit-city']: 'Editar ciudad',
+        ['add-permission']: 'Agregar permiso',
+        ['edit-permission']: 'Editar permiso',
+        ['choose-owner']: 'Elegir propietario',
+        ['add-product']: 'Agregar producto',
+        ['edit-product']: 'Editar producto',
+        ['another-owner']: 'Otro propietario',
+        ['add-origin']: 'Agregar origen',
+        ['add-plan']: 'Agregar plan',
+        ['edit-plan']: 'Editar plan',
+        ['subscriptions']: 'Suscripciones',
+        ['manage-package']: 'Gestionar paquete',
+        ['size']: 'Tamaño',
+        ['add-size']: 'Agregar Tamaño',
+        ['users']: 'Usuarios',
+        ['add-user']: 'Agregar Usuario',
+        ['edit-user']: 'Editar Usuario',
+        ['roasters']: 'Tostadores',
+        ['add-roaster']: 'Agregar Tostadore',
+        ['edit-roaster']: 'Editar Tostadore',
+        ['orders']: 'Órdenes',
+        ['order-details']: 'Detalles del pedido',
+        ['coffee-shop']: 'Cafetería',
+        ['add-coffee']: 'Agregar café',
+        ['edit-coffee']: 'Editar café',
+        ['offers']: 'Ofertas',
+        ['add-offer']: 'Agregar oferta',
+        ['edit-offer']: 'Editar oferta',
+        ['profile']: 'Perfil',
+    }
 
     // Update the `getLocation` state variable when the `location` variable changes
     useEffect(() => {
@@ -40,7 +77,7 @@ export default function BreadcrumbNav() {
 
                                 </span>
 
-                                <h1 className='text-[25px] ms-5 font-medium capitalize'>{improvePathname.slice(-1).toString()?.replace("-", " ")}</h1>
+                                <h1 className='text-[25px] ms-5 font-medium capitalize'>{spanishPaths[improvePathname.slice(-1).toString()] || improvePathname.slice(-1).toString()?.replace("-", " ")}</h1>
 
                             </div>
 

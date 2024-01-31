@@ -1,5 +1,4 @@
 import { PageContent } from '../../../../components';
-import NotFound from '../../../NotFound/NotFound';
 import CountryForm from '../CountryForm';
 import { useDataGetter } from './data';
 
@@ -9,7 +8,7 @@ export default function AddCountry() {
 
     return (
 
-        <PageContent title={'Country Form'} showActions={false}>
+        <PageContent title={'Formulario de País'} showActions={false}>
 
             <CountryForm formik={formik} clickHandler={clickHandler} />
 

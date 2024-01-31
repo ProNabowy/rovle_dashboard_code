@@ -14,7 +14,7 @@ export default function Countries() {
             PermissionsKey={'Countries'}
             roleKey={'dashboard.countries.store'}
             url={'add-country'}
-            title={'All Countries'}
+            title={'Todos los países'}
             showActions={true}
             columns={columns}
             list={countries}

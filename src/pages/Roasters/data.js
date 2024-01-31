@@ -39,13 +39,13 @@ const useActionsBodyTemplate = (rowData) => {
 
 const columns = [
     { field: "id", header: "ID", tamplate: tableService.idBodyTemplate },
-    { field: "official_name", header: "Official Name", tamplate: officialNameBodyTemplate },
-    { field: "manage_stock", header: "Control of the stock", tamplate: stockBodyTemplate },
-    { field: "commercial_name", header: "Commercial Name", tamplate: tableService.roasterNameBodyTemplate },
-    { field: "official_name", header: "Email", tamplate: emailBodyTemplate },
-    { field: "official_name", header: "Locations", tamplate: tableService.fullLocationBodyTemplate },
-    { field: "updated_at", header: "Last Date", tamplate: tableService.lastDateBodyTemplate },
-    { field: "status", header: "Action", tamplate: useActionsBodyTemplate },
+    { field: "official_name", header: "Nombre oficial", tamplate: officialNameBodyTemplate },
+    { field: "manage_stock", header: "Control de inventario", tamplate: stockBodyTemplate },
+    { field: "commercial_name", header: "Nombre comercial", tamplate: tableService.roasterNameBodyTemplate },
+    { field: "official_name", header: "Correo electrónico", tamplate: emailBodyTemplate },
+    { field: "official_name", header: "Ubicaciones", tamplate: tableService.fullLocationBodyTemplate },
+    { field: "updated_at", header: "Fecha de finalización", tamplate: tableService.lastDateBodyTemplate },
+    { field: "status", header: "Acción", tamplate: useActionsBodyTemplate },
 ];
 
 export {

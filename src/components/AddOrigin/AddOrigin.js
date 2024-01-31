@@ -39,30 +39,31 @@ function AddOrigin({ formik, provider_id, classNames }) {
 
             <div className='flex items-center justify-between'>
 
-                <label htmlFor={'Origin'} className='text-[18px] text-[#252525] font-medium'>      Origin   </label>
+                <label htmlFor={'Origin'} className='text-[18px] text-[#252525] font-medium'>      Origen   </label>
 
                 <div className='flex items-center cursor-pointer' onClick={() => setVisible(true)}>
-                    <h2 className='font-medium underline text-[#45B8EA] me-3'>Add Origin</h2>
+                    <h2 className='font-medium underline text-[#45B8EA] me-3'>Añadir Origen</h2>
                 </div>
 
             </div>
 
             <Dialog
-                header='Add Origin'
+                header='Añadir Origen'
                 visible={visible}
                 style={{ width: '50vw' }}
+                headerClassName='origin'
                 onHide={() => setVisible(false)}
             >
 
                 <InputText
                     className='!my-5 !w-full'
-                    placeholder='Add Origin'
+                    placeholder='Añadir Origen'
                     value={addOriginValue}
                     onChange={(e) => setAddOriginValue(e.target.value)}
                 />
 
                 <div className='flex items-center justify-center'>
-                    <Button className='!bg-[#45B8EA] !border-[#45B8EA] !px-10' label='Submit' onClick={handelAddOrigin} />
+                    <Button className='!bg-[#45B8EA] !border-[#45B8EA] !px-10' label='Enviar' onClick={handelAddOrigin} />
                 </div>
 
             </Dialog>

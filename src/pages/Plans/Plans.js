@@ -10,7 +10,7 @@ export default function PlansList() {
 
         <PageContent
             url={'/products/plans/add-plan'}
-            title={'All Plan'}
+            title={'Todos los Planes'}
             showActions={true}
             PermissionsKey={'Plans'}
             roleKey={'dashboard.plans.store'}

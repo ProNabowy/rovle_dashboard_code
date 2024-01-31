@@ -10,7 +10,7 @@ export default function Cities() {
 
         <PageContent
             url={'add-city'}
-            title={'City Form'}
+            title={'Todas las Ciudades'}
             showActions={true}
             PermissionsKey={'Cities'}
             roleKey={'dashboard.cities.store'}

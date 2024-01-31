@@ -15,7 +15,7 @@ class CoffeeShops {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -34,7 +34,7 @@ class CoffeeShops {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -46,14 +46,14 @@ class CoffeeShops {
 
             .then(response => {
 
-                Swal.success('Added!', `Your coffee has been Added.`).then(_ => navigate('/setups/coffee-shop'))
+                Swal.success('Añadido!', `Tu café ha sido añadido.`).then(_ => navigate('/setups/coffee-shop'))
 
                 return dispatch(setShops([...coffeeShops, response.data.data]));
 
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -65,7 +65,7 @@ class CoffeeShops {
 
             .then(response => {
 
-                Swal.success('Updated!', `Your coffee has been Updated.`)
+                Swal.success('Actualizado!', `Tu café ha sido actualizado.`)
 
                 const updatedShops = shops.map(shop => shop?.id == id ? response.data.data : shop);
 
@@ -74,7 +74,7 @@ class CoffeeShops {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 
@@ -86,7 +86,7 @@ class CoffeeShops {
 
             .then(response => {
 
-                Swal.success('Deleted!', `Your coffee has been deleted.`)
+                Swal.success('Borrado!', `Tu café ha sido eliminado.`)
 
                 const updatedShops = shops.filter(shops => shops?.id != id);
 
@@ -94,7 +94,7 @@ class CoffeeShops {
             })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `something wrong please try again later`).then(_ => handleLogOut(error?.response));
+                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
             })
 

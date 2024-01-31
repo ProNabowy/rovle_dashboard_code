@@ -11,7 +11,7 @@ export default function Orders() {
         <PageContent
             PermissionsKey={'Orders'}
             roleKey={'dashboard.orders.store'}
-            title={'All Orders'}
+            title={'Todas las órdenes'}
             showActions={true}
             columns={columns}
             list={orders}

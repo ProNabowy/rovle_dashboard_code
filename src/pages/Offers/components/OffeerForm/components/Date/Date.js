@@ -31,7 +31,7 @@ export default function Date({ formik }) {
 
                 </label>
 
-                <Calendar value={formik.values.start_date} disabled={autoSelectStartData} onChange={formik.handleChange} name='start_date' placeholder={formik.values.start_date || 'Enter Fecha INI'} className='w-full my-2' showIcon />
+                <Calendar value={formik.values.start_date} disabled={autoSelectStartData} onChange={formik.handleChange} name='start_date' placeholder={formik.values.start_date || 'Ingresar Fecha INI'} className='w-full my-2' showIcon />
 
             </div>
 
@@ -51,7 +51,7 @@ export default function Date({ formik }) {
 
                 </label>
 
-                <Calendar value={formik.values.end_date} disabled={autoSelectEndData} onChange={formik.handleChange} name='end_date' placeholder={formik.values.end_date || 'Enter Fecha FIN'} className='w-full my-2' showIcon />
+                <Calendar value={formik.values.end_date} disabled={autoSelectEndData} onChange={formik.handleChange} name='end_date' placeholder={formik.values.end_date || 'Ingresar Fecha FIN'} className='w-full my-2' showIcon />
 
             </div>
 

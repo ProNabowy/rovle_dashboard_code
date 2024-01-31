@@ -60,17 +60,17 @@ const useDataGetter = (isExpanded) => {
 }
 
 const settings = {
-    name: "SETTINGS", children: [
-        { name: "Country", PagePermissions: "Countries", PermissionKey: "dashboard.countries.index", icon: country, href: "settings/country/list" },
-        { name: "Province", PagePermissions: "Provinces", PermissionKey: "dashboard.provinces.index", icon: province, href: "settings/province/list" },
-        { name: "City", PagePermissions: "Cities", PermissionKey: "dashboard.cities.index", icon: city, href: "settings/cities/list", },
-        { name: "Permissions", PagePermissions: "Roles", PermissionKey: "dashboard.roles.index", icon: permission, href: "settings/permissions/list", }
+    name: "Configuración", children: [
+        { name: "País", PagePermissions: "Countries", PermissionKey: "dashboard.countries.index", icon: country, href: "settings/country/list" },
+        { name: "Provincia", PagePermissions: "Provinces", PermissionKey: "dashboard.provinces.index", icon: province, href: "settings/province/list" },
+        { name: "Ciudad", PagePermissions: "Cities", PermissionKey: "dashboard.cities.index", icon: city, href: "settings/cities/list", },
+        { name: "Permisos", PagePermissions: "Roles", PermissionKey: "dashboard.roles.index", icon: permission, href: "settings/permissions/list", }
     ]
 };
 
 const setups = {
     name: "SETUPS", children: [
-        { name: "Coffee Shop", PagePermissions: "Coffee Shops", PermissionKey: "dashboard.coffeeShops.index", icon: shops, href: "setups/coffee-shop" },
+        { name: "Cafetería", PagePermissions: "Coffee Shops", PermissionKey: "dashboard.coffeeShops.index", icon: shops, href: "setups/coffee-shop" },
     ]
 }
 
@@ -137,7 +137,7 @@ const ProductsRoutes = isHasPermissions => {
 
                             </div>
 
-                            <span className='ms-3 font-medium'>Products</span>
+                            <span className='ms-3 font-medium'>Productos</span>
                         </div>
 
                     </div>
@@ -147,7 +147,7 @@ const ProductsRoutes = isHasPermissions => {
                     {
                         label: isHasPermissions('Products', 'dashboard.products.index') && <NavLink to={'products/list'} className='flex items-center text-[#FFFFFFA6] p-2 !w-full mnue-link'>
 
-                            <span className='ms-10'>Product List</span>
+                            <span className='ms-10'>Lista de productos</span>
 
                         </NavLink>,
 
@@ -155,7 +155,7 @@ const ProductsRoutes = isHasPermissions => {
                     {
                         label: isHasPermissions('Origins', 'dashboard.origins.index') && <NavLink to={'origins/list'} className='flex items-center text-[#FFFFFFA6] p-2 !w-full mnue-link'>
 
-                            <span className='ms-10 !py-0'>Origin List</span>
+                            <span className='ms-10 !py-0'>Lista de origen</span>
 
                         </NavLink>,
 
@@ -178,7 +178,7 @@ const ProductsRoutes = isHasPermissions => {
 
                             </div>
 
-                            <span className='ms-3 font-medium'>Plans</span>
+                            <span className='ms-3 font-medium'>Planes</span>
                         </div>
 
                     </div>
@@ -188,7 +188,7 @@ const ProductsRoutes = isHasPermissions => {
                     {
                         label: isHasPermissions('Plans', 'dashboard.plans.index') && <NavLink to={'products/plans/list'} className='flex items-center text-[#FFFFFFA6] p-2 !w-full mnue-link'>
 
-                            <span className='ms-10'>List</span>
+                            <span className='ms-10'>Lista</span>
 
                         </NavLink>,
 
@@ -196,7 +196,7 @@ const ProductsRoutes = isHasPermissions => {
                     {
                         label: isHasPermissions('Subscription', 'dashboard.plans.subscriptions') && <NavLink to={'products/plans/subscriptions'} className='flex items-center text-[#FFFFFFA6] p-2 !w-full mnue-link' >
 
-                            <span className='ms-10 !py-0'>Subscriptions</span>
+                            <span className='ms-10 !py-0'>Subscripciones</span>
 
                         </NavLink >,
 
@@ -204,7 +204,7 @@ const ProductsRoutes = isHasPermissions => {
                     {
                         label: isHasPermissions('Sizes', 'dashboard.sizes.index') && <NavLink to={'products/plans/size'} className='flex items-center text-[#FFFFFFA6] p-2 !w-full mnue-link'>
 
-                            <span className='ms-10 !py-0'>Size management</span>
+                            <span className='ms-10 !py-0'>Administración de tallas</span>
 
                         </NavLink>,
 
@@ -244,7 +244,7 @@ const GroupsRoutes = isHasPermissions => {
 
                             </div>
 
-                            <span className='ms-3 font-medium'>Roasters</span>
+                            <span className='ms-3 font-medium'>Tostadores</span>
                         </div>
 
                     </div>
@@ -254,7 +254,7 @@ const GroupsRoutes = isHasPermissions => {
                     {
                         label: isHasPermissions('Providers', 'dashboard.providers.index') && isAdmin && <NavLink to={'groups/roasters'} className='flex items-center text-[#FFFFFFA6] p-2 !w-full mnue-link'>
 
-                            <span className='ms-10'>List</span>
+                            <span className='ms-10'>Lista</span>
 
                         </NavLink>,
 
@@ -262,7 +262,7 @@ const GroupsRoutes = isHasPermissions => {
                     {
                         label: isHasPermissions('Orders', 'dashboard.orders.index') && <NavLink to={'groups/orders'} className='flex items-center text-[#FFFFFFA6] p-2 !w-full mnue-link'>
 
-                            <span className='ms-10 !py-0'>Orders</span>
+                            <span className='ms-10 !py-0'>Pedidos</span>
 
                         </NavLink>,
 

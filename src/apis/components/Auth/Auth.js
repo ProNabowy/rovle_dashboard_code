@@ -9,12 +9,12 @@ class PostLogin {
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('user', JSON.stringify(response.data.user));
 
-            Swal.success(null, `You're Loged in successfuly`).then(response => window.location.href = '/products/list');
+            Swal.success(null, response?.data?.message).then(response => window.location.href = '/products/list');
 
         })
             .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `The given Data was invalid`);
+                Swal.rejected(null, error?.response?.data?.message || `Los datos proporcionados no son válidos.`);
 
             })
     }

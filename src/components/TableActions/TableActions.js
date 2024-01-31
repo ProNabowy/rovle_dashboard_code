@@ -26,10 +26,10 @@ export default function TableActions({
 
     const handleClick = () => {
         Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: '¿Estás seguro/a?',
+            text: "¡No podrás revertir esto!",
             icon: 'warning',
-            confirmButtonText: 'Yes, delete it!',
+            confirmButtonText: 'Sí, bórralo.',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
