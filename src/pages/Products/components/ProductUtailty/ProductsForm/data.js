@@ -10,6 +10,8 @@ const useFormDataGetter = (formik, originsList, packagesList) => {
 
     const [selectedProvider, setSelectedProvider] = useState({});
 
+    const sizes = useSelector(store => store.sizes);
+
     const isProvider = JSON.parse(localStorage.getItem('user'))?.provider;
 
     const [coffee, setCoffee] = useState([]);
@@ -80,7 +82,9 @@ const useFormDataGetter = (formik, originsList, packagesList) => {
         coffee,
         selectedProvider,
         setSelectedProvider,
-        rosters
+        sizes,
+        rosters,
+        isProvider
     }
 
 }

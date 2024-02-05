@@ -1,10 +1,15 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SwalControlar from "../../assets/js/utils";
+import { Size } from "../../apis/apis";
 
 
-const useAddPackage = (formik) => {
+const useAddPackage = (formik, formikKey) => {
 
     const [selectedSize, setSelectedSize] = useState({});
+
+    const [options, setOptions] = useState([]);
+
+    const sizeUtailty = new Size();
 
     const inputPriceRef = useRef();
 
@@ -16,6 +21,11 @@ const useAddPackage = (formik) => {
         id: ""
     });
 
+    useEffect(() => {
+
+        sizeUtailty.fetchSizes(setOptions);
+
+    }, []);
 
     const handelAddNewPackage = () => {
 
@@ -25,7 +35,7 @@ const useAddPackage = (formik) => {
 
         } else {
 
-            const isDuplicate = formik.values.sizes.some(pkg => parseInt(pkg.size_id) === parseInt(addNewPackage.size_id));
+            const isDuplicate = formik.values?.[formikKey || 'sizes'].some(pkg => parseInt(pkg.size_id) === parseInt(addNewPackage.size_id));
 
             if (isDuplicate) {
 
@@ -33,7 +43,7 @@ const useAddPackage = (formik) => {
 
             } else {
 
-                formik.setFieldValue('sizes', [...formik.values.sizes, { ...addNewPackage, id: addNewPackage?.size_id }]);
+                formik.setFieldValue(formikKey || 'sizes', [...formik.values?.[formikKey || 'sizes'], { ...addNewPackage, id: addNewPackage?.size_id }]);
 
                 // Return The Value Of The Inputs as Empty Value
                 setSelectedSize({});
@@ -46,7 +56,7 @@ const useAddPackage = (formik) => {
     };
 
 
-    const removePackage = id => formik.values.sizes?.filter(newPackage => +newPackage.id !== +id);
+    const removePackage = id => formik.values?.[formikKey || 'sizes']?.filter(newPackage => +newPackage.id !== +id);
 
     return {
         setAddNewPackage,
@@ -55,6 +65,7 @@ const useAddPackage = (formik) => {
         removePackage,
         selectedSize,
         setSelectedSize,
+        options
     };
 }
 

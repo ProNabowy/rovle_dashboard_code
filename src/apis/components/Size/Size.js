@@ -6,18 +6,48 @@ class Size {
 
     fetchSizes(state) {
 
-        return RequestManager.get(`${secondrayUrl}sizes`)
+        // return RequestManager.get(`${secondrayUrl}sizes`)
 
-            .then(response => {
+        //     .then(response => {
 
-                state(response.data.data);
+        //         state(response.data.data);
 
-            })
-            .catch(error => {
+        //     })
+        //     .catch(error => {
 
-                Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
+        //         Swal.rejected(null, error?.response?.data?.message || `Algo salió mal, por favor inténtalo de nuevo más tarde.`).then(_ => handleLogOut(error?.response));
 
-            })
+        //     })
+
+        const sizes = [
+            {
+                "id": 1,
+                "name": "SM",
+                "weight": "500",
+            },
+            {
+                "id": 2,
+                "name": "M",
+                "weight": "1000",
+            },
+            {
+                "id": 3,
+                "name": "L",
+                "weight": "2000",
+            },
+            {
+                "id": 4,
+                "name": "XL",
+                "weight": "3000",
+            },
+            {
+                "id": 4,
+                "name": "XXL",
+                "weight": "5000",
+            },
+        ];
+
+        return state(sizes);
 
     }
 

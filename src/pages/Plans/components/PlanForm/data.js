@@ -1,7 +1,5 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { Size } from "../../../../apis/apis";
-import { setSizes } from "../../../../store/reduces/sizes";
 
 
 const useAddPlan = (formik) => {
@@ -10,26 +8,25 @@ const useAddPlan = (formik) => {
 
     const [coffee, setCoffee] = useState([]);
 
-    const sizes = useSelector(store => store.sizes);
-
-    const sizeUtality = new Size();
-
-    const dispatch = useDispatch();
+    const provider = JSON.parse(localStorage.getItem('user'))?.provider;
 
     useEffect(() => {
 
-        formik.values?.provider_id && sizeUtality.fetchSizeByProvider(setSizes, formik.values?.provider_id, dispatch);
+        if (provider?.id) {
 
-    }, [formik.values?.provider_id]);
+            const getSelectedRoaster = roaster?.filter(item => item.id === provider?.id);
 
+            setCoffee(getSelectedRoaster[0]?.coffee_shops);
 
-    useEffect(() => {
+        } else {
 
-        const getSelectedRoaster = roaster?.filter(item => item.id === formik.values?.provider_id);
+            const getSelectedRoaster = roaster?.filter(item => item.id === formik.values?.provider_id);
 
-        setCoffee(getSelectedRoaster[0]?.coffee_shops);
+            setCoffee(getSelectedRoaster[0]?.coffee_shops);
 
-    }, [formik.values?.provider_id]);
+        }
+
+    }, [formik.values?.provider_id, provider]);
 
     const handleChangeProvider = e => {
 
@@ -44,7 +41,7 @@ const useAddPlan = (formik) => {
     return {
         roaster,
         coffee,
-        sizes,
+        provider,
         handleChangeProvider
     };
 

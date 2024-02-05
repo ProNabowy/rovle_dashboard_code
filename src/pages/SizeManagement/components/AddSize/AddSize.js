@@ -5,7 +5,12 @@ import { getSelectedOption } from '../../../../assets/js/utils';
 
 export default function AddSize() {
 
-    const { formik, roasters, clickHandler } = useDataGetter();
+    const {
+        formik,
+        roasters,
+        clickHandler,
+        isProvider
+    } = useDataGetter();
 
     return (
 
@@ -13,14 +18,20 @@ export default function AddSize() {
 
             <form onSubmit={e => e.preventDefault()}>
 
-                <div className='p-10 pb-4'>
+                {
+                    !isProvider?.id
+                        ?
+                        <div className='p-10 pb-4'>
 
-                    <label className='mb-3 block text-[#234486]'>Tostadors</label>
+                            <label className='mb-3 block text-[#234486]'>Tostadors</label>
 
-                    <Dropdown value={getSelectedOption(roasters, 'id', formik?.values?.provider_id)} name='provider_id' onChange={(e) => formik.setFieldValue('provider_id', e.target.value?.id)} options={roasters} optionLabel="commercial_name"
-                        className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" placeholder='Nombre Tostador' />
+                            <Dropdown value={getSelectedOption(roasters, 'id', formik?.values?.provider_id)} name='provider_id' onChange={(e) => formik.setFieldValue('provider_id', e.target.value?.id)} options={roasters} optionLabel="commercial_name"
+                                className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" placeholder='Nombre Tostador' />
 
-                </div>
+                        </div>
+                        :
+                        null
+                }
 
                 <div className='p-10 py-4'>
 

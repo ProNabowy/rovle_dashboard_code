@@ -14,6 +14,8 @@ const useDataGetter = (asEdit) => {
 
     const shops = useSelector(store => store.shops);
 
+    const isProvider = JSON.parse(localStorage.getItem('user'))?.provider;
+
     const dispatch = useDispatch();
 
     const location = useLocation().search;
@@ -62,9 +64,14 @@ const useDataGetter = (asEdit) => {
 
             }).finally(_ => setIsLoading(false));
 
+        } else {
+
+            return setInitialValues(perv => ({ ...perv, provider_id: isProvider?.id }))
+
         }
 
     }, []);
+
 
     const { formik } = useFormData(initialValues, null);
 
@@ -76,7 +83,7 @@ const useDataGetter = (asEdit) => {
 
     }, 1000);
 
-    return { formik, clickHandler }
+    return { formik, clickHandler, isProvider }
 
 }
 

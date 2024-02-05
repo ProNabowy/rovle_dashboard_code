@@ -1,8 +1,6 @@
 import { PageContent, RenderTable } from '../../../../components';
 import { Dropdown } from 'primereact/dropdown';
 import { columns, useDataGetter } from './data';
-import { Navigate } from 'react-router-dom';
-
 
 export default function SizeList() {
 
@@ -10,36 +8,39 @@ export default function SizeList() {
         rosters,
         selectedRosters,
         setselectedRosters,
-        sizes
+        sizes,
+        provider
     } = useDataGetter();
 
     return (
+        <PageContent
+            url={'/products/plans/size/list/add-size'}
+            title={'Gestión de tamaño'}
+            showActions={true}
+            PermissionsKey={'Sizes'}
+            roleKey={'dashboard.sizes.store'}
+            columns={columns}
+            list={sizes}
+            saveName={'Sizes'}
+        >
 
-        selectedRosters?.id ?
-            <PageContent
-                url={'/products/plans/size/list/add-size'}
-                title={'Gestión de tamaño'}
-                showActions={true}
-                PermissionsKey={'Sizes'}
-                roleKey={'dashboard.sizes.store'}
-                columns={columns}
-                list={sizes}
-                saveName={'Sizes'}
-            >
+            {
+                !provider?.id
+                    ?
+                    <div className='w-full my-5 px-10'>
 
-                <div className='w-full my-5 px-10'>
+                        <label htmlFor='name-input' className='mb-3 block font-medium text-[#234486]'>Tostadors</label>
 
-                    <label htmlFor='name-input' className='mb-3 block font-medium text-[#234486]'>Tostadors</label>
+                        <Dropdown value={selectedRosters} onChange={(e) => setselectedRosters(e.value)} options={rosters} optionLabel="commercial_name"
+                            placeholder="Seleccionar Tostadors" className="w-full p-3 !border-r-[0] !border-l-[0] !border-t-[0] !border-b !border-b-[#b3b3b3] !shadow-none !rounded-none" />
 
-                    <Dropdown value={selectedRosters} onChange={(e) => setselectedRosters(e.value)} options={rosters} optionLabel="commercial_name"
-                        placeholder="Seleccionar Tostadors" className="w-full p-3 !border-r-[0] !border-l-[0] !border-t-[0] !border-b !border-b-[#b3b3b3] !shadow-none !rounded-none" />
+                    </div>
+                    :
+                    null
+            }
 
-                </div>
+            <RenderTable columns={columns} list={sizes} />
 
-                <RenderTable columns={columns} list={sizes} />
-
-            </PageContent>
-            :
-            <Navigate to={'/products/plans/size'} />
+        </PageContent>
     )
 }

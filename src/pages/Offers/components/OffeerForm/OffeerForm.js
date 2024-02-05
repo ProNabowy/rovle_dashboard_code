@@ -8,14 +8,14 @@ import { Date, OffeerInfo } from './components';
 
 export default function OffeerForm({ formik, clickHandler }) {
 
-    const { roasters } = useDataGetter(formik);
+    const { roasters, isProvider } = useDataGetter(formik);
 
     return (
         <form onSubmit={e => e.preventDefault()} className='px-10 add-offer-form'>
 
             <div className='flex items-center justify-between mb-8'>
 
-                <div className='sm:w-[48%]'>
+                <div className={`${isProvider ? "w-full" : "sm:w-[48%]"}`}>
 
                     <label htmlFor={'name'} className='text-[18px] text-[#252525] font-medium'>Nombre de la oferta</label>
 
@@ -24,27 +24,32 @@ export default function OffeerForm({ formik, clickHandler }) {
 
                 </div>
 
-                <div className='sm:w-[48%]'>
+                {
+                    !isProvider?.id
+                        ?
+                        <div className='sm:w-[48%]'>
 
-                    <div className='flex items-center justify-between'>
+                            <div className='flex items-center justify-between'>
 
-                        <h2 className='text-[18px] text-[#252525] font-medium'>Tostadors</h2>
+                                <h2 className='text-[18px] text-[#252525] font-medium'>Tostadors</h2>
 
-                        <div className='flex items-center cursor-pointer'>
+                                <div className='flex items-center cursor-pointer'>
 
-                            <h2 className='font-medium underline text-[#45B8EA] me-3'>Agregar Tostador</h2>
+                                    <h2 className='font-medium underline text-[#45B8EA] me-3'>Agregar Tostador</h2>
 
-                            <FontAwesomeIcon icon={faArrowUpRightFromSquare} className='text-[#45B8EA]' />
+                                    <FontAwesomeIcon icon={faArrowUpRightFromSquare} className='text-[#45B8EA]' />
+
+                                </div>
+
+                            </div>
+
+                            <Dropdown value={getSelectedOption(roasters, 'id', formik?.values?.provider_id)} name='provider_id' onChange={(e) => formik.setFieldValue('provider_id', e.target.value?.id)} options={roasters} optionLabel="commercial_name"
+                                className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" placeholder='Seleccionar Tostador' />
 
                         </div>
-
-                    </div>
-
-                    <Dropdown value={getSelectedOption(roasters, 'id', formik?.values?.provider_id)} name='provider_id' onChange={(e) => formik.setFieldValue('provider_id', e.target.value?.id)} options={roasters} optionLabel="commercial_name"
-                        className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" placeholder='Seleccionar Tostador' />
-
-
-                </div>
+                        :
+                        null
+                }
 
             </div>
 

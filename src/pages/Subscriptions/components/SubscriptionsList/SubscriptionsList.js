@@ -15,6 +15,7 @@ export default function SubscriptionsList() {
         setselectedPlan,
         subscriptionsList,
         plans,
+        provider
     } = useDataGetter();
 
     return (
@@ -33,16 +34,22 @@ export default function SubscriptionsList() {
 
                 <div className='grid grid-cols-12 gap-5 w-full my-5 px-10'>
 
-                    <div className='col-span-6'>
+                    {
+                        !provider?.provider?.id
+                            ?
+                            <div className='col-span-6'>
 
-                        <label htmlFor='name-input' className='mb-3 block font-medium text-[#234486]'>Tostador</label>
+                                <label htmlFor='name-input' className='mb-3 block font-medium text-[#234486]'>Tostador</label>
 
-                        <Dropdown value={selectedRosters && selectedRosters} onChange={(e) => setselectedRosters(e.value)} options={rosters} optionLabel="commercial_name"
-                            placeholder="Seleccionar proveedor" className="w-full p-3 !border-r-[0] !border-l-[0] !border-t-[0] !border-b !border-b-[#b3b3b3] !shadow-none !rounded-none" />
+                                <Dropdown value={selectedRosters && selectedRosters} onChange={(e) => setselectedRosters(e.value)} options={rosters} optionLabel="commercial_name"
+                                    placeholder="Seleccionar proveedor" className="w-full p-3 !border-r-[0] !border-l-[0] !border-t-[0] !border-b !border-b-[#b3b3b3] !shadow-none !rounded-none" />
 
-                    </div>
+                            </div>
+                            :
+                            null
+                    }
 
-                    <div className='col-span-6'>
+                    <div className={`${provider?.provider?.id ? "col-span-12" : "col-span-6"}`}>
 
                         <label htmlFor='name-input' className='mb-3 block font-medium text-[#234486]'>Nombre del plan</label>
 

@@ -4,8 +4,12 @@ import { useSelector } from "react-redux";
 const useDataGetter = formik => {
 
     const roasters = useSelector(store => store?.rosters);
+
     const [autoSelectStartData, setAutoSelectStartData] = useState(false);
+
     const [autoSelectEndData, setAutoSelectEndData] = useState(false);
+
+    const isProvider = JSON.parse(localStorage.getItem('user'))?.provider
 
     const handleStartDate = e => {
 
@@ -46,6 +50,7 @@ const useDataGetter = formik => {
         setAutoSelectStartData,
         autoSelectEndData,
         handleEndDate,
+        isProvider,
         setAutoSelectEndData,
     }
 

@@ -85,7 +85,7 @@ const useFetchGloableData = (setIsLoading) => {
 
                 const providers = rostersUtility.fetchRosters(setRosters, dispatch);
 
-            } if (hasPermissions(permissions.Profile, user_access, 'dashboard.profile.index')) {
+            } else if (hasPermissions(permissions.Profile, user_access, 'dashboard.profile.index')) {
 
                 //  Don't Forget To Handle Provider Login
                 const user = JSON.parse(localStorage.getItem('user'));

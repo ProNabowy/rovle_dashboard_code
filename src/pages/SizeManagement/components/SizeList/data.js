@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../../../components/AppContext/AppContext";
 import { setSizes } from "../../../../store/reduces/sizes";
 import Table from "../../../../assets/js/table";
+import { getSelectedOption } from "../../../../assets/js/utils";
 
 
 const tableService = new Table();
@@ -13,7 +14,9 @@ const useDataGetter = _ => {
 
     const rosters = useSelector(store => store.rosters);
 
-    const [selectedRosters, setselectedRosters] = useState(JSON.parse(sessionStorage.getItem('selected-roaster')));
+    const provider = JSON.parse(localStorage.getItem('user'))?.provider;
+
+    const [selectedRosters, setselectedRosters] = useState({});
 
     const sizeUtility = new Size();
 
@@ -22,6 +25,17 @@ const useDataGetter = _ => {
     const dispatch = useDispatch();
 
     const { setIsLoading } = useContext(AppContext);
+
+    useEffect(() => {
+
+        if (provider?.id) {
+
+            setselectedRosters(getSelectedOption(rosters, 'id', provider?.id))
+
+        }
+
+        return () => { };
+    }, [rosters]);
 
     useEffect(() => {
 
@@ -36,7 +50,13 @@ const useDataGetter = _ => {
     }, [selectedRosters?.id]);
 
 
-    return { rosters, selectedRosters, setselectedRosters, sizes };
+    return {
+        rosters,
+        selectedRosters,
+        setselectedRosters,
+        sizes,
+        provider
+    };
 
 }
 

@@ -18,7 +18,8 @@ export default function ProductsForm() {
         setCurrentRoaster,
         setSelectedProvider,
         roasterFrom,
-        roasterTo
+        roasterTo,
+        user
     } = useFormDataGetter();
 
     return (
@@ -27,7 +28,7 @@ export default function ProductsForm() {
 
             <div className='mb-8 flex items-center justify-between'>
 
-                <div className='w-[48%]'>
+                <div className={`${user?.provider ? "w-full" : "w-[48%]"}`}>
 
                     <label htmlFor={'owner'} className='text-[18px] text-[#252525] font-medium'>Roaster From</label>
 
@@ -40,18 +41,24 @@ export default function ProductsForm() {
 
                 </div>
 
-                <div className='w-[48%]'>
+                {
+                    !user?.provider
+                        ?
+                        <div className='w-[48%]'>
 
-                    <label htmlFor={'owner'} className='text-[18px] text-[#252525] font-medium'>Roaster To</label>
+                            <label htmlFor={'owner'} className='text-[18px] text-[#252525] font-medium'>Roaster To</label>
 
-                    <Dropdown
-                        value={currentRoaster}
-                        onChange={(e) => setCurrentRoaster(getSelectedOption(rosters, 'id', e.target.value?.id))}
-                        options={roasterTo} optionLabel="commercial_name"
-                        inputId='owner'
-                        placeholder="Seleccionar Tostador" className="w-full p-2  !shadow-none !rounded-none border-[#b3b3b3] !border-t-transparent !border-l-transparent !border-r-transparent" />
+                            <Dropdown
+                                value={currentRoaster}
+                                onChange={(e) => setCurrentRoaster(getSelectedOption(rosters, 'id', e.target.value?.id))}
+                                options={roasterTo} optionLabel="commercial_name"
+                                inputId='owner'
+                                placeholder="Seleccionar Tostador" className="w-full p-2  !shadow-none !rounded-none border-[#b3b3b3] !border-t-transparent !border-l-transparent !border-r-transparent" />
 
-                </div>
+                        </div>
+                        :
+                        null
+                }
 
             </div>
 

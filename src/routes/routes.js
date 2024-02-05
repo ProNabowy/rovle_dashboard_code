@@ -27,7 +27,6 @@ import {
     SubscriptionsList,
     Subscriptions,
     ManagePackage,
-    SizeManagement,
     SizeList,
     AddSize,
     UsersList,
@@ -103,7 +102,6 @@ export default function routes(isHasPermissions) {
                 <Route path="/products/plans/subscriptions/list" element={isHasPermissions('Subscription', 'dashboard.plans.subscriptions') ? <SubscriptionsList /> : <NotFound />} />
                 <Route path="/products/plans/subscriptions/manage-package" element={isHasPermissions('Subscription', 'dashboard.plans.subscriptions') ? <ManagePackage /> : <NotFound />} />
 
-                <Route path="/products/plans/size" element={isHasPermissions('Sizes', 'dashboard.sizes.index') ? <SizeManagement /> : <NotFound />} />
                 <Route path="/products/plans/size/list" element={isHasPermissions('Sizes', 'dashboard.sizes.index') ? <SizeList /> : <NotFound />} />
                 <Route path="/products/plans/size/list/add-size" element={isHasPermissions('Sizes', 'dashboard.sizes.store') ? <AddSize /> : <NotFound />} />
 

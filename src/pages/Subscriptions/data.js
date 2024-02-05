@@ -14,6 +14,8 @@ const useDataGetter = () => {
 
     const [selectedPlan, setselectedPlan] = useState(JSON.parse(sessionStorage.getItem('selected-plan')));
 
+    const provider = JSON.parse(localStorage.getItem('user'));
+
     const location = useLocation().pathname;
 
     const [plans, setPlans] = useState([]);
@@ -38,11 +40,21 @@ const useDataGetter = () => {
 
     useEffect(() => {
 
-        if (selectedRosters?.id) {
+        if (provider?.id) {
 
-            plansUtailty.fetchPlansByProvider(setPlans, selectedRosters?.id, true);
+            plansUtailty.fetchPlansByProvider(setPlans, provider?.id, true);
 
             sessionStorage.setItem('selected-roaster', JSON.stringify(selectedRosters));
+
+        } else {
+
+            if (selectedRosters?.id) {
+
+                plansUtailty.fetchPlansByProvider(setPlans, selectedRosters?.id, true);
+
+                sessionStorage.setItem('selected-roaster', JSON.stringify(selectedRosters));
+
+            }
 
         }
 
@@ -70,6 +82,7 @@ const useDataGetter = () => {
         setselectedPlan,
         subscriptionsList,
         plans,
+        provider,
         handleShowButton
     };
 

@@ -1,5 +1,5 @@
 import { Dropdown } from 'primereact/dropdown';
-import { ChipsList, AddOrigin, InputsGroup, AddPackage } from '../../../../../components';
+import { ChipsList, AddOrigin, InputsGroup, AddPackage, AddPackageByDropdown } from '../../../../../components';
 import { useFormDataGetter } from './data';
 import { getSelectedOption } from '../../../../../assets/js/utils';
 
@@ -9,6 +9,8 @@ export default function ProductsForm({ formik, clickHandler, originsList, packag
         inputsData,
         coffee,
         isByNewOWner,
+        isProvider,
+        sizes,
         selectedProvider,
         setSelectedProvider,
         rosters
@@ -23,9 +25,9 @@ export default function ProductsForm({ formik, clickHandler, originsList, packag
                 {
                     isByNewOWner
                         ?
-                        <div className='w-[48%]'>
+                        <div className={`${isProvider ? "w-full" : "w-[48%]"}`}>
 
-                            <label htmlFor={'factor'} className='text-[18px] text-[#252525] font-medium'>Mini factor name</label>
+                            <label htmlFor={'factor'} className='text-[18px] text-[#252525] font-medium'>Nombre del proveedor</label>
 
                             <input value={formik?.values?.owner_name} name={'owner_name'} type={'text'} onChange={formik.handleChange} id={'factor'} className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]' placeholder={'Enter factor name'} />
 
@@ -34,18 +36,25 @@ export default function ProductsForm({ formik, clickHandler, originsList, packag
                         null
                 }
 
-                <div className={`w-[48%] ${!isByNewOWner ? "flex-1" : ""}`}>
+                {
+                    !isProvider
+                        ?
+                        <div className={`w-[48%] ${!isByNewOWner ? "flex-1" : ""}`}>
 
-                    <label htmlFor={'owner'} className='text-[18px] text-[#252525] font-medium'>Roaster To</label>
+                            <label htmlFor={'owner'} className='text-[18px] text-[#252525] font-medium'>Roaster To</label>
 
-                    <Dropdown
-                        value={selectedProvider}
-                        onChange={(e) => setSelectedProvider(getSelectedOption(rosters, 'id', e.target.value?.id))}
-                        options={rosters} optionLabel="commercial_name"
-                        inputId='owner'
-                        placeholder="Seleccionar Tostador" className="w-full p-2  !shadow-none !rounded-none border-[#b3b3b3] !border-t-transparent !border-l-transparent !border-r-transparent" />
+                            <Dropdown
+                                value={selectedProvider}
+                                onChange={(e) => setSelectedProvider(getSelectedOption(rosters, 'id', e.target.value?.id))}
+                                options={rosters} optionLabel="commercial_name"
+                                inputId='owner'
+                                placeholder="Seleccionar Tostador"
+                                className="w-full p-2  !shadow-none !rounded-none border-[#b3b3b3] !border-t-transparent !border-l-transparent !border-r-transparent" />
 
-                </div>
+                        </div>
+                        :
+                        null
+                }
 
             </div>
 
@@ -53,7 +62,16 @@ export default function ProductsForm({ formik, clickHandler, originsList, packag
 
             <AddOrigin classNames={'!w-full mb-8'} formik={formik} provider_id={formik.values?.provider_id} />
 
-            <InputsGroup data={inputsData[1]} />
+            <div className='mb-8'>
+
+                <label htmlFor={'Region'} className='text-[18px] text-[#252525] font-medium'>Region</label>
+
+                <input value={formik?.values?.region} name={'region'} type={'text'} onChange={formik.handleChange} id={'Region'}
+                    className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]' placeholder={'Ingresar Region'} />
+
+            </div>
+
+            {/* <InputsGroup data={inputsData[1]} /> */}
 
             <InputsGroup data={inputsData[2]} />
 
@@ -73,7 +91,7 @@ export default function ProductsForm({ formik, clickHandler, originsList, packag
                 formik={formik}
                 dataKey={'coffeeShops'}
                 url={'/setups/coffee-shop/add-coffee'}
-                title={'Cafés'}
+                title={'Tiendas'}
                 options={coffee}
             />
 
@@ -86,7 +104,17 @@ export default function ProductsForm({ formik, clickHandler, originsList, packag
 
             </div>
 
-            <AddPackage formik={formik} provider_id={formik.values.provider_id} />
+            <AddPackageByDropdown
+                formik={formik}
+                options={sizes}
+                optionLabel={'name'}
+                formikKey='presentations'
+                label={'Talla'}
+                inputLabel={"Precio"}
+                hasAddButton={false}
+            />
+
+            {/* <AddPackage formik={formik} provider_id={formik.values.provider_id} /> */}
 
             <div className='flex items-center justify-end mt-10'>
 

@@ -8,8 +8,8 @@ export default function ChooseOwner() {
 
     const options = [
         'Mis Productos',
-        'Otro Propietario',
-        'Nuevo Propietario',
+        'Del proveedor existente',
+        'De un proveedor no registrado',
     ]
 
     const navigate = useNavigate();
@@ -21,11 +21,11 @@ export default function ChooseOwner() {
 
             return navigate('/products/list/add-product');
 
-        } else if (selectedOption === 'Otro Propietario') {
+        } else if (selectedOption === 'Del proveedor existente') {
 
             return navigate('/products/list/add-product/another-owner');
 
-        } else if (selectedOption === 'Nuevo Propietario') {
+        } else if (selectedOption === 'De un proveedor no registrado') {
 
             return navigate('/products/list/add-product?new-owner=true');
 

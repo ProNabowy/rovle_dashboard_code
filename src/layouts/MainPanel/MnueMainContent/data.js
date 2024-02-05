@@ -202,7 +202,7 @@ const ProductsRoutes = isHasPermissions => {
 
                     },
                     {
-                        label: isHasPermissions('Sizes', 'dashboard.sizes.index') && <NavLink to={'products/plans/size'} className='flex items-center text-[#FFFFFFA6] p-2 !w-full mnue-link'>
+                        label: isHasPermissions('Sizes', 'dashboard.sizes.index') && <NavLink to={'products/plans/size/list'} className='flex items-center text-[#FFFFFFA6] p-2 !w-full mnue-link'>
 
                             <span className='ms-10 !py-0'>Administración de tallas</span>
 

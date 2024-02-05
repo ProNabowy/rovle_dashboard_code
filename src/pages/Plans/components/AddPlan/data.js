@@ -10,6 +10,8 @@ const useAddPlan = () => {
 
     const plansUtailty = new Plans();
 
+    const provider = JSON.parse(localStorage.getItem('user'))?.provider;
+
     const plans = useSelector(store => store.plans);
 
     const dispatch = useDispatch();
@@ -18,7 +20,7 @@ const useAddPlan = () => {
         name: "",
         status: "",
         description: "",
-        provider_id: "",
+        provider_id: provider?.id,
         sizes: [],
         coffee_shops: [],
         products: []

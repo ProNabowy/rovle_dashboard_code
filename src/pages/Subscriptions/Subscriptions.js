@@ -11,7 +11,8 @@ export default function Subscriptions() {
         selectedPlan,
         setselectedPlan,
         plans,
-        handleShowButton
+        handleShowButton,
+        provider
     } = useDataGetter();
 
     return (
@@ -20,14 +21,20 @@ export default function Subscriptions() {
 
             <form onSubmit={e => e.preventDefault()}>
 
-                <div className='px-10 py-3'>
+                {
+                    !provider?.provider?.id
+                        ?
+                        <div className='px-10 py-3'>
 
-                    <label htmlFor='name-input' className='mb-3 block text-[#234486]'>Tostador</label>
+                            <label htmlFor='name-input' className='mb-3 block text-[#234486]'>Tostador</label>
 
-                    <Dropdown value={selectedRosters} onChange={(e) => setselectedRosters(e.value)} options={rosters} optionLabel="commercial_name"
-                        placeholder="Seleccionar proveedor" className="w-full p-3 !border-r-[0] !border-l-[0] !border-t-[0] !border-b !border-b-[#b3b3b3] !shadow-none !rounded-none" />
+                            <Dropdown value={selectedRosters} onChange={(e) => setselectedRosters(e.value)} options={rosters} optionLabel="commercial_name"
+                                placeholder="Seleccionar proveedor" className="w-full p-3 !border-r-[0] !border-l-[0] !border-t-[0] !border-b !border-b-[#b3b3b3] !shadow-none !rounded-none" />
 
-                </div>
+                        </div>
+                        :
+                        null
+                }
 
                 <div className='px-10 py-3'>
 

@@ -10,8 +10,8 @@ export default function PlanForm({ formik, clickHandler }) {
 
     const {
         roaster,
-        coffee,
-        sizes,
+        coffee, 
+        provider,
         handleChangeProvider
     } = useAddPlan(formik);
 
@@ -35,27 +35,34 @@ export default function PlanForm({ formik, clickHandler }) {
             </div>
 
 
-            <div className='mb-8'>
+            {
+                !provider?.id
+                    ?
+                    <div className='mb-8'>
 
-                <div className='flex items-center justify-between'>
+                        <div className='flex items-center justify-between'>
 
-                    <h2 className='text-[18px] text-[#252525] font-medium'>Nombre del Tostador</h2>
+                            <h2 className='text-[18px] text-[#252525] font-medium'>Nombre del Tostador</h2>
 
-                    <Link to={'/groups/roasters/add-roaster'} className='flex items-center cursor-pointer'>
+                            <Link to={'/groups/roasters/add-roaster'} className='flex items-center cursor-pointer'>
 
-                        <h2 className='font-medium underline text-[#45B8EA] me-3'>Añadir Tostador</h2>
+                                <h2 className='font-medium underline text-[#45B8EA] me-3'>Añadir Tostador</h2>
 
-                    </Link>
+                            </Link>
 
-                </div>
+                        </div>
 
-                <Dropdown
-                    value={getSelectedOption(roaster, 'id', formik?.values?.provider_id)}
-                    onChange={handleChangeProvider}
-                    options={roaster} optionLabel="commercial_name"
-                    placeholder="Seleccionar Tostador Name" className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
+                        <Dropdown
+                            value={getSelectedOption(roaster, 'id', formik?.values?.provider_id)}
+                            onChange={handleChangeProvider}
+                            options={roaster} optionLabel="commercial_name"
+                            placeholder="Seleccionar Tostador Name" className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
 
-            </div>
+                    </div>
+                    :
+                    null
+            }
+
 
             <div className='mb-8'>
 
@@ -81,16 +88,15 @@ export default function PlanForm({ formik, clickHandler }) {
                 formik={formik}
                 dataKey={'coffee_shops'}
                 url={'/setups/coffee-shop/add-coffee'}
-                title={'Cafés'}
+                title={'Tiendas'}
                 options={coffee}
             />
 
             <AddPackageByDropdown
                 formik={formik}
-                options={sizes}
-                optionLabel={'Nombre'}
+                optionLabel={'name'}
                 inputLabel={"Precio"}
-                hasAddButton={true}
+                label={'Talla'}
             />
 
             <div className='flex items-center justify-end mt-10'>

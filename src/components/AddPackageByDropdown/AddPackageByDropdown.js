@@ -5,13 +5,13 @@ import { Link } from 'react-router-dom';
 
 export default function AddPackageByDropdown({
     formik,
-    options,
     optionLabel,
     classNames,
     placeholder,
     label,
     inputLabel,
     hasAddButton,
+    formikKey,
     inputPlaceholder
 }) {
 
@@ -22,9 +22,10 @@ export default function AddPackageByDropdown({
         handelAddNewPackage,
         removePackage,
         selectedSize,
+        options,
         setSelectedSize,
 
-    } = useAddPackage(formik, options);
+    } = useAddPackage(formik, formikKey);
 
     return (
         <div className={`rounded-[20px] mt-20 border border-[#252525] p-[32px] grid grid-cols-12 gap-10 ${classNames}`}>
@@ -56,7 +57,7 @@ export default function AddPackageByDropdown({
                         ref={inputWeightRef}
                         value={selectedSize}
                         onChange={e => {
-                            setAddNewPackage(prev => ({ ...prev, size_id: e.target.value?.id }));
+                            setAddNewPackage(prev => ({ ...prev, size_id: e.target.value?.id, weight: e.target.value?.weight, name: e.target.value?.name }));
                             setSelectedSize(e.value)
                         }}
                         options={options} optionLabel={optionLabel || "name"}
@@ -76,7 +77,12 @@ export default function AddPackageByDropdown({
 
             </form>
 
-            <RenderPackages formik={formik} removePackage={removePackage} />
+            <RenderPackages
+                formik={formik}
+                removePackage={removePackage}
+                formikKey={formikKey}
+                options={options}
+            />
 
         </div>
     )

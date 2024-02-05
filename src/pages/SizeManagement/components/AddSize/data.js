@@ -14,6 +14,8 @@ const useDataGetter = () => {
 
     const dispatch = useDispatch();
 
+    const isProvider = JSON.parse(localStorage.getItem('user')).provider;
+
     const sizes = useSelector(store => store.sizes);
 
     const navigate = useNavigate();
@@ -28,10 +30,21 @@ const useDataGetter = () => {
 
     const { useFormData } = Formik();
 
+    useEffect(() => {
+
+        if (isProvider?.id) {
+
+            setInitialValues(perv => ({ ...perv, provider_id: isProvider?.id }));
+
+        }
+
+        return () => { };
+
+    }, [isProvider]);
+
     const handelSubmit = values => {
 
         setIsLoading(true);
-
 
         return sizeUtility.addSize(values, dispatch, sizes, navigate).finally(_ => {
 
@@ -53,7 +66,12 @@ const useDataGetter = () => {
 
     }, [formik.values?.provider_id]);
 
-    return { formik, roasters, clickHandler };
+    return {
+        formik,
+        roasters,
+        clickHandler,
+        isProvider
+    };
 
 }
 
