@@ -61,9 +61,9 @@ const useDataGetter = (isExpanded) => {
 
 const settings = {
     name: "Configuración", children: [
-        { name: "País", PagePermissions: "Countries", PermissionKey: "dashboard.countries.index", icon: country, href: "settings/country/list" },
-        { name: "Provincia", PagePermissions: "Provinces", PermissionKey: "dashboard.provinces.index", icon: province, href: "settings/province/list" },
-        { name: "Ciudad", PagePermissions: "Cities", PermissionKey: "dashboard.cities.index", icon: city, href: "settings/cities/list", },
+        // { name: "País", PagePermissions: "Countries", PermissionKey: "dashboard.countries.index", icon: country, href: "settings/country/list" },
+        // { name: "Provincia", PagePermissions: "Provinces", PermissionKey: "dashboard.provinces.index", icon: province, href: "settings/province/list" },
+        // { name: "Ciudad", PagePermissions: "Cities", PermissionKey: "dashboard.cities.index", icon: city, href: "settings/cities/list", },
         { name: "Permisos", PagePermissions: "Roles", PermissionKey: "dashboard.roles.index", icon: permission, href: "settings/permissions/list", }
     ]
 };
@@ -107,6 +107,8 @@ const renderCollaction = (isHasPermissions, isExpanded, item, linkStyle) => {
 }
 
 const ProductsRoutes = isHasPermissions => {
+
+    const isProvider = JSON.parse(localStorage.getItem('user'))?.provider;
 
     const renderProduct =
         isHasPermissions('Products', 'dashboard.products.index')
@@ -202,7 +204,7 @@ const ProductsRoutes = isHasPermissions => {
 
                     },
                     {
-                        label: isHasPermissions('Sizes', 'dashboard.sizes.index') && <NavLink to={'products/plans/size/list'} className='flex items-center text-[#FFFFFFA6] p-2 !w-full mnue-link'>
+                        label: (isHasPermissions('Sizes', 'dashboard.sizes.index') && !isProvider?.id) && <NavLink to={'products/plans/size/list'} className='flex items-center text-[#FFFFFFA6] p-2 !w-full mnue-link'>
 
                             <span className='ms-10 !py-0'>Administración de tallas</span>
 

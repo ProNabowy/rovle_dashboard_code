@@ -64,7 +64,7 @@ export default function routes(isHasPermissions) {
 
                 <Route path='/login' element={<Login />} />
 
-                <Route path="/settings/country/list" element={isHasPermissions('Countries', 'dashboard.countries.index') ? <CountryList /> : <NotFound />} />
+                {/* <Route path="/settings/country/list" element={isHasPermissions('Countries', 'dashboard.countries.index') ? <CountryList /> : <NotFound />} />
                 <Route path="/settings/country/list/add-country" element={isHasPermissions('Countries', 'dashboard.countries.store') ? <AddCountry /> : <NotFound />} />
                 <Route path="/settings/country/list/edit-country" element={isHasPermissions('Countries', 'dashboard.countries.update') ? <EditCountry /> : <NotFound />} />
 
@@ -76,7 +76,7 @@ export default function routes(isHasPermissions) {
 
                 <Route path="/settings/cities/list" element={isHasPermissions('Cities', 'dashboard.cities.index') ? <CitiesList /> : <NotFound />} />
                 <Route path="/settings/cities/list/add-city" element={isHasPermissions('Cities', 'dashboard.cities.store') ? <AddCity /> : <NotFound />} />
-                <Route path="/settings/cities/list/edit-city" element={isHasPermissions('Cities', 'dashboard.cities.update') ? <EditCity /> : <NotFound />} />
+                <Route path="/settings/cities/list/edit-city" element={isHasPermissions('Cities', 'dashboard.cities.update') ? <EditCity /> : <NotFound />} /> */}
 
                 <Route path="settings/permissions/list" element={isHasPermissions('Roles', 'dashboard.roles.index') ? <PermissionList /> : <NotFound />} />
                 <Route path="/settings/permissions/list/add-permission" element={isHasPermissions('Roles', 'dashboard.roles.store') ? <AddPermission /> : <NotFound />} />

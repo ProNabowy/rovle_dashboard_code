@@ -10,7 +10,7 @@ export default function PlanForm({ formik, clickHandler }) {
 
     const {
         roaster,
-        coffee, 
+        coffee,
         provider,
         handleChangeProvider
     } = useAddPlan(formik);
@@ -74,14 +74,14 @@ export default function PlanForm({ formik, clickHandler }) {
             </div>
 
             {/* For Add Product */}
-            <ChipsList
+            {/* <ChipsList
                 formik={formik}
                 dataKey={'products'}
                 url={'/products/list/add-product'}
                 optionLabel="commercial_name"
                 title={'Productos'}
                 options={getSelectedOption(roaster, 'id', formik?.values?.provider_id)?.products}
-            />
+            /> */}
 
             {/* For Add CoffeShop */}
             <ChipsList
