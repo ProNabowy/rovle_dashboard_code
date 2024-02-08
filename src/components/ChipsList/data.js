@@ -1,8 +1,15 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { hasPermissions } from "../../assets/js/utils";
 
 const useGetShopData = (formik, dataKey, optionLabel) => {
 
     const [selectedShop, setSelectedShop] = useState(null);
+
+    const permissions = useSelector(store => store.permissions);
+    const user_access = useSelector(store => store?.userPeressmisons);
+
+    const isHasPermissions = (PagePermissions, permissionKey) => hasPermissions(permissions[PagePermissions], user_access, permissionKey);
 
     useEffect(() => {
 
@@ -39,7 +46,7 @@ const useGetShopData = (formik, dataKey, optionLabel) => {
     };
 
 
-    return { selectedShop, handleDuplicatedValue, handleRemove, renderChipsItem }
+    return { selectedShop, handleDuplicatedValue, handleRemove, renderChipsItem, isHasPermissions }
 
 }
 

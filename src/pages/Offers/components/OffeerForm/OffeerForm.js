@@ -4,11 +4,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getSelectedOption } from '../../../../assets/js/utils';
 import { Fisico, Recurren, Usuario, useDataGetter } from './data';
 import { Date, OffeerInfo } from './components';
+import { Link } from 'react-router-dom';
 
 
 export default function OffeerForm({ formik, clickHandler }) {
 
-    const { roasters, isProvider } = useDataGetter(formik);
+    const { roasters, isProvider, isHasPermissions } = useDataGetter(formik);
 
     return (
         <form onSubmit={e => e.preventDefault()} className='px-10 add-offer-form'>
@@ -33,13 +34,20 @@ export default function OffeerForm({ formik, clickHandler }) {
 
                                 <h2 className='text-[18px] text-[#252525] font-medium'>Tostadors</h2>
 
-                                <div className='flex items-center cursor-pointer'>
+                                {
+                                    isHasPermissions('Providers', 'dashboard.providers.store')
+                                        ?
+                                        <Link to={'/groups/roasters/add-roaster'} className='flex items-center'>
 
-                                    <h2 className='font-medium underline text-[#45B8EA] me-3'>Agregar Tostador</h2>
+                                            <h2 className='font-medium underline text-[#45B8EA] me-3'>Agregar Tostador</h2>
 
-                                    <FontAwesomeIcon icon={faArrowUpRightFromSquare} className='text-[#45B8EA]' />
+                                            <FontAwesomeIcon icon={faArrowUpRightFromSquare} className='text-[#45B8EA]' />
 
-                                </div>
+                                        </Link>
+                                        :
+                                        null
+                                }
+
 
                             </div>
 

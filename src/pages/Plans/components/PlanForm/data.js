@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { hasPermissions } from "../../../../assets/js/utils";
 
 
 const useAddPlan = (formik) => {
@@ -9,6 +10,12 @@ const useAddPlan = (formik) => {
     const [coffee, setCoffee] = useState([]);
 
     const provider = JSON.parse(localStorage.getItem('user'))?.provider;
+
+    const permissions = useSelector(store => store.permissions);
+    const user_access = useSelector(store => store?.userPeressmisons);
+
+    const isHasPermissions = (PagePermissions, permissionKey) => hasPermissions(permissions[PagePermissions], user_access, permissionKey);
+
 
     useEffect(() => {
 
@@ -42,7 +49,8 @@ const useAddPlan = (formik) => {
         roaster,
         coffee,
         provider,
-        handleChangeProvider
+        handleChangeProvider,
+        isHasPermissions
     };
 
 }

@@ -69,10 +69,46 @@ const useFormDataGetter = (formik, originsList, packagesList) => {
     }, [packagesList]);
 
     const inputsData = [
-        { names: ['Nombre del Producto', 'Código'], placeholders: ['Ingresar Nombre', 'Ingresar Código'], values: [formik?.values?.trade_name, formik.values?.code], nameAttr: ['trade_name', 'code'], onChange: formik.handleChange, key: ['trade_name', 'code'] },
-        { names: ['Nombre Comercial', 'Region'], placeholders: ['Ingresar Nombre Comercial', 'Ingresar Region'], key: ['commercial_name', 'region'], values: [formik?.values?.commercial_name, formik.values?.region], nameAttr: ['commercial_name', 'region'], onChange: formik.handleChange, },
-        { names: ['Finca', 'Puntunaction Sca s'], types: ['text', 'number'], placeholders: ['Ingresar Finca', 'Ingresar Puntunaction Sca s'], key: ['farm', 'sca_score'], values: [formik?.values?.farm, formik.values?.sca_score], nameAttr: ['farm', 'sca_score'], onChange: formik.handleChange, },
-        { names: ['Altitud', 'Proceso'], types: ['number', 'text'], placeholders: ['Ingresar Altitud', 'Ingresar Proceso'], key: ['altitude', 'process'], values: [formik?.values?.altitude, formik.values?.process], nameAttr: ['altitude', 'process'], onChange: formik.handleChange, },
+        {
+            names: ['Nombre del Producto', 'Código'],
+            placeholders: ['Ingresar Nombre', 'Ingresar Código'],
+            values: [formik?.values?.trade_name, formik.values?.code],
+            nameAttr: ['trade_name', 'code'],
+            onChange: formik.handleChange,
+            required: [true, true],
+            key: ['trade_name', 'code']
+        },
+        {
+            names: ['Nombre Comercial', 'Region'],
+            placeholders: ['Ingresar Nombre Comercial', 'Ingresar Region'],
+            key: ['commercial_name', 'region'],
+            required: [true, true],
+            values: [formik?.values?.commercial_name, formik.values?.region],
+            nameAttr: ['commercial_name', 'region'],
+            onChange: formik.handleChange,
+        },
+        {
+            names: ['Finca', 'Puntunaction Sca s'],
+            types: ['text', 'number'],
+            placeholders: ['Ingresar Finca', 'Ingresar Puntunaction Sca s'],
+            key: ['farm', 'sca_score'],
+            values: [formik?.values?.farm, formik.values?.sca_score],
+            nameAttr: ['farm', 'sca_score'],
+            required: [true, true],
+            min: [null, 80],
+            onChange: formik.handleChange,
+        },
+        {
+            names: ['Altitud', 'Proceso'],
+            types: ['number', 'text'],
+            required: [true, true],
+            placeholders: ['Ingresar Altitud', 'Ingresar Proceso'],
+            key: ['altitude', 'process'],
+            min: [1000, null],
+            values: [formik?.values?.altitude, formik.values?.process],
+            nameAttr: ['altitude', 'process'],
+            onChange: formik.handleChange,
+        },
     ]
 
 

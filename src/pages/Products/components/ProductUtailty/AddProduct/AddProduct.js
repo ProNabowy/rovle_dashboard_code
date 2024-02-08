@@ -4,14 +4,13 @@ import ProductsForm from '../ProductsForm';
 
 export default function AddProduct() {
 
-    const { formik, clickHandler } = useAddProduct();
+    const { formik } = useAddProduct();
 
     return (
 
         <PageContent title={'Formulario de Producto'} showActions={false}>
             <ProductsForm
                 formik={formik}
-                clickHandler={clickHandler}
             />
         </PageContent>
 

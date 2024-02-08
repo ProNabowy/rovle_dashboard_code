@@ -1,5 +1,4 @@
 import { Dialog } from 'primereact/dialog';
-import { Fragment } from 'react';
 
 export default function OrderDetails({ visible, setVisible, row }) {
 
@@ -39,36 +38,51 @@ export default function OrderDetails({ visible, setVisible, row }) {
                 </div>
 
                 {
-                    row?.items.map((item, index) => {
+                    row?.products?.map((item, index) => {
 
                         return (
-                            <Fragment key={index}>
+                            <div key={index} className='grid grid-cols-12 gap-5 col-span-12'>
 
                                 <div className='col-span-6'>
 
-                                    <h5 className='text-[#58291E] text-[16px] font-medium'>{item?.presentation?.product?.commercial_name}</h5>
+                                    <h5 className='text-[#58291E] text-[16px] font-medium'>{item?.product_name}</h5>
 
                                 </div>
 
-                                <div className='col-span-2'>
+                                <div className='col-span-6'>
+                                    {
+                                        row?.products?.[index]?.items?.map((order, i) => {
+                                            return (
+                                                <div key={i} className='grid grid-cols-12 gap-5'>
 
-                                    <h5 className='text-[#58291E] text-[16px] font-medium'>500g</h5>
+                                                    <div className='col-span-4 mb-1'>
+
+                                                        <h5 className='text-[#58291E] text-[16px] font-medium'>500g</h5>
+
+                                                    </div>
+
+                                                    <div className='col-span-4 mb-1'>
+
+                                                        <h5 className='text-[#58291E] text-[16px] font-medium'>{order?.units} Paquete</h5>
+
+                                                    </div>
+
+                                                    <div className='col-span-4 mb-1'>
+
+                                                        <h5 className='text-[#58291E] text-[16px] font-medium'>{order?.price_per_unit}$</h5>
+
+                                                    </div>
+
+                                                </div>
+                                            )
+
+                                        })
+                                    }
 
                                 </div>
 
-                                <div className='col-span-2'>
 
-                                    <h5 className='text-[#58291E] text-[16px] font-medium'>{item?.units} Paquete</h5>
-
-                                </div>
-
-                                <div className='col-span-2'>
-
-                                    <h5 className='text-[#58291E] text-[16px] font-medium'>{item?.price}$</h5>
-
-                                </div>
-
-                            </Fragment>
+                            </div>
                         )
 
                     })

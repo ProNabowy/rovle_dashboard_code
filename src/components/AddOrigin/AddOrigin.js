@@ -18,6 +18,7 @@ function AddOrigin({ formik, provider_id, classNames }) {
         addOriginValue,
         setAddOriginValue,
         origins,
+        isHasPermissions,
         handelAddOrigin
     } = useGetOriginData(formik, provider_id);
 
@@ -41,32 +42,47 @@ function AddOrigin({ formik, provider_id, classNames }) {
 
                 <label htmlFor={'Origin'} className='text-[18px] text-[#252525] font-medium'>      Origen   </label>
 
-                <div className='flex items-center cursor-pointer' onClick={() => setVisible(true)}>
-                    <h2 className='font-medium underline text-[#45B8EA] me-3'>Añadir Origen</h2>
-                </div>
+                {
+                    isHasPermissions('Origins', 'dashboard.origins.store')
+                        ?
+                        <div className='flex items-center cursor-pointer' onClick={() => setVisible(true)}>
+                            <h2 className='font-medium underline text-[#45B8EA] me-3'>Añadir Origen</h2>
+                        </div>
+                        :
+                        null
+                }
 
             </div>
 
-            <Dialog
-                header='Añadir Origen'
-                visible={visible}
-                style={{ width: '50vw' }}
-                headerClassName='origin'
-                onHide={() => setVisible(false)}
-            >
+            {
+                isHasPermissions('Origins', 'dashboard.origins.store')
+                    ?
+                    <Dialog
+                        header='Añadir Origen'
+                        visible={visible}
+                        style={{ width: '50vw' }}
+                        headerClassName='origin'
+                        onHide={() => setVisible(false)}
+                    >
 
-                <InputText
-                    className='!my-5 !w-full'
-                    placeholder='Añadir Origen'
-                    value={addOriginValue}
-                    onChange={(e) => setAddOriginValue(e.target.value)}
-                />
+                        <InputText
+                            className='!my-5 !w-full'
+                            placeholder='Añadir Origen'
+                            value={addOriginValue}
+                            required
+                            onChange={(e) => setAddOriginValue(e.target.value)}
+                        />
 
-                <div className='flex items-center justify-center'>
-                    <Button className='!bg-[#45B8EA] !border-[#45B8EA] !px-10' label='Enviar' onClick={handelAddOrigin} />
-                </div>
+                        <div className='flex items-center justify-center'>
+                            <Button className='!bg-[#45B8EA] !border-[#45B8EA] !px-10' label='Enviar' onClick={handelAddOrigin} />
+                        </div>
 
-            </Dialog>
+                    </Dialog>
+                    :
+                    null
+            }
+
+
 
             <Chips
                 allowDuplicate={false}

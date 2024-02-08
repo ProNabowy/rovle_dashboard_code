@@ -6,10 +6,10 @@ export default function Auth() {
 
     const isLogin = isLoggedIn();
 
-    const arrOfNotAvilableRoutes = ['/login', '/register', '/join',];
+    const arrOfNotAvilableRoutes = ['/login', '/register', '/join', '/reset-password'];
 
     const location = useLocation().pathname;
-
+    console.log(location);
 
     return (
         isLogin
@@ -20,6 +20,10 @@ export default function Auth() {
                 :
                 null
             :
-            <Navigate to={'/login'} />
+            arrOfNotAvilableRoutes.includes(location)
+                ?
+                null
+                :
+                <Navigate to={'/login'} />
     )
 }

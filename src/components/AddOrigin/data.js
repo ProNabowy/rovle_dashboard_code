@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Origins } from "../../apis/apis";
 import { useDispatch, useSelector } from "react-redux";
 import { setOrigins } from "../../store/reduces/origins";
+import { Swal } from "../../apis/data";
+import { hasPermissions } from "../../assets/js/utils";
 
 
 
@@ -13,6 +15,11 @@ const useGetOriginData = (formik, provider_id) => {
 
     const [addOriginValue, setAddOriginValue] = useState(null);
 
+    const permissions = useSelector(store => store.permissions);
+    const user_access = useSelector(store => store?.userPeressmisons);
+
+    const isHasPermissions = (PagePermissions, permissionKey) => hasPermissions(permissions[PagePermissions], user_access, permissionKey);
+
     const OriginsUtailty = new Origins();
 
     const origins = useSelector(store => store.origins);
@@ -21,9 +28,17 @@ const useGetOriginData = (formik, provider_id) => {
 
     const handelAddOrigin = () => {
 
-        setVisible(false);
+        if (addOriginValue) {
 
-        OriginsUtailty.addOrigin({ name: addOriginValue, provider_id: provider_id }, dispatch, origins);
+            setVisible(false);
+
+            OriginsUtailty.addOrigin({ name: addOriginValue, provider_id: provider_id }, dispatch, origins);
+
+        } else {
+
+            return Swal.rejected('Oops!', 'el campo de nombre es obligatorio');
+
+        }
 
     }
 
@@ -54,7 +69,8 @@ const useGetOriginData = (formik, provider_id) => {
         setSelectedOrigin, visible, setVisible,
         addOriginValue, setAddOriginValue,
         origins,
-        handelAddOrigin
+        handelAddOrigin,
+        isHasPermissions
     }
 
 }

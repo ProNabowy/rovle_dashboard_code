@@ -70,7 +70,7 @@ const settings = {
 
 const setups = {
     name: "SETUPS", children: [
-        { name: "Cafetería", PagePermissions: "Coffee Shops", PermissionKey: "dashboard.coffeeShops.index", icon: shops, href: "setups/coffee-shop" },
+        { name: "Cafeterías", PagePermissions: "Coffee Shops", PermissionKey: "dashboard.coffeeShops.index", icon: shops, href: "setups/coffee-shop" },
     ]
 }
 

@@ -12,7 +12,8 @@ export default function PlanForm({ formik, clickHandler }) {
         roaster,
         coffee,
         provider,
-        handleChangeProvider
+        handleChangeProvider,
+        isHasPermissions
     } = useAddPlan(formik);
 
     return (
@@ -44,11 +45,17 @@ export default function PlanForm({ formik, clickHandler }) {
 
                             <h2 className='text-[18px] text-[#252525] font-medium'>Nombre del Tostador</h2>
 
-                            <Link to={'/groups/roasters/add-roaster'} className='flex items-center cursor-pointer'>
+                            {
+                                isHasPermissions('Providers', 'dashboard.providers.store')
+                                    ?
+                                    <Link to={'/groups/roasters/add-roaster'} className='flex items-center cursor-pointer'>
 
-                                <h2 className='font-medium underline text-[#45B8EA] me-3'>Añadir Tostador</h2>
+                                        <h2 className='font-medium underline text-[#45B8EA] me-3'>Añadir Tostador</h2>
 
-                            </Link>
+                                    </Link>
+                                    :
+                                    null
+                            }
 
                         </div>
 
@@ -80,6 +87,8 @@ export default function PlanForm({ formik, clickHandler }) {
                 url={'/products/list/add-product'}
                 optionLabel="commercial_name"
                 title={'Productos'}
+                pageKey={'Products'}
+                pagePermissionKeyName={'dashboard.products.store'}
                 options={getSelectedOption(roaster, 'id', formik?.values?.provider_id)?.products}
             /> */}
 
@@ -89,6 +98,8 @@ export default function PlanForm({ formik, clickHandler }) {
                 dataKey={'coffee_shops'}
                 url={'/setups/coffee-shop/add-coffee'}
                 title={'Tiendas'}
+                pageKey={'Coffee Shops'}
+                pagePermissionKeyName={'dashboard.coffeeShops.store'}
                 options={coffee}
             />
 

@@ -5,13 +5,13 @@ import { useEditProduct } from './data';
 
 export default function EditProduct() {
 
-    const { formik, clickHandler } = useEditProduct();
+    const { formik } = useEditProduct();
 
     return (
 
         <PageContent title={'Formulario de Producto'} showActions={false}>
 
-            <ProductsForm formik={formik} clickHandler={clickHandler} />
+            <ProductsForm formik={formik} />
 
         </PageContent>
 

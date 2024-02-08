@@ -2,6 +2,7 @@
 import { Route, Routes } from 'react-router-dom';
 import {
     Login,
+    ForgetPassword,
     ProvinceList,
     AddProvince,
     EditProvince,
@@ -63,6 +64,7 @@ export default function routes(isHasPermissions) {
                 <Route path='' element={<p></p>} />
 
                 <Route path='/login' element={<Login />} />
+                <Route path='/reset-password' element={<ForgetPassword />} />
 
                 {/* <Route path="/settings/country/list" element={isHasPermissions('Countries', 'dashboard.countries.index') ? <CountryList /> : <NotFound />} />
                 <Route path="/settings/country/list/add-country" element={isHasPermissions('Countries', 'dashboard.countries.store') ? <AddCountry /> : <NotFound />} />

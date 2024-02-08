@@ -58,7 +58,7 @@ const useActionsBodyTemplate = (rowData) => {
 const columns = [
     { field: "id", header: "ID", tamplate: tableService.idBodyTemplate },
     { field: "name", header: "Nombre", tamplate: tableService.nameBodyTemplate },
-    { field: "provider.commercial_name", header: "Anfitrión", tamplate: hostBodyTemplate },
+    { field: "provider.commercial_name", header: "Introducido por", tamplate: hostBodyTemplate },
     { field: "created_at", header: "Fecha", tamplate: tableService.startDateBodyTemplate },
     { field: "status", header: "Acción", tamplate: useActionsBodyTemplate },
 ];

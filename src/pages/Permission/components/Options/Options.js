@@ -14,7 +14,7 @@ export default function Options({ items, options, onOptionChange }) {
 
                             <Checkbox inputId={item?.id} name={item?.id} value={item?.title} onChange={e => onOptionChange(e, item)} checked={options.includes(item?.id)} />
 
-                            <label htmlFor={item?.id} className="ml-2 cursor-pointer select-none">{item?.title}</label>
+                            <label htmlFor={item?.id} className="ms-2 !mb-0 cursor-pointer select-none">{item?.title}</label>
 
                         </div>
 

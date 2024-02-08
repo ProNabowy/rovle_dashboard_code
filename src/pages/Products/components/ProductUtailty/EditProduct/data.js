@@ -40,9 +40,7 @@ const useEditProduct = () => {
         return productUtailty.editProducts(updatedData, productId, products, dispatch).finally(_ => setIsLoading(false));
 
     }
-    const { formik } = useFormData(initialValues, null);
-
-    const clickHandler = debounce((_) => handelSubmit(formik.values), 1000);
+    const { formik } = useFormData(initialValues, handelSubmit);
 
     useEffect(() => {
 
@@ -80,7 +78,7 @@ const useEditProduct = () => {
     }, [product]);
 
 
-    return { formik, clickHandler, }
+    return { formik, }
 
 }
 

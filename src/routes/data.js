@@ -3,6 +3,7 @@ import { lazy } from "react";
 
 // Lazy Function To Load Page Lossaley
 const Login = lazy(() => import('../pages/Login'));
+const ForgetPassword = lazy(() => import('../pages/ForgetPassword'));
 
 const ProvinceList = lazy(() => import('../pages/Province'));
 const AddProvince = lazy(() => import('../pages/Province/components/AddProvince'));
@@ -72,6 +73,7 @@ const NotFound = lazy(() => import('../pages/NotFound'));
 
 export {
     Login,
+    ForgetPassword,
     ProvinceList,
     AddProvince,
     EditProvince,

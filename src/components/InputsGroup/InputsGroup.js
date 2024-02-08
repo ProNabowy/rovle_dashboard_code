@@ -8,10 +8,12 @@ export default function InputsGroup({ data }) {
                 <label htmlFor={data?.names[0]} className='text-[18px] text-[#252525] font-medium'>{data?.names[0]}</label>
 
                 <input
+                    required={data?.required?.[0]}
                     value={data?.values && data?.values[0]}
                     name={data?.nameAttr && data?.nameAttr[0]}
                     type={data.types && data?.types[0] || 'text'}
                     onChange={data?.onChange}
+                    min={data?.min?.[0]}
                     id={data?.names && data?.names[0]} className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]'
                     placeholder={data?.placeholders[0]}
                 />
@@ -23,6 +25,8 @@ export default function InputsGroup({ data }) {
                 <label htmlFor={data?.names[1]} className='text-[18px] text-[#252525] font-medium'>{data?.names[1]}</label>
 
                 <input
+                    required={data?.required?.[1]}
+                    min={data?.min?.[1]}
                     disabled={data?.disabledSecondInput}
                     value={data?.values && data?.values[1]}
                     name={data?.nameAttr && data?.nameAttr[1]}

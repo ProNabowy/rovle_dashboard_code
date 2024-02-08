@@ -4,11 +4,20 @@ import React, { useRef } from 'react';
 import { useGetShopData } from './data';
 import { Link } from 'react-router-dom';
 
-function ChipsList({ options, title, url, optionLabel, formik, dataKey }) {
+function ChipsList({
+    options,
+    title,
+    url,
+    optionLabel,
+    formik,
+    dataKey,
+    pageKey,
+    pagePermissionKeyName
+}) {
 
     const dropdownRef = useRef();
 
-    const { selectedShop, handleDuplicatedValue, handleRemove, renderChipsItem } = useGetShopData(formik, dataKey, optionLabel);
+    const { selectedShop, handleDuplicatedValue, handleRemove, renderChipsItem, isHasPermissions } = useGetShopData(formik, dataKey, optionLabel);
 
     return (
         <div className='relative mb-8'>
@@ -19,9 +28,16 @@ function ChipsList({ options, title, url, optionLabel, formik, dataKey }) {
                     {title}
                 </label>
 
-                <Link to={url} className='flex items-center cursor-pointer'>
-                    <h2 className='font-medium underline text-[#45B8EA] me-3'>Añadir {title}</h2>
-                </Link>
+                {
+                    isHasPermissions(pageKey, pagePermissionKeyName)
+                        ?
+                        <Link to={url} className='flex items-center cursor-pointer'>
+                            <h2 className='font-medium underline text-[#45B8EA] me-3'>Añadir {title}</h2>
+                        </Link>
+                        :
+                        null
+                }
+
 
             </div>
 

@@ -2,8 +2,14 @@ import { Dropdown } from 'primereact/dropdown';
 import { ChipsList, AddOrigin, InputsGroup, AddPackage, AddPackageByDropdown } from '../../../../../components';
 import { useFormDataGetter } from './data';
 import { getSelectedOption } from '../../../../../assets/js/utils';
-
-export default function ProductsForm({ formik, clickHandler, originsList, packagesList }) {
+// {
+//     "size_id": 55,
+//     "price": "321",
+//     "id": 55,
+//     "weight": "50.00",
+//     "name": "Xl"
+// }
+export default function ProductsForm({ formik, originsList, packagesList }) {
 
     const {
         inputsData,
@@ -18,7 +24,7 @@ export default function ProductsForm({ formik, clickHandler, originsList, packag
 
     return (
 
-        <form onSubmit={e => e.preventDefault()} className='px-10 add-product'>
+        <form onSubmit={formik.handleSubmit} className='px-10 add-product'>
 
             <div className='flex items-center justify-between mb-8'>
 
@@ -29,7 +35,7 @@ export default function ProductsForm({ formik, clickHandler, originsList, packag
 
                             <label htmlFor={'factor'} className='text-[18px] text-[#252525] font-medium'>Nombre del proveedor</label>
 
-                            <input value={formik?.values?.owner_name} name={'owner_name'} type={'text'} onChange={formik.handleChange} id={'factor'} className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]' placeholder={'Enter factor name'} />
+                            <input required value={formik?.values?.owner_name} name={'owner_name'} type={'text'} onChange={formik.handleChange} id={'factor'} className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]' placeholder={'Enter factor name'} />
 
                         </div>
                         :
@@ -92,6 +98,8 @@ export default function ProductsForm({ formik, clickHandler, originsList, packag
                 dataKey={'coffeeShops'}
                 url={'/setups/coffee-shop/add-coffee'}
                 title={'Tiendas'}
+                pageKey={'Coffee Shops'}
+                pagePermissionKeyName={'dashboard.coffeeShops.store'}
                 options={coffee}
             />
 
@@ -104,7 +112,7 @@ export default function ProductsForm({ formik, clickHandler, originsList, packag
 
             </div>
 
-            <AddPackageByDropdown
+            {/* <AddPackageByDropdown
                 formik={formik}
                 options={sizes}
                 optionLabel={'name'}
@@ -112,13 +120,18 @@ export default function ProductsForm({ formik, clickHandler, originsList, packag
                 label={'Talla'}
                 inputLabel={"Precio"}
                 hasAddButton={false}
+            /> */}
+
+            <AddPackage
+                formik={formik}
+                provider_id={selectedProvider?.id}
             />
 
             {/* <AddPackage formik={formik} provider_id={formik.values.provider_id} /> */}
 
             <div className='flex items-center justify-end mt-10'>
 
-                <button onClick={clickHandler} type='submit' className='bg-[#45B8EA] text-white py-[16px] px-32 rounded-full'>Enviar</button>
+                <button type='submit' className='bg-[#45B8EA] text-white py-[16px] px-32 rounded-full'>Enviar</button>
 
             </div>
 

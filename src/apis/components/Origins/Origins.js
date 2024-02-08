@@ -27,7 +27,7 @@ class Origins {
 
             .then(response => {
 
-                Swal.success('Añadido!', `Tu origen ha sido añadido.`).then(_ => navigate('/origins/list'));
+                Swal.success('Añadido!', `Tu origen ha sido añadido.`).then(_ => navigate && navigate('/origins/list'));
 
                 return dispatch(setOrigins([...origins, response.data.data]));
 

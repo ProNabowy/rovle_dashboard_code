@@ -45,13 +45,15 @@ export default function Login() {
 
                             </div>
 
-                            <div className='mb-[8px]'>
+                            <div>
 
                                 <label className='block font-medium' htmlFor='password'>Contraseña</label>
 
                                 <input onChange={e => setData(perv => ({ ...perv, password: e.target.value }))} id='password' type='password' className='w-[400px] h-[40px] px-5 rounded-[8px]' style={{ background: 'linear-gradient(120deg, #FFF -45.57%, rgba(217, 217, 217, 0.00) 134.89%)', backdropFilter: 'blur(12.343469619750977px)' }} />
 
                             </div>
+
+                            <Link to={'/reset-password'} className='text-[#252525] text-[12px] underline'>Forget Password ?  </Link>
 
                             <button className='w-full h-[45px] mt-[16px] text-center rounded-[8px] text-white bg-[#45B8EA]' style={{ backdropFilter: 'blur(12.343469619750977px)' }}>
                                 Iniciar sesión
@@ -60,7 +62,7 @@ export default function Login() {
 
                             <div className="flex items-center mt-[8px]">
                                 <Checkbox inputId='rememberMe' onChange={e => setChecked(e.checked)} checked={checked}></Checkbox>
-                                <label htmlFor="rememberMe" className="ml-2 cursor-pointer text-[#252525]">Recuérdame</label>
+                                <label htmlFor="rememberMe" className="ml-2 !mb-0 cursor-pointer text-[#252525]">Recuérdame</label>
                             </div>
 
                         </form>

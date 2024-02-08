@@ -39,7 +39,7 @@ const useAddProduct = () => {
     const { useFormData } = Formik();
 
     const handelSubmit = values => {
-
+        console.log(formik.errors);
         const updatedData = { ...values };
 
         // Convert Objects To Arr Of Ids
@@ -51,11 +51,9 @@ const useAddProduct = () => {
         return productUtailty.addProduct(updatedData, dispatch, products, navigate).finally(_ => setIsLoading(false));
 
     }
-    const { formik } = useFormData(initialValues, null);
+    const { formik } = useFormData(initialValues, handelSubmit);
 
-    const clickHandler = debounce((_) => handelSubmit(formik.values), 1000);
-
-    return { formik, clickHandler, }
+    return { formik }
 
 }
 

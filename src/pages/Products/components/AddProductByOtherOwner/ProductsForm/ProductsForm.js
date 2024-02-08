@@ -254,7 +254,7 @@ export default function ProductsForm() {
                                     productInfo?.presentations?.map((item, index) => {
 
                                         return (
-                                            <div className='col-span-6 border border-[#58291E] text-center rounded-[5px] p-2'>
+                                            <div key={index} className='col-span-6 border border-[#58291E] text-center rounded-[5px] p-2'>
                                                 {item?.price} Euro por {item?.weight} gm
                                             </div>
                                         )
@@ -272,6 +272,8 @@ export default function ProductsForm() {
                             dataKey={'coffeeShops'}
                             url={'/setups/coffee-shop/add-coffee'}
                             title={'Tu Tienda'}
+                            pageKey={'Coffee Shops'}
+                            pagePermissionKeyName={'dashboard.coffeeShops.store'}
                             options={currentRoaster?.coffee_shops}
                         />
 

@@ -43,7 +43,7 @@ export default function BreadcrumbNav() {
         ['edit-roaster']: 'Editar Tostadore',
         ['orders']: 'Órdenes',
         ['order-details']: 'Detalles del pedido',
-        ['coffee-shop']: 'Cafetería',
+        ['coffee-shop']: 'Cafeterías',
         ['add-coffee']: 'Agregar café',
         ['edit-coffee']: 'Editar café',
         ['offers']: 'Ofertas',

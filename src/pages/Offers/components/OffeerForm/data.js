@@ -1,11 +1,17 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { hasPermissions } from "../../../../assets/js/utils";
 
 const useDataGetter = formik => {
 
     const roasters = useSelector(store => store?.rosters);
 
     const [autoSelectStartData, setAutoSelectStartData] = useState(false);
+
+    const permissions = useSelector(store => store.permissions);
+    const user_access = useSelector(store => store?.userPeressmisons);
+
+    const isHasPermissions = (PagePermissions, permissionKey) => hasPermissions(permissions[PagePermissions], user_access, permissionKey);
 
     const [autoSelectEndData, setAutoSelectEndData] = useState(false);
 
@@ -51,6 +57,7 @@ const useDataGetter = formik => {
         autoSelectEndData,
         handleEndDate,
         isProvider,
+        isHasPermissions,
         setAutoSelectEndData,
     }
 
