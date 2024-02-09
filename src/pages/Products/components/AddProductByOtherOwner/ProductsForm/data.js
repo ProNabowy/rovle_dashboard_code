@@ -13,7 +13,7 @@ const useFormDataGetter = () => {
     const user = JSON.parse(localStorage.getItem('user'));
 
     const [roasterFrom, setRoasterFrom] = useState([]);
-    
+
     const [roasterTo, setRoasterTo] = useState([]);
 
     const productUtailty = new Products();

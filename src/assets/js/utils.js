@@ -168,7 +168,7 @@ const hasPermissions = (arrOfPermissions, arrOfUserPermissions, key) => {
 // Handle User Logout
 const handleLogOut = (response, userWant) => {
 
-    if (response?.status == 401 || userWant) {
+    if (userWant) {
 
         window.localStorage.clear();
 

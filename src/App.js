@@ -1,7 +1,6 @@
 import { MainPanel, MainContent } from './layouts'
 import { Auth, Spiners } from "./components";
 import { useDataAppGetter } from "./data";
-import { useSelector } from 'react-redux';
 
 export default function App() {
 
@@ -11,7 +10,6 @@ export default function App() {
     setIsExpanded
   } = useDataAppGetter();
 
-  const store = useSelector(store => store);
 
   return (
     <div className="App">

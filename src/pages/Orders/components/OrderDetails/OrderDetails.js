@@ -69,7 +69,7 @@ export default function OrderDetails({ visible, setVisible, row }) {
 
                                                     <div className='col-span-4 mb-1'>
 
-                                                        <h5 className='text-[#58291E] text-[16px] font-medium'>{order?.price_per_unit}$</h5>
+                                                        <h5 className='text-[#58291E] text-[16px] font-medium'>{order?.total}$</h5>
 
                                                     </div>
 
@@ -91,13 +91,62 @@ export default function OrderDetails({ visible, setVisible, row }) {
                 <h2 className='col-span-12 mt-5'>
 
                     Totals Price
-                    <span className='text-[#58291E] ms-3 font-medium'>12.95 Eouro</span>
+                    <span className='text-[#58291E] ms-3 font-medium'>{row?.total} Eouro</span>
 
                 </h2>
 
                 <h2 className='col-span-12 mt-3'>Nota:</h2>
 
                 <p className='p-3 border border-[#252525ac] col-span-12 rounded-[5px]'>Tu mensaje parece ser un texto en latín o una combinación de palabras que no forman una oración coherente en español. Si puedes proporcionar más contexto o aclarar tu solicitud, estaré encantado de ayudarte.</p>
+
+                <div className='col-span-12 mt-12' style={{ background: 'linear-gradient(0deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.95) 100%), #252525' }}>
+
+                    <h1 className='text-[#252525] mb-4 font-medium text-[18px]'>Shipping information</h1>
+
+                    <div className='grid grid-cols-12 gap-5'>
+
+                        <div className='col-span-6 flex items-center'>
+
+                            <h3 className='text-[#252525] font-medium me-4'>address</h3>
+                            <h3 className='text-[#252525] font-medium'>{row?.address}</h3>
+
+                        </div>
+
+                        <div className='col-span-6 flex items-center'>
+
+                            <h3 className='text-[#252525] font-medium me-4'>Zip code</h3>
+                            <h3 className='text-[#252525] font-medium'>{row?.zip_code}</h3>
+
+                        </div>
+                        <div className='col-span-6 flex items-center'>
+
+                            <h3 className='text-[#252525] font-medium me-4'>Name</h3>
+                            <h3 className='text-[#252525] font-medium'>{row?.name}</h3>
+
+                        </div>
+                        <div className='col-span-6 flex items-center'>
+
+                            <h3 className='text-[#252525] font-medium me-4'>Email</h3>
+                            <h3 className='text-[#252525] font-medium'>{row?.email}</h3>
+
+                        </div>
+                        <div className='col-span-6 flex items-center'>
+
+                            <h3 className='text-[#252525] font-medium me-4'>Phone</h3>
+                            <h3 className='text-[#252525] font-medium'>{row?.phone}</h3>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div className='col-span-12 flex items-center justify-between mt-10'>
+
+                    <button className='bg-[#45B8EA] text-white py-4 px-6 text-[20px] rounded-full w-[48%]'>Accept</button>
+                    <button className='bg-[#FF5C34] text-white py-4 px-6 text-[20px] rounded-full w-[48%]'>Cancel</button>
+
+                </div>
 
             </div>
 
