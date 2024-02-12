@@ -1,2 +1,0 @@
-user have Permission of Products can update delete list any products of another user
-the same idea of the country and cities

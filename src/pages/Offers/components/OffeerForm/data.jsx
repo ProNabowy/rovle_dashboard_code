@@ -1,0 +1,120 @@
+import { useContext, useEffect, useState } from "react";
+import { AppContext } from "../../../../context/AppContext";
+import { hasRoutePermissions } from "../../../../assets/utils/utils";
+import { Get } from "../../../../apis/apis";
+
+const useDataGetter = formik => {
+
+    const [roasters, setRoasters] = useState([]);
+
+    const getUtailty = new Get();
+
+    const [autoSelectStartData, setAutoSelectStartData] = useState(true);
+
+    const { setIsLoading, userPeressmisons, user } = useContext(AppContext);
+
+    const isHasPermissions = (permissionKey) => hasRoutePermissions(userPeressmisons, permissionKey);
+
+    const [autoSelectEndData, setAutoSelectEndData] = useState(true);
+
+    const isProvider = user?.provider;
+
+    useEffect(() => {
+
+        setIsLoading(true);
+
+        getUtailty.getRoasters().then(response => setRoasters(response)).finally(_ => setIsLoading(false));
+
+        return () => { };
+    }, []);
+
+    const handleStartDate = e => {
+
+        setAutoSelectStartData(e.checked);
+
+        if (e.checked) {
+
+            formik.setFieldValue('start_date', new Date());
+
+
+        } else {
+
+            formik.setFieldValue('start_date', '');
+
+        }
+
+    }
+    const handleEndDate = e => {
+
+        setAutoSelectEndData(e.checked);
+
+        if (e.checked) {
+
+            formik.setFieldValue('end_date', 'auto');
+
+
+        } else {
+
+            formik.setFieldValue('end_date', '');
+
+        }
+
+    }
+
+    return {
+        handleStartDate,
+        roasters,
+        autoSelectStartData,
+        setAutoSelectStartData,
+        autoSelectEndData,
+        handleEndDate,
+        isProvider,
+        isHasPermissions,
+        setAutoSelectEndData,
+    }
+
+
+}
+
+const Usuario = [
+    { id: 'auto', name: "TODOS" },
+    { id: 1, name: "Nivel 1" },
+    { id: 2, name: "Nivel 2" },
+    { id: 3, name: "Nivel 3" },
+]
+
+const Activa = [
+    { id: 'auto', name: "AUTO" },
+    { id: 'visit', name: "VISITAS" },
+    { id: 'points', name: "PUNTOS" },
+]
+
+const Discount = [
+    { id: 'percentage', name: "% DESC" },
+    { id: 'freeCoffee', name: "CAFÉ GRATIS" },
+]
+const Recurren = [
+    { id: 0, name: "Diaria" },
+    { id: 1, name: "Semanal" },
+    { id: 2, name: "Mensual" },
+    { id: 3, name: "Anual" },
+    { id: 4, name: "Sólo una vez" },
+    { id: 5, name: "Automática" },
+]
+const Fisico = [
+    { id: 'auto', name: "FÍSICO Y ONLINE" },
+    { id: 'coffeeShop', name: "FISICO" },
+    { id: 'app', name: "SOLO APP" },
+]
+
+
+
+
+export {
+    Usuario,
+    Activa,
+    Discount,
+    Recurren,
+    Fisico,
+    useDataGetter
+}
