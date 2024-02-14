@@ -44,6 +44,9 @@ export default class Get {
     getSizeByProvider(id) {
         return axios.get(`sizes?provider_id=${id}`).then(response => response.data.data);
     }
+    getSubscriptions() {
+        return axios.get(`subscriptions`).then(response => response.data.data);
+    }
     getSubscriptionsByPlanId(id) {
         return axios.get(`plans/${id}/subscriptions`).then(response => response.data.data);
     }
@@ -76,5 +79,8 @@ export default class Get {
     }
     getSingleOffeer(id) {
         return axios.get(`passports/${id}`).then(response => response.data.data);
+    }
+    getCitiesByZipCode(code) {
+        return axios.get(`cities/filter?zip=${code}`).then(response => response.data.data);
     }
 }

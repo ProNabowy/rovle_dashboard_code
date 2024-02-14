@@ -1,16 +1,19 @@
-import { useDataGetter, renderCollaction, settings, setups } from './data';
-import { GROUPSRoutes, SettingsRoutes } from './components';
-import { useState } from 'react';
+import { useDataGetter, renderCollaction, settings, setups, groups } from './data';
+import { SettingsRoutes } from './components';
+import { useContext, useState } from 'react';
+import { AppContext } from '../../../context/AppContext';
 
 export default function MnueMainContent({ isExpanded }) {
+
+    const { user } = useContext(AppContext);
+
+    const isAdmin = user?.roles?.[0]?.name === 'admin';
 
     const { isRenderRouteCollactions, isHasPermissions, linkStyle } = useDataGetter(isExpanded);
 
     const [visibleProducts, setVisibleProducts] = useState(false);
 
     const [visiblePlans, setVisiblePlans] = useState(false);
-
-    const [visibleRoasters, setVisibleRoasters] = useState(false);
 
     return (
 
@@ -26,17 +29,9 @@ export default function MnueMainContent({ isExpanded }) {
                     setVisibleProducts={setVisibleProducts}
                     visiblePlans={visiblePlans}
                     visibleProducts={visibleProducts}
-                    setVisibleRoasters={setVisibleRoasters}
                 />
 
-                <GROUPSRoutes
-                    isExpanded={isExpanded}
-                    setVisiblePlans={setVisiblePlans}
-                    setVisibleProducts={setVisibleProducts}
-                    visibleRoasters={visibleRoasters}
-                    setVisibleRoasters={setVisibleRoasters}
-                />
-
+                {isRenderRouteCollactions[2] && renderCollaction(isHasPermissions, isExpanded, groups, linkStyle , isAdmin)}
                 {isRenderRouteCollactions[3] && renderCollaction(isHasPermissions, isExpanded, setups, linkStyle)}
 
             </ul>

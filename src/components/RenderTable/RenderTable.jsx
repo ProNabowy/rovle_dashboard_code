@@ -3,6 +3,7 @@ import { useDataGetter, FilterFields, data } from './data';
 import { Dropdown } from 'primereact/dropdown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import Input from '../Input/Input';
 
 export default function RenderTable({
     columns,
@@ -27,7 +28,13 @@ export default function RenderTable({
 
             <div className='relative ms-8 mb-5 w-[400px]'>
 
-                <input type='text' placeholder='Búsqueda (Ctrl+/)' value={globalFilterValue} onChange={onGlobalFilterChange} className='px-10 py-3 rounded-full border w-full' />
+                <Input
+                    type='text'
+                    value={globalFilterValue}
+                    placeholder={'Búsqueda (Ctrl+/)'}
+                    onChange={onGlobalFilterChange}
+                    classNames="px-10 py-3 rounded-full w-full border border-[#b3b3b3]"
+                />
 
                 <FontAwesomeIcon icon={faSearch} className='text-[#252525] text-[13px] absolute left-4 top-[50%] translate-y-[-50%]' />
 

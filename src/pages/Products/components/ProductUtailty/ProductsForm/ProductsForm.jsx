@@ -13,7 +13,9 @@ export default function ProductsForm({ formik, originsList, packagesList }) {
         selectedProvider,
         setSelectedProvider,
         rosters,
-        allRoasters
+        allRoasters,
+        setAddedShops,
+        addedShops
     } = useFormDataGetter(formik, originsList, packagesList);
 
     return (
@@ -96,6 +98,8 @@ export default function ProductsForm({ formik, originsList, packagesList }) {
                 pageKey={'Coffee Shops'}
                 pagePermissionKeyName={'dashboard.coffeeShops.store'}
                 options={coffee}
+                stateList={setAddedShops}
+                listOfState={addedShops}
             />
 
             <div>

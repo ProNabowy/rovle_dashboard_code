@@ -18,7 +18,6 @@ const PlansList = lazy(() => import('../pages/Plans'));
 const AddPlan = lazy(() => import('../pages/Plans/components/AddPlan'));
 const EditPlan = lazy(() => import('../pages/Plans/components/EditPlan'));
 const Subscriptions = lazy(() => import('../pages/Subscriptions'));
-const SubscriptionsList = lazy(() => import('../pages/Subscriptions/components/SubscriptionsList'));
 const ManagePackage = lazy(() => import('../pages/ManagePackage'));
 const SizeList = lazy(() => import('../pages/SizeManagement/components/SizeList'));
 const AddSize = lazy(() => import('../pages/SizeManagement/components/AddSize'));
@@ -56,7 +55,6 @@ export {
     AddPlan,
     EditPlan,
     Subscriptions,
-    SubscriptionsList,
     ManagePackage,
     SizeList,
     AddSize,

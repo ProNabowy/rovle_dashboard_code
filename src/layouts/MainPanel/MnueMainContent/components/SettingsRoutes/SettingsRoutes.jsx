@@ -11,8 +11,7 @@ export default function SettingsRoutes({
     setVisiblePlans,
     setVisibleProducts,
     visiblePlans,
-    visibleProducts,
-    setVisibleRoasters
+    visibleProducts
 }) {
 
     const { isRenderRouteCollactions, isHasPermissions, linkStyle } = useDataGetter(isExpanded);
@@ -61,7 +60,6 @@ export default function SettingsRoutes({
                                     <div onClick={_ => {
                                         setVisiblePlans(false);
                                         setVisibleProducts(perv => !perv);
-                                        setVisibleRoasters(false);
                                     }} className='nav-icon w-[35px] h-[35px] rounded-full flex items-center justify-center'>
 
                                         <img src={products} alt="" className="w-[20px] h-[20px]" />
@@ -109,7 +107,6 @@ export default function SettingsRoutes({
                                     <div onClick={_ => {
                                         setVisiblePlans(perv => !perv);
                                         setVisibleProducts(false);
-                                        setVisibleRoasters(false);
                                     }} className='nav-icon w-[35px] h-[35px] rounded-full flex items-center justify-center'>
 
                                         <img src={plans} alt="" className="w-[20px] h-[20px]" />

@@ -9,6 +9,8 @@ const useFormDataGetter = (formik, originsList, packagesList) => {
 
     const [allRoasters, setAllRoasters] = useState([]);
 
+    const [addedShops, setAddedShops] = useState({});
+
     const [rosters, setRosters] = useState([]);
 
     const [selectedProvider, setSelectedProvider] = useState({});
@@ -23,7 +25,7 @@ const useFormDataGetter = (formik, originsList, packagesList) => {
 
         setIsLoading(true);
 
-        getUtailty.getProducts()
+        getUtailty.getRoasters()
             .then(response => setAllRoasters(response))
             .finally(_ => setIsLoading(false));
 
@@ -39,9 +41,7 @@ const useFormDataGetter = (formik, originsList, packagesList) => {
 
         }
 
-        if (isProvider) {
-
-            // const currentRoaster = allRoasters?.filter(item => item.id === isProvider?.id);
+        if (isProvider && !addedShops?.provider_id) {
 
             setRosters(isProvider);
 
@@ -134,6 +134,36 @@ const useFormDataGetter = (formik, originsList, packagesList) => {
         },
     ]
 
+    useEffect(() => {
+
+        const shopProviderId = addedShops?.provider_id;
+
+        if (shopProviderId) {
+
+            getUtailty.getRoasters()
+                .then(response => {
+
+                    setAllRoasters(response);
+
+                    if (isProvider) {
+
+                        const newProviderData = response?.filter(roaster => roaster?.id === isProvider?.id)?.[0];
+
+                        setRosters(newProviderData);
+
+                        setSelectedProvider(newProviderData);
+
+                        setCoffee(newProviderData?.coffee_shops);
+
+                    }
+
+                });
+
+        }
+
+        return () => { };
+    }, [addedShops]);
+
 
     return {
         inputsData,
@@ -143,7 +173,9 @@ const useFormDataGetter = (formik, originsList, packagesList) => {
         setSelectedProvider,
         rosters,
         isProvider,
-        allRoasters
+        setAddedShops,
+        allRoasters,
+        addedShops
     }
 
 }

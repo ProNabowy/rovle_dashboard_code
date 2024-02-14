@@ -1,6 +1,7 @@
-import { PageContent } from '../../components';
+import { PageContent, RenderTable } from '../../components';
 import { Dropdown } from 'primereact/dropdown';
-import { useDataGetter } from './data';
+import { useDataGetter, columns } from './data';
+import { useRef } from 'react';
 
 export default function Subscriptions() {
 
@@ -11,24 +12,35 @@ export default function Subscriptions() {
         selectedPlan,
         setselectedPlan,
         plans,
-        handleShowButton,
-        provider
+        provider,
+        subscriptionsList,
     } = useDataGetter();
+
+    const tableRef = useRef();
 
     return (
 
-        <PageContent title={'Suscripciones'} showActions={false} >
+        <PageContent
+            url={'/products/plans/add-plan'}
+            addnewClassNames={'hidden'}
+            title={'Suscripciones'}
+            showActions={true}
+            table={tableRef}
+            columns={columns}
+            list={subscriptionsList}
+            saveName={'Subscriptions'}
+        >
 
-            <form onSubmit={e => e.preventDefault()}>
+            <div className='grid grid-cols-12 gap-5 w-full my-5 px-10'>
 
                 {
                     !provider?.id
                         ?
-                        <div className='px-10 py-3'>
+                        <div className='col-span-6'>
 
-                            <label htmlFor='name-input' className='mb-3 block text-[#234486]'>Tostador</label>
+                            <label htmlFor='name-input' className='mb-3 block font-medium text-[#234486]'>Tostador</label>
 
-                            <Dropdown filter value={selectedRosters} onChange={(e) => setselectedRosters(e.value)} options={rosters} optionLabel="commercial_name"
+                            <Dropdown filter value={selectedRosters && selectedRosters} onChange={(e) => setselectedRosters(e.value)} options={rosters} optionLabel="commercial_name"
                                 placeholder="Seleccionar proveedor" className="w-full p-3 !border-r-[0] !border-l-[0] !border-t-[0] !border-b !border-b-[#b3b3b3] !shadow-none !rounded-none" />
 
                         </div>
@@ -36,26 +48,20 @@ export default function Subscriptions() {
                         null
                 }
 
-                <div className='px-10 py-3'>
+                <div className={`${provider?.id ? "col-span-12" : "col-span-6"}`}>
 
-                    <label htmlFor='name-input' className='mb-3 block text-[#234486]'>Plan name</label>
+                    <label htmlFor='name-input' className='mb-3 block font-medium text-[#234486]'>Nombre del plan</label>
 
-                    <Dropdown filter value={selectedPlan} onChange={(e) => setselectedPlan(e.value)} options={plans} optionLabel="name"
-                        placeholder="Seleccionar plan" className="w-full p-3 !border-r-[0] !border-l-[0] !border-t-[0] !border-b !border-b-[#b3b3b3] !shadow-none !rounded-none" />
-
-                </div>
-
-                <div className='flex items-center justify-end p-10 pb-5'>
-
-                    <button onClick={handleShowButton} className='p-4 px-24 rounded-full text-white font-medium bg-[var(--primary-color)]'>
-                        Mostrar
-                    </button>
+                    <Dropdown filter value={selectedPlan && selectedPlan} onChange={(e) => setselectedPlan(e.value)} options={Array.from(plans)} optionLabel="name"
+                        placeholder="Seleccionar Plan" className="w-full p-3 !border-r-[0] !border-l-[0] !border-t-[0] !border-b !border-b-[#b3b3b3] !shadow-none !rounded-none" />
 
                 </div>
 
-            </form>
+            </div>
 
+            <RenderTable columns={columns} list={subscriptionsList} table={tableRef} />
 
         </PageContent>
+
     )
 }

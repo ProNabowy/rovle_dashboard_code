@@ -19,7 +19,8 @@ export default function ProductsForm() {
         setSelectedProvider,
         roasterFrom,
         roasterTo,
-        user
+        user,
+        setAddedShops
     } = useFormDataGetter();
 
     return (
@@ -278,6 +279,7 @@ export default function ProductsForm() {
                             pageKey={'Coffee Shops'}
                             pagePermissionKeyName={'dashboard.coffeeShops.store'}
                             options={currentRoaster?.coffee_shops}
+                            stateList={setAddedShops}
                         />
 
                         <div className='flex items-center justify-end mt-10'>

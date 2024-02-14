@@ -13,7 +13,9 @@ export default function PlanForm({ formik, clickHandler }) {
         coffee,
         provider,
         handleChangeProvider,
-        isHasPermissions
+        isHasPermissions,
+        setAddedShops,
+        addedShops
     } = useAddPlan(formik);
 
     return (
@@ -81,18 +83,6 @@ export default function PlanForm({ formik, clickHandler }) {
 
             </div>
 
-            {/* For Add Product */}
-            {/* <ChipsList
-                formik={formik}
-                dataKey={'products'}
-                url={'/products/list/add-product'}
-                optionLabel="commercial_name"
-                title={'Productos'}
-                pageKey={'Products'}
-                pagePermissionKeyName={'dashboard.products.store'}
-                options={getSelectedOption(roaster, 'id', formik?.values?.provider_id)?.products}
-            /> */}
-
             {/* For Add CoffeShop */}
             <ChipsList
                 formik={formik}
@@ -100,6 +90,8 @@ export default function PlanForm({ formik, clickHandler }) {
                 url={'/setups/coffee-shop/add-coffee'}
                 title={'Tiendas'}
                 pageKey={'Coffee Shops'}
+                stateList={setAddedShops}
+                listOfState={addedShops}
                 pagePermissionKeyName={'dashboard.coffeeShops.store'}
                 options={coffee}
             />

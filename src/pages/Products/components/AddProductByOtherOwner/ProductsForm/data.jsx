@@ -11,6 +11,8 @@ const useFormDataGetter = () => {
 
     const getUtailty = new Get();
 
+    const [addedShops, setAddedShops] = useState({});
+
     const storeUtailty = new Store();
 
     const { setIsLoading, user } = useContext(AppContext);
@@ -147,7 +149,8 @@ const useFormDataGetter = () => {
         setSelectedProvider,
         user,
         roasterFrom,
-        roasterTo
+        roasterTo,
+        setAddedShops
     }
 
 }

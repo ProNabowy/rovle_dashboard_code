@@ -41,10 +41,25 @@ const useGetOriginData = (formik, provider_id) => {
 
             setVisible(false);
 
+            // Call the 'addOrigin' function from the 'storeUtailty' object, passing the 'data' parameter.
             storeUtailty.addOrigin(data)
+                // When the promise is resolved, execute the following callback with the 'response' parameter.
                 .then(response => {
+                    // Update the 'origins' state by appending the new data from the response.
                     setOrigins(perv => ([...perv, response.data]));
-                })
+
+                    // Reset the input value to null after successfully adding the origin.
+                    setAddOriginValue(null);
+
+                    // Check if the 'origins' property in 'formik.values' is an array.
+                    const type_of_old_origin = Array.isArray(formik?.values?.origins);
+
+                    // Create a new array 'origins' containing the previous values and the new origin data.
+                    const origins = type_of_old_origin ? [...formik?.values?.origins, response.data] : [response.data];
+
+                    // Update the 'origins' property in the 'formik' form values with the new array.
+                    formik?.setFieldValue('origins', origins);
+                });
 
         } else {
 

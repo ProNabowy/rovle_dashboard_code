@@ -5,13 +5,13 @@ import RoasterForm from '../RoasterForm';
 
 export default function EditRoaster() {
 
-    const { formik, clickHandler } = useDataGetter();
+    const { formik } = useDataGetter();
 
     return (
 
         <PageContent title={'Formulario de tostadores'} showActions={false} >
 
-            <RoasterForm formik={formik} clickHandler={clickHandler} />
+            <RoasterForm formik={formik} />
 
         </PageContent>
     )

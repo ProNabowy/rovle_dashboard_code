@@ -8,19 +8,22 @@ export default function PermissionsForm({ asEdit }) {
         permissionsKeys,
         permissions,
         formik,
-        onOptionChange,
-        clickHandler
+        onOptionChange
     } = useDataGetter(asEdit);
 
     return (
 
-        <form onSubmit={e => e.preventDefault()} className='permission-form'>
+        <form onSubmit={formik.handleSubmit} className='permission-form'>
 
             <div className='p-10 pb-2'>
 
-                <label htmlFor='name-input' className='mb-3 block text-[20px] text-[#234486]'>Nombre del Rol</label>
+                <label
+                    htmlFor='name-input'
+                    className='mb-3 block text-[20px] text-[#234486]' >
+                    Nombre del Rol
+                </label>
 
-                <input type='text' name='name' value={formik?.values?.name} onChange={formik.handleChange}
+                <input type='text' required name='name' value={formik?.values?.name} onChange={formik.handleChange}
                     className='p-3 px-5 placeholder:!text-[#b3b3b3] border-b border-b-[#b3b3b3] w-full' placeholder='Ingresar Nombre del Rol' />
 
             </div>
@@ -55,7 +58,7 @@ export default function PermissionsForm({ asEdit }) {
 
             <div className='flex items-center justify-end p-10 pb-5'>
 
-                <button onClick={clickHandler} type='submit' className='p-4 px-24 rounded-full text-white font-medium bg-[var(--primary-color)]'>Actualizar</button>
+                <button type='submit' className='p-4 px-24 rounded-full text-white font-medium bg-[var(--primary-color)]'>Actualizar</button>
 
             </div>
 

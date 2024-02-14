@@ -18,8 +18,16 @@ const useDataGetter = _ => {
 
     const roasterId = location.slice(4);
 
+    const handelSubmit = values => {
+
+        setIsLoading(true);
+
+        return updateUtailty.updateRoaster(roasterId, values).finally(_ => setIsLoading(false))
+    };
+
     const formik = useFormik({
-        initialValues: {}
+        initialValues: {},
+        onSubmit: handelSubmit,
     })
 
     useEffect(() => {
@@ -49,17 +57,7 @@ const useDataGetter = _ => {
         return () => { };
     }, []);
 
-
-    const handelSubmit = values => {
-
-        setIsLoading(true);
-
-        return updateUtailty.updateRoaster(roasterId, values).finally(_ => setIsLoading(false))
-    };
-
-    const clickHandler = debounce((_) => handelSubmit(formik.values), 1000);
-
-    return { formik, clickHandler }
+    return { formik }
 
 }
 export {

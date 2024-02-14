@@ -1,17 +1,37 @@
 import { useContext, useEffect, useState } from "react";
-import { Get, Store, Update } from "../../../../apis/apis";
+import { Get, Store, Update, } from "../../../../apis/apis";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { AppContext } from "../../../../context/AppContext";
-import { debounce } from "../../../../assets/utils/utils";
+import { debounce, hasRoutePermissions } from "../../../../assets/utils/utils";
 
-const useDataGetter = (asEdit) => {
+const useDataGetter = (asEdit, stateList) => {
 
     const getUtailty = new Get();
 
     const storeUtailty = new Store();
 
     const updateUtailty = new Update();
+
+    const [countries, setCountries] = useState([]);
+
+    const clickHandler = debounce((_) => {
+
+        setIsLoading(true);
+
+        if (asEdit) {
+
+            return updateUtailty.updateCoffee(coffeeShopId, formik.values).finally(_ => setIsLoading(false));
+
+        } else {
+
+            return storeUtailty.addCoffee(formik.values, stateList ? null : navigate)
+                .then(response => stateList ? stateList(response?.data) : null)
+                .finally(_ => setIsLoading(false));
+
+        }
+
+    }, 1000);
 
     const formik = useFormik({
         initialValues: {
@@ -21,13 +41,16 @@ const useDataGetter = (asEdit) => {
             latitude: "40.463725",
             longitude: "-3.7904194",
             provider_id: "",
-            country_id: "",
+            country_id: "ES",
             province_id: "",
             city_id: ""
-        }
+        },
+        onSubmit: clickHandler
     });
 
-    const { setIsLoading, user } = useContext(AppContext);
+    const { setIsLoading, userPeressmisons, user } = useContext(AppContext);
+
+    const isHasPermissions = (permissionKey) => hasRoutePermissions(userPeressmisons, permissionKey);
 
     const isProvider = user?.provider;
 
@@ -35,15 +58,31 @@ const useDataGetter = (asEdit) => {
 
     const coffeeShopId = location.slice(4);
 
-    const [countries, setCountries] = useState([]);
-
     const [roasters, setRoasters] = useState([]);
 
     const navigate = useNavigate();
 
+    const handleBlur = (e) => {
+
+        if (e?.target?.value?.length === 5) {
+
+            return getUtailty.getCitiesByZipCode(e?.target?.value)
+                .then(response => setCountries(response))
+
+        }
+        return null;
+    }
+
     useEffect(() => {
 
-        getUtailty.getCountries().then(response => setCountries(response))
+        getUtailty.getCountries().then(response => {
+
+            setCountries(response);
+
+            formik.setFieldValue('country_id', response?.[0]?.id);
+
+            return response;
+        })
             .then(_ => {
 
                 getUtailty.getRoasters().then(response => setRoasters(response))
@@ -84,28 +123,14 @@ const useDataGetter = (asEdit) => {
         return () => { };
     }, []);
 
-    const clickHandler = debounce((_) => {
-
-        setIsLoading(true);
-
-        if (asEdit) {
-
-            return updateUtailty.updateCoffee(coffeeShopId, formik.values).finally(_ => setIsLoading(false));
-
-        } else {
-
-            return storeUtailty.addCoffee(formik.values, navigate).finally(_ => setIsLoading(false));
-
-        }
-
-    }, 1000);
-
     return {
         formik,
         clickHandler,
         isProvider,
         roasters,
-        countries
+        countries,
+        isHasPermissions,
+        handleBlur
     }
 
 }

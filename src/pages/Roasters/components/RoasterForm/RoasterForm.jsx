@@ -5,13 +5,13 @@ import { getSelectedOption } from '../../../../assets/utils/utils';
 import { useDataGetter } from './data';
 
 
-export default function RoasterForm({ formik, clickHandler, isRenderPassword }) {
+export default function RoasterForm({ formik, isRenderPassword }) {
 
-    const { countries } = useDataGetter();
+    const { countries, handleBlur } = useDataGetter(formik);
 
     return (
 
-        <form onSubmit={e => e.preventDefault()} className='px-10'>
+        <form onSubmit={formik.handleSubmit} className='px-10'>
 
             <InputsGroup data={
                 {
@@ -19,6 +19,7 @@ export default function RoasterForm({ formik, clickHandler, isRenderPassword }) 
                     placeholders: ['Ingresar Nombre', 'Ingresar Correo electrónico'],
                     values: [formik.values?.user_name, formik.values?.user_email],
                     onChange: formik.handleChange,
+                    required: [true, true],
                     nameAttr: ['user_name', 'user_email']
                 }
             } />
@@ -31,6 +32,7 @@ export default function RoasterForm({ formik, clickHandler, isRenderPassword }) 
                             names: ['Contraseña', 'Confirmación de contraseña'],
                             placeholders: ['Ingresar Contraseña', 'Ingresar Confirmación de contraseña'],
                             onChange: formik.handleChange,
+                            required: [true, true],
                             nameAttr: ['user_password', 'user_password_confirmation'],
                             types: ["password", 'password']
                         }
@@ -45,6 +47,7 @@ export default function RoasterForm({ formik, clickHandler, isRenderPassword }) 
                     placeholders: ['Ingresar NIF', 'Ingresar Commercial Name'],
                     values: [formik.values?.provider_nif, formik.values?.provider_commercial_name],
                     onChange: formik.handleChange,
+                    required: [true, true],
                     nameAttr: ['provider_nif', 'provider_commercial_name']
                 }
             } />
@@ -55,20 +58,53 @@ export default function RoasterForm({ formik, clickHandler, isRenderPassword }) 
                     placeholders: ['Ingresar Nombre oficial', 'Ingresar Dirección'],
                     values: [formik.values?.provider_official_name, formik.values?.provider_address],
                     onChange: formik.handleChange,
+                    required: [true, true],
                     nameAttr: ['provider_official_name', 'provider_address']
                 }
             } />
 
-            <InputsGroup data={
-                {
-                    names: ['Código postal', 'Teléfono'],
-                    placeholders: ['Ingresar Código postal', 'Ingresar Teléfono'],
-                    values: [formik.values?.provider_zip, formik.values?.provider_phone],
-                    onChange: formik.handleChange,
-                    nameAttr: ['provider_zip', 'provider_phone']
-                }
-            } />
+            <div className='flex items-center justify-between mb-8'>
 
+                <div className='sm:w-[48%]'>
+
+                    <label htmlFor={'provider_zip'} className='text-[18px] text-[#252525] font-medium'>Código postal</label>
+
+                    <input
+                        onChange={formik.handleChange}
+                        onBlur={handleBlur}
+                        value={formik.values?.provider_zip}
+                        name='provider_zip'
+                        type='text'
+                        required
+                        min={5}
+                        max={5}
+                        maxLength={5}
+                        minLength={5}
+                        id={'provider_zip'}
+                        className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]'
+                        placeholder={'Ingresar Código postal'}
+                    />
+
+                </div>
+
+                <div className='sm:w-[48%]'>
+
+                    <label htmlFor={'provider_phone'} className='text-[18px] text-[#252525] font-medium'>Teléfono</label>
+
+                    <input
+                        onChange={formik.handleChange}
+                        value={formik.values?.provider_phone}
+                        name='provider_phone'
+                        type='text'
+                        required
+                        id={'provider_phone'}
+                        className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]'
+                        placeholder={'Ingresar Teléfono'}
+                    />
+
+                </div>
+
+            </div>
 
             <div className='flex items-center justify-between mb-8'>
 
@@ -96,7 +132,6 @@ export default function RoasterForm({ formik, clickHandler, isRenderPassword }) 
 
             <div className='flex items-center justify-between mb-8'>
 
-
                 <CitiesDropdown
                     formik={formik}
                     provinces={getSelectedOption(countries, 'id', formik?.values?.provider_country_id)?.provinces}
@@ -111,7 +146,7 @@ export default function RoasterForm({ formik, clickHandler, isRenderPassword }) 
 
             <div className='flex items-center justify-end mt-10'>
 
-                <button onClick={clickHandler} type='submit' className='bg-[#45B8EA] text-white py-[16px] px-32 rounded-full'>Enviar</button>
+                <button type='submit' className='bg-[#45B8EA] text-white py-[16px] px-32 rounded-full'>Enviar</button>
 
             </div>
 

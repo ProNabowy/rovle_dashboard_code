@@ -1,3 +1,7 @@
 2 => manage packages the product list doesn't included in plans
 3 => removed dropdown of selected roaster in size list cuz it'll be fixed !!  
 6 => edit user => can i change the password of user?
+
+
+
+1 => provider can't list other providers? in add product by new owner

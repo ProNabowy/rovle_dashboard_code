@@ -20,6 +20,7 @@ export default function Permission() {
             table={tableRef}
             saveName={'Roles'}
         >
+
             <RenderTable
                 columns={columns}
                 list={roles}

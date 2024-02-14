@@ -2,7 +2,6 @@ import { useContext, } from "react";
 import { Store } from "../../../../apis/apis";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../../../context/AppContext";
-import { debounce } from "../../../../assets/utils/utils";
 import { useFormik } from "formik";
 
 const useDataGetter = _ => {
@@ -12,6 +11,13 @@ const useDataGetter = _ => {
     const { setIsLoading } = useContext(AppContext);
 
     const navigate = useNavigate();
+
+    const handleSubmit = (values) => {
+
+        setIsLoading(true);
+
+        return storeUtailty.addRoaster(values, navigate).finally(_ => setIsLoading(false));
+    }
 
     const formik = useFormik({
         initialValues: {
@@ -29,17 +35,13 @@ const useDataGetter = _ => {
             provider_country_id: "",
             provider_province_id: "",
             provider_city_id: ""
-        }
+        },
+        onSubmit: handleSubmit
     })
 
-    const clickHandler = debounce((_) => {
 
-        setIsLoading(true);
 
-        return storeUtailty.addRoaster(formik.values, navigate).finally(_ => setIsLoading(false));
-    }, 1000);
-
-    return { formik, clickHandler }
+    return { formik }
 
 }
 export {

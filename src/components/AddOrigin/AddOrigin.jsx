@@ -1,10 +1,10 @@
 import { Chips } from 'primereact/chips';
 import { Dialog } from 'primereact/dialog';
-import { InputText } from "primereact/inputtext";
 import { Button } from 'primereact/button';
 import { Dropdown } from 'primereact/dropdown';
 import React, { useRef } from 'react';
 import { useGetOriginData } from './data';
+import Input from '../Input/Input';
 
 function AddOrigin({ formik, provider_id, classNames }) {
 
@@ -65,12 +65,11 @@ function AddOrigin({ formik, provider_id, classNames }) {
                         onHide={() => setVisible(false)}
                     >
 
-                        <InputText
-                            className='!my-5 !w-full'
-                            placeholder='Añadir Origen'
+                        <Input
                             value={addOriginValue}
                             required
                             onChange={(e) => setAddOriginValue(e.target.value)}
+                            classNames='!my-5 !w-full border border-[#b3b3b3] rounded-[8px]'
                         />
 
                         <div className='flex items-center justify-center'>

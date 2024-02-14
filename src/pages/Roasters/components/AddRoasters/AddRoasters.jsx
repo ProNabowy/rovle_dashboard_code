@@ -4,13 +4,13 @@ import RoasterForm from '../RoasterForm';
 
 export default function AddRoasters() {
 
-    const { formik, clickHandler } = useDataGetter();
+    const { formik } = useDataGetter();
 
     return (
 
         <PageContent title={'Formulario de tostadores'} showActions={false} >
 
-            <RoasterForm formik={formik} clickHandler={clickHandler} isRenderPassword={true} />
+            <RoasterForm formik={formik} isRenderPassword={true} />
 
         </PageContent>
     )

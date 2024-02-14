@@ -2,6 +2,7 @@ import { Dropdown } from 'primereact/dropdown';
 import { RenderPackages } from './components';
 import { useAddPackage } from './data';
 import { Link } from 'react-router-dom';
+import Input from '../Input/Input';
 
 export default function AddPackageByDropdown({
     formik,
@@ -70,7 +71,13 @@ export default function AddPackageByDropdown({
 
                     <label htmlFor={'PriceEuro'} className='text-[18px] text-[#252525] font-medium'>{inputLabel}</label>
 
-                    <input ref={inputPriceRef} onChange={e => setAddNewPackage(prev => ({ ...prev, price: e.target.value }))} type='number' id={'PriceEuro'} className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]' placeholder={inputPlaceholder} />
+                    <Input
+                        type='number'
+                        ref={inputPriceRef}
+                        placeholder={inputPlaceholder}
+                        onChange={e => setAddNewPackage(prev => ({ ...prev, price: e.target.value }))}
+                        id={'PriceEuro'}
+                    />
 
                 </div>
 

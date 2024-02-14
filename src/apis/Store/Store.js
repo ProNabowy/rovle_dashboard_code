@@ -56,7 +56,7 @@ export default class Store {
     }
     addCoffee(data, navigate) {
         return axios.post(`coffee-shops`, data).then(response => {
-            swal.success('Añadido!', `Tu café ha sido añadido.`).then(_ => navigate('/setups/coffee-shop'))
+            swal.success('Añadido!', `Tu café ha sido añadido.`).then(_ => navigate && navigate('/setups/coffee-shop'))
             return response.data;
         });
     }

@@ -1,8 +1,9 @@
 import { Chips } from 'primereact/chips';
 import { Dropdown } from 'primereact/dropdown';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useGetShopData } from './data';
-import { Link } from 'react-router-dom';
+import { Dialog } from 'primereact/dialog';
+import AddCoffee from '../../pages/CoffeShop/components/AddCoffee/AddCoffee';
 
 function ChipsList({
     options,
@@ -11,13 +12,39 @@ function ChipsList({
     optionLabel,
     formik,
     dataKey,
-    pageKey,
+    listOfState,
+    stateList,
     pagePermissionKeyName
 }) {
+    const [visible, setVisible] = useState(false);
 
     const dropdownRef = useRef();
 
-    const { selectedShop, handleDuplicatedValue, handleRemove, renderChipsItem, isHasPermissions } = useGetShopData(formik, dataKey, optionLabel);
+    const {
+        selectedShop,
+        handleDuplicatedValue,
+        handleRemove,
+        renderChipsItem,
+        isHasPermissions
+    } = useGetShopData(formik, dataKey, optionLabel);
+
+    useEffect(() => {
+
+        if (listOfState) {
+
+            const itHasValues = Object.keys(listOfState);
+
+            if (itHasValues?.length) {
+
+                setVisible(false);
+
+            }
+
+        }
+
+
+        return () => { };
+    }, [listOfState]);
 
     return (
         <div className='relative mb-8'>
@@ -31,15 +58,33 @@ function ChipsList({
                 {
                     isHasPermissions(pagePermissionKeyName)
                         ?
-                        <Link to={url} className='flex items-center cursor-pointer'>
+                        <div onClick={_ => setVisible(true)} to={url} className='flex items-center cursor-pointer'>
                             <h2 className='font-medium underline text-[#45B8EA] me-3'>Añadir {title}</h2>
-                        </Link>
+                        </div>
                         :
                         null
                 }
 
 
             </div>
+
+            {
+                isHasPermissions(pagePermissionKeyName)
+                    ?
+                    <Dialog 
+                        visible={visible}
+                        onHide={() => setVisible(false)}
+                        headerClassName='origin'
+                        resizable={false}
+                        className='w-[85vw]'
+                    >
+
+                        <AddCoffee stateList={stateList} />
+
+                    </Dialog>
+                    :
+                    null
+            }
 
             <Chips
                 allowDuplicate={false}

@@ -11,3 +11,4 @@ export { default as InputsGroup } from './InputsGroup';
 export { default as AddPackageByDropdown } from './AddPackageByDropdown';
 export { default as CitiesDropdown } from './CitiesDropdown';
 export { default as ProvincesDropDown } from './ProvincesDropDown';
+export { default as Input } from './Input';

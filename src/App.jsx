@@ -1,4 +1,4 @@
-import { Fragment, Suspense, useContext } from 'react';
+import { Fragment, Suspense, useContext, } from 'react';
 import './assets/styles/App.css';
 import { Loader, RouteGuard } from './components';
 import { AppContext } from './context/AppContext';
