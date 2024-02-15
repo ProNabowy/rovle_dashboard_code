@@ -1,12 +1,12 @@
 import { Dropdown } from 'primereact/dropdown';
 import { useFormDataGetter } from './data';
 import { getSelectedOption } from '../../../../../assets/utils/utils';
-import { AddPackage, ChipsList, AddOrigin, InputsGroup } from '../../../../../components';
+import { AddPackage, ChipsList, AddOrigin, Input } from '../../../../../components';
+import { Fragment } from 'react';
 
 export default function ProductsForm({ formik, originsList, packagesList }) {
 
     const {
-        inputsData,
         coffee,
         isByNewOWner,
         isProvider,
@@ -22,16 +22,24 @@ export default function ProductsForm({ formik, originsList, packagesList }) {
 
         <form onSubmit={formik.handleSubmit} className='px-10 add-product'>
 
-            <div className='flex items-center justify-between mb-8'>
+            <div className='flex-container'>
 
                 {
                     isByNewOWner
                         ?
                         <div className={`${isProvider ? "w-full" : "w-[48%]"}`}>
 
-                            <label htmlFor={'factor'} className='text-[18px] text-[#252525] font-medium'>Nombre del proveedor</label>
+                            <label htmlFor={'factor'} className='label'>Nombre del proveedor</label>
 
-                            <input required value={formik?.values?.owner_name} name={'owner_name'} type={'text'} onChange={formik.handleChange} id={'factor'} className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]' placeholder={'Enter factor name'} />
+                            <Input
+                                required
+                                value={formik?.values?.owner_name}
+                                name={'owner_name'}
+                                type={'text'}
+                                onChange={formik.handleChange}
+                                id={'factor'}
+                                placeholder={'Enter factor name'}
+                            />
 
                         </div>
                         :
@@ -43,7 +51,7 @@ export default function ProductsForm({ formik, originsList, packagesList }) {
                         ?
                         <div className={`w-[48%] ${!isByNewOWner ? "flex-1" : ""}`}>
 
-                            <label htmlFor={'owner'} className='text-[18px] text-[#252525] font-medium'>Roaster To</label>
+                            <label htmlFor={'owner'} className='label'>Roaster To</label>
 
                             <Dropdown
                                 value={selectedProvider}
@@ -61,31 +69,152 @@ export default function ProductsForm({ formik, originsList, packagesList }) {
 
             </div>
 
-            <InputsGroup data={inputsData[0]} />
+            <div className='flex-container'>
 
-            <AddOrigin classNames={'!w-full mb-8'} formik={formik} provider_id={formik.values?.provider_id} />
+                <div className='sm:w-[48%]'>
 
-            <div className='mb-8'>
+                    <label htmlFor={'commercial_name'} className='label'>Nombre del Producto</label>
 
-                <label htmlFor={'Region'} className='text-[18px] text-[#252525] font-medium'>Region</label>
+                    <Input
+                        value={formik?.values?.commercial_name}
+                        name={'commercial_name'}
+                        type={'text'}
+                        required={true}
+                        onChange={formik.handleChange}
+                        id={'commercial_name'}
+                        placeholder={'Este será el nombre que aparecerá en el listado en el shop.'}
+                    />
 
-                <input value={formik?.values?.region} name={'region'} type={'text'} onChange={formik.handleChange} id={'Region'}
-                    className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]' placeholder={'Ingresar Region'} />
+                </div>
+
+                <div className='sm:w-[48%]'>
+
+                    <label htmlFor={'code'} className='label'>Código</label>
+
+                    <Input
+                        value={formik?.values?.code}
+                        name={'code'}
+                        type={'text'}
+                        required={true}
+                        onChange={formik.handleChange}
+                        id={'code'}
+                        placeholder={'Ingresar Código'}
+                    />
+
+                </div>
 
             </div>
 
-            {/* <InputsGroup data={inputsData[1]} /> */}
-
-            <InputsGroup data={inputsData[2]} />
-
-            <InputsGroup data={inputsData[3]} />
+            <AddOrigin
+                classNames={'!w-full mb-8'}
+                formik={formik}
+                provider_id={formik.values?.provider_id}
+            />
 
             <div className='mb-8'>
 
-                <label htmlFor={'Variedad'} className='text-[18px] text-[#252525] font-medium'>Variedad</label>
+                <label htmlFor={'Region'} className='label'>Region</label>
 
-                <input value={formik?.values?.grades} name={'grades'} type={'text'} onChange={formik.handleChange} id={'Variedad'}
-                    className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]' placeholder={'Ingresar Variedad'} />
+                <Input
+                    value={formik?.values?.region}
+                    name={'region'}
+                    type={'text'}
+                    onChange={formik.handleChange}
+                    id={'Region'}
+                    placeholder={'Ingresar Region'}
+                />
+
+            </div>
+
+
+            <div className='flex-container'>
+
+                <div className='sm:w-[48%]'>
+
+                    <label htmlFor={'farm'} className='label'>Finca</label>
+
+                    <Input
+                        value={formik?.values?.farm}
+                        name={'farm'}
+                        type={'text'}
+                        required={true}
+                        onChange={formik.handleChange}
+                        id={'farm'}
+                        placeholder={'Ingresar Finca'}
+                    />
+
+                </div>
+
+                <div className='sm:w-[48%]'>
+
+                    <label htmlFor={'sca_score'} className='label'>Puntunaction Sca s</label>
+
+                    <Input
+                        value={formik?.values?.sca_score}
+                        name={'sca_score'}
+                        type={'number'}
+                        required={true}
+                        min={80}
+                        max={100}
+                        onChange={formik.handleChange}
+                        id={'sca_score'}
+                        placeholder={'Ingresar Puntunaction Sca s'}
+                    />
+
+                </div>
+
+            </div>
+
+            <div className='flex-container'>
+
+                <div className='sm:w-[48%]'>
+
+                    <label htmlFor={'altitude'} className='label'>Altitud</label>
+
+                    <Input
+                        value={formik?.values?.altitude}
+                        name={'altitude'}
+                        type={'number'}
+                        min={0}
+                        max={8000}
+                        required={true}
+                        onChange={formik.handleChange}
+                        id={'altitude'}
+                        placeholder={'Ingresar Altitud'}
+                    />
+
+                </div>
+
+                <div className='sm:w-[48%]'>
+
+                    <label htmlFor={'process'} className='label'>Proceso</label>
+
+                    <Input
+                        value={formik?.values?.process}
+                        name={'process'}
+                        type={'text'}
+                        required={true}
+                        onChange={formik.handleChange}
+                        id={'process'}
+                        placeholder={'Ingresar process'}
+                    />
+
+                </div>
+
+            </div>
+
+            <div className='mb-8'>
+
+                <label htmlFor={'Variedad'} className='label'>Variedad</label>
+
+                <Input
+                    value={formik?.values?.grades}
+                    name={'grades'}
+                    type={'text'}
+                    onChange={formik.handleChange}
+                    id={'Variedad'}
+                    placeholder={'Ingresar Variedad'}
+                />
 
             </div>
 
@@ -102,24 +231,22 @@ export default function ProductsForm({ formik, originsList, packagesList }) {
                 listOfState={addedShops}
             />
 
-            <div>
+            <Fragment>
 
-                <label htmlFor={'Description'} className='text-[18px] text-[#252525] font-medium'>Descripción</label>
+                <label htmlFor={'Description'} className='label'>Descripción</label>
 
-                <textarea rows={5} onChange={formik.handleChange} type='text' value={formik?.values?.description} name='description' id={'Description'}
-                    className='p-3 w-full border rounded-[5px] mt-5 resize-none border-[#b3b3b3] placeholder:text-[#b3b3b3]' placeholder={'Ingresar Descripción'} />
+                <textarea
+                    rows={5}
+                    onChange={formik.handleChange}
+                    type='text'
+                    value={formik?.values?.description}
+                    name='description'
+                    id={'Description'}
+                    className='p-3 w-full border rounded-[5px] mt-5 resize-none border-[#b3b3b3] placeholder:text-[#b3b3b3]'
+                    placeholder={'Ingresar Descripción'}
+                />
 
-            </div>
-
-            {/* <AddPackageByDropdown
-                formik={formik}
-                options={sizes}
-                optionLabel={'name'}
-                formikKey='presentations'
-                label={'Talla'}
-                inputLabel={"Precio"}
-                hasAddButton={false}
-            /> */}
+            </Fragment>
 
             <AddPackage
                 formik={formik}
@@ -127,11 +254,12 @@ export default function ProductsForm({ formik, originsList, packagesList }) {
                 provider_id={selectedProvider?.id}
             />
 
-            <div className='flex items-center justify-end mt-10'>
-
-                <button type='submit' className='bg-[#45B8EA] text-white py-[16px] px-32 rounded-full'>Enviar</button>
-
-            </div>
+            <button
+                type='submit'
+                className='min-btn mt-10 block ml-auto'
+            >
+                Enviar
+            </button>
 
         </form>
     )

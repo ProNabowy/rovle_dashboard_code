@@ -1,7 +1,7 @@
 import { Dropdown } from 'primereact/dropdown';
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { CitiesDropdown, Input, InputsGroup, ProvincesDropDown } from '../../../../components';
+import { CitiesDropdown, Input, ProvincesDropDown } from '../../../../components';
 import { useDataGetter } from './data';
 import { Link } from 'react-router-dom';
 import { getSelectedOption } from '../../../../assets/utils/utils';
@@ -12,7 +12,6 @@ export default function CoffeeFrom({ asEdit, stateList }) {
 
     const {
         formik,
-        clickHandler,
         isProvider,
         roasters,
         countries,
@@ -24,11 +23,11 @@ export default function CoffeeFrom({ asEdit, stateList }) {
 
         <form onSubmit={formik.handleSubmit} className='px-10'>
 
-            <div className='flex items-center justify-between mb-8'>
+            <div className='flex-container'>
 
                 <div className='sm:w-[48%]'>
 
-                    <label htmlFor={'name'} className='text-[18px] text-[#252525] font-medium'>Nombre</label>
+                    <label htmlFor={'name'} className='label'>Nombre</label>
 
                     <Input
                         onChange={formik.handleChange}
@@ -44,7 +43,7 @@ export default function CoffeeFrom({ asEdit, stateList }) {
 
                 <div className='sm:w-[48%]'>
 
-                    <label htmlFor={'post_code'} className='text-[18px] text-[#252525] font-medium'>Código postal</label>
+                    <label htmlFor={'post_code'} className='label'>Código postal</label>
 
                     <Input
                         onChange={formik.handleChange}
@@ -69,7 +68,7 @@ export default function CoffeeFrom({ asEdit, stateList }) {
 
                 <div className='mb-8 sm:w-[48%]'>
 
-                    <label htmlFor={'Address'} className='text-[18px] text-[#252525] font-medium'>Dirección</label>
+                    <label htmlFor={'Address'} className='label'>Dirección</label>
 
                     <Input
                         onChange={formik.handleChange}
@@ -84,7 +83,7 @@ export default function CoffeeFrom({ asEdit, stateList }) {
 
                 <div className='mb-8 sm:w-[48%]'>
 
-                    <label htmlFor={'options'} className='text-[18px] text-[#252525] font-medium'>Opciones de tienda</label>
+                    <label htmlFor={'options'} className='label'>Opciones de tienda</label>
 
                     <div className='flex items-center justify-between'>
 
@@ -116,7 +115,7 @@ export default function CoffeeFrom({ asEdit, stateList }) {
 
             </div>
 
-            <div className='flex items-center justify-between mb-8'>
+            <div className='flex-container'>
 
                 {
                     !isProvider?.id
@@ -125,7 +124,7 @@ export default function CoffeeFrom({ asEdit, stateList }) {
 
                             <div className='flex items-center justify-between'>
 
-                                <h2 className='text-[18px] text-[#252525] font-medium'>Tostadores</h2>
+                                <h2 className='label'>Tostadores</h2>
 
                                 {
                                     isHasPermissions('dashboard.providers.store')
@@ -156,7 +155,7 @@ export default function CoffeeFrom({ asEdit, stateList }) {
 
                 <div className={`${isProvider ? "w-full" : "sm:w-[48%]"}`}>
 
-                    <label htmlFor={'Country'} className='text-[18px] text-[#252525] font-medium'>País</label>
+                    <label htmlFor={'Country'} className='label'>País</label>
 
                     <Dropdown
                         value={getSelectedOption(countries, 'id', formik?.values?.country_id)}
@@ -169,7 +168,7 @@ export default function CoffeeFrom({ asEdit, stateList }) {
 
             </div>
 
-            <div className='flex items-center justify-between mb-8'>
+            <div className='flex-container'>
 
                 <ProvincesDropDown
                     formik={formik}
@@ -191,7 +190,7 @@ export default function CoffeeFrom({ asEdit, stateList }) {
 
                 <div className='mb-10 sm:w-[48%]'>
 
-                    <label htmlFor={'Latitude'} className='text-[18px] text-[#252525] font-medium'>Seleccionar latitud</label>
+                    <label htmlFor={'Latitude'} className='label'>Seleccionar latitud</label>
 
                     <Input
                         id={'Latitude'}
@@ -204,7 +203,7 @@ export default function CoffeeFrom({ asEdit, stateList }) {
                 </div>
                 <div className='mb-10 sm:w-[48%]'>
 
-                    <label htmlFor={'Longitude'} className='text-[18px] text-[#252525] font-medium'>Seleccionar longitud</label>
+                    <label htmlFor={'Longitude'} className='label'>Seleccionar longitud</label>
 
                     <Input
                         type='text'
@@ -229,7 +228,7 @@ export default function CoffeeFrom({ asEdit, stateList }) {
 
             <div className='flex items-center justify-end mt-10'>
 
-                <button type='submit' className='bg-[#45B8EA] text-white py-[16px] px-32 rounded-full'>Enviar</button>
+                <button type='submit' className='min-btn'>Enviar</button>
 
             </div>
 

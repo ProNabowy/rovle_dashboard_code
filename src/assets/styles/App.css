@@ -35,6 +35,26 @@
     transition: 0.5s all ease-in-out;
 }
 
+.min-btn {
+    background-color: #45B8EA;
+    color: white;
+    padding: 16px 8rem;
+    border-radius: 50%;
+}
+
+.label {
+    font-size: 18px;
+    color: #252525;
+    font-weight: 500;
+}
+
+.flex-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 32px;
+}
+
 label {
     display: inline-block;
     margin-bottom: 8px !important;

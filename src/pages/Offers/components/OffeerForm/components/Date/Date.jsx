@@ -13,11 +13,11 @@ export default function Date({ formik }) {
     } = useDataGetter(formik);
 
     return (
-        <div className='flex items-center justify-between mb-8'>
+        <div className='flex-container'>
 
             <div className='w-[48%]'>
 
-                <label htmlFor={'checkbox-1'} className='text-[18px] text-[#252525] font-medium flex items-center justify-between'>
+                <label htmlFor={'checkbox-1'} className='label flex items-center justify-between'>
 
                     <h3>Fecha INI</h3>
 
@@ -37,7 +37,7 @@ export default function Date({ formik }) {
 
             <div className='w-[48%]'>
 
-                <label htmlFor={'checkbox-2'} className='text-[18px] text-[#252525] font-medium flex items-center justify-between'>
+                <label htmlFor={'checkbox-2'} className='label flex items-center justify-between'>
 
                     <h3>Fecha FIN</h3>
 

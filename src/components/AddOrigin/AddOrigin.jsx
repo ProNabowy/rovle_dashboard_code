@@ -40,7 +40,7 @@ function AddOrigin({ formik, provider_id, classNames }) {
 
             <div className='flex items-center justify-between'>
 
-                <label htmlFor={'Origin'} className='text-[18px] text-[#252525] font-medium'>      Origen   </label>
+                <label htmlFor={'Origin'} className='label'>      Origen   </label>
 
                 {
                     isHasPermissions('dashboard.origins.store')

@@ -1,5 +1,5 @@
 import { Dropdown } from 'primereact/dropdown';
-import { PageContent } from '../../../../components';
+import { Input, PageContent } from '../../../../components';
 import { useDataGetter } from './data';
 import { getSelectedOption } from '../../../../assets/utils/utils';
 
@@ -31,8 +31,13 @@ export default function AddOrigin() {
 
                     <label htmlFor='name-input' className='mb-3 block text-[#234486]'>Nombre</label>
 
-                    <input type='text' name='name' value={formik.values?.name} className='p-3 px-5 placeholder:!text-[#b3b3b3] border-b border-b-[#b3b3b3] w-full'
-                        onChange={formik.handleChange} placeholder='Ingresar Nombre del Origen' />
+                    <Input
+                        type='text'
+                        name='name'
+                        value={formik.values?.name}
+                        onChange={formik.handleChange}
+                        placeholder='Ingresar Nombre del Origen'
+                    />
 
                 </div>
 

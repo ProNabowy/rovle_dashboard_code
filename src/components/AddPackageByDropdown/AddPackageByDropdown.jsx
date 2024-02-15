@@ -41,7 +41,7 @@ export default function AddPackageByDropdown({
                             ?
                             <div className='flex items-center justify-between'>
 
-                                <h2 className='text-[18px] text-[#252525] font-medium'>Talla</h2>
+                                <h2 className='label'>Talla</h2>
 
                                 <Link to={'/products/plans/size/list/add-size'} className='flex items-center cursor-pointer'>
 
@@ -51,7 +51,7 @@ export default function AddPackageByDropdown({
 
                             </div>
                             :
-                            <label className='text-[18px] text-[#252525] font-medium'>{label}</label>
+                            <label className='label'>{label}</label>
                     }
 
                     <Dropdown
@@ -69,7 +69,7 @@ export default function AddPackageByDropdown({
 
                 <div className='mb-8'>
 
-                    <label htmlFor={'PriceEuro'} className='text-[18px] text-[#252525] font-medium'>{inputLabel}</label>
+                    <label htmlFor={'PriceEuro'} className='label'>{inputLabel}</label>
 
                     <Input
                         type='number'

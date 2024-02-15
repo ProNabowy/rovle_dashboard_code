@@ -23,7 +23,7 @@ export default function AddPackage({ formik, roasters, provider_id }) {
 
                 <div className='mb-8'>
 
-                    <label htmlFor={'Weight /gm'} className='text-[18px] text-[#252525] font-medium'>Peso</label>
+                    <label htmlFor={'Weight /gm'} className='label'>Peso</label>
 
                     <Input
                         type='number'
@@ -38,7 +38,7 @@ export default function AddPackage({ formik, roasters, provider_id }) {
 
                 <div className='mb-8'>
 
-                    <label htmlFor={'PriceEuro'} className='text-[18px] text-[#252525] font-medium'>Precio</label>
+                    <label htmlFor={'PriceEuro'} className='label'>Precio</label>
 
                     <Input
                         type='number'
@@ -55,7 +55,7 @@ export default function AddPackage({ formik, roasters, provider_id }) {
                         ?
                         <div className='mb-8'>
 
-                            <label htmlFor={'Units'} className='text-[18px] text-[#252525] font-medium'>Cantidad</label>
+                            <label htmlFor={'Units'} className='label'>Cantidad</label>
 
                             <Input
                                 type='number'

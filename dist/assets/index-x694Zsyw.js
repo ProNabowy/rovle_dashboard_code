@@ -1,1 +1,0 @@
-import{j as s,P as o}from"./index-T_rrs4rL.js";import{P as r}from"./PermissionsForm-FLQuv2cs.js";function t(){return s.jsx(o,{title:"Formulario de Permisos",showActions:!1,children:s.jsx(r,{asEdit:!1})})}export{t as default};

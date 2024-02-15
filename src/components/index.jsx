@@ -7,7 +7,6 @@ export { default as SeeMore } from './SeeMore';
 export { default as AddPackage } from './AddPackage';
 export { default as ChipsList } from './ChipsList';
 export { default as AddOrigin } from './AddOrigin';
-export { default as InputsGroup } from './InputsGroup';
 export { default as AddPackageByDropdown } from './AddPackageByDropdown';
 export { default as CitiesDropdown } from './CitiesDropdown';
 export { default as ProvincesDropDown } from './ProvincesDropDown';

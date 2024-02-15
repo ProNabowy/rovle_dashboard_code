@@ -51,7 +51,7 @@ function ChipsList({
 
             <div className='flex items-center justify-between'>
 
-                <label htmlFor={'Origin'} className='text-[18px] text-[#252525] font-medium'>
+                <label htmlFor={'Origin'} className='label'>
                     {title}
                 </label>
 

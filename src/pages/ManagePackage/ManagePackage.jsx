@@ -1,4 +1,4 @@
-import { PageContent } from '../../components'
+import { Input, PageContent } from '../../components'
 import { useDataGetter, useAddPackage } from './data'
 import { Dropdown } from 'primereact/dropdown';
 import RenderPackages from './components/RenderPackages/RenderPackages';
@@ -34,7 +34,7 @@ export default function ManagePackage() {
 
                     <div className='mb-8'>
 
-                        <label className='text-[18px] text-[#252525] font-medium'>Nombre del Producto</label>
+                        <label className='label'>Nombre del Producto</label>
 
                         <Dropdown
                             value={selectedProduct}
@@ -50,7 +50,7 @@ export default function ManagePackage() {
 
                     <div className='mb-8'>
 
-                        <label htmlFor={'weight'} className='text-[18px] text-[#252525] font-medium'>Peso / gm </label>
+                        <label htmlFor={'weight'} className='label'>Peso / gm </label>
 
                         {/* Don't Forget To Ask What U render Here */}
                         <Dropdown
@@ -67,10 +67,15 @@ export default function ManagePackage() {
 
                     <div className='mb-8'>
 
-                        <label htmlFor={'Quantity'} className='text-[18px] text-[#252525] font-medium'>Cantidad</label>
+                        <label htmlFor={'Quantity'} className='label'>Cantidad</label>
 
-                        <input ref={inputWeightRef} onChange={e => setAddNewPackage(prev => ({ ...prev, units: e.target.value }))} type='number' id={'Quantity'}
-                            className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]' placeholder={'Cantidad'} />
+                        <Input
+                            ref={inputWeightRef}
+                            onChange={e => setAddNewPackage(prev => ({ ...prev, units: e.target.value }))}
+                            type='number'
+                            id={'Quantity'}
+                            placeholder={'Cantidad'}
+                        />
 
                     </div>
 

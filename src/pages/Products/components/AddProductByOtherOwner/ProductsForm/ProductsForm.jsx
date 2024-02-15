@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Dropdown } from 'primereact/dropdown';
 import { useFormDataGetter } from './data';
-import { ChipsList } from '../../../../../components';
+import { ChipsList, Input } from '../../../../../components';
 import { getSelectedOption } from '../../../../../assets/utils/utils';
 
 export default function ProductsForm() {
@@ -31,7 +31,7 @@ export default function ProductsForm() {
 
                 <div className={`${user?.provider ? "w-full" : "w-[48%]"}`}>
 
-                    <label htmlFor={'owner'} className='text-[18px] text-[#252525] font-medium'>Roaster From</label>
+                    <label htmlFor={'owner'} className='label'>Roaster From</label>
 
                     <Dropdown
                         value={selectedProvider}
@@ -48,7 +48,7 @@ export default function ProductsForm() {
                         ?
                         <div className='w-[48%]'>
 
-                            <label htmlFor={'owner'} className='text-[18px] text-[#252525] font-medium'>Roaster To</label>
+                            <label htmlFor={'owner'} className='label'>Roaster To</label>
 
                             <Dropdown
                                 filter
@@ -67,7 +67,7 @@ export default function ProductsForm() {
 
             <div className='mb-8'>
 
-                <label htmlFor={'name'} className='text-[18px] text-[#252525] font-medium'>Nombre del Producto</label>
+                <label htmlFor={'name'} className='label'>Nombre del Producto</label>
 
                 <Dropdown
                     value={selectedProduct}
@@ -83,17 +83,17 @@ export default function ProductsForm() {
                 productInfo?.id
                     ?
                     <Fragment>
-                        <div className='flex items-center justify-between mb-8'>
+                        <div className='flex-container'>
 
                             <div className='w-[48%]'>
 
-                                <label htmlFor={'Code'} className='text-[18px] text-[#252525] font-medium'>Código</label>
+                                <label htmlFor={'Code'} className='label'>Código</label>
 
-                                <input
+                                <Input
                                     value={productInfo?.code}
-                                    disabled type={'text'}
+                                    disabled
+                                    type={'text'}
                                     id={'Code'}
-                                    className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]'
                                     placeholder={'Ingresar Código'}
                                 />
 
@@ -101,13 +101,13 @@ export default function ProductsForm() {
 
                             <div className='w-[48%]'>
 
-                                <label htmlFor={'Region'} className='text-[18px] text-[#252525] font-medium'>Region</label>
+                                <label htmlFor={'Region'} className='label'>Region</label>
 
-                                <input
+                                <Input
                                     value={productInfo?.region}
-                                    disabled type={'text'}
+                                    disabled
+                                    type={'text'}
                                     id={'Region'}
-                                    className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]'
                                     placeholder={'Ingresar Region'}
                                 />
 
@@ -117,9 +117,9 @@ export default function ProductsForm() {
 
                         <div className='mb-8'>
 
-                            <label htmlFor={'Origin'} className='text-[18px] text-[#252525] font-medium'>Origen</label>
+                            <label htmlFor={'Origin'} className='label'>Origen</label>
 
-                            <input
+                            <Input
                                 value={productInfo?.origin}
                                 disabled
                                 type={'text'}
@@ -130,18 +130,17 @@ export default function ProductsForm() {
 
                         </div>
 
-                        <div className='flex items-center justify-between mb-8'>
+                        <div className='flex-container'>
 
                             <div className='w-[48%]'>
 
-                                <label htmlFor={'Finca'} className='text-[18px] text-[#252525] font-medium'>Finca</label>
+                                <label htmlFor={'Finca'} className='label'>Finca</label>
 
-                                <input
+                                <Input
                                     value={productInfo?.farm}
                                     disabled
                                     type={'text'}
                                     id={'Finca'}
-                                    className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]'
                                     placeholder={'Ingresar Finca'}
                                 />
 
@@ -149,14 +148,13 @@ export default function ProductsForm() {
 
                             <div className='w-[48%]'>
 
-                                <label htmlFor={'Nombre'} className='text-[18px] text-[#252525] font-medium'>Nombre Comercial</label>
+                                <label htmlFor={'Nombre'} className='label'>Nombre Comercial</label>
 
-                                <input
+                                <Input
                                     value={productInfo?.commercial_name}
                                     disabled
                                     type={'text'}
                                     id={'Nombre'}
-                                    className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]'
                                     placeholder={'Ingresar Nombre Comercial'}
                                 />
 
@@ -164,18 +162,17 @@ export default function ProductsForm() {
 
                         </div>
 
-                        <div className='flex items-center justify-between mb-8'>
+                        <div className='flex-container'>
 
                             <div className='w-[48%]'>
 
-                                <label htmlFor={'Sca'} className='text-[18px] text-[#252525] font-medium'>Puntuación Sca s</label>
+                                <label htmlFor={'Sca'} className='label'>Puntuación Sca s</label>
 
-                                <input
+                                <Input
                                     value={productInfo?.sca_score}
                                     disabled
                                     type={'text'}
                                     id={'Sca'}
-                                    className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]'
                                     placeholder={'Ingresar Puntuación Sca s'}
                                 />
 
@@ -183,14 +180,13 @@ export default function ProductsForm() {
 
                             <div className='w-[48%]'>
 
-                                <label htmlFor={'Altitud'} className='text-[18px] text-[#252525] font-medium'>Altitud</label>
+                                <label htmlFor={'Altitud'} className='label'>Altitud</label>
 
-                                <input
+                                <Input
                                     value={productInfo?.altitude}
                                     disabled
                                     type={'text'}
                                     id={'Altitud'}
-                                    className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]'
                                     placeholder={'Ingresar Altitud'}
                                 />
 
@@ -198,18 +194,17 @@ export default function ProductsForm() {
 
                         </div>
 
-                        <div className='flex items-center justify-between mb-8'>
+                        <div className='flex-container'>
 
                             <div className='w-[48%]'>
 
-                                <label htmlFor={'Variedad'} className='text-[18px] text-[#252525] font-medium'>Variety</label>
+                                <label htmlFor={'Variedad'} className='label'>Variety</label>
 
-                                <input
+                                <Input
                                     value={productInfo?.grades}
                                     disabled
                                     type={'text'}
                                     id={'Variedad'}
-                                    className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]'
                                     placeholder={'Ingresar Variety'}
                                 />
 
@@ -217,14 +212,13 @@ export default function ProductsForm() {
 
                             <div className='w-[48%]'>
 
-                                <label htmlFor={'Proceso'} className='text-[18px] text-[#252525] font-medium'>Proceso</label>
+                                <label htmlFor={'Proceso'} className='label'>Proceso</label>
 
-                                <input
+                                <Input
                                     value={productInfo?.process}
                                     disabled
                                     type={'text'}
                                     id={'Proceso'}
-                                    className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]'
                                     placeholder={'Ingresar Proceso'}
                                 />
 
@@ -234,7 +228,7 @@ export default function ProductsForm() {
 
                         <div className='mb-8'>
 
-                            <label htmlFor={'Description'} className='text-[18px] text-[#252525] font-medium'>Descripción</label>
+                            <label htmlFor={'Description'} className='label'>Descripción</label>
 
                             <textarea
                                 rows={5}
@@ -287,7 +281,7 @@ export default function ProductsForm() {
                             <button
                                 onClick={clickHandler}
                                 type='submit'
-                                className='bg-[#45B8EA] text-white py-[16px] px-32 rounded-full'>
+                                className='min-btn'>
                                 Enviar
                             </button>
 

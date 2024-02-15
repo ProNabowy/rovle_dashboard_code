@@ -5,7 +5,7 @@ export default function PlanStatus({ formik }) {
     return (
         <div className="w-[48%]">
 
-            <label className='text-[18px] text-[#252525] font-medium block mb-4'>Estado</label>
+            <label className='label block mb-4'>Estado</label>
 
             <div className='flex items-center'>
 

@@ -1,10 +1,11 @@
-import { CitiesDropdown, InputsGroup, PageContent, ProvincesDropDown } from '../../components'
+import { CitiesDropdown, Input, PageContent, ProvincesDropDown } from '../../components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faImage } from '@fortawesome/free-solid-svg-icons'
 import { useDataGetter } from './data'
 import { Dropdown } from 'primereact/dropdown'
 import { getSelectedOption } from '../../assets/utils/utils'
 import default_user from '../../assets/images/default_user.png';
+
 
 export default function Profile() {
 
@@ -46,7 +47,12 @@ export default function Profile() {
 
                     <div className='w-[250px] h-[250px] flex items-start justify-center rounded-full bg-[#45b9eae1] absolute left-0 z-20 transition bottom-[-250px] uploade-image'>
 
-                        <input type='file' accept="image/png, image/gif, image/jpeg" onChange={e => formik.setFieldValue('image', e.target.files[0])} id='uploade-img' className='w-0 h-0 appearance-none opacity-0 scale-0' />
+                        <Input
+                            type='file'
+                            accept="image/png, image/gif, image/jpeg"
+                            onChange={e => formik.setFieldValue('image', e.target.files[0])}
+                            id='uploade-img'
+                            classNames='!w-0 !h-0 appearance-none !opacity-0 !scale-0' />
 
                         <label htmlFor='uploade-img'>
 
@@ -58,42 +64,122 @@ export default function Profile() {
 
                 </div>
 
-                <InputsGroup data={
-                    {
-                        names: ['Nombre', 'Correo electrónico'],
-                        placeholders: ['Ingresar Nombre', 'example@gmail.com'],
-                        values: [formik.values?.name, formik.values?.email],
-                        onChange: formik.handleChange,
-                        nameAttr: ['name', 'emil'],
-                        disabledSecondInput: true
+                <div className='flex-container'>
 
-                    }
-                } />
+                    <div className='sm:w-[48%]'>
 
-                <InputsGroup data={
-                    {
-                        names: ['Dirección', 'Teléfono'],
-                        placeholders: ['Ingresar Dirección', 'Ingresar Teléfono'],
-                        values: [formik.values?.address, formik.values?.phone],
-                        onChange: formik.handleChange,
-                        nameAttr: ['address', 'phone'],
-                    }
-                } />
-                <InputsGroup data={
-                    {
-                        names: ['Código postal', 'Identificación de tarjeta'],
-                        placeholders: ['Ingresar Código postal', 'Ingresar Identificación de tarjeta'],
-                        values: [formik.values?.zip, formik.values?.card_id],
-                        onChange: formik.handleChange,
-                        nameAttr: ['zip', 'card_id'],
-                    }
-                } />
+                        <label htmlFor={'name'} className='label'>Nombre</label>
 
-                <div className='flex items-center justify-between mb-8'>
+                        <Input
+                            value={formik?.values?.name}
+                            name={'name'}
+                            type={'text'}
+                            required={true}
+                            onChange={formik.handleChange}
+                            id={'name'}
+                            placeholder={'Ingresar Nombre'}
+                        />
+
+                    </div>
+
+                    <div className='sm:w-[48%]'>
+
+                        <label htmlFor={'email'} className='label'>Correo electrónico</label>
+
+                        <Input
+                            value={formik?.values?.email}
+                            name={'email'}
+                            type={'email'}
+                            disabled
+                            required={true}
+                            onChange={formik.handleChange}
+                            id={'email'}
+                            placeholder={'example@gmail.com'}
+                        />
+
+                    </div>
+
+                </div>
+
+                <div className='flex-container'>
+
+                    <div className='sm:w-[48%]'>
+
+                        <label htmlFor={'address'} className='label'>Dirección</label>
+
+                        <Input
+                            value={formik?.values?.address}
+                            name={'address'}
+                            type={'text'}
+                            required={true}
+                            onChange={formik.handleChange}
+                            id={'address'}
+                            placeholder={'Ingresar Dirección'}
+                        />
+
+                    </div>
+
+                    <div className='sm:w-[48%]'>
+
+                        <label htmlFor={'phone'} className='label'>Teléfono</label>
+
+                        <Input
+                            value={formik?.values?.phone}
+                            name={'phone'}
+                            type={'text'}
+                            disabled
+                            required={true}
+                            onChange={formik.handleChange}
+                            id={'phone'}
+                            placeholder={'Ingresar Teléfono'}
+                        />
+
+                    </div>
+
+                </div>
+
+                <div className='flex-container'>
+
+                    <div className='sm:w-[48%]'>
+
+                        <label htmlFor={'zip'} className='label'>Código postal</label>
+
+                        <Input
+                            value={formik?.values?.zip}
+                            name={'zip'}
+                            type={'number'}
+                            required={true}
+                            onChange={formik.handleChange}
+                            id={'zip'}
+                            placeholder={'Ingresar Código postal'}
+                        />
+
+                    </div>
+
+                    <div className='sm:w-[48%]'>
+
+                        <label htmlFor={'card_id'} className='label'>Identificación de tarjeta</label>
+
+                        <Input
+                            value={formik?.values?.card_id}
+                            name={'card_id'}
+                            type={'text'}
+                            disabled
+                            required={true}
+                            onChange={formik.handleChange}
+                            id={'card_id'}
+                            placeholder={'Ingresar Identificación de tarjeta'}
+                        />
+
+                    </div>
+
+                </div>
+
+                <div className='flex-container'>
 
                     <div className='w-[48%]'>
 
-                        <label className='text-[18px] text-[#252525] font-medium block'>País</label>
+                        <label className='label block'>País</label>
 
                         <Dropdown
                             value={getSelectedOption(counteris, 'id', formik?.values?.country_id)}
@@ -114,7 +200,7 @@ export default function Profile() {
 
                 </div>
 
-                <div className='flex items-center justify-between mb-8'>
+                <div className='flex-container'>
 
                     <CitiesDropdown
                         formik={formik}
@@ -125,20 +211,19 @@ export default function Profile() {
 
                     <div className='w-[48%]'>
 
-                        <label htmlFor='Permissions' className='text-[18px] text-[#252525] font-medium block'>Permisos</label>
+                        <label htmlFor='Permissions' className='label block'>Permisos</label>
 
-                        <input disabled={true} value={formik.values.roles && formik.values.roles[0]?.name} type='text' id={'Permissions'}
-                            className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]' />
+                        <Input
+                            disabled={true}
+                            value={formik.values.roles && formik.values.roles[0]?.name}
+                            type='text' id={'Permissions'}
+                        />
 
                     </div>
 
                 </div>
 
-                <div className='flex items-center justify-end mt-10'>
-
-                    <button onClick={clickHandler} className='bg-[#45B8EA] text-white py-[16px] px-32 rounded-full'>Guardar cambios</button>
-
-                </div>
+                <button onClick={clickHandler} className='min-btn block mt-10 ml-auto'>Guardar cambios</button>
 
             </form>
 

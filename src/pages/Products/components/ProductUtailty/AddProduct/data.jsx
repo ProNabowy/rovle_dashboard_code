@@ -17,8 +17,8 @@ const useAddProduct = () => {
         const updatedData = { ...values };
 
         // Convert Objects To Arr Of Ids
-        updatedData.origins = updatedData?.origins.map(item => item?.id || item);
-        updatedData.coffeeShops = updatedData?.coffeeShops.map(item => item?.id || item);
+        updatedData.origins = updatedData?.origins?.map(item => item?.id || item);
+        updatedData.coffeeShops = updatedData?.coffeeShops?.map(item => item?.id || item);
 
         setIsLoading(true);
 

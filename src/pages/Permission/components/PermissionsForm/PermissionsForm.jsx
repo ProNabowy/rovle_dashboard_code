@@ -1,6 +1,7 @@
 import { Accordion, AccordionTab } from 'primereact/accordion'
 import PermissionsList from '../PermissionsList'
 import { useDataGetter } from './data'
+import { Input } from '../../../../components';
 
 export default function PermissionsForm({ asEdit }) {
 
@@ -23,8 +24,14 @@ export default function PermissionsForm({ asEdit }) {
                     Nombre del Rol
                 </label>
 
-                <input type='text' required name='name' value={formik?.values?.name} onChange={formik.handleChange}
-                    className='p-3 px-5 placeholder:!text-[#b3b3b3] border-b border-b-[#b3b3b3] w-full' placeholder='Ingresar Nombre del Rol' />
+                <Input
+                    type='text'
+                    required
+                    name='name'
+                    value={formik?.values?.name}
+                    onChange={formik.handleChange}
+                    placeholder='Ingresar Nombre del Rol'
+                />
 
             </div>
 
