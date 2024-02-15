@@ -1,0 +1,1 @@
+import{j as s,P as o}from"./index-UqVmnRqZ.js";import{P as r}from"./PermissionsForm-hLPCsaPF.js";function i(){return s.jsx(o,{title:"Formulario de Permisos",showActions:!1,children:s.jsx(r,{asEdit:!0})})}export{i as default};

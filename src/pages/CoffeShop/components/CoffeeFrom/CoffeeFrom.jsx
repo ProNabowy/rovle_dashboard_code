@@ -226,11 +226,7 @@ export default function CoffeeFrom({ asEdit, stateList }) {
                 width="100%"
             ></iframe>
 
-            <div className='flex items-center justify-end mt-10'>
-
-                <button type='submit' className='min-btn'>Enviar</button>
-
-            </div>
+            <button type='submit' className='min-btn block ml-auto'>Enviar</button>
 
         </form>
 

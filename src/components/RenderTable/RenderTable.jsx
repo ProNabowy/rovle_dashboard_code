@@ -4,6 +4,7 @@ import { Dropdown } from 'primereact/dropdown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import Input from '../Input/Input';
+import { Fragment } from 'react';
 
 export default function RenderTable({
     columns,
@@ -52,24 +53,42 @@ export default function RenderTable({
                 </DataTable>
 
             </div>
-
             {
                 list?.length
                     ?
                     <div className={`flex items-center w-fit absolute ${showPaginator ? "bottom-5" : "-bottom-5"} left-8`}>
 
-                        <h3 className='text-[#252525] font-medium me-3'>Mostrar</h3>
+                        <h2 htmlFor="entries-dropdown" className='text-[#252525] font-medium me-3'>Mostrar</h2>
 
                         {
                             entries?.length < selectedEntries?.name
                                 ?
-                                <h2 className='text-[#252525] font-medium'>{entries?.length}</h2>
+                                <Fragment>
+
+                                    <h3 className='text-[#252525] font-medium'>{entries?.length}</h3>
+
+                                    <h3 className='text-[#252525] font-medium ms-3'>entradas</h3>
+
+                                </Fragment>
                                 :
-                                <Dropdown filter value={selectedEntries} onChange={(e) => setSelectedEntries(e.value)} options={entries} optionLabel="name"
-                                    placeholder="" className="w-[89px] ps-2 !rounded-full" emptyMessage={'La tabla está vacía'} />
+                                <div className="ps-2 !rounded-full">
+                                    <Dropdown
+                                        filter
+                                        value={selectedEntries}
+                                        onChange={(e) => setSelectedEntries(e.value)}
+                                        options={entries}
+                                        optionLabel="name"
+                                        placeholder=""
+                                        aria-label='entries-dropdown'
+                                        inputId="entries-dropdown"
+                                        emptyMessage={'La tabla está vacía'}
+                                    />
+                                    <label htmlFor="entries-dropdown" className='visually-hidden text-[16px] ms-3 text-[#252525] font-medium'>
+                                        entradas
+                                    </label>
+                                </div>
                         }
 
-                        <h3 className='text-[#252525] font-medium ms-3'>entradas</h3>
 
                     </div>
                     :

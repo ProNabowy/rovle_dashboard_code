@@ -1,6 +1,5 @@
 import axios from "axios";
 import { swal } from "../../apis/apis.jsx";
-import { useNavigate } from 'react-router-dom';
 import { getCookie } from "./utils.js";
 
 

@@ -47,9 +47,9 @@ export default function ChooseOwner() {
 
                 </div>
 
-                <div className='flex items-center justify-end p-10 pb-5'>
+                <div className='flex-end-container'>
 
-                    <button onClick={handelClick} className='p-4 px-24 rounded-full text-white font-medium bg-[var(--primary-color)]'>
+                    <button onClick={handelClick} className='min-btn'>
                         Mostrar
                     </button>
 

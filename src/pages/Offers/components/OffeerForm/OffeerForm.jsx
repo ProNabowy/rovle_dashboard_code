@@ -108,11 +108,7 @@ export default function OffeerForm({ formik, clickHandler }) {
 
             </div>
 
-            <div className='flex items-center justify-end mt-10'>
-
-                <button onClick={clickHandler} type='submit' className='min-btn'>Enviar</button>
-
-            </div>
+            <button onClick={clickHandler} type='submit' className='min-btn block ml-auto'>Enviar</button>
 
         </form>
     )

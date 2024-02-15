@@ -109,11 +109,7 @@ export default function PlanForm({ formik, clickHandler }) {
                 label={'Talla'}
             />
 
-            <div className='flex items-center justify-end mt-10'>
-
-                <button onClick={clickHandler} type='submit' className='min-btn'>Enviar</button>
-
-            </div>
+            <button onClick={clickHandler} type='submit' className='min-btn block !mt-10 ml-auto'>Enviar</button>
 
         </form>
 

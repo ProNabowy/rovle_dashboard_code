@@ -27,9 +27,9 @@ const hasRoutePermissions = (userPermissions, pagePermission) => {
 }
 
 // Function to set a secure cookie
-function setSecureCookie(name, value, daysToExpire, sameSite = 'Strict') {
+function setSecureCookie(name, value, hoursToExpire = 1, sameSite = 'Strict') {
     const date = new Date();
-    date.setTime(date.getTime() + (daysToExpire * 24 * 60 * 60 * 1000));
+    date.setTime(date.getTime() + (hoursToExpire * 60 * 60 * 1000));
     const expires = `expires=${date.toUTCString()}`;
     const secure = location.protocol === 'https:' ? 'Secure' : '';
     const cookieString = `${name}=${value}; ${expires}; path=/; ${secure}; SameSite=${sameSite}`;

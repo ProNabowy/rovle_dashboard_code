@@ -93,7 +93,7 @@ export default function ManagePackage() {
                 <h3 className='text-[24px] text-[#58291E] mb-24'>{totalWeightOfPersentations} / {subscriptionItem?.plan_size?.size?.weight} gm</h3>
 
 
-                <button onClick={clickHandler} type='submit' className='p-4 px-24 rounded-full text-white font-medium bg-[var(--primary-color)]'>
+                <button onClick={clickHandler} type='submit' className='min-btn'>
                     Enviar
                 </button>
 

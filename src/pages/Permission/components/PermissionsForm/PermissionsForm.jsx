@@ -63,9 +63,9 @@ export default function PermissionsForm({ asEdit }) {
 
             </Accordion>
 
-            <div className='flex items-center justify-end p-10 pb-5'>
+            <div className='flex-end-container'>
 
-                <button type='submit' className='p-4 px-24 rounded-full text-white font-medium bg-[var(--primary-color)]'>Actualizar</button>
+                <button type='submit' className='min-btn'>Actualizar</button>
 
             </div>
 

@@ -8,7 +8,7 @@ export default class Auth {
 
         axios.post('https://rovle.eslamghazy.net/api/v1/auth/login', data).then(response => {
 
-            setSecureCookie('token', response.data?.token, 10);
+            setSecureCookie('token', response.data?.token, 1);
             // set user info to localstorage
             localStorage.setItem('user', JSON.stringify(response.data.user));
 

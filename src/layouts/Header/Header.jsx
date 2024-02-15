@@ -42,7 +42,7 @@ export default function Header({ isExpanded, setIsExpanded }) {
 
                             <h3 className='text-[#252525] text-[13px] font-medium'>{user?.name}</h3>
 
-                            <h6 className='text-[#252525] font-medium text-[12px]'>{user?.roles && user?.roles[0]?.name}</h6>
+                            <h4 className='text-[#252525] font-medium text-[12px]'>{user?.roles && user?.roles[0]?.name}</h4>
 
                         </div>
 

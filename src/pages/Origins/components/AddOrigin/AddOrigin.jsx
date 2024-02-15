@@ -41,9 +41,13 @@ export default function AddOrigin() {
 
                 </div>
 
-                <div className='flex items-center justify-end p-10 pb-5'>
+                <div className='flex-end-container'>
 
-                    <button type='submit' onClick={clickHandler} className='p-4 px-24 rounded-full text-white font-medium bg-[var(--primary-color)]'>
+                    <button
+                        type='submit'
+                        onClick={clickHandler}
+                        className='min-btn'
+                    >
                         Enviar
                     </button>
 

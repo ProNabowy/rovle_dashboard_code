@@ -25,6 +25,8 @@ const useAppDefaults = () => {
 
         }
 
+        // Clean up
+        return () => { };
     }, [isLoading]);
 
     return { isExpanded, setIsExpanded };

@@ -24,9 +24,9 @@ export default function SettingsRoutes({
                 ?
                 <li className='mb-8'>
 
-                    {isExpanded && <h3 className='text-[#7c7c7c] font-medium  px-2'>PRODUCTOS</h3>}
+                    {isExpanded && <h3 className='text-[#7c7c7c] font-medium px-2'>PRODUCTOS</h3>}
 
-                    <PanelMenu model={ProductsRoutes(isHasPermissions)} multiple={true} className="w-full" />
+                    <PanelMenu id='products-routes' itemID='products' model={ProductsRoutes(isHasPermissions)} multiple={true} className="w-full" />
 
                     {
                         isHasPermissions('dashboard.passports.index') &&
