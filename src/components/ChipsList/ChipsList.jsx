@@ -1,6 +1,6 @@
 import { Chips } from 'primereact/chips';
 import { Dropdown } from 'primereact/dropdown';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { useGetShopData } from './data';
 import { Dialog } from 'primereact/dialog';
 import AddCoffee from '../../pages/CoffeShop/components/AddCoffee/AddCoffee';
@@ -16,7 +16,7 @@ function ChipsList({
     stateList,
     pagePermissionKeyName
 }) {
-    const [visible, setVisible] = useState(false);
+
 
     const dropdownRef = useRef();
 
@@ -25,26 +25,11 @@ function ChipsList({
         handleDuplicatedValue,
         handleRemove,
         renderChipsItem,
-        isHasPermissions
-    } = useGetShopData(formik, dataKey, optionLabel);
+        isHasPermissions,
+        visible,
+        setVisible,
+    } = useGetShopData(formik, dataKey, optionLabel, listOfState);
 
-    useEffect(() => {
-
-        if (listOfState) {
-
-            const itHasValues = Object.keys(listOfState);
-
-            if (itHasValues?.length) {
-
-                setVisible(false);
-
-            }
-
-        }
-
-
-        return () => { };
-    }, [listOfState]);
 
     return (
         <div className='relative mb-8'>
@@ -71,15 +56,19 @@ function ChipsList({
             {
                 isHasPermissions(pagePermissionKeyName)
                     ?
-                    <Dialog 
+                    <Dialog
                         visible={visible}
                         onHide={() => setVisible(false)}
                         headerClassName='origin'
                         resizable={false}
+                        header={<h1>Añadir {title}</h1>}
+                        headerStyle={{ paddingBottom: '0' }}
                         className='w-[85vw]'
                     >
 
-                        <AddCoffee stateList={stateList} />
+                        <AddCoffee
+                            stateList={stateList}
+                        />
 
                     </Dialog>
                     :

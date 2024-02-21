@@ -6,7 +6,12 @@ import { getSelectedOption } from '../../../../assets/utils/utils';
 
 export default function AddOrigin() {
 
-    const { formik, roasters, clickHandler } = useDataGetter();
+    const {
+        formik,
+        roasters,
+        clickHandler,
+        user
+    } = useDataGetter();
 
     return (
 
@@ -16,18 +21,32 @@ export default function AddOrigin() {
             PermissionsKey={'Origins'}
             roleKey={'Add'}    >
 
-            <form onSubmit={e => e.preventDefault()}>
+            <form onSubmit={e => e.preventDefault()} autoComplete='off'>
 
-                <div className='p-10 pb-4'>
+                {
+                    user?.provider?.id
+                        ?
+                        null
+                        :
+                        <div className='p-3 sm:p-10 pb-4'>
 
-                    <label className='mb-3 block text-[#234486]'>Tostadores</label>
+                            <label className='mb-3 block text-[#234486]'>Tostadores</label>
 
-                    <Dropdown filter value={getSelectedOption(roasters, 'id', formik?.values?.provider_id)} name='provider_id' onChange={(e) => formik.setFieldValue('provider_id', e.target.value?.id)} options={roasters} optionLabel="commercial_name"
-                        placeholder="Seleccionar Tostador" className="w-full p-3 !border-r-[0] !border-l-[0] !border-t-[0] !border-b !border-b-[#b3b3b3] !shadow-none !rounded-none" />
+                            <Dropdown
+                                filter
+                                value={getSelectedOption(roasters, 'id', formik?.values?.provider_id)}
+                                name='provider_id'
+                                onChange={(e) => formik.setFieldValue('provider_id', e.target.value?.id)}
+                                options={roasters}
+                                optionLabel="commercial_name"
+                                placeholder="Seleccionar Tostador"
+                                className="w-full p-3 !border-r-[0] !border-l-[0] !border-t-[0] !border-b !border-b-[#b3b3b3] !shadow-none !rounded-none"
+                            />
 
-                </div>
+                        </div>
+                }
 
-                <div className='p-10 pt-4'>
+                <div className='p-3 sm:p-10 pt-4'>
 
                     <label htmlFor='name-input' className='mb-3 block text-[#234486]'>Nombre</label>
 

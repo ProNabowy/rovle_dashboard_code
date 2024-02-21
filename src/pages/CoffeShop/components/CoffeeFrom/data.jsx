@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Get, Store, Update, } from "../../../../apis/apis";
+import { Get, Store, Update, swal, } from "../../../../apis/apis";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { AppContext } from "../../../../context/AppContext";
@@ -17,19 +17,31 @@ const useDataGetter = (asEdit, stateList) => {
 
     const clickHandler = debounce((_) => {
 
-        setIsLoading(true);
+        if (!formik.values?.provider_id) {
 
-        if (asEdit) {
+            if (!formik?.values?.provider_id) {
 
-            return updateUtailty.updateCoffee(coffeeShopId, formik.values).finally(_ => setIsLoading(false));
+                return swal.warning('Advertencia', 'El campo del tostador es necesario, por favor complételo.');
+
+            }
 
         } else {
 
-            return storeUtailty.addCoffee(formik.values, stateList ? null : navigate)
-                .then(response => stateList ? stateList(response?.data) : null)
-                .finally(_ => setIsLoading(false));
+            setIsLoading(true);
 
-        }
+            if (asEdit) {
+
+                return updateUtailty.updateCoffee(coffeeShopId, formik.values).finally(_ => setIsLoading(false));
+
+            } else {
+
+                return storeUtailty.addCoffee(formik.values, stateList ? null : navigate)
+                    .then(response => stateList ? stateList(response?.data) : null)
+                    .finally(_ => setIsLoading(false));
+
+            }
+
+        };
 
     }, 1000);
 
@@ -67,13 +79,19 @@ const useDataGetter = (asEdit, stateList) => {
         if (e?.target?.value?.length === 5) {
 
             return getUtailty.getCitiesByZipCode(e?.target?.value)
-                .then(response => setCountries(response))
+                .then(response => {
+                    setCountries(response);
+                    formik.setFieldValue('province_id', response?.[0]?.provinces?.[0]?.id);
+                    formik.setFieldValue('city_id', response?.[0]?.provinces?.[0]?.cities?.[0]?.id);
+                })
 
         }
         return null;
     }
 
     useEffect(() => {
+
+        setIsLoading(true);
 
         getUtailty.getCountries().then(response => {
 

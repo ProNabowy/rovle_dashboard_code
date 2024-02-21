@@ -1,7 +1,7 @@
 import React from "react";
 
 const Input = React.forwardRef((props, ref) => {
-    const { classNames } = props;
+    const { classNames = "" } = props;
 
     return <input
         {...props}

@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 import { Get, Update } from "../../../../apis/apis";
 import { useFormik } from "formik";
 import { AppContext } from "../../../../context/AppContext";
-import { debounce } from "../../../../assets/utils/utils";
 
 
 const useDataGetter = _ => {
@@ -32,8 +31,6 @@ const useDataGetter = _ => {
 
     useEffect(() => {
 
-        setIsLoading(true);
-
         getUtailty.getSingleRoaster(roasterId)
             .then(currentRoaster => {
 
@@ -52,7 +49,7 @@ const useDataGetter = _ => {
                     provider_city_id: currentRoaster?.city?.id,
                 })
 
-            }).finally(_ => setIsLoading(false));
+            });
 
         return () => { };
     }, []);

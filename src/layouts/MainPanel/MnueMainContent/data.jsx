@@ -114,7 +114,7 @@ const renderCollaction = (isHasPermissions, isExpanded, item, linkStyle, isAdmin
                     ?
                     child.name === 'Tostadores' && !isAdmin
                         ?
-                        console.log(isAdmin)
+                        null
                         :
                         <NavLink to={child.href} key={i} className={`${linkStyle} block px-2`}>
 

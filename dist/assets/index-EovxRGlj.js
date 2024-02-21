@@ -1,0 +1,1 @@
+import{j as s,P as o}from"./index-oURgFu_2.js";import{P as r}from"./PermissionsForm-L_u1dKE7.js";function i(){return s.jsx(o,{title:"Formulario de Permisos",showActions:!1,children:s.jsx(r,{asEdit:!0})})}export{i as default};

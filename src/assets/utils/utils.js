@@ -140,6 +140,7 @@ const handleDelete = (callback) => {
     })
 
 }
+ 
 
 export {
     hasRoutePermissions,
@@ -148,7 +149,7 @@ export {
     debounce,
     getCookie,
     handleLogOut,
-    SwalControlar,
+    SwalControlar, 
     getSelectedOption,
     handleDelete
 }

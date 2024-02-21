@@ -20,12 +20,13 @@ export default function ProductsForm() {
         roasterFrom,
         roasterTo,
         user,
-        setAddedShops
+        setAddedShops,
+        addedShops
     } = useFormDataGetter();
 
     return (
 
-        <form onSubmit={e => e.preventDefault()} className='px-10 add-product'>
+        <form onSubmit={e => e.preventDefault()} autoComplete='off' className='px-10 add-product'>
 
             <div className='mb-8 flex items-center justify-between'>
 
@@ -272,8 +273,9 @@ export default function ProductsForm() {
                             title={'Tu Tienda'}
                             pageKey={'Coffee Shops'}
                             pagePermissionKeyName={'dashboard.coffeeShops.store'}
-                            options={currentRoaster?.coffee_shops}
+                            options={user?.provider?.coffee_shops || currentRoaster?.coffee_shops}
                             stateList={setAddedShops}
+                            listOfState={addedShops}
                         />
 
                         <button

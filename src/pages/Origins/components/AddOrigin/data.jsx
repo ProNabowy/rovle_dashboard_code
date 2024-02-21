@@ -15,11 +15,18 @@ const useDataGetter = () => {
 
     const navigate = useNavigate();
 
-    const { setIsLoading } = useContext(AppContext);
+    const { setIsLoading, user } = useContext(AppContext);
 
     const formik = useFormik({
-        initialValues: { name: "", provider_id: "" }
+        initialValues: { name: "", provider_id: user?.provider?.id }
     });
+
+    useEffect(() => {
+
+        if (user?.provider?.id) formik.setFieldValue('provider_id', user?.provider?.id);
+
+        return () => { };
+    }, [user?.provider?.id]);
 
     useEffect(() => {
 
@@ -35,11 +42,16 @@ const useDataGetter = () => {
 
         setIsLoading(true);
 
-        return storeUtialty.addOrigin(formik.values, navigate);
+        return storeUtialty.addOrigin(formik.values, navigate).finally(_ => setIsLoading(false));
 
     }, 1000);
 
-    return { formik, roasters, clickHandler }
+    return {
+        formik,
+        roasters,
+        clickHandler,
+        user
+    }
 
 }
 

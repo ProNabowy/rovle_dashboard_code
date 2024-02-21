@@ -16,10 +16,9 @@ export default function AddPackage({ formik, roasters, provider_id }) {
 
     return (
 
-        <div className='rounded-[20px] mt-20 border border-[#252525] p-[32px] grid grid-cols-12 gap-10'>
+        <div className='rounded-[20px] mt-20 border border-[#252525] p-4 sm:p-[32px] grid grid-cols-12 gap-3 md:gap-10'>
 
-            <form onSubmit={e => e.preventDefault()} className='col-span-6'>
-
+            <form onSubmit={e => e.preventDefault()} autoComplete='off' className='col-span-12 md:col-span-6'>
 
                 <div className='mb-8'>
 
@@ -32,7 +31,6 @@ export default function AddPackage({ formik, roasters, provider_id }) {
                         onChange={e => setAddNewPackage(prev => ({ ...prev, weight: e.target.value }))}
                         id={'Weight /gm'}
                     />
-
 
                 </div>
 

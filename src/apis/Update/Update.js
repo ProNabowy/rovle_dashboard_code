@@ -3,6 +3,16 @@ import { swal } from "../apis";
 
 export default class Update {
 
+    constructor() {
+
+        this.headers = {
+            headers: {
+                'Content-Type': "multipart/form-data"
+            }
+        }
+
+    }
+
     updateRole(id, data) {
         return axios.put(`roles/${id}`, data).then(response => swal.success('Updated!', `Permissions has been Updated.`));
     }
@@ -25,7 +35,12 @@ export default class Update {
         return axios.put(`passports/${id}`, data).then(response => swal.success('Actualizado!', `Tu oferta ha sido actualizada.`));
     }
     updateProfile(data) {
-        return axios.post(`profile`, data).then(response => swal.success('Actualizado!', `Tu perfil ha sido actualizado.`));
+        const includedImage = typeof data?.image === 'object';
+        const updateData = includedImage ? data : { ...data };
+
+        !includedImage ? delete updateData?.image : null;
+
+        return axios.post(`profile`, updateData, this.headers).then(response => swal.success('Actualizado!', `Tu perfil ha sido actualizado.`)).then(_ => typeof data?.image === 'object' ? window.location.reload() : null)
     }
 
 }

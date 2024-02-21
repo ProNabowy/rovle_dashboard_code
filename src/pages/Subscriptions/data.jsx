@@ -9,7 +9,7 @@ import Table from "../../assets/utils/table";
 const tableService = new Table();
 
 const statusBodyTemplate = (rowData) => {
-    return <p className={`mb-1 capitalize text-[13px] font-medium ${rowData.status == 'pending' ? "text-[#C9CC3A]" : rowData.status == 'processing' ? "text-[#7A3ACC]" : rowData?.status === 'active' ? "text-[#28C76F]" : "text-[#FF5C34]"}`}> {rowData?.status} </p>
+    return <p className={`mb-1 capitalize text-[13px] font-medium ${rowData.status == 'pending' ? "text-[#C9CC3A]" : rowData.status == 'processing' ? "text-[#7A3ACC]" : rowData?.status === 'active' ? "text-[#28C76F]" : "text-[#FF5C34]"}`}> {rowData?.status === 'pending' ? "Esperando pago" : rowData?.status} </p>
 };
 
 const usePackageBodyTemplate = (rowData) => {
@@ -52,8 +52,6 @@ const useDataGetter = () => {
 
     const provider = user?.provider;
 
-    const location = useLocation().pathname;
-
     const [plans, setPlans] = useState([]);
 
     const [subscriptionsList, setSubscriptions] = useState([]);
@@ -72,7 +70,7 @@ const useDataGetter = () => {
 
         if (provider?.id) {
 
-            getUtailty.getPlansByProvider(provider?.id).then(response => setPlans(response));
+            getUtailty.getPlansByProvider(provider?.id).then(response => setPlans([{ name: 'All', id: 'all' }, ...response]));
 
         } else {
 
@@ -92,18 +90,35 @@ const useDataGetter = () => {
 
         if (selectedPlan?.id) {
 
-            getUtailty.getSubscriptionsByPlanId(selectedPlan?.id).then(response => setSubscriptions(response))
-                .finally(_ => setIsLoading(false));
+            if (selectedPlan?.id === 'all') {
 
-        } else {
+                getUtailty.getSubscriptions()
+                    .then(response => setSubscriptions(response))
+                    .finally(_ => setIsLoading(false));
 
-            getUtailty.getSubscriptions()
-                .then(response => setSubscriptions(response))
-                .finally(_ => setIsLoading(false));
+            } else {
+
+                getUtailty.getSubscriptionsByPlanId(selectedPlan?.id).then(response => setSubscriptions(response))
+                    .finally(_ => setIsLoading(false));
+
+            }
+
+
         }
 
         return () => { };
     }, [selectedPlan]);
+
+    useEffect(() => {
+
+        setIsLoading(true);
+
+        getUtailty.getSubscriptions()
+            .then(response => setSubscriptions(response))
+            .finally(_ => setIsLoading(false));
+
+        return () => { };
+    }, []);
 
     return {
         selectedRosters,

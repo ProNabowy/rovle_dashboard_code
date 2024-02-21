@@ -38,7 +38,7 @@ export default class Store {
     }
     addSize(data, navigate) {
         return axios.post(`sizes`, data).then(response => {
-            swal.success('Añadido!', `El tamaño ha sido añadido.`).then(_ => navigate('/products/plans/size'));
+            swal.success('Añadido!', `El tamaño ha sido añadido.`).then(_ => navigate('/products/plans/size/list'));
             return response.data;
         });
     }

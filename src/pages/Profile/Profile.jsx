@@ -6,21 +6,22 @@ import { Dropdown } from 'primereact/dropdown'
 import { getSelectedOption } from '../../assets/utils/utils'
 import default_user from '../../assets/images/default_user.png';
 
-
 export default function Profile() {
 
     const {
         formik,
-        clickHandler,
         data,
         counteris,
+        classList,
+        setClassList,
+        handleBlur
     } = useDataGetter();
 
     return (
 
         <PageContent title={'Mi perfil'} showActions={false}>
 
-            <form onSubmit={e => e.preventDefault()} className='px-10'>
+            <form onSubmit={formik.handleSubmit} autoComplete='off' className='px-10'>
 
                 <div className='w-[250px] h-[250px] shadow-lg mb-20 m-auto rounded-full flex items-center justify-center relative profile-image overflow-hidden'>
 
@@ -29,7 +30,9 @@ export default function Profile() {
                             typeof
                                 formik.values.image === "object"
                                 ?
-                                URL.createObjectURL(formik.values?.image)
+                                formik.values?.image ? URL?.createObjectURL(formik.values?.image)
+                                    :
+                                    `${data?.image}`
                                 :
                                 `${data?.image}`
                         }
@@ -37,12 +40,11 @@ export default function Profile() {
                         onError={e => {
 
                             e.target.src = default_user;
-                            e.target.classList.add('!w-[150px]');
-                            e.target.classList.add('!object-contain');
+                            setClassList('!w-[150px] !object-contain');
 
+                            return null;
                         }}
-
-                        className='w-full h-full object-cover rounded-full'
+                        className={`w-full h-full object-cover rounded-full ${classList}`}
                     />
 
                     <div className='w-[250px] h-[250px] flex items-start justify-center rounded-full bg-[#45b9eae1] absolute left-0 z-20 transition bottom-[-250px] uploade-image'>
@@ -50,13 +52,16 @@ export default function Profile() {
                         <Input
                             type='file'
                             accept="image/png, image/gif, image/jpeg"
-                            onChange={e => formik.setFieldValue('image', e.target.files[0])}
+                            onChange={e => {
+                                formik.setFieldValue('image', e.target.files[0]);
+                                setClassList('');
+                            }}
                             id='uploade-img'
                             classNames='!w-0 !h-0 appearance-none !opacity-0 !scale-0' />
 
                         <label htmlFor='uploade-img'>
 
-                            <FontAwesomeIcon icon={faImage} className='text-[40px] mt-8 cursor-pointer text-white' />
+                            <FontAwesomeIcon icon={faImage} className='text-[40px] mt-8 -ms-3 cursor-pointer text-white' />
 
                         </label>
 
@@ -127,7 +132,7 @@ export default function Profile() {
                             value={formik?.values?.phone}
                             name={'phone'}
                             type={'text'}
-                            disabled
+                            disabled={data?.values?.phone ? true : false}
                             required={true}
                             onChange={formik.handleChange}
                             id={'phone'}
@@ -145,11 +150,16 @@ export default function Profile() {
                         <label htmlFor={'zip'} className='label'>Código postal</label>
 
                         <Input
+                            onChange={formik.handleChange}
+                            onBlur={handleBlur}
                             value={formik?.values?.zip}
                             name={'zip'}
-                            type={'number'}
-                            required={true}
-                            onChange={formik.handleChange}
+                            type={'text'}
+                            required
+                            min={5}
+                            max={5}
+                            maxLength={5}
+                            minLength={5}
                             id={'zip'}
                             placeholder={'Ingresar Código postal'}
                         />
@@ -223,7 +233,7 @@ export default function Profile() {
 
                 </div>
 
-                <button onClick={clickHandler} className='min-btn block mt-10 ml-auto'>Guardar cambios</button>
+                <button type='submit' className='min-btn block mt-10 ml-auto'>Guardar cambios</button>
 
             </form>
 

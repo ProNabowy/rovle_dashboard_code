@@ -11,11 +11,11 @@ export default function RoasterForm({ formik, isRenderPassword }) {
 
     return (
 
-        <form onSubmit={formik.handleSubmit} className='px-10'>
+        <form onSubmit={formik.handleSubmit} autoComplete='off' className='px-10'>
 
             <div className='flex-container'>
 
-                <div className='sm:w-[48%]'>
+                <div className='w-full sm:w-[48%]'>
 
                     <label htmlFor={'user_name'} className='label'>Nombre</label>
 
@@ -31,7 +31,7 @@ export default function RoasterForm({ formik, isRenderPassword }) {
 
                 </div>
 
-                <div className='sm:w-[48%]'>
+                <div className='w-full sm:w-[48%]'>
 
                     <label htmlFor={'user_email'} className='label'>Correo electrónico</label>
 
@@ -39,48 +39,10 @@ export default function RoasterForm({ formik, isRenderPassword }) {
                         value={formik?.values?.user_email}
                         name={'user_email'}
                         type={'email'}
-                        disabled
                         required={true}
                         onChange={formik.handleChange}
                         id={'user_email'}
                         placeholder={'Ingresar Correo electrónico'}
-                    />
-
-                </div>
-
-            </div>
-
-            <div className='flex-container'>
-
-                <div className='sm:w-[48%]'>
-
-                    <label htmlFor={'user_password'} className='label'>Contraseña</label>
-
-                    <Input
-                        value={formik?.values?.user_password}
-                        name={'user_password'}
-                        type={'password'}
-                        required={true}
-                        onChange={formik.handleChange}
-                        id={'user_password'}
-                        placeholder={'Ingresar Contraseña'}
-                    />
-
-                </div>
-
-                <div className='sm:w-[48%]'>
-
-                    <label htmlFor={'user_password_confirmation'} className='label'>Confirmación de contraseña</label>
-
-                    <Input
-                        value={formik?.values?.user_password_confirmation}
-                        name={'user_password_confirmation'}
-                        type={'password'}
-                        disabled
-                        required={true}
-                        onChange={formik.handleChange}
-                        id={'user_password_confirmation'}
-                        placeholder={'Ingresar Confirmación de contraseña'}
                     />
 
                 </div>
@@ -92,7 +54,7 @@ export default function RoasterForm({ formik, isRenderPassword }) {
                     ?
                     <div className='flex-container'>
 
-                        <div className='sm:w-[48%]'>
+                        <div className='w-full sm:w-[48%]'>
 
                             <label htmlFor={'user_password'} className='label'>Contraseña</label>
 
@@ -108,7 +70,7 @@ export default function RoasterForm({ formik, isRenderPassword }) {
 
                         </div>
 
-                        <div className='sm:w-[48%]'>
+                        <div className='w-full sm:w-[48%]'>
 
                             <label htmlFor={'user_password_confirmation'} className='label'>Confirmación de contraseña</label>
 
@@ -116,7 +78,6 @@ export default function RoasterForm({ formik, isRenderPassword }) {
                                 value={formik?.values?.user_password_confirmation}
                                 name={'user_password_confirmation'}
                                 type={'password'}
-                                disabled
                                 required={true}
                                 onChange={formik.handleChange}
                                 id={'user_password_confirmation'}
@@ -132,7 +93,7 @@ export default function RoasterForm({ formik, isRenderPassword }) {
 
             <div className='flex-container'>
 
-                <div className='sm:w-[48%]'>
+                <div className='w-full sm:w-[48%]'>
 
                     <label htmlFor={'provider_nif'} className='label'>NIF</label>
 
@@ -148,7 +109,7 @@ export default function RoasterForm({ formik, isRenderPassword }) {
 
                 </div>
 
-                <div className='sm:w-[48%]'>
+                <div className='w-full sm:w-[48%]'>
 
                     <label htmlFor={'provider_commercial_name'} className='label'>Confirmación Commercial Name</label>
 
@@ -156,7 +117,6 @@ export default function RoasterForm({ formik, isRenderPassword }) {
                         value={formik?.values?.provider_commercial_name}
                         name={'provider_commercial_name'}
                         type={'text'}
-                        disabled
                         required={true}
                         onChange={formik.handleChange}
                         id={'provider_commercial_name'}
@@ -169,7 +129,7 @@ export default function RoasterForm({ formik, isRenderPassword }) {
 
             <div className='flex-container'>
 
-                <div className='sm:w-[48%]'>
+                <div className='w-full sm:w-[48%]'>
 
                     <label htmlFor={'provider_official_name'} className='label'>Nombre oficial</label>
 
@@ -185,18 +145,17 @@ export default function RoasterForm({ formik, isRenderPassword }) {
 
                 </div>
 
-                <div className='sm:w-[48%]'>
+                <div className='w-full sm:w-[48%]'>
 
-                    <label htmlFor={'provider_commercial_name'} className='label'>Confirmación Dirección</label>
+                    <label htmlFor={'provider_address'} className='label'>Dirección</label>
 
                     <Input
-                        value={formik?.values?.provider_commercial_name}
-                        name={'provider_commercial_name'}
+                        value={formik?.values?.provider_address}
+                        name={'provider_address'}
                         type={'text'}
-                        disabled
                         required={true}
                         onChange={formik.handleChange}
-                        id={'provider_commercial_name'}
+                        id={'provider_address'}
                         placeholder={'Ingresar Confirmación Dirección'}
                     />
 
@@ -206,7 +165,7 @@ export default function RoasterForm({ formik, isRenderPassword }) {
 
             <div className='flex-container'>
 
-                <div className='sm:w-[48%]'>
+                <div className='w-full sm:w-[48%]'>
 
                     <label htmlFor={'provider_zip'} className='label'>Código postal</label>
 
@@ -227,7 +186,7 @@ export default function RoasterForm({ formik, isRenderPassword }) {
 
                 </div>
 
-                <div className='sm:w-[48%]'>
+                <div className='w-full sm:w-[48%]'>
 
                     <label htmlFor={'provider_phone'} className='label'>Teléfono</label>
 
@@ -247,7 +206,7 @@ export default function RoasterForm({ formik, isRenderPassword }) {
 
             <div className='flex-container'>
 
-                <div className='sm:w-[48%]'>
+                <div className='w-full sm:w-[48%]'>
 
                     <h2 className='label'>País</h2>
 

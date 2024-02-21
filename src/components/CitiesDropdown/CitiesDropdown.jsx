@@ -1,11 +1,12 @@
 import { Dropdown } from 'primereact/dropdown'
 import { getSelectedOption } from '../../assets/utils/utils'
 
-export default function CitiesDropdown({ provinces, formik, province_Key, city_Key, classNames }) {
+
+function CitiesDropdown({ provinces, formik, province_Key, city_Key, classNames }) {
 
     return (
 
-        <div className={`sm:w-[48%] ${classNames}`}>
+        <div className={`w-full sm:w-[48%] ${classNames}`}>
 
             <label htmlFor={'cities'} className='label'>Ciudad</label>
 
@@ -22,3 +23,5 @@ export default function CitiesDropdown({ provinces, formik, province_Key, city_K
 
     )
 }
+
+export default CitiesDropdown

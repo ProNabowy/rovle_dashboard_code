@@ -36,11 +36,11 @@ function AddOrigin({ formik, provider_id, classNames }) {
 
     return (
 
-        <div className={`sm:w-[48%] relative ${classNames}`}>
+        <div className={`w-full sm:w-[48%] relative ${classNames}`}>
 
             <div className='flex items-center justify-between'>
 
-                <label htmlFor={'Origin'} className='label'>      Origen   </label>
+                <label htmlFor={'Origin'} className='label'>Origen</label>
 
                 {
                     isHasPermissions('dashboard.origins.store')
@@ -60,7 +60,7 @@ function AddOrigin({ formik, provider_id, classNames }) {
                     <Dialog
                         header='Añadir Origen'
                         visible={visible}
-                        style={{ width: '50vw' }}
+                        className='w-[90%] sm:w-[50vw]'
                         headerClassName='origin'
                         onHide={() => setVisible(false)}
                     >

@@ -14,9 +14,9 @@ export default function PermissionsForm({ asEdit }) {
 
     return (
 
-        <form onSubmit={formik.handleSubmit} className='permission-form'>
+        <form onSubmit={formik.handleSubmit} autoComplete='off' className='permission-form'>
 
-            <div className='p-10 pb-2'>
+            <div className='p-3 sm:p-10 pb-2'>
 
                 <label
                     htmlFor='name-input'
@@ -36,9 +36,9 @@ export default function PermissionsForm({ asEdit }) {
             </div>
 
 
-            <label className='block text-[24px] text-[#252525] opacity-70 p-10 pb-2'>Páginas</label>
+            <label className='block text-[24px] text-[#252525] opacity-70 p-3 sm:p-10 pb-2'>Páginas</label>
 
-            <Accordion multiple className='p-10' activeIndex={0}>
+            <Accordion multiple className='p-3 sm:p-10' activeIndex={0}>
 
                 {
                     permissionsKeys.map((item, index) => {

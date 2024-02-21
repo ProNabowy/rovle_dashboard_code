@@ -20,14 +20,14 @@ export default function ProductsForm({ formik, originsList, packagesList }) {
 
     return (
 
-        <form onSubmit={formik.handleSubmit} className='px-10 add-product'>
+        <form onSubmit={formik.handleSubmit} autoComplete='off' className='px-3 sm:px-10 add-product'>
 
             <div className='flex-container'>
 
                 {
                     isByNewOWner
                         ?
-                        <div className={`${isProvider ? "w-full" : "w-[48%]"}`}>
+                        <div className={`${isProvider ? "w-full" : "w-full sm:w-[48%]"}`}>
 
                             <label htmlFor={'factor'} className='label'>Nombre del proveedor</label>
 
@@ -71,7 +71,7 @@ export default function ProductsForm({ formik, originsList, packagesList }) {
 
             <div className='flex-container'>
 
-                <div className='sm:w-[48%]'>
+                <div className='w-full sm:w-[48%]'>
 
                     <label htmlFor={'commercial_name'} className='label'>Nombre del Producto</label>
 
@@ -87,16 +87,19 @@ export default function ProductsForm({ formik, originsList, packagesList }) {
 
                 </div>
 
-                <div className='sm:w-[48%]'>
+                <div className='w-full sm:w-[48%]'>
 
                     <label htmlFor={'code'} className='label'>Código</label>
 
                     <Input
+                        onChange={formik.handleChange}
                         value={formik?.values?.code}
                         name={'code'}
                         type={'text'}
-                        required={true}
-                        onChange={formik.handleChange}
+                        min={5}
+                        max={5}
+                        maxLength={5}
+                        minLength={5}
                         id={'code'}
                         placeholder={'Ingresar Código'}
                     />
@@ -126,10 +129,9 @@ export default function ProductsForm({ formik, originsList, packagesList }) {
 
             </div>
 
-
             <div className='flex-container'>
 
-                <div className='sm:w-[48%]'>
+                <div className='w-full sm:w-[48%]'>
 
                     <label htmlFor={'farm'} className='label'>Finca</label>
 
@@ -137,7 +139,6 @@ export default function ProductsForm({ formik, originsList, packagesList }) {
                         value={formik?.values?.farm}
                         name={'farm'}
                         type={'text'}
-                        required={true}
                         onChange={formik.handleChange}
                         id={'farm'}
                         placeholder={'Ingresar Finca'}
@@ -145,7 +146,7 @@ export default function ProductsForm({ formik, originsList, packagesList }) {
 
                 </div>
 
-                <div className='sm:w-[48%]'>
+                <div className='w-full sm:w-[48%]'>
 
                     <label htmlFor={'sca_score'} className='label'>Puntunaction Sca s</label>
 
@@ -167,7 +168,7 @@ export default function ProductsForm({ formik, originsList, packagesList }) {
 
             <div className='flex-container'>
 
-                <div className='sm:w-[48%]'>
+                <div className='w-full sm:w-[48%]'>
 
                     <label htmlFor={'altitude'} className='label'>Altitud</label>
 
@@ -185,7 +186,7 @@ export default function ProductsForm({ formik, originsList, packagesList }) {
 
                 </div>
 
-                <div className='sm:w-[48%]'>
+                <div className='w-full sm:w-[48%]'>
 
                     <label htmlFor={'process'} className='label'>Proceso</label>
 
@@ -193,7 +194,6 @@ export default function ProductsForm({ formik, originsList, packagesList }) {
                         value={formik?.values?.process}
                         name={'process'}
                         type={'text'}
-                        required={true}
                         onChange={formik.handleChange}
                         id={'process'}
                         placeholder={'Ingresar process'}

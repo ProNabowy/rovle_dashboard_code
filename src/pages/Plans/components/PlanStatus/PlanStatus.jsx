@@ -3,7 +3,7 @@ import { RadioButton } from 'primereact/radiobutton'
 export default function PlanStatus({ formik }) {
 
     return (
-        <div className="w-[48%]">
+        <div className="w-full sm:w-[48%]">
 
             <label className='label block mb-4'>Estado</label>
 

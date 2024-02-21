@@ -36,9 +36,9 @@ export default function ChooseOwner() {
     return (
         <PageContent title={'Elegir Propietario'} showActions={false} >
 
-            <form onSubmit={e => e.preventDefault()}>
+            <form onSubmit={e => e.preventDefault()} autoComplete='off'>
 
-                <div className='px-10 py-3'>
+                <div className='px-3 sm:px-10 py-3'>
 
                     <label htmlFor='name-input' className='mb-3 block text-[#234486]'>Dueño del Producto</label>
 
@@ -50,7 +50,7 @@ export default function ChooseOwner() {
                 <div className='flex-end-container'>
 
                     <button onClick={handelClick} className='min-btn'>
-                        Mostrar
+                        Siguiente
                     </button>
 
                 </div>

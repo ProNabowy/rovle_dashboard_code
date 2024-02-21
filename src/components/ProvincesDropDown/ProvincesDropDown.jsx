@@ -4,7 +4,7 @@ import { getSelectedOption } from '../../assets/utils/utils';
 export default function ProvincesDropDown({ formik, countries, country_Key, province_Key }) {
 
     return (
-        <div className='sm:w-[48%]'>
+        <div className='w-full sm:w-[48%]'>
 
             <label htmlFor='provinces' className='label'>Provincia</label>
 

@@ -1,20 +1,20 @@
 import { Dropdown } from 'primereact/dropdown';
-import { Input } from '../../../../components';
+import { ChipsList, Input } from '../../../../components';
 import { getSelectedOption } from '../../../../assets/utils/utils';
 import { useDataGetter } from './data';
 
 
 export default function UserForm({ formik, asEdit }) {
 
-    const { roles } = useDataGetter();
+    const { roles, user } = useDataGetter();
 
     return (
 
-        <form onSubmit={formik.handleSubmit} className='px-10'>
+        <form onSubmit={formik.handleSubmit} autoComplete='off' className='px-3 sm:px-10'>
 
             <div className='flex-container'>
 
-                <div className='sm:w-[48%]'>
+                <div className='w-full sm:w-[48%]'>
 
                     <label htmlFor={'user_name'} className='label'>Nombre</label>
 
@@ -30,7 +30,7 @@ export default function UserForm({ formik, asEdit }) {
 
                 </div>
 
-                <div className='sm:w-[48%]'>
+                <div className='w-full sm:w-[48%]'>
 
                     <label htmlFor={'user_email'} className='label'>Correo electrónico</label>
 
@@ -55,7 +55,7 @@ export default function UserForm({ formik, asEdit }) {
                     :
                     <div className='flex-container'>
 
-                        <div className='sm:w-[48%]'>
+                        <div className='w-full sm:w-[48%]'>
 
                             <label htmlFor={'user_password'} className='label'>Contraseña</label>
 
@@ -71,7 +71,7 @@ export default function UserForm({ formik, asEdit }) {
 
                         </div>
 
-                        <div className='sm:w-[48%]'>
+                        <div className='w-full sm:w-[48%]'>
 
                             <label htmlFor={'user_password_confirmation'} className='label'>Confirmación de contraseña</label>
 
@@ -90,6 +90,26 @@ export default function UserForm({ formik, asEdit }) {
                     </div>
             }
 
+            {
+                user?.provider?.id
+                    ?
+                    <div className="mb-8">
+
+                        <h2 className='label'>Cafeterías</h2>
+
+                        <Dropdown
+                            value={getSelectedOption(user?.provider?.coffee_shops, 'id', formik?.values?.coffee_shop_id)}
+                            onChange={(e) => formik.setFieldValue('coffee_shop_id', e.target.value?.id)}
+                            options={user?.provider?.coffee_shops}
+                            optionLabel="name"
+                            filter
+                            placeholder="Seleccionar Cafeterías" className="w-full p-2 !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
+
+                    </div>
+                    :
+                    null
+            }
+
 
             <div className='mb-8'>
 
@@ -100,7 +120,7 @@ export default function UserForm({ formik, asEdit }) {
                     onChange={(e) => formik.setFieldValue('role_id', e.target.value?.id)}
                     options={roles} optionLabel="name"
                     filter
-                    placeholder="Seleccionar Permiso" className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
+                    placeholder="Seleccionar Permiso" className="w-full p-2 !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
 
             </div>
 

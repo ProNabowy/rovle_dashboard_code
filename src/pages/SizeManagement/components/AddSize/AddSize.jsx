@@ -12,9 +12,9 @@ export default function AddSize() {
 
         <PageContent title={'Formulario de tamaño'} showActions={false}>
 
-            <form onSubmit={e => e.preventDefault()}>
+            <form onSubmit={e => e.preventDefault()} autoComplete='off'>
 
-                <div className='p-10 py-4'>
+                <div className='p-3 sm:p-10 py-4'>
 
                     <label htmlFor='name-input' className='mb-3 block text-[#234486]'>Personaje</label>
 
@@ -29,7 +29,7 @@ export default function AddSize() {
 
                 </div>
 
-                <div className='p-10 pt-4'>
+                <div className='p-3 sm:p-10 pt-4'>
 
                     <label htmlFor='weight' className='mb-3 block text-[#234486]'>Peso</label>
 

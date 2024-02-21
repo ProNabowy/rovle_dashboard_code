@@ -5,9 +5,9 @@ import React from 'react'
 export default function RenderPacakges({ formik, removePackage }) {
 
     return (
-        <div className='col-span-6'>
+        <div className='col-span-12 md:col-span-6'>
 
-            <div className='border border-[#252525] p-[32px] rounded-[20px] h-full max-h-[270px] overflow-y-auto add-package'>
+            <div className='border border-[#252525] p-3 sm:p-[32px] rounded-[20px] h-full max-h-[270px] overflow-y-auto add-package'>
                 {
                     formik?.values?.presentations?.map((item, index) => {
 

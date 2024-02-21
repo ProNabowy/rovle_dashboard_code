@@ -28,7 +28,7 @@ export default function OffeerInfo({ formik }) {
   return (
     <div className='flex-container'>
 
-      <div className='sm:w-[48%] border border-[#28C76F] p-3 py-8 rounded-[10px]'>
+      <div className='w-full sm:w-[48%] border border-[#28C76F] p-3 py-8 rounded-[10px]'>
 
         <div className='mb-8'>
 
@@ -65,7 +65,7 @@ export default function OffeerInfo({ formik }) {
 
       </div>
 
-      <div className='sm:w-[48%] border border-[#28C76F] p-3 py-8 rounded-[10px]'>
+      <div className='w-full sm:w-[48%] border border-[#28C76F] p-3 py-8 rounded-[10px]'>
 
         <div className='mb-8'>
 
@@ -89,6 +89,7 @@ export default function OffeerInfo({ formik }) {
               <Input
                 type='number'
                 id={'C.Oferta'}
+                required={true}
                 value={formik.values.discount}
                 name='discount'
                 onChange={formik.handleChange}

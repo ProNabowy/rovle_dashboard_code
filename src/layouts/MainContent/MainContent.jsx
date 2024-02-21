@@ -14,7 +14,7 @@ export default function MainContent({ isExpanded, setIsExpanded, children }) {
 
                 <Header isExpanded={isExpanded} setIsExpanded={setIsExpanded} />
 
-                <div className='container'>
+                <div className='container sm:px-10'>
 
                     <BreadcrumbNav />
 

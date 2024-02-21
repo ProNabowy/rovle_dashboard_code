@@ -25,9 +25,9 @@ const useDataGetter = _ => {
         return () => { };
     }, []);
 
-    const level_one = offers.filter(item => item?.level_id === 1 || item?.level_id === 'auto');
-    const level_two = offers.filter(item => item?.level_id === 2 || item?.level_id === 'auto');
-    const level_three = offers.filter(item => item?.level_id === 3 || item?.level_id === 'auto');
+    const level_one = offers.filter(item => item?.level_id === 1 || item?.level_id === null);
+    const level_two = offers.filter(item => item?.level_id === 2 || item?.level_id === null);
+    const level_three = offers.filter(item => item?.level_id === 3 || item?.level_id === null);
 
     const roasterNameBodyTemplate = (rowData) => {
         return <p className='mb-1 capitalize text-[13px] font-medium'>{rowData.provider?.commercial_name}</p>

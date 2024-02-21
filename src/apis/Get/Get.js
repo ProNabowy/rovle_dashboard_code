@@ -26,6 +26,9 @@ export default class Get {
     getRoasters() {
         return axios.get(`providers`).then(response => response.data.data);
     }
+    getAllRoasters() {
+        return axios.get(`providers-list`).then(response => response.data.data);
+    }
     getSingleRoaster(id) {
         return axios.get(`providers/${id}`).then(response => response.data.data);
     }

@@ -2,7 +2,7 @@ import OrderDetails from './components/OrderDetails/OrderDetails';
 import { Fragment, useContext, useEffect, useState } from 'react';
 import { Get } from '../../apis/apis';
 import Table from '../../assets/utils/table';
-import { AppContext } from '../../context/AppContext';
+import { AppContext } from '../../context/AppContext'; 
 
 const tableService = new Table();
 
@@ -18,7 +18,20 @@ const useDataGetter = () => {
 
         setIsLoading(true);
 
-        getUtailty.getOrders().then(response => setOrders(response)).finally(_ => setIsLoading(false));
+        getUtailty.getOrders()
+            .then(response => {
+                setOrders(response?.sort((a, b) => {
+
+                    if (a?.status === 'pending' && b?.status !== 'pending') {
+                        return -1;
+                    } else if (a?.status !== 'pending' && b?.status === 'pending') {
+                        return 1;
+                    } else {
+                        return b?.created_at.localeCompare(a?.created_at);
+                    }
+                }));
+            })
+            .finally(_ => setIsLoading(false));
 
         return () => { };
     }, []);
@@ -35,14 +48,12 @@ const addressBodyTemplate = (rowData) => {
 
 const useStatusBodyTemplate = (rowData) => {
 
-    const status = rowData?.status == 0 ? "Received" : "Pending";
-
     const [visible, setVisible] = useState(false);
 
     return (
         <Fragment>
 
-            <p onClick={_ => setVisible(true)} className={`mb-1 capitalize text-[13px] cursor-pointer underline font-medium ${rowData?.status == 0 ? "text-[#28C76F]" : "text-[#C9CC3A]"}`}>{status}</p>
+            <p onClick={_ => setVisible(true)} className={`mb-1 capitalize text-[13px] cursor-pointer underline font-medium ${rowData?.status == 'completed' ? "text-[#28C76F]" : rowData?.status === 'canceld' ? 'text-[red]' : "text-[#C9CC3A]"}`}>{rowData?.status}</p>
 
             <OrderDetails row={rowData} visible={visible} setVisible={setVisible} />
 

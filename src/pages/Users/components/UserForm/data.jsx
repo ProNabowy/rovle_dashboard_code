@@ -6,7 +6,7 @@ const useDataGetter = () => {
 
     const getUtailty = new Get();
 
-    const { setIsLoading } = useContext(AppContext);
+    const { setIsLoading, user } = useContext(AppContext);
 
     const [roles, setRoles] = useState([]);
 
@@ -20,7 +20,7 @@ const useDataGetter = () => {
         return () => { };
     }, []);
 
-    return { roles };
+    return { roles, user };
 }
 
 export {

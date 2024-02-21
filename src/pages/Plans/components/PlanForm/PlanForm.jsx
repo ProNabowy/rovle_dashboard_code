@@ -6,7 +6,7 @@ import PlanStatus from '../PlanStatus';
 import { getSelectedOption } from '../../../../assets/utils/utils';
 
 
-export default function PlanForm({ formik, clickHandler }) {
+export default function PlanForm({ formik }) {
 
     const {
         roasters,
@@ -20,11 +20,11 @@ export default function PlanForm({ formik, clickHandler }) {
 
     return (
 
-        <form onSubmit={e => e.preventDefault()} className='px-10'>
+        <form onSubmit={formik.handleSubmit} autoComplete='off' className='px-3 sm:px-10'>
 
             <div className='flex-container'>
 
-                <div className='sm:w-[48%]'>
+                <div className='w-full sm:w-[48%]'>
 
                     <label htmlFor={'plan-name'} className='label'>Nombre Plan</label>
 
@@ -32,6 +32,7 @@ export default function PlanForm({ formik, clickHandler }) {
                         type='text'
                         id={'plan-name'}
                         name='name'
+                        required={true}
                         value={formik.values?.name}
                         onChange={formik.handleChange}
                         placeholder={'Este sera el nombre que se verá en la aplicacion'}
@@ -42,7 +43,6 @@ export default function PlanForm({ formik, clickHandler }) {
                 <PlanStatus formik={formik} />
 
             </div>
-
 
             {
                 !provider?.id
@@ -109,7 +109,7 @@ export default function PlanForm({ formik, clickHandler }) {
                 label={'Talla'}
             />
 
-            <button onClick={clickHandler} type='submit' className='min-btn block !mt-10 ml-auto'>Enviar</button>
+            <button type='submit' className='min-btn block !mt-10 ml-auto'>Enviar</button>
 
         </form>
 

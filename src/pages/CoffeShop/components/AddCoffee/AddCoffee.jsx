@@ -6,9 +6,7 @@ export default function AddCoffee({ stateList }) {
     return (
         <PageContent title={'Formulario de Cafetería'} showActions={false}  >
 
-            <CoffeeFrom
-                stateList={stateList}
-            />
+            <CoffeeFrom stateList={stateList} />
 
         </PageContent>
     )

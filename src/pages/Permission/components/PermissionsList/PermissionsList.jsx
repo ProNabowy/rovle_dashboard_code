@@ -4,9 +4,9 @@ export default function PermissionsList({ optionKey, permissions, options, formi
 
 
     return (
-        <div className='col-span-6 flex items-center'>
+        <div className='col-span-6 flex items-center flex-wrap'>
 
-            <label className='text-[#252525] text-[20px] min-w-[200px]'>{optionKey}</label>
+            <label className='text-[#252525] text-[20px] me-5 sm:me-0 sm:min-w-[200px]'>{optionKey}</label>
 
             <Options
                 onOptionChange={onOptionChange}

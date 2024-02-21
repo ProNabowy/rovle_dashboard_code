@@ -38,25 +38,6 @@ const useTableDefaults = (list) => {
 
     const entries = [];
 
-    useEffect(() => {
-
-        const perv = document.querySelector('.p-paginator-prev');
-        const next = document.querySelector('.p-paginator-next');
-
-        if (perv) {
-
-            perv.innerHTML = "Anterior";
-
-        }
-
-        if (next) {
-
-            next.innerHTML = "Siguiente";
-
-        }
-
-    }, []);
-
     // Fetch Entries 
     list?.map((item, index) => entries.push({ name: index + 1, code: index + 1 }));
 

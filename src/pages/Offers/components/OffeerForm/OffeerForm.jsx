@@ -8,22 +8,23 @@ import { getSelectedOption } from '../../../../assets/utils/utils';
 import { Input } from '../../../../components';
 
 
-export default function OffeerForm({ formik, clickHandler }) {
+export default function OffeerForm({ formik }) {
 
     const { roasters, isProvider, isHasPermissions } = useDataGetter(formik);
 
     return (
-        <form onSubmit={e => e.preventDefault()} className='px-10 add-offer-form'>
+        <form onSubmit={formik.handleSubmit} autoComplete='off' className='px-3 sm:px-10 add-offer-form'>
 
             <div className='flex-container'>
 
-                <div className={`${isProvider ? "w-full" : "sm:w-[48%]"}`}>
+                <div className={`${isProvider ? "w-full" : "w-full sm:w-[48%]"}`}>
 
                     <label htmlFor={'name'} className='label'>Nombre de la oferta</label>
 
                     <Input
                         type='text'
                         id={'name'}
+                        required={true}
                         name='name'
                         value={formik.values?.name}
                         onChange={formik.handleChange}
@@ -35,7 +36,7 @@ export default function OffeerForm({ formik, clickHandler }) {
                 {
                     !isProvider?.id
                         ?
-                        <div className='sm:w-[48%]'>
+                        <div className='w-full sm:w-[48%]'>
 
                             <div className='flex items-center justify-between'>
 
@@ -72,8 +73,16 @@ export default function OffeerForm({ formik, clickHandler }) {
 
                 <label htmlFor={'name'} className='label'>Nivel</label>
 
-                <Dropdown filter value={getSelectedOption(Usuario, 'id', formik?.values?.level_id)} name='level_id' onChange={(e) => formik.setFieldValue('level_id', e.target.value?.id)} options={Usuario} optionLabel="name"
-                    className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" placeholder='Seleccionar Nivel' />
+                <Dropdown
+                    filter
+                    value={getSelectedOption(Usuario, 'id', formik?.values?.level_id)}
+                    name='level_id'
+                    onChange={(e) => formik.setFieldValue('level_id', e.target.value?.id)}
+                    options={Usuario}
+                    optionLabel="name"
+                    className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent"
+                    placeholder='Seleccionar Nivel'
+                />
 
             </div>
 
@@ -83,8 +92,17 @@ export default function OffeerForm({ formik, clickHandler }) {
 
                 <label htmlFor={'duration'} className='label'>Recurrencia</label>
 
-                <Dropdown filter value={getSelectedOption(Recurren, 'id', formik?.values?.duration)} name='duration' onChange={(e) => formik.setFieldValue('duration', e.target.value?.id)} options={Recurren} optionLabel="name"
-                    inputId='duration' className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" placeholder='Seleccionar Recurrencia' />
+                <Dropdown
+                    filter
+                    value={getSelectedOption(Recurren, 'id', formik?.values?.duration)}
+                    name='duration'
+                    onChange={(e) => formik.setFieldValue('duration', e.target.value?.id)}
+                    options={Recurren}
+                    optionLabel="name"
+                    inputId='duration'
+                    className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent"
+                    placeholder='Seleccionar Recurrencia'
+                />
 
             </div>
 
@@ -94,21 +112,34 @@ export default function OffeerForm({ formik, clickHandler }) {
 
                 <label htmlFor={'Fisico'} className='label'>Dónde canjearlo</label>
 
-                <Dropdown filter value={getSelectedOption(Fisico, 'id', formik?.values?.offer_place)} name='offer_place' onChange={(e) => formik.setFieldValue('offer_place', e.target.value?.id)} options={Fisico} optionLabel="name"
-                    className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" placeholder='Seleccionar dónde canjearlo' />
+                <Dropdown
+                    filter
+                    value={getSelectedOption(Fisico, 'id', formik?.values?.offer_place)}
+                    name='offer_place'
+                    onChange={(e) => formik.setFieldValue('offer_place', e.target.value?.id)}
+                    options={Fisico}
+                    optionLabel="name"
+                    className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent"
+                    placeholder='Seleccionar dónde canjearlo'
+                />
 
             </div>
 
-            <div>
+            <label htmlFor={'Description'} className='label'>Descripción</label>
 
-                <label htmlFor={'Description'} className='label'>Descripción</label>
+            <textarea
+                rows={5}
+                type='text'
+                value={formik.values?.description}
+                onChange={formik.handleChange}
+                required
+                name='description'
+                id={'Description'}
+                className='p-3 w-full border rounded-[5px] mt-5 resize-none border-[#b3b3b3] placeholder:text-[#b3b3b3]'
+                placeholder={'Ingresar Descripción'}
+            />
 
-                <textarea rows={5} type='text' value={formik.values?.description} onChange={formik.handleChange} name='description' id={'Description'}
-                    className='p-3 w-full border rounded-[5px] mt-5 resize-none border-[#b3b3b3] placeholder:text-[#b3b3b3]' placeholder={'Ingresar Descripción'} />
-
-            </div>
-
-            <button onClick={clickHandler} type='submit' className='min-btn block ml-auto'>Enviar</button>
+            <button type='submit' className='min-btn block ml-auto mt-10'>Enviar</button>
 
         </form>
     )

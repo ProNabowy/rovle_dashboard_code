@@ -15,7 +15,7 @@ export default function Date({ formik }) {
     return (
         <div className='flex-container'>
 
-            <div className='w-[48%]'>
+            <div className='w-full sm:w-[48%]'>
 
                 <label htmlFor={'checkbox-1'} className='label flex items-center justify-between'>
 
@@ -35,7 +35,7 @@ export default function Date({ formik }) {
 
             </div>
 
-            <div className='w-[48%]'>
+            <div className='w-full sm:w-[48%]'>
 
                 <label htmlFor={'checkbox-2'} className='label flex items-center justify-between'>
 

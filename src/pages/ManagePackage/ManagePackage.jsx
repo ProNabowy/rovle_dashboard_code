@@ -30,7 +30,7 @@ export default function ManagePackage() {
 
             <div className={`grid grid-cols-12 gap-10 p-4 px-10`}>
 
-                <form onSubmit={e => e.preventDefault()} className='col-span-6'>
+                <form onSubmit={e => e.preventDefault()} autoComplete='off' className='col-span-6'>
 
                     <div className='mb-8'>
 

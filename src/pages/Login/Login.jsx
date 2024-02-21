@@ -35,7 +35,7 @@ export default function Login() {
                         <img src={logo} className='mb-[56px] mt-[59px] m-auto' />
 
 
-                        <form onSubmit={handelSubmit}>
+                        <form onSubmit={handelSubmit} >
 
                             <div className='mb-[16px]'>
 

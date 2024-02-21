@@ -5,3 +5,30 @@
 
 
 1 => provider can't list other providers? in add product by new owner
+
+
+
+
+
+take the list providers from postman
+
+
+
+routes => 
+1 => Permisos => done
+2 => Products => done 
+3 => origins => done
+4 => plans => done
+5 => sizes => done
+6 => subscriptions => done
+8 => time in edit offer auto doesn't working
+9 => offeer => done
+10 => users => done
+11 => roaster
+12 => orders
+
+13 => ask karim for endpoint of list providers by logging provider
+14 => delete user doesn't working by provider account
+
+
+another owner coffee shops

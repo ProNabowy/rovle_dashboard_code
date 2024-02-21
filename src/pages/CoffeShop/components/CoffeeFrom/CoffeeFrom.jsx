@@ -21,11 +21,11 @@ export default function CoffeeFrom({ asEdit, stateList }) {
 
     return (
 
-        <form onSubmit={formik.handleSubmit} className='px-10'>
+        <form onSubmit={formik.handleSubmit} autoComplete='off' className='px-3 sm:px-10'>
 
             <div className='flex-container'>
 
-                <div className='sm:w-[48%]'>
+                <div className='w-full sm:w-[48%]'>
 
                     <label htmlFor={'name'} className='label'>Nombre</label>
 
@@ -41,7 +41,7 @@ export default function CoffeeFrom({ asEdit, stateList }) {
 
                 </div>
 
-                <div className='sm:w-[48%]'>
+                <div className='w-full sm:w-[48%]'>
 
                     <label htmlFor={'post_code'} className='label'>Código postal</label>
 
@@ -64,9 +64,9 @@ export default function CoffeeFrom({ asEdit, stateList }) {
 
             </div>
 
-            <div className='flex items-center justify-between '>
+            <div className='flex-container'>
 
-                <div className='mb-8 sm:w-[48%]'>
+                <div className='w-full sm:w-[48%]'>
 
                     <label htmlFor={'Address'} className='label'>Dirección</label>
 
@@ -81,13 +81,13 @@ export default function CoffeeFrom({ asEdit, stateList }) {
 
                 </div>
 
-                <div className='mb-8 sm:w-[48%]'>
+                <div className='w-full sm:w-[48%]'>
 
                     <label htmlFor={'options'} className='label'>Opciones de tienda</label>
 
-                    <div className='flex items-center justify-between'>
+                    <div className='flex items-center justify-between flex-wrap gap-y-5'>
 
-                        <div className='flex items-center me-5'>
+                        <div className='flex items-center me-5 w-full lg:w-fit'>
 
                             <label htmlFor={'online'} className='text-[18px] !mb-0 me-3 select-none text-[#252525] font-medium'>Acepta pedidos online</label>
 
@@ -98,7 +98,7 @@ export default function CoffeeFrom({ asEdit, stateList }) {
                             ></Checkbox>
 
                         </div>
-                        <div className='flex items-center me-5'>
+                        <div className='flex items-center me-5 w-full lg:w-fit'>
 
                             <label htmlFor={'offline'} className='text-[18px] me-3 !mb-0 select-none text-[#252525] font-medium'>Acepta recogidas de productos</label>
 
@@ -120,7 +120,7 @@ export default function CoffeeFrom({ asEdit, stateList }) {
                 {
                     !isProvider?.id
                         ?
-                        <div className='sm:w-[48%]'>
+                        <div className='w-full sm:w-[48%]'>
 
                             <div className='flex items-center justify-between'>
 
@@ -186,9 +186,9 @@ export default function CoffeeFrom({ asEdit, stateList }) {
 
             </div>
 
-            <div className='flex items-center justify-between'>
+            <div className='flex items-center justify-between flex-wrap'>
 
-                <div className='mb-10 sm:w-[48%]'>
+                <div className='mb-10 w-full sm:w-[48%]'>
 
                     <label htmlFor={'Latitude'} className='label'>Seleccionar latitud</label>
 
@@ -201,7 +201,7 @@ export default function CoffeeFrom({ asEdit, stateList }) {
                     />
 
                 </div>
-                <div className='mb-10 sm:w-[48%]'>
+                <div className='mb-10 w-full sm:w-[48%]'>
 
                     <label htmlFor={'Longitude'} className='label'>Seleccionar longitud</label>
 
@@ -226,7 +226,7 @@ export default function CoffeeFrom({ asEdit, stateList }) {
                 width="100%"
             ></iframe>
 
-            <button type='submit' className='min-btn block ml-auto'>Enviar</button>
+            <button type='submit' className='min-btn block ml-auto mt-10'>Enviar</button>
 
         </form>
 
