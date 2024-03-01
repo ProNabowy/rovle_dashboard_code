@@ -32,7 +32,7 @@ export default class Store {
         })
 
         return axios.post(`subscription/${id}/accept`, { presentations: updateData }).then(response => {
-            swal.success('Añadido!', `Tu paquete de suscripción ha sido añadido.`).then(_ => navigate('/products/plans/subscriptions/list'));
+            swal.success('Añadido!', `Tu paquete de suscripción ha sido añadido.`).then(_ => navigate('/products/plans/subscriptions'));
             return response.data;
         });
     }
@@ -63,6 +63,18 @@ export default class Store {
     addOffeer(data, navigate) {
         return axios.post(`passports`, data).then(response => {
             swal.success('Añadido!', `Tu oferta ha sido añadida.`).then(_ => navigate("/setups/offers"));
+            return response.data;
+        });
+    }
+    cancelPlan(id) {
+        return axios.delete(`orders/${id}`).then(response => {
+            swal.success('Añadido!', `Tu oferta ha sido añadida.`).then(_ => window.location.reload());
+            return response.data;
+        });
+    }
+    acspetPlan(id) {
+        return axios.get(`orders/${id}/deliver`).then(response => {
+            swal.success('Añadido!', `Tu oferta ha sido añadida.`).then(_ => window.location.reload());
             return response.data;
         });
     }

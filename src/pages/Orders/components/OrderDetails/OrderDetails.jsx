@@ -1,6 +1,9 @@
 import { Dialog } from 'primereact/dialog';
+import { useDataGetter } from './data';
 
 export default function OrderDetails({ visible, setVisible, row }) {
+
+    const { handleCancelPlan, handleAcspetPlan } = useDataGetter(row, setVisible);
 
     return (
 
@@ -143,8 +146,8 @@ export default function OrderDetails({ visible, setVisible, row }) {
 
                 <div className='col-span-12 flex items-center justify-between mt-10'>
 
-                    <button className='bg-[#45B8EA] text-white py-4 px-6 text-[20px] rounded-full w-[48%]'>Accept</button>
-                    <button className='bg-[#FF5C34] text-white py-4 px-6 text-[20px] rounded-full w-[48%]'>Cancel</button>
+                    <button onClick={handleAcspetPlan} className='bg-[#45B8EA] text-white py-4 px-6 text-[20px] rounded-full w-[48%]'>Accept</button>
+                    <button onClick={handleCancelPlan} className='bg-[#FF5C34] text-white py-4 px-6 text-[20px] rounded-full w-[48%]'>Cancel</button>
 
                 </div>
 

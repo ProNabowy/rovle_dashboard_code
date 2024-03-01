@@ -1,6 +1,6 @@
-import { Get, swal } from "../../apis/apis";
+import { Get } from "../../apis/apis";
 import { useContext, useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AppContext } from "../../context/AppContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear } from "@fortawesome/free-solid-svg-icons";

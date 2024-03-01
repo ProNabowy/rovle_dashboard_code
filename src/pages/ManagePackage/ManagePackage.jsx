@@ -9,7 +9,8 @@ export default function ManagePackage() {
         formik,
         subscriptionItem,
         totalWeightOfPersentations,
-        clickHandler
+        clickHandler,
+        products
     } = useDataGetter();
 
     const {
@@ -43,8 +44,12 @@ export default function ManagePackage() {
                                 setSelectProduct(e.value);
                             }}
                             filter
-                            options={subscriptionItem?.plan?.products} optionLabel={"commercial_name"}
-                            placeholder={"Seleccionar Producto"} className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
+                            options={products}
+                            optionLabel={"commercial_name"}
+                            panelClassName='max-w-full'
+                            placeholder={"Seleccionar Producto"}
+                            className="w-full p-2 relative !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent"
+                        />
 
                     </div>
 

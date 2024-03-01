@@ -297,6 +297,18 @@ div:where(.swal2-container) {
     color: black !important;
 }
 
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+    max-width: 600px !important;
+    width: 100% !important;
+    white-space: pre-wrap !important;
+}
+
+@media (max-width: 768px) {
+    .p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+        max-width: 300px !important;
+    }
+}
+
 /* 
     #----------------------------------------##############################----------------------------------------#
     #----------------------------------------##############################----------------------------------------#
