@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AppContext } from "../../../../context/AppContext";
-import { debounce } from "../../../../assets/utils/utils";
 import { useFormik } from "formik";
 import Update from "../../../../apis/Update";
 import { Get, Store } from "../../../../apis/apis";
@@ -15,6 +14,8 @@ const useDataGetter = asEdit => {
     const getUtailty = new Get();
 
     const storeUtailty = new Store();
+
+    const [isDisabled, setIsDisabled] = useState(false);
 
     const permissionsKeys = Object.keys(permissions);
 
@@ -44,7 +45,8 @@ const useDataGetter = asEdit => {
     };
 
     const formik = useFormik({
-        initialValues
+        initialValues,
+        onSubmit: handelSubmit
     });
 
     useEffect(() => {
@@ -53,11 +55,6 @@ const useDataGetter = asEdit => {
 
         return () => { };
     }, []);
-
-    useEffect(() => {
-
-    }, []);
-    const clickHandler = debounce((_) => handelSubmit(formik.values), 1000);
 
     const onOptionChange = (e, item) => {
         let _ingredients = [...formik.values?.permissions];
@@ -81,6 +78,8 @@ const useDataGetter = asEdit => {
         if (asEdit) {
             getUtailty.getSingleRole(roleId)
                 .then(response => {
+
+                    setIsDisabled(response?.owner_id ? false : true);
                     setRole(response?.permissions || []);
                     formik.setFieldValue('name', response?.name);
                 })
@@ -94,14 +93,12 @@ const useDataGetter = asEdit => {
         formik.setFieldValue('permissions', role?.map(item => item?.id));
 
     }, [role]);
-
-
     return {
         permissionsKeys,
         onOptionChange,
         permissions,
         formik,
-        clickHandler
+        isDisabled
     }
 
 }

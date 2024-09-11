@@ -1,46 +1,66 @@
-import { useContext } from "react";
-import { Store } from "../../../../apis/apis";
+import { useContext, useEffect } from "react";
+import { Store, swal } from "../../../../apis/apis";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../../../context/AppContext";
 import { useFormik } from "formik";
-import { debounce } from "../../../../assets/utils/utils";
 
 const useDataGetter = _ => {
 
     const storeUtailty = new Store();
 
-    const { setIsLoading } = useContext(AppContext);
+    const { setIsLoading, user } = useContext(AppContext);
+
+    const navigate = useNavigate();
+
+    const handleSubmit = (values) => {
+
+        if (!values?.provider_id || !values?.level_id || !values?.activation_method || !values?.discount_type || !values?.offer_place) {
+            console.log(values);
+            if (!values?.provider_id) return swal.warning('Advertencia', 'El campo del Tostador es necesario, por favor complételo.');
+            if (!values?.level_id) return swal.warning('Advertencia', 'El campo del Nivel es necesario, por favor complételo.');
+            if (!values?.activation_method) return swal.warning('Advertencia', 'El campo del Activo es necesario, por favor complételo.');
+            if (!values?.discount_type) return swal.warning('Advertencia', 'El campo del T.Promo es necesario, por favor complételo.');
+            if (!values?.offer_place) return swal.warning('Advertencia', 'El campo del Recurrencia es necesario, por favor complételo.');
+
+
+        } else {
+
+            setIsLoading(true);
+
+            return storeUtailty.addOffeer(values, navigate).finally(_ => setIsLoading(false));
+
+        }
+
+
+    }
 
     const formik = useFormik({
         initialValues: {
             name: "",
-            provider_id: "",
+            provider_id: user?.provider?.id,
             description: "",
             level_id: "",
             activation_method: "",
             activation_amount: "",
             discount: "",
             duration: "",
-            start_date: "",
-            end_date: "",
+            start_date: new Date(),
+            end_date: null,
             offer_place: "",
             discount_type: "",
-        }
+        },
+        onSubmit: handleSubmit
     });
+console.log(formik.values);
 
-    const navigate = useNavigate();
+    useEffect(() => {
 
-    const handleSubmit = () => {
+        if (user?.provider?.id) formik.setFieldValue('provider_id', user?.provider?.id);
 
-        setIsLoading(true);
+        return () => { };
+    }, [user]);
 
-        return storeUtailty.addOffeer(formik.values, navigate).finally(_ => setIsLoading(false));
-    }
-
-    const clickHandler = debounce(handleSubmit, 1000);
-
-    return { formik, clickHandler }
-
+    return { formik }
 }
 
 

@@ -50,12 +50,12 @@ const useDataGetter = formik => {
 
         if (e.checked) {
 
-            formik.setFieldValue('end_date', 'auto');
+            formik.setFieldValue('end_date', null);
 
 
         } else {
 
-            formik.setFieldValue('end_date', '');
+            formik.setFieldValue('end_date', null);
 
         }
 
@@ -99,9 +99,11 @@ const Recurren = [
     { id: 2, name: "Mensual" },
     { id: 3, name: "Anual" },
     { id: 4, name: "Sólo una vez" },
-    { id: 5, name: "Automática" },
 ]
 const Fisico = [
+    { id: 'coffeeShop', name: "FISICO" },
+]
+const AppFisico = [
     { id: 'auto', name: "FÍSICO Y ONLINE" },
     { id: 'coffeeShop', name: "FISICO" },
     { id: 'app', name: "SOLO APP" },
@@ -116,5 +118,6 @@ export {
     Discount,
     Recurren,
     Fisico,
-    useDataGetter
+    AppFisico,
+    useDataGetter,
 }

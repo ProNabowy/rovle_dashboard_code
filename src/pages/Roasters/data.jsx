@@ -1,8 +1,9 @@
-import { Delete, Get } from '../../apis/apis';
+import { Delete, Get, Store } from '../../apis/apis';
 import TableActions from '../../components/TableActions/TableActions';
 import { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../context/AppContext';
 import Table from '../../assets/utils/table';
+import switchIcon from '../../assets/images/switch.svg';
 
 const tableService = new Table();
 
@@ -12,7 +13,9 @@ const useDataGetter = () => {
 
     const deleteUtailty = new Delete();
 
-    const { setIsLoading } = useContext(AppContext);
+    const storeUtailty = new Store();
+
+    const { setIsLoading, user } = useContext(AppContext);
 
     const [roasters, setRoasters] = useState([]);
 
@@ -42,6 +45,8 @@ const useDataGetter = () => {
 
     const useActionsBodyTemplate = (rowData) => {
 
+        const isAdmin = user?.roles?.[0]?.name === "admin";
+
         return <TableActions
             path={`/groups/roasters/edit-roaster?id=${rowData?.id}`}
             handelDeleteFunction={deleteUtailty.deleteRoaster}
@@ -50,8 +55,18 @@ const useDataGetter = () => {
             deleteKey={'dashboard.providers.destroy'}
             PagePermissionKey={'Providers'}
             state={setRoasters}
+            reverseChildren={true}
             list={roasters}
-        ></TableActions>
+        >
+
+            {
+                isAdmin
+                    ?
+                    <img src={switchIcon} onClick={_ => storeUtailty.actAs(rowData?.id)} alt='' className='w-fit cursor-pointer' />
+                    :
+                    null
+            }
+        </TableActions>
 
     };
 

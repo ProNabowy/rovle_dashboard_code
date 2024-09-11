@@ -1,11 +1,11 @@
 import { useRef } from 'react';
 import { PageContent, RenderTable } from '../../components';
-import { columns, useDataGetter } from './data';
+import { useDataGetter } from './data';
 
 
 export default function Orders() {
 
-    const { orders } = useDataGetter();
+    const { orders, columns } = useDataGetter();
 
     const tableRef = useRef();
 

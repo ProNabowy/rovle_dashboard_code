@@ -1,10 +1,18 @@
 import { useRef } from 'react';
 import { PageContent, RenderTable, } from '../../components';
 import { useDataGetter } from './data';
+import { UsersList } from './components';
 
 export default function Permission() {
 
-    const { columns, roles } = useDataGetter();
+    const {
+        columns,
+        roles,
+        visible,
+        setVisible,
+        users,
+        setUsers
+    } = useDataGetter();
 
     const tableRef = useRef();
 
@@ -20,10 +28,18 @@ export default function Permission() {
             table={tableRef}
             saveName={'Roles'}
         >
+
             <RenderTable
                 columns={columns}
                 list={roles}
                 table={tableRef}
+            />
+
+            <UsersList
+                visible={visible}
+                setVisible={setVisible}
+                users={users}
+                setUsers={setUsers}
             />
 
         </PageContent>

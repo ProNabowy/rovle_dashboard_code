@@ -12,6 +12,8 @@ const useDataGetter = () => {
 
     const PackageId = location.slice(4);
 
+    const [products, setProducts] = useState([]);
+
     const getUtailty = new Get();
 
     const storeUtailty = new Store();
@@ -23,7 +25,9 @@ const useDataGetter = () => {
     })
 
     useEffect(() => {
+
         formik.setValues({ presentations: [] });
+
         return () => { }
     }, []);
 
@@ -36,6 +40,7 @@ const useDataGetter = () => {
         setIsLoading(true);
 
         getUtailty.getSingleSubscription(PackageId).then(response => setSubscription(response))
+            .then(_ => getUtailty.getProducts().then(response => setProducts(response)))
             .finally(_ => setIsLoading(false));
 
         return () => { };
@@ -44,9 +49,9 @@ const useDataGetter = () => {
 
     const handleSubmit = (values, totalWeightOfPersentations) => {
 
-        if (parseInt(totalWeightOfPersentations) !== parseInt(subscriptionItem?.total)) {
+        if (parseInt(totalWeightOfPersentations) < parseInt(subscriptionItem?.total)) {
 
-            return swal.warning('warning', 'the Packages Must be the same of the total subscription Packages');
+            return swal.warning('warning', 'the Packages Must be the same of the total or more than the total of  subscription Packages');
 
         } else {
 
@@ -67,10 +72,23 @@ const useDataGetter = () => {
 
         if (subscriptionItem) {
 
-            formik.setFieldValue('presentations', subscriptionItem?.presentations);
+            const updateSubsciption = subscriptionItem?.presentations?.map((item) => {
+
+                return {
+                    ...item,
+                    units: parseInt(item?.quantity),
+                    weight: item?.weight,
+                    commercial_name: '',
+                    presentation_id: item?.presentation_id,
+                    id: item?.id
+                }
+            });
+
+            formik.setFieldValue('presentations', updateSubsciption);
 
         }
 
+        return () => { };
     }, [subscriptionItem]);
 
     return {
@@ -78,6 +96,7 @@ const useDataGetter = () => {
         subscriptionItem,
         totalWeightOfPersentations,
         clickHandler,
+        products
     };
 }
 
@@ -106,25 +125,14 @@ const useAddPackage = (formik, maxTotalSize, totalWeightOfPersentations) => {
 
         } else {
 
-            const totalOfNewPackage = parseInt(addNewPackage.units) * parseInt(addNewPackage.weight);
+            formik.setFieldValue('presentations', [...formik.values?.presentations, { ...addNewPackage, id: id }]);
 
-            if ((totalOfNewPackage + totalWeightOfPersentations) <= maxTotalSize) {
+            // Increes id 
+            setId(perv => perv + 1);
 
-                formik.setFieldValue('presentations', [...formik.values?.presentations, { ...addNewPackage, id: id }]);
+            inputWeightRef.current.value = '';
 
-                // Increes id 
-                setId(perv => perv + 1);
-
-                inputWeightRef.current.value = '';
-
-                swal.success('success', `Package Add Successfully`);
-
-            } else {
-
-                swal.warning('warning', 'Packages more than the total size of the subscriptions');
-
-            }
-
+            swal.success('success', `Package Add Successfully`);
 
         }
 

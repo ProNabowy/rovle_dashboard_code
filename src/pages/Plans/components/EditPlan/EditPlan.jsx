@@ -4,13 +4,13 @@ import { useEditPlan } from './data';
 
 export default function EditPlan() {
 
-    const { formik, clickHandler } = useEditPlan();
+    const { formik } = useEditPlan();
 
     return (
 
         <PageContent title={'Formulario de Plan'} showActions={false}  >
 
-            <PlanForm formik={formik} clickHandler={clickHandler} />
+            <PlanForm formik={formik} />
 
         </PageContent >
 

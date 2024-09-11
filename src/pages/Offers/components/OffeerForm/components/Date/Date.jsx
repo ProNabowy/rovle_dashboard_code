@@ -3,21 +3,22 @@ import { Checkbox } from 'primereact/checkbox'
 import React from 'react'
 import { useDataGetter } from '../../data';
 
-export default function Date({ formik }) {
+export default function DateForm({ formik }) {
 
     const {
         handleStartDate,
         autoSelectStartData,
         autoSelectEndData,
         handleEndDate,
+        setAutoSelectEndData
     } = useDataGetter(formik);
 
     return (
-        <div className='flex items-center justify-between mb-8'>
+        <div className='flex-container'>
 
-            <div className='w-[48%]'>
+            <div className='w-full sm:w-[48%]'>
 
-                <label htmlFor={'checkbox-1'} className='text-[18px] text-[#252525] font-medium flex items-center justify-between'>
+                <label htmlFor={'checkbox-1'} className='label flex items-center justify-between'>
 
                     <h3>Fecha INI</h3>
 
@@ -35,9 +36,9 @@ export default function Date({ formik }) {
 
             </div>
 
-            <div className='w-[48%]'>
+            <div className='w-full sm:w-[48%]'>
 
-                <label htmlFor={'checkbox-2'} className='text-[18px] text-[#252525] font-medium flex items-center justify-between'>
+                <label htmlFor={'checkbox-2'} className='label flex items-center justify-between'>
 
                     <h3>Fecha FIN</h3>
 
@@ -51,7 +52,18 @@ export default function Date({ formik }) {
 
                 </label>
 
-                <Calendar value={formik.values.end_date} disabled={autoSelectEndData} onChange={formik.handleChange} name='end_date' placeholder={formik.values.end_date || 'Ingresar Fecha FIN'} className='w-full my-2' showIcon />
+                <Calendar
+                    value={formik.values.end_date}
+                    minDate={new Date(formik.values?.start_date)}
+                    onChange={e => {
+                        formik.handleChange(e);
+                        setAutoSelectEndData(false);
+                    }}
+                    name='end_date'
+                    placeholder={formik.values.end_date || 'Ingresar Fecha FIN'}
+                    className='w-full my-2'
+                    showIcon
+                />
 
             </div>
 

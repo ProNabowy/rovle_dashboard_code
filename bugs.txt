@@ -1,3 +1,6 @@
-2 => manage packages the product list doesn't included in plans
-3 => removed dropdown of selected roaster in size list cuz it'll be fixed !!  
-6 => edit user => can i change the password of user?
+
+after edit navigate him to list in coffee-shop => done 
+add option all in the dropdown of the table and remove search from the list  => done 
+make update origin work
+
+list of update origin

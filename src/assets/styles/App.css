@@ -35,6 +35,38 @@
     transition: 0.5s all ease-in-out;
 }
 
+.min-btn {
+    background-color: #45B8EA !important;
+    color: white;
+    padding: 16px 24px;
+    width: 304px;
+    max-width: 90% !important;
+    border-radius: 50px;
+}
+
+.flex-end-container {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding: 40px;
+    padding-bottom: 20px;
+}
+
+.label {
+    font-size: 18px;
+    color: #252525;
+    font-weight: 500;
+}
+
+.flex-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 32px 0;
+    margin-bottom: 32px;
+}
+
 label {
     display: inline-block;
     margin-bottom: 8px !important;
@@ -93,6 +125,15 @@ label {
     border-radius: 10px;
 }
 
+.p-datatable .p-datatable-thead>tr>th {
+    text-wrap: nowrap !important;
+    width: fit-content !important;
+}
+
+.p-datatable .p-datatable-tbody>tr>td {
+    text-wrap: nowrap;
+    width: fit-content;
+}
 
 .p-dialog .p-dialog-header .p-dialog-header-icon {
     color: white !important;
@@ -100,7 +141,8 @@ label {
 
 
 .p-dialog .p-dialog-header .p-dialog-header-icon:hover,
-.p-dialog .p-dialog-header.origin .p-dialog-header-icon {
+.p-dialog .p-dialog-header.origin .p-dialog-header-icon,
+.p-dialog .p-dialog-header.dialog-cancel-btn .p-dialog-header-icon {
     color: black !important;
 }
 
@@ -129,9 +171,17 @@ label {
     margin-top: 20px;
 }
 
+.p-paginator .p-paginator-first,
+.p-paginator .p-paginator-prev,
+.p-paginator .p-paginator-next,
+.p-paginator .p-paginator-last {
+    width: 30px !important;
+    min-width: 30px !important;
+    height: 30px !important;
+}
+
 .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
     background-color: #45B8EA !important;
-
 }
 
 .p-paginator .p-paginator-pages .p-paginator-page {
@@ -143,6 +193,15 @@ label {
     align-items: center;
     margin: 0 5px !important;
     background-color: #b3b3b3 !important;
+}
+
+@media (max-width: 768px) {
+    .p-paginator .p-paginator-pages .p-paginator-page {
+        width: 20px !important;
+        min-width: 20px !important;
+        height: 20px !important;
+        font-size: 11px !important;
+    }
 }
 
 .p-dropdown .p-dropdown-label {
@@ -230,11 +289,24 @@ div:where(.swal2-container) {
 }
 
 .profile-image:hover .uploade-image {
+    transition: 0.5s all ease-in-out !important;
     bottom: -150px !important;
 }
 
 .p-dialog .p-dialog-header.black-text .p-dialog-header-icon {
     color: black !important;
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+    max-width: 600px !important;
+    width: 100% !important;
+    white-space: pre-wrap !important;
+}
+
+@media (max-width: 768px) {
+    .p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+        max-width: 300px !important;
+    }
 }
 
 /* 

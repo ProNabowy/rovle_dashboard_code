@@ -2,7 +2,8 @@ import { Chips } from 'primereact/chips';
 import { Dropdown } from 'primereact/dropdown';
 import React, { useRef } from 'react';
 import { useGetShopData } from './data';
-import { Link } from 'react-router-dom';
+import { Dialog } from 'primereact/dialog';
+import AddCoffee from '../../pages/CoffeShop/components/AddCoffee/AddCoffee';
 
 function ChipsList({
     options,
@@ -11,35 +12,68 @@ function ChipsList({
     optionLabel,
     formik,
     dataKey,
-    pageKey,
+    listOfState,
+    stateList,
     pagePermissionKeyName
 }) {
 
+
     const dropdownRef = useRef();
 
-    const { selectedShop, handleDuplicatedValue, handleRemove, renderChipsItem, isHasPermissions } = useGetShopData(formik, dataKey, optionLabel);
+    const {
+        selectedShop,
+        handleDuplicatedValue,
+        handleRemove,
+        renderChipsItem,
+        isHasPermissions,
+        visible,
+        setVisible,
+    } = useGetShopData(formik, dataKey, optionLabel, listOfState);
+
 
     return (
         <div className='relative mb-8'>
 
             <div className='flex items-center justify-between'>
 
-                <label htmlFor={'Origin'} className='text-[18px] text-[#252525] font-medium'>
+                <label htmlFor={'Origin'} className='label'>
                     {title}
                 </label>
 
                 {
                     isHasPermissions(pagePermissionKeyName)
                         ?
-                        <Link to={url} className='flex items-center cursor-pointer'>
+                        <div onClick={_ => setVisible(true)} to={url} className='flex items-center cursor-pointer'>
                             <h2 className='font-medium underline text-[#45B8EA] me-3'>Añadir {title}</h2>
-                        </Link>
+                        </div>
                         :
                         null
                 }
 
 
             </div>
+
+            {
+                isHasPermissions(pagePermissionKeyName)
+                    ?
+                    <Dialog
+                        visible={visible}
+                        onHide={() => setVisible(false)}
+                        headerClassName='origin'
+                        resizable={false}
+                        header={<h1>Añadir {title}</h1>}
+                        headerStyle={{ paddingBottom: '0' }}
+                        className='w-[85vw]'
+                    >
+
+                        <AddCoffee
+                            stateList={stateList}
+                        />
+
+                    </Dialog>
+                    :
+                    null
+            }
 
             <Chips
                 allowDuplicate={false}

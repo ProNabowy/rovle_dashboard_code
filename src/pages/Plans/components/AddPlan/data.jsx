@@ -1,10 +1,8 @@
 import { useContext, useEffect, useState } from "react";
-import { Store } from "../../../../apis/apis";
+import { Store, swal } from "../../../../apis/apis";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../../../context/AppContext";
 import { useFormik } from "formik";
-import { debounce } from "../../../../assets/utils/utils";
-
 const useAddPlan = () => {
 
     const { user, setIsLoading } = useContext(AppContext);
@@ -13,9 +11,49 @@ const useAddPlan = () => {
 
     const provider = user?.provider;
 
+    const is_created_by_provider = user?.created_by_provider;
+
+    const handleSubmit = (values) => {
+
+        if ((!values?.provider_id) || !values?.sizes?.length) {
+
+            if (!values?.provider_id) {
+
+                return swal.warning('Advertencia', 'El campo del tostador es necesario, por favor complételo.');
+
+            }
+
+            if (!values?.sizes?.length) {
+
+                return swal.warning('Advertencia', 'Es necesario completar el campo de Talla, por favor.');
+
+            }
+
+        } else {
+
+            setIsLoading(true);
+
+            const updatedData = { ...values };
+
+            // Convert Products To Ids
+            updatedData.products = updatedData.products?.map(item => {
+                const newProductArct = { id: item?.id || item };
+                return newProductArct;
+            });
+
+            // Convert Coffee Shops To Ids
+            updatedData.coffee_shops = updatedData.coffee_shops?.map(item => {
+                return item?.id || item;
+            });
+
+            return storeUtailty.addPlan(updatedData, navigate).finally(_ => setIsLoading(false));
+
+        };
+    }
+
     const [initialValues, setInitialValues] = useState({
         name: "",
-        status: "",
+        status: "active",
         description: "",
         provider_id: provider?.id,
         sizes: [],
@@ -26,7 +64,8 @@ const useAddPlan = () => {
     const navigate = useNavigate();
 
     const formik = useFormik({
-        initialValues: {}
+        initialValues: {},
+        onSubmit: handleSubmit
     });
 
     useEffect(() => {
@@ -36,28 +75,8 @@ const useAddPlan = () => {
         return () => { };
     }, []);
 
-    const clickHandler = debounce((_) => {
 
-        setIsLoading(true);
-
-        const updatedData = { ...formik.values };
-
-        // Convert Products To Ids
-        updatedData.products = updatedData.products?.map(item => {
-            const newProductArct = { id: item?.id || item };
-            return newProductArct;
-        });
-
-        // Convert Coffee Shops To Ids
-        updatedData.coffee_shops = updatedData.coffee_shops?.map(item => {
-            return item?.id || item;
-        });
-
-        return storeUtailty.addPlan(updatedData, navigate).finally(_ => setIsLoading(false));
-
-    }, 1000);
-
-    return { formik, clickHandler };
+    return { formik, };
 
 }
 

@@ -27,18 +27,18 @@ export default class Store {
     }
     acceptSubscription(id, data, navigate) {
 
-        const updateData = data.map(item => {
-            return { id: item.presentationId, units: item.units };
+        const updateData = data?.map(item => {
+            return { ...item, id: item?.presentationId, units: item.units, presentationId: null };
         })
 
         return axios.post(`subscription/${id}/accept`, { presentations: updateData }).then(response => {
-            swal.success('Añadido!', `Tu paquete de suscripción ha sido añadido.`).then(_ => navigate('/products/plans/subscriptions/list'));
+            swal.success('Añadido!', `Tu paquete de suscripción ha sido añadido.`).then(_ => navigate('/products/plans/subscriptions'));
             return response.data;
         });
     }
     addSize(data, navigate) {
         return axios.post(`sizes`, data).then(response => {
-            swal.success('Añadido!', `El tamaño ha sido añadido.`).then(_ => navigate('/products/plans/size'));
+            swal.success('Añadido!', `El tamaño ha sido añadido.`).then(_ => navigate('/products/plans/size/list'));
             return response.data;
         });
     }
@@ -56,7 +56,7 @@ export default class Store {
     }
     addCoffee(data, navigate) {
         return axios.post(`coffee-shops`, data).then(response => {
-            swal.success('Añadido!', `Tu café ha sido añadido.`).then(_ => navigate('/setups/coffee-shop'))
+            swal.success('Añadido!', `Tu café ha sido añadido.`).then(_ => navigate && navigate('/setups/coffee-shop'))
             return response.data;
         });
     }
@@ -64,6 +64,27 @@ export default class Store {
         return axios.post(`passports`, data).then(response => {
             swal.success('Añadido!', `Tu oferta ha sido añadida.`).then(_ => navigate("/setups/offers"));
             return response.data;
+        });
+    }
+    acspetPlan(id) {
+        return axios.get(`orders/${id}/deliver`).then(response => {
+            if (response.data?.message === "Could not order delivery") {
+                swal.warning('Advertencia', `No se pudo solicitar la recogida. Por favor inténtelo mas tarde.`).then(_ => window.location.reload());
+            } else {
+                swal.success('Envio solicitado', `Hemos informado a Correos para que recoja el envío`).then(_ => window.location.reload());
+            }
+            return response.data;
+        });
+    }
+    switchOrigin(data) {
+        return axios.post(`origins/substitute`, data).then(response => {
+            swal.success('Añadido!', `Actualizado exitosamente`);
+            return response.data;
+        });
+    }
+    actAs(provider_id) {
+        return axios.post(`act-as`, { provider_id }).then(response => {
+            return window.open(`/products/list?token=${response?.data?.data?.token}`, '_blank');
         });
     }
 }

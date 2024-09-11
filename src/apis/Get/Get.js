@@ -8,6 +8,14 @@ export default class Get {
     getProfile() {
         return axios.get('profile').then(response => response.data.data);
     }
+    getOrderPDF(id) {
+        return axios.get(`orders/${id}/label`, {
+            headers: {
+                'Accept': 'application/pdf',
+                'content-type': 'application/pdf',
+            }
+        }).then(response => response.data);
+    }
     getRoles() {
         return axios.get('roles').then(response => response.data.data);
     }
@@ -26,11 +34,17 @@ export default class Get {
     getRoasters() {
         return axios.get(`providers`).then(response => response.data.data);
     }
+    getAllRoasters() {
+        return axios.get(`providers-list`).then(response => response.data.data);
+    }
     getSingleRoaster(id) {
         return axios.get(`providers/${id}`).then(response => response.data.data);
     }
     getOrigins() {
         return axios.get(`origins`).then(response => response.data.data);
+    }
+    getSingleOrigin(id) {
+        return axios.get(`origins/${id}`).then(response => response.data.data);
     }
     getPlans() {
         return axios.get(`plans`).then(response => response.data.data);
@@ -44,6 +58,9 @@ export default class Get {
     getSizeByProvider(id) {
         return axios.get(`sizes?provider_id=${id}`).then(response => response.data.data);
     }
+    getSubscriptions() {
+        return axios.get(`subscriptions`).then(response => response.data.data);
+    }
     getSubscriptionsByPlanId(id) {
         return axios.get(`plans/${id}/subscriptions`).then(response => response.data.data);
     }
@@ -55,6 +72,9 @@ export default class Get {
     }
     getUsers() {
         return axios.get(`users`).then(response => response.data.data);
+    }
+    getCustomers(prams = "") {
+        return axios.get(`customers${prams}`).then(response => response.data.data);
     }
     getSingleUser(id) {
         return axios.get(`users/${id}`).then(response => response.data.data);
@@ -76,5 +96,8 @@ export default class Get {
     }
     getSingleOffeer(id) {
         return axios.get(`passports/${id}`).then(response => response.data.data);
+    }
+    getCitiesByZipCode(code) {
+        return axios.get(`cities/filter?zip=${code}`).then(response => response.data.data);
     }
 }

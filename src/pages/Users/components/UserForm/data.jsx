@@ -6,28 +6,21 @@ const useDataGetter = () => {
 
     const getUtailty = new Get();
 
-    const { setIsLoading } = useContext(AppContext);
+    const { setIsLoading, user } = useContext(AppContext);
 
     const [roles, setRoles] = useState([]);
-
-    const [countries, setCountries] = useState([]);
 
     useEffect(() => {
 
         setIsLoading(true);
 
-        getUtailty.getCountries().then(response => setCountries(response))
-            .then(_ => {
-
-                getUtailty.getRoles().then(response => setRoles(response));
-
-            })
+        getUtailty.getRoles().then(response => setRoles(response))
             .finally(_ => setIsLoading(false));
 
         return () => { };
     }, []);
 
-    return { roles, countries };
+    return { roles, user };
 }
 
 export {

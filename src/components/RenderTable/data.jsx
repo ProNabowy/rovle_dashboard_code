@@ -38,7 +38,7 @@ const useDataGetter = (list) => {
 
 const data = (columns) => {
 
-    return columns?.map((column , index) => {
+    return columns?.map((column, index) => {
 
         return <Column key={index} field={column?.field} sortable header={column?.header} className={column?.classNames} body={column?.tamplate} />;
 
@@ -52,6 +52,7 @@ const FilterFields = [
     'status',
     'start_date',
     'end_date',
+    'email',
     'created_at',
     'updated_at',
     'id',
@@ -66,6 +67,7 @@ const FilterFields = [
     'user.name',
     'user.email',
     'weight',
+    'shop_name',
     'card_id',
     'roles.name'
 ]

@@ -16,14 +16,17 @@
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "axios": "^1.6.7",
+    "file-saver": "^2.0.5",
     "formik": "^2.4.5",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.8.2",
     "primereact": "^9.6.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-to-print": "^2.14.15",
     "react-router-dom": "^6.15.0",
     "swal": "^0.1.0",
-    "sweetalert2": "^11.7.31"
+    "sweetalert2": "^11.7.31",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@types/react": "^18.2.55",

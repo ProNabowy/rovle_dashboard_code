@@ -26,7 +26,7 @@ export default function SecondStep({ setActiveIndex }) {
 
             </Link>
 
-            <form onSubmit={handelSubmit}>
+            <form onSubmit={handelSubmit} autoComplete='off'>
 
                 <h3 className='text-[24px] text-[#252525] text-center mb-2 font-medium'>Forget password</h3>
 

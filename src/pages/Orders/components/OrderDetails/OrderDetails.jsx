@@ -1,6 +1,11 @@
 import { Dialog } from 'primereact/dialog';
+import { useDataGetter } from './data';
+import { Fragment } from 'react';
+import { numberFormat } from '../../../../assets/utils/utils';
 
 export default function OrderDetails({ visible, setVisible, row }) {
+
+    const { handleCancelPlan, handleAcspetPlan } = useDataGetter(row, setVisible);
 
     return (
 
@@ -52,12 +57,13 @@ export default function OrderDetails({ visible, setVisible, row }) {
                                 <div className='col-span-6'>
                                     {
                                         row?.products?.[index]?.items?.map((order, i) => {
+
                                             return (
                                                 <div key={i} className='grid grid-cols-12 gap-5'>
 
                                                     <div className='col-span-4 mb-1'>
 
-                                                        <h5 className='text-[#58291E] text-[16px] font-medium'>500g</h5>
+                                                        <h5 className='text-[#58291E] text-[16px] font-medium'>{order?.presentation?.weight}</h5>
 
                                                     </div>
 
@@ -69,7 +75,7 @@ export default function OrderDetails({ visible, setVisible, row }) {
 
                                                     <div className='col-span-4 mb-1'>
 
-                                                        <h5 className='text-[#58291E] text-[16px] font-medium'>{order?.total}$</h5>
+                                                        <h5 className='text-[#58291E] text-[16px] font-medium'>{numberFormat(order?.total)} €</h5>
 
                                                     </div>
 
@@ -90,37 +96,61 @@ export default function OrderDetails({ visible, setVisible, row }) {
 
                 <h2 className='col-span-12 mt-5'>
 
-                    Totals Price
-                    <span className='text-[#58291E] ms-3 font-medium'>{row?.total} Eouro</span>
+                    Precio total:
+                    <span className='text-[#58291E] ms-3 font-medium'>{numberFormat(row?.total)} €</span>
 
                 </h2>
 
-                <h2 className='col-span-12 mt-3'>Nota:</h2>
+                <h2 className='col-span-12 '>
 
-                <p className='p-3 border border-[#252525ac] col-span-12 rounded-[5px]'>Tu mensaje parece ser un texto en latín o una combinación de palabras que no forman una oración coherente en español. Si puedes proporcionar más contexto o aclarar tu solicitud, estaré encantado de ayudarte.</p>
+                    Portes:
+                    <span className='text-[#58291E] ms-3 font-medium'>{row?.shipping}</span>
 
-                <div className='col-span-12 mt-12' style={{ background: 'linear-gradient(0deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.95) 100%), #252525' }}>
+                </h2>
 
-                    <h1 className='text-[#252525] mb-4 font-medium text-[18px]'>Shipping information</h1>
+                <h2 className='col-span-12'>
+
+                    Tienda asignada:
+                    <span className='text-[#58291E] ms-3 font-medium'>{row?.coffee_shop?.name}</span>
+
+                </h2>
+
+                {
+                    row?.notes
+                        ?
+                        <Fragment>
+
+                            <h2 className='col-span-12 mt-3'>Nota:</h2>
+
+                            <p className='p-3 border border-[#252525ac] col-span-12 rounded-[5px]'>{row?.notes}</p>
+
+                        </Fragment>
+                        :
+                        null
+                }
+
+                <div className='col-span-12 mt-12' >
+
+                    <h1 className='text-[#252525] mb-4 font-medium text-[18px]'>Dirección de envío</h1>
 
                     <div className='grid grid-cols-12 gap-5'>
 
                         <div className='col-span-6 flex items-center'>
 
-                            <h3 className='text-[#252525] font-medium me-4'>address</h3>
+                            <h3 className='text-[#252525] font-medium me-4'>Dirección</h3>
                             <h3 className='text-[#252525] font-medium'>{row?.address}</h3>
 
                         </div>
 
                         <div className='col-span-6 flex items-center'>
 
-                            <h3 className='text-[#252525] font-medium me-4'>Zip code</h3>
+                            <h3 className='text-[#252525] font-medium me-4'>C.P.</h3>
                             <h3 className='text-[#252525] font-medium'>{row?.zip_code}</h3>
 
                         </div>
                         <div className='col-span-6 flex items-center'>
 
-                            <h3 className='text-[#252525] font-medium me-4'>Name</h3>
+                            <h3 className='text-[#252525] font-medium me-4'>Nombre</h3>
                             <h3 className='text-[#252525] font-medium'>{row?.name}</h3>
 
                         </div>
@@ -132,7 +162,7 @@ export default function OrderDetails({ visible, setVisible, row }) {
                         </div>
                         <div className='col-span-6 flex items-center'>
 
-                            <h3 className='text-[#252525] font-medium me-4'>Phone</h3>
+                            <h3 className='text-[#252525] font-medium me-4'>Teléfono</h3>
                             <h3 className='text-[#252525] font-medium'>{row?.phone}</h3>
 
                         </div>
@@ -143,9 +173,19 @@ export default function OrderDetails({ visible, setVisible, row }) {
 
                 <div className='col-span-12 flex items-center justify-between mt-10'>
 
-                    <button className='bg-[#45B8EA] text-white py-4 px-6 text-[20px] rounded-full w-[48%]'>Accept</button>
-                    <button className='bg-[#FF5C34] text-white py-4 px-6 text-[20px] rounded-full w-[48%]'>Cancel</button>
+                    {
+                        row?.status === "Pending"
+                            ?
+                            <Fragment>
 
+                                <button onClick={handleAcspetPlan} className='bg-[#45B8EA] text-white py-4 px-6 text-[20px] rounded-full w-[48%]'>Servir y enviar</button>
+                                <button onClick={_ => setVisible(false)} className='bg-[#FF5C34] text-white py-4 px-6 text-[20px] rounded-full w-[48%]'>No servir ni enviar por ahora</button>
+
+                            </Fragment>
+
+                            :
+                            <button onClick={_ => setVisible(false)} className='bg-[#45B8EA] text-white py-4 px-6 text-[20px] rounded-full w-[48%] m-auto'>Aceptar</button>
+                    }
                 </div>
 
             </div>

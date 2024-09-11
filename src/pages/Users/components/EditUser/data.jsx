@@ -3,7 +3,6 @@ import { Get, Update, swal } from "../../../../apis/apis";
 import { useLocation } from "react-router-dom";
 import { AppContext } from "../../../../context/AppContext";
 import { useFormik } from "formik";
-import { debounce } from "../../../../assets/utils/utils";
 
 
 const useHandleAddUserLogic = () => {
@@ -20,21 +19,14 @@ const useHandleAddUserLogic = () => {
 
     const handelSubmit = values => {
 
-        if (values?.user_password !== values?.user_password_confirmation || !values.user_password) {
+        setIsLoading(true);
 
-            return swal.warning('Warning', 'Password And Confirem Password Must Be The Same');
-
-        } else {
-
-            setIsLoading(true);
-
-            return updateUtailty.updateUser(userId, values).finally(_ => setIsLoading(false));
-        }
-
+        return updateUtailty.updateUser(userId, values).finally(_ => setIsLoading(false));
     }
 
     const formik = useFormik({
         initialValues: {},
+        onSubmit: handelSubmit
     })
 
     useEffect(() => {
@@ -43,14 +35,7 @@ const useHandleAddUserLogic = () => {
             .then(data => {
                 formik.setValues({
                     user_name: data?.name,
-                    user_card_id: data?.card_id,
                     user_email: data?.email,
-                    user_address: data?.address,
-                    user_phone: data?.phone,
-                    user_zip: data?.zip,
-                    user_country_id: data?.country_id,
-                    user_province_id: data?.province_id,
-                    user_city_id: data?.city_id,
                     role_id: data?.role_id,
                 })
             });
@@ -58,9 +43,7 @@ const useHandleAddUserLogic = () => {
         return () => { };
     }, []);
 
-    const clickHandler = debounce((_) => handelSubmit(formik.values), 1000);
-
-    return { formik, clickHandler }
+    return { formik }
 }
 
 export {

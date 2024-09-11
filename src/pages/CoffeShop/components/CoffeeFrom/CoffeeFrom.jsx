@@ -1,63 +1,169 @@
 import { Dropdown } from 'primereact/dropdown';
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { CitiesDropdown, InputsGroup, ProvincesDropDown } from '../../../../components';
+import { CitiesDropdown, Input, ProvincesDropDown } from '../../../../components';
 import { useDataGetter } from './data';
 import { Link } from 'react-router-dom';
 import { getSelectedOption } from '../../../../assets/utils/utils';
+import { Checkbox } from 'primereact/checkbox';
 
-export default function CoffeeFrom({ asEdit }) {
+
+export default function CoffeeFrom({ asEdit, stateList }) {
 
     const {
         formik,
-        clickHandler,
         isProvider,
         roasters,
-        countries
-    } = useDataGetter(asEdit);
+        countries,
+        isHasPermissions,
+        handleBlur
+    } = useDataGetter(asEdit, stateList);
+
+    const provinces = getSelectedOption(countries, 'id', formik?.values?.country_id)?.provinces;
+    const cities = getSelectedOption(provinces, 'id', formik?.values?.province_id)?.cities;
+
+    // Construct the address string
+    const address = `${getSelectedOption(cities, 'id', formik?.values?.city_id)?.name}, ${getSelectedOption(provinces, 'id', formik?.values?.province_id)?.name}, ${getSelectedOption(countries, 'id', formik?.values?.country_id)?.name}`;
 
     return (
 
-        <form onSubmit={e => e.preventDefault()} className='px-10'>
+        <form onSubmit={formik.handleSubmit} autoComplete='off' className='px-3 sm:px-10'>
 
-            <InputsGroup data={
-                {
-                    names: ['Nombre', 'Código postal'],
-                    placeholders: ['Ingresar Nombre', 'Ingresar Código postal'],
-                    values: [formik.values?.name, formik.values?.post_code],
-                    onChange: formik.handleChange,
-                    nameAttr: ['name', 'post_code'],
-                }
-            } />
+            <div className='flex-container'>
 
-            <div className='mb-8'>
+                <div className='w-full sm:w-[48%]'>
 
-                <label htmlFor={'Address'} className='text-[18px] text-[#252525] font-medium'>Dirección</label>
+                    <label htmlFor={'name'} className='label'>Nombre</label>
 
-                <input onChange={formik.handleChange} value={formik.values?.address} name='address' type='text' id={'Address'}
-                    className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]' placeholder={'Nombre Dirección'} />
+                    <Input
+                        onChange={formik.handleChange}
+                        value={formik.values?.name}
+                        name='name'
+                        type='text'
+                        required
+                        id={'name'}
+                        placeholder={'Ingresar Nombre'}
+                    />
+
+                </div>
+
+                <div className='w-full sm:w-[48%]'>
+
+                    <label htmlFor={'post_code'} className='label'>Código postal</label>
+
+                    <Input
+                        onChange={formik.handleChange}
+                        onBlur={handleBlur}
+                        value={formik.values?.post_code}
+                        name='post_code'
+                        type='text'
+                        required
+                        min={5}
+                        max={5}
+                        maxLength={5}
+                        minLength={5}
+                        id={'post_code'}
+                        placeholder={'Ingresar Código postal'}
+                    />
+
+                </div>
 
             </div>
 
-            <div className='flex items-center justify-between mb-8'>
+            <div className='flex-container'>
+
+                <div className='w-full sm:w-[48%]'>
+
+                    <label htmlFor={'Address'} className='label'>Dirección</label>
+
+                    <Input
+                        onChange={formik.handleChange}
+                        value={formik.values?.address}
+                        name='address' type='text'
+                        required
+                        id={'Address'}
+                        placeholder={'Nombre Dirección'}
+                    />
+
+                </div>
+
+                <div className='w-full sm:w-[48%]'>
+
+                    <label htmlFor={'options'} className='label'>Opciones de tienda</label>
+
+                    <div className='flex items-center justify-between flex-wrap gap-y-5'>
+
+                        <div className='flex items-center me-2 w-full lg:w-fit'>
+
+                            <label htmlFor={'accepts_online_orders'} className='text-[13px] !mb-0 me-3 select-none text-[#252525] font-medium'>Acepta pedidos online</label>
+
+                            <Checkbox
+                                inputId='accepts_online_orders'
+                                onChange={e => formik.setFieldValue('accepts_online_orders', e.checked)}
+                                checked={formik.values?.accepts_online_orders ? true : false}
+                            ></Checkbox>
+
+                        </div>
+                        <div className='flex items-center me-2 w-full lg:w-fit'>
+
+                            <label htmlFor={'accepts_orders_pick_up'} className='text-[13px] me-3 !mb-0 select-none text-[#252525] font-medium'>Acepta recogidas de productos</label>
+
+                            <Checkbox
+                                inputId='accepts_orders_pick_up'
+                                onChange={e => formik.setFieldValue('accepts_orders_pick_up', e.checked)}
+                                checked={formik.values?.accepts_orders_pick_up ? true : false}
+                            ></Checkbox>
+
+                        </div>
+                        <div className='flex items-center me-2 w-full lg:w-fit'>
+
+                            <label htmlFor={'default_for_sending'} className='text-[13px] me-3 !mb-0 select-none text-[#252525] font-medium'>Tienda por defecto para envíos</label>
+
+                            <Checkbox
+                                inputId='default_for_sending'
+                                onChange={e => {
+                                    formik.setFieldValue('default_for_sending', e.checked);
+                                    if (!formik.values?.accepts_online_orders) {
+
+                                        formik.setFieldValue('accepts_online_orders', e.checked);
+
+                                    }
+                                }}
+                                checked={formik.values?.default_for_sending ? true : false}
+                            ></Checkbox>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div className='flex-container'>
 
                 {
                     !isProvider?.id
                         ?
-                        <div className='sm:w-[48%]'>
+                        <div className='w-full sm:w-[48%]'>
 
                             <div className='flex items-center justify-between'>
 
-                                <h2 className='text-[18px] text-[#252525] font-medium'>Tostadores</h2>
+                                <h2 className='label'>Tostadores</h2>
 
-                                <div className='flex items-center cursor-pointer'>
+                                {
+                                    isHasPermissions('dashboard.providers.store')
+                                        ?
 
-                                    <Link to={'/groups/roasters'} className='font-medium underline text-[#45B8EA] me-3'>Agregar tostador</Link>
+                                        <div className='flex items-center cursor-pointer'>
 
-                                    <FontAwesomeIcon icon={faArrowUpRightFromSquare} className='text-[#45B8EA]' />
+                                            <Link to={'/groups/roasters/add-roaster'} className='font-medium underline text-[#45B8EA] me-3'>Agregar tostador</Link>
 
-                                </div>
+                                            <FontAwesomeIcon icon={faArrowUpRightFromSquare} className='text-[#45B8EA]' />
 
+                                        </div>
+                                        :
+                                        null
+                                }
                             </div>
 
                             <Dropdown
@@ -66,7 +172,6 @@ export default function CoffeeFrom({ asEdit }) {
                                 options={roasters} optionLabel="commercial_name"
                                 placeholder="Seleccionar Tostador" className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
 
-
                         </div>
                         :
                         null
@@ -74,7 +179,7 @@ export default function CoffeeFrom({ asEdit }) {
 
                 <div className={`${isProvider ? "w-full" : "sm:w-[48%]"}`}>
 
-                    <label htmlFor={'Country'} className='text-[18px] text-[#252525] font-medium'>País</label>
+                    <label htmlFor={'Country'} className='label'>País</label>
 
                     <Dropdown
                         value={getSelectedOption(countries, 'id', formik?.values?.country_id)}
@@ -87,7 +192,7 @@ export default function CoffeeFrom({ asEdit }) {
 
             </div>
 
-            <div className='flex items-center justify-between mb-8'>
+            <div className='flex-container'>
 
                 <ProvincesDropDown
                     formik={formik}
@@ -98,41 +203,22 @@ export default function CoffeeFrom({ asEdit }) {
 
                 <CitiesDropdown
                     formik={formik}
-                    provinces={getSelectedOption(countries, 'id', formik?.values?.country_id)?.provinces}
+                    provinces={provinces}
                     province_Key={'province_id'}
                     city_Key={'city_id'}
                 />
 
             </div>
 
-            <div className='flex items-center justify-between'>
+            <iframe
+                id="iframeId"
+                loading='async'
+                src={`https://maps.google.com/maps?q=${encodeURIComponent(address)}&hl=es;&output=embed&zoom=10`}
+                height="400px"
+                width="100%"
+            ></iframe>
 
-                <div className='mb-10 sm:w-[48%]'>
-
-                    <label htmlFor={'Latitude'} className='text-[18px] text-[#252525] font-medium'>Seleccionar latitud</label>
-
-                    <input type='text' id={'Latitude'} value={formik.values.latitude} name='latitude' onChange={formik.handleChange}
-                        className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]' placeholder={'Ingresar latitud'} />
-
-                </div>
-                <div className='mb-10 sm:w-[48%]'>
-
-                    <label htmlFor={'Longitude'} className='text-[18px] text-[#252525] font-medium'>Seleccionar longitud</label>
-
-                    <input type='text' id={'Longitude'} value={formik.values?.longitude} name='longitude' onChange={formik.handleChange}
-                        className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]' placeholder={'Ingresar longitud'} />
-
-                </div>
-
-            </div>
-
-            <iframe id="iframeId" src={`https://maps.google.com/maps?q=${formik.values.latitude},${formik.values.longitude}&hl=es;&output=embed&zoom=10`} height="400px" width="100%"></iframe>
-
-            <div className='flex items-center justify-end mt-10'>
-
-                <button onClick={clickHandler} type='submit' className='bg-[#45B8EA] text-white py-[16px] px-32 rounded-full'>Enviar</button>
-
-            </div>
+            <button type='submit' className='min-btn block ml-auto mt-10'>Enviar</button>
 
         </form>
 

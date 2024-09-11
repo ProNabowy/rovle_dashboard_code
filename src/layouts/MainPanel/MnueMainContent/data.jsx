@@ -4,6 +4,7 @@ import shops from '../images/shops.svg';
 import products from '../images/products.svg';
 import plans from '../images/plans.svg';
 import roasters from '../images/roasters.svg';
+import users from '../images/users.svg';
 import { hasRoutePermissions } from "../../../assets/utils/utils";
 import { useContext } from "react";
 import { AppContext } from "../../../context/AppContext";
@@ -57,17 +58,58 @@ const useDataGetter = (isExpanded) => {
 
 const settings = {
     name: "Configuración", children: [
-        { name: "Permisos", PagePermissions: "Roles", PermissionKey: "dashboard.roles.index", icon: permission, href: "settings/permissions/list", }
+        {
+            name: "Permisos",
+            PagePermissions: "Roles",
+            PermissionKey: "dashboard.roles.index",
+            icon: permission,
+            href: "settings/permissions/list",
+        }
     ]
 };
 
 const setups = {
     name: "SETUPS", children: [
-        { name: "Cafeterías", PagePermissions: "Coffee Shops", PermissionKey: "dashboard.coffeeShops.index", icon: shops, href: "setups/coffee-shop" },
+        {
+            name: "Cafeterías",
+            PagePermissions: "Coffee Shops",
+            PermissionKey: "dashboard.coffeeShops.index",
+            icon: shops,
+            href: "setups/coffee-shop"
+        },
+    ]
+}
+const groups = {
+    name: "GRUPOS", children: [
+        {
+            name: "Equipo",
+            PermissionKey: "dashboard.users.index",
+            icon: users,
+            href: "groups/users"
+        },
+        {
+            name: "Permisos",
+            PagePermissions: "Roles",
+            PermissionKey: "dashboard.roles.index",
+            icon: permission,
+            href: "settings/permissions/list",
+        },
+        {
+            name: "Tostadores",
+            PermissionKey: "dashboard.providers.index",
+            icon: roasters,
+            href: "groups/roasters"
+        },
+        {
+            name: "Pedidos",
+            PermissionKey: "dashboard.orders.index",
+            icon: roasters,
+            href: "groups/orders"
+        },
     ]
 }
 
-const renderCollaction = (isHasPermissions, isExpanded, item, linkStyle) => {
+const renderCollaction = (isHasPermissions, isExpanded, item, linkStyle, isAdmin) => {
 
     return <li className='mb-5'>
 
@@ -77,26 +119,85 @@ const renderCollaction = (isHasPermissions, isExpanded, item, linkStyle) => {
             return (
                 isHasPermissions(child.PermissionKey)
                     ?
-                    <NavLink to={child.href} key={i} className={`${linkStyle} block px-2`}>
+                    child.name === 'Tostadores' && !isAdmin
+                        ?
+                        null
+                        :
+                        <NavLink to={child.href} key={i} className={`${linkStyle} block px-2`}>
 
-                        <div className={`rounded-[6px] flex items-center ${isExpanded ? "ms-5" : ""}`}>
+                            <div className={`rounded-[6px] flex items-center ${isExpanded ? "ms-5" : ""}`}>
 
-                            <div className='nav-icon w-[35px] h-[35px] rounded-full flex items-center justify-center'>
+                                <div className='nav-icon w-[35px] h-[35px] rounded-full flex items-center justify-center'>
 
-                                <img src={child.icon} alt="" className="w-[20px] h-[20px]" />
+                                    <img src={child.icon} alt="" className="w-[20px] h-[20px]" />
 
+                                </div>
+
+                                {isExpanded && <span className='ms-3 font-medium'>{child.name}</span>}
                             </div>
 
-                            {isExpanded && <span className='ms-3 font-medium'>{child.name}</span>}
-                        </div>
-
-                    </NavLink>
+                        </NavLink>
                     :
                     null
             )
         })}
     </li>
 
+}
+
+const GroupsRoutes = isHasPermissions => {
+
+    const renderGroups =
+        isHasPermissions('dashboard.users.index')
+        ||
+        isHasPermissions('dashboard.roles.index');
+
+
+    return (
+        [
+            (renderGroups &&
+            {
+                expanded: false,
+                label: <div className='flex items-center'>
+
+                    <div className={`block px-2`}>
+
+                        <div className={`rounded-[6px] flex items-center ms-[10px]`}>
+
+                            <div className='nav-icon w-[35px] h-[35px] rounded-full flex items-center justify-center'>
+
+                                <img src={permission} alt="" className="w-[20px] h-[20px]" />
+
+                            </div>
+
+                            <span className='ms-3 font-medium'>Configuración</span>
+                        </div>
+
+                    </div>
+
+                </div>,
+                items: [
+                    {
+                        label: isHasPermissions('dashboard.users.index') && <NavLink to={'groups/users'} className='flex items-center text-[#FFFFFFA6] p-2 !w-full mnue-link'>
+
+                            <span className="ms-10">Equipo</span>
+
+                        </NavLink >,
+
+                    },
+                    {
+                        label: isHasPermissions('dashboard.roles.index') && <NavLink to={'settings/permissions/list'} className='flex items-center text-[#FFFFFFA6] p-2 !w-full mnue-link'>
+
+                            <span className='ms-10 !py-0'>Permisos</span>
+
+                        </NavLink>,
+
+                    }
+                ]
+            }
+            )
+        ]
+    )
 }
 
 const ProductsRoutes = isHasPermissions => {
@@ -211,71 +312,12 @@ const ProductsRoutes = isHasPermissions => {
     )
 }
 
-const GroupsRoutes = isHasPermissions => {
-
-    const isAdmin = JSON.parse(localStorage.getItem('user'))?.roles?.[0]?.name === 'admin';
-
-    const renderRoasters =
-        isHasPermissions('dashboard.providers.index')
-        ||
-        isHasPermissions('dashboard.orders.index');
-
-
-    return (
-        [
-            (renderRoasters
-                &&
-            {
-                expanded: false,
-                label: <div className='flex items-center'>
-
-                    <div className={`block px-2`}>
-
-                        <div className={`rounded-[6px] flex items-center ms-[10px]`}>
-
-                            <div className='nav-icon w-[35px] h-[35px] rounded-full flex items-center justify-center'>
-
-                                <img src={roasters} alt="" className="w-[20px] h-[20px]" />
-
-                            </div>
-
-                            <span className='ms-3 font-medium'>Tostadores</span>
-                        </div>
-
-                    </div>
-
-                </div>,
-                items: [
-                    {
-                        label: isHasPermissions('dashboard.providers.index') && isAdmin && <NavLink to={'groups/roasters'} className='flex items-center text-[#FFFFFFA6] p-2 !w-full mnue-link'>
-
-                            <span className='ms-10'>Lista</span>
-
-                        </NavLink>,
-
-                    },
-                    {
-                        label: isHasPermissions('dashboard.orders.index') && <NavLink to={'groups/orders'} className='flex items-center text-[#FFFFFFA6] p-2 !w-full mnue-link'>
-
-                            <span className='ms-10 !py-0'>Pedidos</span>
-
-                        </NavLink>,
-
-                    }
-                ]
-            }
-            )
-        ]
-    )
-
-}
-
-
 export {
     useDataGetter,
     renderCollaction,
     settings,
     setups,
+    groups,
     ProductsRoutes,
     GroupsRoutes
 }

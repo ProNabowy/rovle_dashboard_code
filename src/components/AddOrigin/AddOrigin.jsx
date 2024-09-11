@@ -1,10 +1,10 @@
 import { Chips } from 'primereact/chips';
 import { Dialog } from 'primereact/dialog';
-import { InputText } from "primereact/inputtext";
 import { Button } from 'primereact/button';
 import { Dropdown } from 'primereact/dropdown';
 import React, { useRef } from 'react';
 import { useGetOriginData } from './data';
+import Input from '../Input/Input';
 
 function AddOrigin({ formik, provider_id, classNames }) {
 
@@ -36,11 +36,11 @@ function AddOrigin({ formik, provider_id, classNames }) {
 
     return (
 
-        <div className={`sm:w-[48%] relative ${classNames}`}>
+        <div className={`w-full sm:w-[48%] relative ${classNames}`}>
 
             <div className='flex items-center justify-between'>
 
-                <label htmlFor={'Origin'} className='text-[18px] text-[#252525] font-medium'>      Origen   </label>
+                <label htmlFor={'Origin'} className='label'>Origen</label>
 
                 {
                     isHasPermissions('dashboard.origins.store')
@@ -60,17 +60,16 @@ function AddOrigin({ formik, provider_id, classNames }) {
                     <Dialog
                         header='Añadir Origen'
                         visible={visible}
-                        style={{ width: '50vw' }}
+                        className='w-[90%] sm:w-[50vw]'
                         headerClassName='origin'
                         onHide={() => setVisible(false)}
                     >
 
-                        <InputText
-                            className='!my-5 !w-full'
-                            placeholder='Añadir Origen'
+                        <Input
                             value={addOriginValue}
                             required
                             onChange={(e) => setAddOriginValue(e.target.value)}
+                            classNames='!my-5 !w-full border border-[#b3b3b3] rounded-[8px]'
                         />
 
                         <div className='flex items-center justify-center'>

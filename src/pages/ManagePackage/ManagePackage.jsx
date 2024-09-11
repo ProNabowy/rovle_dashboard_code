@@ -1,4 +1,4 @@
-import { PageContent } from '../../components'
+import { Input, PageContent } from '../../components'
 import { useDataGetter, useAddPackage } from './data'
 import { Dropdown } from 'primereact/dropdown';
 import RenderPackages from './components/RenderPackages/RenderPackages';
@@ -9,7 +9,8 @@ export default function ManagePackage() {
         formik,
         subscriptionItem,
         totalWeightOfPersentations,
-        clickHandler
+        clickHandler,
+        products
     } = useDataGetter();
 
     const {
@@ -30,11 +31,11 @@ export default function ManagePackage() {
 
             <div className={`grid grid-cols-12 gap-10 p-4 px-10`}>
 
-                <form onSubmit={e => e.preventDefault()} className='col-span-6'>
+                <form onSubmit={e => e.preventDefault()} autoComplete='off' className='col-span-6'>
 
                     <div className='mb-8'>
 
-                        <label className='text-[18px] text-[#252525] font-medium'>Nombre del Producto</label>
+                        <label className='label'>Nombre del Producto</label>
 
                         <Dropdown
                             value={selectedProduct}
@@ -43,14 +44,18 @@ export default function ManagePackage() {
                                 setSelectProduct(e.value);
                             }}
                             filter
-                            options={subscriptionItem?.plan?.products} optionLabel={"commercial_name"}
-                            placeholder={"Seleccionar Producto"} className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
+                            options={products}
+                            optionLabel={"commercial_name"}
+                            panelClassName='max-w-full'
+                            placeholder={"Seleccionar Producto"}
+                            className="w-full p-2 relative !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent"
+                        />
 
                     </div>
 
                     <div className='mb-8'>
 
-                        <label htmlFor={'weight'} className='text-[18px] text-[#252525] font-medium'>Peso / gm </label>
+                        <label htmlFor={'weight'} className='label'>Peso / gm </label>
 
                         {/* Don't Forget To Ask What U render Here */}
                         <Dropdown
@@ -67,10 +72,15 @@ export default function ManagePackage() {
 
                     <div className='mb-8'>
 
-                        <label htmlFor={'Quantity'} className='text-[18px] text-[#252525] font-medium'>Cantidad</label>
+                        <label htmlFor={'Quantity'} className='label'>Cantidad</label>
 
-                        <input ref={inputWeightRef} onChange={e => setAddNewPackage(prev => ({ ...prev, units: e.target.value }))} type='number' id={'Quantity'}
-                            className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]' placeholder={'Cantidad'} />
+                        <Input
+                            ref={inputWeightRef}
+                            onChange={e => setAddNewPackage(prev => ({ ...prev, units: e.target.value }))}
+                            type='number'
+                            id={'Quantity'}
+                            placeholder={'Cantidad'}
+                        />
 
                     </div>
 
@@ -88,7 +98,7 @@ export default function ManagePackage() {
                 <h3 className='text-[24px] text-[#58291E] mb-24'>{totalWeightOfPersentations} / {subscriptionItem?.plan_size?.size?.weight} gm</h3>
 
 
-                <button onClick={clickHandler} type='submit' className='p-4 px-24 rounded-full text-white font-medium bg-[var(--primary-color)]'>
+                <button onClick={clickHandler} type='submit' className='min-btn'>
                     Enviar
                 </button>
 

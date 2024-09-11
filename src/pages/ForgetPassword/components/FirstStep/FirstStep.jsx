@@ -18,7 +18,7 @@ export default function FirstStep({ setData, handelSubmit }) {
 
             <img src={lock} className='m-auto mb-4' />
 
-            <form onSubmit={handelSubmit}>
+            <form onSubmit={handelSubmit} autoComplete='off'>
 
                 <h3 className='text-[24px] text-[#252525] text-center mb-2 font-medium'>Forget password</h3>
 

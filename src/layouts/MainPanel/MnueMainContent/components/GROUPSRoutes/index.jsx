@@ -1,1 +1,1 @@
-export { default } from './GROUPSRoutes';
+export { default } from './GroupsRoutes';

@@ -14,11 +14,11 @@ const AddProductByOtherOwner = lazy(() => import('../pages/Products/components/A
 const EditProduct = lazy(() => import('../pages/Products/components/ProductUtailty/EditProduct'));
 const OriginsList = lazy(() => import('../pages/Origins'));
 const AddOrigin = lazy(() => import('../pages/Origins/components/AddOrigin'));
+const EditOrigin = lazy(() => import('../pages/Origins/components/EditOrigin'));
 const PlansList = lazy(() => import('../pages/Plans'));
 const AddPlan = lazy(() => import('../pages/Plans/components/AddPlan'));
 const EditPlan = lazy(() => import('../pages/Plans/components/EditPlan'));
 const Subscriptions = lazy(() => import('../pages/Subscriptions'));
-const SubscriptionsList = lazy(() => import('../pages/Subscriptions/components/SubscriptionsList'));
 const ManagePackage = lazy(() => import('../pages/ManagePackage'));
 const SizeList = lazy(() => import('../pages/SizeManagement/components/SizeList'));
 const AddSize = lazy(() => import('../pages/SizeManagement/components/AddSize'));
@@ -35,6 +35,7 @@ const EditCoffee = lazy(() => import('../pages/CoffeShop/components/EditCoffee')
 const OffersList = lazy(() => import('../pages/Offers'));
 const AddOffer = lazy(() => import('../pages/Offers/components/AddOffer'));
 const EditOffer = lazy(() => import('../pages/Offers/components/EditOffer'));
+const Customers = lazy(() => import('../pages/Customers'));
 const Profile = lazy(() => import('../pages/Profile'));
 const NotFound = lazy(() => import('../pages/NotFound'));
 
@@ -52,11 +53,11 @@ export {
     EditProduct,
     OriginsList,
     AddOrigin,
+    EditOrigin,
     PlansList,
     AddPlan,
     EditPlan,
     Subscriptions,
-    SubscriptionsList,
     ManagePackage,
     SizeList,
     AddSize,
@@ -74,5 +75,6 @@ export {
     AddOffer,
     EditOffer,
     Profile,
-    NotFound
+    NotFound,
+    Customers
 }

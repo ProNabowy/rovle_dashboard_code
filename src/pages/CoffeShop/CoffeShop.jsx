@@ -31,7 +31,19 @@ export default function CoffeShopList() {
             saveName={'Coffee Shops'}
         >
 
-            <Dialog header="Roasters Form" visible={dialogVisible} style={{ width: '75vw' }} maximizable={true} maximized={true} modal contentStyle={{ height: '300px' }} onHide={() => setDialogVisible(false)} footer={dialogFooterTemplate} >
+            <Dialog header="Roasters Form"
+                visible={dialogVisible}
+                style={{ width: '75vw' }}
+                maximizable={true}
+                maximized={true}
+                modal
+                className='bg-white'
+                headerClassName='dialog-cancel-btn'
+                contentClassName='!mt-3'
+                contentStyle={{ height: '300px' }}
+                onHide={() => setDialogVisible(false)}
+                footer={dialogFooterTemplate}
+            >
 
                 <CoffeShopTable
                     shops={shops}
@@ -41,7 +53,7 @@ export default function CoffeShopList() {
 
             </Dialog>
 
-            <div onClick={() => setDialogVisible(true)} className='flex items-center cursor-pointer  text-[#45B8EA] absolute right-24 z-[10]'>
+            <div onClick={() => setDialogVisible(true)} className='flex items-center cursor-pointer text-[#45B8EA] absolute right-6 md:right-10 top-5 md:top-[initial] z-[10]'>
 
                 <h3 className='font-medium me-5'>Mostrar todo</h3>
 

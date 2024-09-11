@@ -1,33 +1,43 @@
 import { Dropdown } from 'primereact/dropdown';
 import { Link } from 'react-router-dom';
 import { useAddPlan } from './data';
-import { AddPackageByDropdown, ChipsList } from '../../../../components';
+import { AddPackageByDropdown, ChipsList, Input } from '../../../../components';
 import PlanStatus from '../PlanStatus';
 import { getSelectedOption } from '../../../../assets/utils/utils';
 
 
-export default function PlanForm({ formik, clickHandler }) {
+export default function PlanForm({ formik }) {
 
     const {
         roasters,
         coffee,
         provider,
         handleChangeProvider,
-        isHasPermissions
+        isHasPermissions,
+        setAddedShops,
+        addedShops,
+        is_created_by_provider
     } = useAddPlan(formik);
 
     return (
 
-        <form onSubmit={e => e.preventDefault()} className='px-10'>
+        <form onSubmit={formik.handleSubmit} autoComplete='off' className='px-3 sm:px-10'>
 
-            <div className='flex items-center justify-between mb-8'>
+            <div className='flex-container'>
 
-                <div className='sm:w-[48%]'>
+                <div className='w-full sm:w-[48%]'>
 
-                    <label htmlFor={'plan-name'} className='text-[18px] text-[#252525] font-medium'>Nombre Plan</label>
+                    <label htmlFor={'plan-name'} className='label'>Nombre Plan</label>
 
-                    <input type='text' id={'plan-name'} name='name' value={formik.values?.name} onChange={formik.handleChange}
-                        className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]' placeholder={'Este sera el nombre que se verá en la aplicacion'} />
+                    <Input
+                        type='text'
+                        id={'plan-name'}
+                        name='name'
+                        required={true}
+                        value={formik.values?.name}
+                        onChange={formik.handleChange}
+                        placeholder={'Este sera el nombre que se verá en la aplicacion'}
+                    />
 
                 </div>
 
@@ -35,15 +45,14 @@ export default function PlanForm({ formik, clickHandler }) {
 
             </div>
 
-
             {
-                !provider?.id
+                !provider?.id && !is_created_by_provider
                     ?
                     <div className='mb-8'>
 
                         <div className='flex items-center justify-between'>
 
-                            <h2 className='text-[18px] text-[#252525] font-medium'>Nombre del Tostador</h2>
+                            <h2 className='label'>Nombre del Tostador</h2>
 
                             {
                                 isHasPermissions('dashboard.providers.store')
@@ -74,24 +83,12 @@ export default function PlanForm({ formik, clickHandler }) {
 
             <div className='mb-8'>
 
-                <label htmlFor={'Description'} className='text-[18px] text-[#252525] font-medium'>Descripción</label>
+                <label htmlFor={'Description'} className='label'>Descripción</label>
 
                 <textarea onChange={formik.handleChange} value={formik.values.description} name='description' rows={5} type='text' id={'Description'}
                     className='p-3 w-full border rounded-[5px] mt-5 resize-none border-[#b3b3b3] placeholder:text-[#b3b3b3]' placeholder={'Esta sera la descripcion que se verá en la aplicacion'} />
 
             </div>
-
-            {/* For Add Product */}
-            {/* <ChipsList
-                formik={formik}
-                dataKey={'products'}
-                url={'/products/list/add-product'}
-                optionLabel="commercial_name"
-                title={'Productos'}
-                pageKey={'Products'}
-                pagePermissionKeyName={'dashboard.products.store'}
-                options={getSelectedOption(roaster, 'id', formik?.values?.provider_id)?.products}
-            /> */}
 
             {/* For Add CoffeShop */}
             <ChipsList
@@ -100,6 +97,8 @@ export default function PlanForm({ formik, clickHandler }) {
                 url={'/setups/coffee-shop/add-coffee'}
                 title={'Tiendas'}
                 pageKey={'Coffee Shops'}
+                stateList={setAddedShops}
+                listOfState={addedShops}
                 pagePermissionKeyName={'dashboard.coffeeShops.store'}
                 options={coffee}
             />
@@ -111,11 +110,7 @@ export default function PlanForm({ formik, clickHandler }) {
                 label={'Talla'}
             />
 
-            <div className='flex items-center justify-end mt-10'>
-
-                <button onClick={clickHandler} type='submit' className='bg-[#45B8EA] text-white py-[16px] px-32 rounded-full'>Enviar</button>
-
-            </div>
+            <button type='submit' className='min-btn block !mt-10 ml-auto'>Enviar</button>
 
         </form>
 

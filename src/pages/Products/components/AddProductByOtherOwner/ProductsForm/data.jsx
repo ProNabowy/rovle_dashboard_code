@@ -11,6 +11,8 @@ const useFormDataGetter = () => {
 
     const getUtailty = new Get();
 
+    const [addedShops, setAddedShops] = useState({});
+
     const storeUtailty = new Store();
 
     const { setIsLoading, user } = useContext(AppContext);
@@ -35,9 +37,19 @@ const useFormDataGetter = () => {
 
         setIsLoading(true);
 
-        getUtailty.getRoasters()
-            .then(response => setRoasters(response))
-            .finally(_ => setIsLoading(false));
+        if (user?.provider) {
+
+            getUtailty.getAllRoasters()
+                .then(response => setRoasters(response))
+                .finally(_ => setIsLoading(false));
+
+        } else {
+
+            getUtailty.getRoasters()
+                .then(response => setRoasters(response))
+                .finally(_ => setIsLoading(false));
+
+        }
 
         return () => { };
     }, []);
@@ -147,7 +159,9 @@ const useFormDataGetter = () => {
         setSelectedProvider,
         user,
         roasterFrom,
-        roasterTo
+        roasterTo,
+        setAddedShops,
+        addedShops
     }
 
 }

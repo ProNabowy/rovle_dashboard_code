@@ -10,9 +10,13 @@ const useAddPlan = (formik) => {
 
     const getUtailty = new Get();
 
+    const [addedShops, setAddedShops] = useState({});
+
     const [coffee, setCoffee] = useState([]);
 
     const { userPeressmisons, user, setIsLoading } = useContext(AppContext);
+
+    const is_created_by_provider = user?.created_by_provider;
 
     const isHasPermissions = permissionKey => hasRoutePermissions(userPeressmisons, permissionKey);
 
@@ -36,6 +40,12 @@ const useAddPlan = (formik) => {
 
             setCoffee(getSelectedRoaster[0]?.coffee_shops);
 
+        } else if (is_created_by_provider) {
+
+            setCoffee(roasters[0]?.coffee_shops);
+
+            formik.setFieldValue('provider_id', roasters?.[0]?.id)
+
         } else {
 
             const getSelectedRoaster = roasters?.filter(item => item.id === formik.values?.provider_id);
@@ -45,6 +55,32 @@ const useAddPlan = (formik) => {
         }
 
     }, [formik.values?.provider_id, provider, roasters]);
+
+    useEffect(() => {
+
+        const shopProviderId = addedShops?.provider_id;
+
+        if (shopProviderId) {
+
+            getUtailty.getRoasters()
+                .then(response => {
+
+                    setRoasters(response);
+
+                    if (provider) {
+
+                        const newProviderData = response?.filter(roaster => roaster?.id === provider?.id)?.[0];
+
+                        setCoffee(newProviderData?.coffee_shops);
+
+                    }
+
+                });
+
+        }
+
+        return () => { };
+    }, [addedShops]);
 
     const handleChangeProvider = e => {
 
@@ -60,7 +96,10 @@ const useAddPlan = (formik) => {
         coffee,
         provider,
         handleChangeProvider,
-        isHasPermissions
+        isHasPermissions,
+        setAddedShops,
+        addedShops,
+        is_created_by_provider
     };
 
 }

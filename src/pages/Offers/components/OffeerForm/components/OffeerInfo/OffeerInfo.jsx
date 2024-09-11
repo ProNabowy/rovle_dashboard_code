@@ -4,13 +4,14 @@ import React, { useEffect } from 'react'
 import { Activa, Discount } from '../../data'
 import { Dropdown } from 'primereact/dropdown';
 import { getSelectedOption } from '../../../../../../assets/utils/utils';
+import { Input } from '../../../../../../components';
 
 
 export default function OffeerInfo({ formik }) {
 
   useEffect(() => {
 
-    formik.setFieldValue('activation_amount', '');
+    if (!['visit', 'points'].includes(formik?.values?.activation_method)) formik.setFieldValue('activation_amount', '');
 
     return () => { };
 
@@ -18,16 +19,16 @@ export default function OffeerInfo({ formik }) {
 
   useEffect(() => {
 
-    formik.setFieldValue('discount', '');
+    if (formik?.values?.discount_type !== 'percentage') formik.setFieldValue('discount', '');
 
     return () => { };
 
   }, [formik?.values?.discount_type]);
 
   return (
-    <div className='flex items-center justify-between mb-8'>
+    <div className='flex-container'>
 
-      <div className='sm:w-[48%] border border-[#28C76F] p-3 py-8 rounded-[10px]'>
+      <div className='w-full sm:w-[48%] border border-[#28C76F] p-3 py-8 rounded-[10px]'>
 
         <div className='mb-8'>
 
@@ -48,8 +49,14 @@ export default function OffeerInfo({ formik }) {
 
               <label htmlFor='Can.ACT' className='flex items-center mb-3'>Can. ACT</label>
 
-              <input type='text' id={'Can.ACT'} value={formik.values.activation_amount} name='activation_amount' onChange={formik.handleChange}
-                className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]' placeholder={'Ingresar Can.ACT'} />
+              <Input
+                type='text'
+                id={'Can.ACT'}
+                value={formik.values.activation_amount}
+                name='activation_amount'
+                onChange={formik.handleChange}
+                placeholder={'Ingresar Can.ACT'}
+              />
 
             </div>
             :
@@ -58,7 +65,7 @@ export default function OffeerInfo({ formik }) {
 
       </div>
 
-      <div className='sm:w-[48%] border border-[#28C76F] p-3 py-8 rounded-[10px]'>
+      <div className='w-full sm:w-[48%] border border-[#28C76F] p-3 py-8 rounded-[10px]'>
 
         <div className='mb-8'>
 
@@ -79,8 +86,15 @@ export default function OffeerInfo({ formik }) {
 
               <label htmlFor='C.Oferta' className='flex items-center mb-3'>C. Oferta</label>
 
-              <input type='number' id={'C.Oferta'} value={formik.values.discount} name='discount' onChange={formik.handleChange}
-                className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]' placeholder={'Ingresar C. OFERTA'} />
+              <Input
+                type='number'
+                id={'C.Oferta'}
+                required={true}
+                value={parseInt(formik.values.discount)}
+                name='discount'
+                onChange={formik.handleChange}
+                placeholder={'Ingresar C. OFERTA'}
+              />
 
             </div>
             :

@@ -17,14 +17,16 @@ const useAppDefaults = () => {
 
         if (isLoading) {
 
-            body.style.cssText += "max-height: 100vh; overflow:hidden";
+            // body.style.cssText += "max-height: 100vh; overflow:hidden";
 
         } else {
 
-            body.style.cssText += "max-height: initial; overflow:initial";
+            // body.style.cssText += "max-height: initial; overflow:initial";
 
         }
 
+        // Clean up
+        return () => { };
     }, [isLoading]);
 
     return { isExpanded, setIsExpanded };
@@ -36,24 +38,8 @@ const useTableDefaults = (list) => {
 
     const entries = [];
 
-    useEffect(() => {
-
-        const perv = document.querySelector('.p-paginator-prev');
-        const next = document.querySelector('.p-paginator-next');
-
-        if (perv) {
-
-            perv.innerHTML = "Anterior";
-
-        }
-
-        if (next) {
-
-            next.innerHTML = "Siguiente";
-
-        }
-
-    }, []);
+    // Add Option All
+    entries.push({ name: 'All', code: list?.length })
 
     // Fetch Entries 
     list?.map((item, index) => entries.push({ name: index + 1, code: index + 1 }));
@@ -87,8 +73,16 @@ const useSetLogo = () => {
 
 }
 
+const useGetProviderToken = () => {
+
+    const token = useLocation().search.slice(7);
+    const tokenKey = useLocation().search.slice(1, 6);
+
+    if (token && tokenKey === 'token') sessionStorage.setItem('token', token);
+}
+
 const useAppHooks = () => {
-    return { useAppDefaults, useTableDefaults, useSetLogo };
+    return { useAppDefaults, useTableDefaults, useSetLogo, useGetProviderToken };
 }
 
 export {

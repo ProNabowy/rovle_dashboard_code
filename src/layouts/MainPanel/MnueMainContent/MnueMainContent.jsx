@@ -1,16 +1,21 @@
-import { useDataGetter, renderCollaction, settings, setups } from './data';
-import { GROUPSRoutes, SettingsRoutes } from './components';
-import { useState } from 'react';
+import { useDataGetter, renderCollaction, settings, setups, groups } from './data';
+import { GroupsRoutes, SettingsRoutes } from './components';
+import { useContext, useState } from 'react';
+import { AppContext } from '../../../context/AppContext';
 
 export default function MnueMainContent({ isExpanded }) {
 
+    const { user } = useContext(AppContext);
+
+    const isAdmin = user?.roles?.[0]?.name === 'admin';
+
     const { isRenderRouteCollactions, isHasPermissions, linkStyle } = useDataGetter(isExpanded);
 
-    const [visibleProducts, setVisibleProducts] = useState(false);
-
-    const [visiblePlans, setVisiblePlans] = useState(false);
-
-    const [visibleRoasters, setVisibleRoasters] = useState(false);
+    const [visible, setVisible] = useState({
+        plans: false,
+        products: false,
+        groups: false
+    });
 
     return (
 
@@ -18,23 +23,16 @@ export default function MnueMainContent({ isExpanded }) {
 
             <ul>
 
-                {isRenderRouteCollactions[0] && renderCollaction(isHasPermissions, isExpanded, settings, linkStyle)}
-
                 <SettingsRoutes
                     isExpanded={isExpanded}
-                    setVisiblePlans={setVisiblePlans}
-                    setVisibleProducts={setVisibleProducts}
-                    visiblePlans={visiblePlans}
-                    visibleProducts={visibleProducts}
-                    setVisibleRoasters={setVisibleRoasters}
+                    visible={visible}
+                    setVisible={setVisible}
                 />
 
-                <GROUPSRoutes
+                <GroupsRoutes
                     isExpanded={isExpanded}
-                    setVisiblePlans={setVisiblePlans}
-                    setVisibleProducts={setVisibleProducts}
-                    visibleRoasters={visibleRoasters}
-                    setVisibleRoasters={setVisibleRoasters}
+                    visible={visible}
+                    setVisible={setVisible}
                 />
 
                 {isRenderRouteCollactions[3] && renderCollaction(isHasPermissions, isExpanded, setups, linkStyle)}

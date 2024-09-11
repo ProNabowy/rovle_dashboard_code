@@ -56,8 +56,6 @@ const useDataGetter = _ => {
         { field: "id", header: "ID", classNames: "!px-[15px]", tamplate: tableService.idBodyTemplate },
         { field: "name", header: "Nombre", classNames: "!px-[0px]", tamplate: tableService.nameBodyTemplate },
         { field: "email", header: "Correo electrónico", classNames: "!px-[15px]", tamplate: tableService.emailBodyTemplate },
-        { field: "address", header: "Dirección", classNames: "!px-[15px]", tamplate: tableService.addressBodyTemplate },
-        { field: "card_id", header: "Identificación de tarjeta", classNames: "!px-[15px]", tamplate: cardIdBodyTemplate },
         { field: "name", header: "Rol", classNames: "!px-[15px]", tamplate: permissionBodyTemplate },
         { field: "updated_at", header: "Fecha de finalización", classNames: "!px-[15px]", tamplate: tableService.lastDateBodyTemplate },
         { field: "actions", header: "Acción", classNames: "!px-[15px]", tamplate: useActionsBodyTemplate },

@@ -19,7 +19,7 @@ export default function ThiredStep({ }) {
 
             </Link>
 
-            <form onSubmit={handleSubmit} className='w-[400px]'>
+            <form onSubmit={handleSubmit} autoComplete='off' className='w-[400px]'>
 
                 <h3 className='text-[24px] text-[#252525] text-center mb-2 font-medium'>Forget password</h3>
 

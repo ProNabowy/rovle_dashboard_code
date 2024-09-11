@@ -5,13 +5,13 @@ import PlanForm from '../PlanForm';
 
 export default function AddPlan() {
 
-    const { formik, clickHandler } = useAddPlan();
+    const { formik } = useAddPlan();
 
     return (
 
         <PageContent title={'Formulario de Plan'} showActions={false}  >
 
-            <PlanForm formik={formik} clickHandler={clickHandler} />
+            <PlanForm formik={formik} />
 
         </PageContent >
     )

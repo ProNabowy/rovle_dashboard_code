@@ -5,7 +5,7 @@ export default function RedioGroup({ formik }) {
 
         <div className="sm:w-[48%]">
 
-            <label className='text-[18px] text-[#252525] font-medium block mb-4'>Control de inventario</label>
+            <label className='label block mb-4'>Control de inventario</label>
 
             <div className='flex items-center'>
 

@@ -2,9 +2,11 @@ import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../context/AppContext";
 import { hasRoutePermissions } from "../../assets/utils/utils";
 
-const useGetShopData = (formik, dataKey, optionLabel) => {
+const useGetShopData = (formik, dataKey, optionLabel, listOfState) => {
 
     const [selectedShop, setSelectedShop] = useState(null);
+
+    const [visible, setVisible] = useState(false);
 
     const { userPeressmisons } = useContext(AppContext);
 
@@ -22,6 +24,7 @@ const useGetShopData = (formik, dataKey, optionLabel) => {
 
         }
 
+        return () => { };
     }, [selectedShop]);
 
     const handleDuplicatedValue = currentValue => {
@@ -40,13 +43,44 @@ const useGetShopData = (formik, dataKey, optionLabel) => {
 
     };
 
+    useEffect(() => {
+
+        if (listOfState) {
+
+            const itHasValues = Object.keys(listOfState);
+
+            if (itHasValues?.length) {
+
+                setVisible(false);
+
+                if (!formik.values?.[dataKey]?.includes(selectedShop?.[optionLabel] || listOfState?.name)) {
+
+                    formik.setFieldValue(dataKey, [...formik.values[dataKey], { name: listOfState?.name, id: listOfState?.id }])
+
+                }
+
+
+            }
+
+        }
+
+        return () => { };
+    }, [listOfState]);
+
     const renderChipsItem = (item) => {
         return item.name || item[optionLabel];
     };
 
 
-    return { selectedShop, handleDuplicatedValue, handleRemove, renderChipsItem, isHasPermissions }
-
+    return {
+        selectedShop,
+        handleDuplicatedValue,
+        handleRemove,
+        renderChipsItem,
+        isHasPermissions,
+        visible,
+        setVisible,
+    }
 }
 
 export {

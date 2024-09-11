@@ -1,6 +1,7 @@
 import { useAddPackage } from './data';
 import { RenderPacakges } from './components';
 import { getSelectedOption } from '../../assets/utils/utils';
+import Input from '../Input/Input';
 
 export default function AddPackage({ formik, roasters, provider_id }) {
 
@@ -15,25 +16,35 @@ export default function AddPackage({ formik, roasters, provider_id }) {
 
     return (
 
-        <div className='rounded-[20px] mt-20 border border-[#252525] p-[32px] grid grid-cols-12 gap-10'>
+        <div className='rounded-[20px] mt-20 border border-[#252525] p-4 sm:p-[32px] grid grid-cols-12 gap-3 md:gap-10'>
 
-            <form onSubmit={e => e.preventDefault()} className='col-span-6'>
-
+            <form onSubmit={e => e.preventDefault()} autoComplete='off' className='col-span-12 md:col-span-6'>
 
                 <div className='mb-8'>
 
-                    <label htmlFor={'Weight /gm'} className='text-[18px] text-[#252525] font-medium'>Peso</label>
+                    <label htmlFor={'Weight /gm'} className='label'>Peso</label>
 
-                    <input ref={inputWeightRef} onChange={e => setAddNewPackage(prev => ({ ...prev, weight: e.target.value }))} type='number' id={'Weight /gm'}
-                        className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]' placeholder={'Ingresar Peso /gr'} />
+                    <Input
+                        type='number'
+                        ref={inputWeightRef}
+                        placeholder={'Ingresar Peso /gr'}
+                        onChange={e => setAddNewPackage(prev => ({ ...prev, weight: e.target.value }))}
+                        id={'Weight /gm'}
+                    />
 
                 </div>
 
                 <div className='mb-8'>
 
-                    <label htmlFor={'PriceEuro'} className='text-[18px] text-[#252525] font-medium'>Precio</label>
+                    <label htmlFor={'PriceEuro'} className='label'>Precio</label>
 
-                    <input ref={inputPriceRef} onChange={e => setAddNewPackage(prev => ({ ...prev, price: e.target.value }))} type='number' id={'PriceEuro'} className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]' placeholder={'Ingresar Precio /Euro'} />
+                    <Input
+                        type='number'
+                        ref={inputPriceRef}
+                        placeholder={'Ingresar Precio /Euro'}
+                        onChange={e => setAddNewPackage(prev => ({ ...prev, price: e.target.value }))}
+                        id={'PriceEuro'}
+                    />
 
                 </div>
 
@@ -42,10 +53,15 @@ export default function AddPackage({ formik, roasters, provider_id }) {
                         ?
                         <div className='mb-8'>
 
-                            <label htmlFor={'Units'} className='text-[18px] text-[#252525] font-medium'>Cantidad</label>
+                            <label htmlFor={'Units'} className='label'>Cantidad</label>
 
-                            <input ref={inputQuntiyRef} onChange={e => setAddNewPackage(prev => ({ ...prev, units: e.target.value }))} type='number' id={'Units'}
-                                className='p-3 w-full border-b border-b-[#b3b3b3] placeholder:text-[#b3b3b3]' placeholder={'Cantidad'} />
+                            <Input
+                                type='number'
+                                ref={inputQuntiyRef}
+                                placeholder={'Cantidad'}
+                                onChange={e => setAddNewPackage(prev => ({ ...prev, units: e.target.value }))}
+                                id={'Units'}
+                            />
 
                         </div>
                         :

@@ -41,6 +41,7 @@ const AppProvider = ({ children }) => {
                 setIsLoading,
                 userPeressmisons,
                 user,
+                setUser
             }}
         >
             {children}

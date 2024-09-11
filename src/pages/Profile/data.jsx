@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react"
 import { Get, Update } from "../../apis/apis";
-import { debounce } from "../../assets/utils/utils";
 import { useFormik } from "formik";
 import { AppContext } from "../../context/AppContext";
 
@@ -14,56 +13,103 @@ const useDataGetter = () => {
 
     const updateUtailty = new Update();
 
-    const { setIsLoading } = useContext(AppContext);
+    const [classList, setClassList] = useState('');
+
+    const { setIsLoading, user } = useContext(AppContext);
+
+    const isProvider = user?.provider;
+
+    const handleSubmit = values => {
+
+        setIsLoading(true);
+
+        if (isProvider) {
+
+            return updateUtailty.updateRoaster(isProvider?.id ,values).finally(_ => setIsLoading(false));
+
+        } else {
+
+            return updateUtailty.updateProfile(values).finally(_ => setIsLoading(false));
+
+        }
+    }
 
     const formik = useFormik({
-        initialValues: {}
+        initialValues: user,
+        onSubmit: handleSubmit,
     });
+
+    const locitionLogic = (response) => {
+        setCountries(response);
+        formik.setFieldValue('province_id', response?.[0]?.provinces?.[0]?.id);
+        formik.setFieldValue('city_id', response?.[0]?.provinces?.[0]?.cities?.[0]?.id);
+        return null;
+    }
 
     useEffect(() => {
 
         setIsLoading(true);
 
-        getUtailty.getProfile().then(data => {
+        if (user?.zip) {
 
-            setData(data);
+            getUtailty.getCitiesByZipCode(user?.zip)
+                .then(response => locitionLogic(response))
+                .finally(_ => setIsLoading(false));
 
-            formik.setValues({
-                name: data?.name,
-                email: data?.email,
-                address: data?.address,
-                phone: data?.phone,
-                zip: data?.zip,
-                card_id: data?.card_id,
-                country_id: data?.country_id,
-                province_id: data?.province_id,
-                city_id: data?.city_id,
-                roles: data?.roles
-            });
+        } else {
 
-        })
-            .then(_ => {
+            getUtailty.getCountries()
+                .then(response => {
 
-                return getUtailty.getCountries().then(response => setCountries(response));
+                    setCountries(response)
 
-            })
-            .finally(_ => setIsLoading(false));
+                    formik.setFieldValue('country_id', response?.[0]?.id);
+                })
+                .finally(_ => setIsLoading(false));
+        }
+
+        if (isProvider) {
+
+            formik.setValues({ ...user, provider_nif: isProvider?.nif, provider_commercial_name: isProvider?.commercial_name, provider_official_name: isProvider?.official_name });
+
+        } else {
+
+            formik.setValues(user);
+
+        }
 
         return () => { };
-    }, []);
+    }, [user]);
 
-    const clickHandler = debounce((_) => {
+    useEffect(() => {
 
-        setIsLoading(true);
+        setData(user);
+        if (user?.image) setClassList('');
 
-        return updateUtailty.updateProfile(formik.values).finally(_ => setIsLoading(false));
-    }, 1000);
+        return () => { };
+    }, [user]);
+
+    const handleBlur = (e) => {
+
+        if (e?.target?.value?.length === 5) {
+
+            return getUtailty.getCitiesByZipCode(e?.target?.value)
+                .then(response => locitionLogic(response));
+
+        }
+        return null;
+    }
 
     return {
         formik,
-        clickHandler,
         data,
         counteris,
+        classList,
+        setClassList,
+        handleBlur,
+        isProvider,
+        user,
+        isProvider
     };
 
 }

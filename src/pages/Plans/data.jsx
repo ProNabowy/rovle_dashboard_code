@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { Delete, Get } from "../../apis/apis";
 import { SeeMore, TableActions } from "../../components";
 import { AppContext } from "../../context/AppContext";
@@ -41,7 +41,7 @@ const useDataGetter = _ => {
 
         const renderPackages = sizes?.slice(0, 3)?.map((item, index) => {
 
-            return itemBodyTamplate(item, 'text-center');
+            return <Fragment key={index}>{itemBodyTamplate(item, 'text-center')}</Fragment>
 
         });
 

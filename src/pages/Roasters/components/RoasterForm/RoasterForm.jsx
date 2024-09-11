@@ -1,80 +1,208 @@
 import { Dropdown } from 'primereact/dropdown';
-import { CitiesDropdown, InputsGroup, ProvincesDropDown } from '../../../../components';
-import RedioGroup from '../RedioGroup/RedioGroup';
+import { CitiesDropdown, Input, ProvincesDropDown } from '../../../../components';
 import { getSelectedOption } from '../../../../assets/utils/utils';
 import { useDataGetter } from './data';
 
 
-export default function RoasterForm({ formik, clickHandler, isRenderPassword }) {
+export default function RoasterForm({ formik, isRenderPassword }) {
 
-    const { countries } = useDataGetter();
+    const { countries, handleBlur } = useDataGetter(formik);
 
     return (
 
-        <form onSubmit={e => e.preventDefault()} className='px-10'>
+        <form onSubmit={formik.handleSubmit} autoComplete='off' className='px-10'>
 
-            <InputsGroup data={
-                {
-                    names: ['Nombre', 'Correo electrónico'],
-                    placeholders: ['Ingresar Nombre', 'Ingresar Correo electrónico'],
-                    values: [formik.values?.user_name, formik.values?.user_email],
-                    onChange: formik.handleChange,
-                    nameAttr: ['user_name', 'user_email']
-                }
-            } />
+            <div className='flex-container'>
+
+                <div className='w-[48%]'>
+
+                    <label htmlFor={'user_email'} className='label'>Email de login</label>
+
+                    <Input
+                        value={formik?.values?.user_email}
+                        name={'user_email'}
+                        type={'email'}
+                        required={true}
+                        onChange={formik.handleChange}
+                        id={'user_email'}
+                        placeholder={'Ingresar Email de login'}
+                    />
+
+                </div>
+
+                <div className='w-[48%]'>
+
+                    <label htmlFor={'provider_email'} className='label'>Email de contacto</label>
+
+                    <Input
+                        value={formik?.values?.provider_email}
+                        name={'provider_email'}
+                        type={'email'}
+                        required={true}
+                        onChange={formik.handleChange}
+                        id={'provider_email'}
+                        placeholder={'Ingresar Correo electrónico'}
+                    />
+
+                </div>
+
+            </div>
 
             {
                 isRenderPassword
                     ?
-                    <InputsGroup data={
-                        {
-                            names: ['Contraseña', 'Confirmación de contraseña'],
-                            placeholders: ['Ingresar Contraseña', 'Ingresar Confirmación de contraseña'],
-                            onChange: formik.handleChange,
-                            nameAttr: ['user_password', 'user_password_confirmation'],
-                            types: ["password", 'password']
-                        }
-                    } />
+                    <div className='flex-container'>
+
+                        <div className='w-full sm:w-[48%]'>
+
+                            <label htmlFor={'user_password'} className='label'>Contraseña</label>
+
+                            <Input
+                                value={formik?.values?.user_password}
+                                name={'user_password'}
+                                type={'password'}
+                                required={true}
+                                onChange={formik.handleChange}
+                                id={'user_password'}
+                                placeholder={'Ingresar Contraseña'}
+                            />
+
+                        </div>
+
+                        <div className='w-full sm:w-[48%]'>
+
+                            <label htmlFor={'user_password_confirmation'} className='label'>Confirmación de contraseña</label>
+
+                            <Input
+                                value={formik?.values?.user_password_confirmation}
+                                name={'user_password_confirmation'}
+                                type={'password'}
+                                required={true}
+                                onChange={formik.handleChange}
+                                id={'user_password_confirmation'}
+                                placeholder={'Ingresar Confirmación de contraseña'}
+                            />
+
+                        </div>
+
+                    </div>
                     :
                     null
             }
 
-            <InputsGroup data={
-                {
-                    names: ['NIF', 'Commercial Name'],
-                    placeholders: ['Ingresar NIF', 'Ingresar Commercial Name'],
-                    values: [formik.values?.provider_nif, formik.values?.provider_commercial_name],
-                    onChange: formik.handleChange,
-                    nameAttr: ['provider_nif', 'provider_commercial_name']
-                }
-            } />
+            <div className='flex-container'>
 
-            <InputsGroup data={
-                {
-                    names: ['Nombre oficial', 'Dirección'],
-                    placeholders: ['Ingresar Nombre oficial', 'Ingresar Dirección'],
-                    values: [formik.values?.provider_official_name, formik.values?.provider_address],
-                    onChange: formik.handleChange,
-                    nameAttr: ['provider_official_name', 'provider_address']
-                }
-            } />
+                <div className='w-full sm:w-[48%]'>
 
-            <InputsGroup data={
-                {
-                    names: ['Código postal', 'Teléfono'],
-                    placeholders: ['Ingresar Código postal', 'Ingresar Teléfono'],
-                    values: [formik.values?.provider_zip, formik.values?.provider_phone],
-                    onChange: formik.handleChange,
-                    nameAttr: ['provider_zip', 'provider_phone']
-                }
-            } />
+                    <label htmlFor={'provider_nif'} className='label'>NIF</label>
 
+                    <Input
+                        value={formik?.values?.provider_nif}
+                        name={'provider_nif'}
+                        type={'text'}
+                        required={true}
+                        onChange={formik.handleChange}
+                        id={'provider_nif'}
+                        placeholder={'Ingresar NIF'}
+                    />
 
-            <div className='flex items-center justify-between mb-8'>
+                </div>
 
-                <div className='sm:w-[48%]'>
+                <div className='w-full sm:w-[48%]'>
 
-                    <h2 className='text-[18px] text-[#252525] font-medium'>País</h2>
+                    <label htmlFor={'provider_commercial_name'} className='label'>Nombre comercial</label>
+
+                    <Input
+                        value={formik?.values?.provider_commercial_name}
+                        name={'provider_commercial_name'}
+                        type={'text'}
+                        required={true}
+                        onChange={formik.handleChange}
+                        id={'provider_commercial_name'}
+                        placeholder={'Ingresar Nombre comercial'}
+                    />
+
+                </div>
+
+            </div>
+
+            <div className='flex-container'>
+
+                <div className='w-full sm:w-[48%]'>
+
+                    <label htmlFor={'provider_official_name'} className='label'>Nombre oficial</label>
+
+                    <Input
+                        value={formik?.values?.provider_official_name}
+                        name={'provider_official_name'}
+                        type={'text'}
+                        required={true}
+                        onChange={formik.handleChange}
+                        id={'provider_official_name'}
+                        placeholder={'Ingresar Nombre oficial'}
+                    />
+
+                </div>
+
+                <div className='w-full sm:w-[48%]'>
+
+                    <label htmlFor={'provider_address'} className='label'>Dirección</label>
+
+                    <Input
+                        value={formik?.values?.provider_address}
+                        name={'provider_address'}
+                        type={'text'}
+                        required={true}
+                        onChange={formik.handleChange}
+                        id={'provider_address'}
+                        placeholder={'Ingresar Dirección'}
+                    />
+
+                </div>
+
+            </div>
+
+            <div className='flex-container'>
+
+                <div className='w-full sm:w-[48%]'>
+
+                    <label htmlFor={'provider_phone'} className='label'>Teléfono del tostador</label>
+
+                    <Input
+                        onChange={formik.handleChange}
+                        value={formik.values?.provider_phone}
+                        name='provider_phone'
+                        type='text'
+                        required
+                        id={'provider_phone'}
+                        placeholder={'Ingresar Teléfono'}
+                    />
+
+                </div>
+
+                <div className='w-full sm:w-[48%]'>
+
+                    <label htmlFor={'user_phone'} className='label'>Teléfono de contacto</label>
+
+                    <Input
+                        onChange={formik.handleChange}
+                        value={formik.values?.user_phone}
+                        name='user_phone'
+                        type='text'
+                        required
+                        id={'user_phone'}
+                        placeholder={'Ingresar Teléfono'}
+                    />
+
+                </div>
+
+            </div>
+
+            <div className='flex-container'>
+
+                <div className='w-full sm:w-[48%]'>
+
+                    <h2 className='label'>País</h2>
 
                     <Dropdown
                         value={getSelectedOption(countries, 'id', formik?.values?.provider_country_id)}
@@ -94,8 +222,7 @@ export default function RoasterForm({ formik, clickHandler, isRenderPassword }) 
 
             </div>
 
-            <div className='flex items-center justify-between mb-8'>
-
+            <div className='flex-container'>
 
                 <CitiesDropdown
                     formik={formik}
@@ -104,16 +231,33 @@ export default function RoasterForm({ formik, clickHandler, isRenderPassword }) 
                     city_Key={'provider_city_id'}
                 />
 
-                <RedioGroup formik={formik} />
+                <div className='w-full sm:w-[48%]'>
+
+                    <label htmlFor={'provider_zip'} className='label'>Código postal</label>
+
+                    <Input
+                        onChange={formik.handleChange}
+                        onBlur={handleBlur}
+                        value={formik.values?.provider_zip}
+                        name='provider_zip'
+                        type='text'
+                        required
+                        min={5}
+                        max={5}
+                        maxLength={5}
+                        minLength={5}
+                        id={'provider_zip'}
+                        placeholder={'Ingresar Código postal'}
+                    />
+
+                </div>
+
+
+                {/* <RedioGroup formik={formik} /> */}
 
             </div>
 
-
-            <div className='flex items-center justify-end mt-10'>
-
-                <button onClick={clickHandler} type='submit' className='bg-[#45B8EA] text-white py-[16px] px-32 rounded-full'>Enviar</button>
-
-            </div>
+            <button type='submit' className='min-btn block !mt-10 ml-auto'>Enviar</button>
 
         </form>
     )

@@ -27,9 +27,9 @@ const hasRoutePermissions = (userPermissions, pagePermission) => {
 }
 
 // Function to set a secure cookie
-function setSecureCookie(name, value, daysToExpire, sameSite = 'Strict') {
+function setSecureCookie(name, value, hoursToExpire = 1, sameSite = 'Strict') {
     const date = new Date();
-    date.setTime(date.getTime() + (daysToExpire * 24 * 60 * 60 * 1000));
+    date.setTime(date.getTime() + (hoursToExpire * 60 * 60 * 1000));
     const expires = `expires=${date.toUTCString()}`;
     const secure = location.protocol === 'https:' ? 'Secure' : '';
     const cookieString = `${name}=${value}; ${expires}; path=/; ${secure}; SameSite=${sameSite}`;
@@ -64,7 +64,8 @@ function getCookie(name) {
 // const exampleCookieValue = getCookie('exampleCookie');
 
 const loggedIn = () => {
-    return getCookie('token') ? true : false;
+    const sessionToken = sessionStorage.getItem('token');
+    return sessionToken || getCookie('token') ? true : false;
 }
 
 
@@ -122,6 +123,11 @@ const getSelectedOption = (list, optionKey, value) => {
     return list?.filter(item => item[optionKey] == value)[0];
 }
 
+
+function numberFormat(number) {
+    return number.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
 const handleDelete = (callback) => {
 
     Swal.fire({
@@ -141,6 +147,7 @@ const handleDelete = (callback) => {
 
 }
 
+
 export {
     hasRoutePermissions,
     setSecureCookie,
@@ -150,5 +157,6 @@ export {
     handleLogOut,
     SwalControlar,
     getSelectedOption,
-    handleDelete
+    handleDelete,
+    numberFormat
 }

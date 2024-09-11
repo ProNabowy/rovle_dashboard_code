@@ -20,9 +20,7 @@ export default class Delete {
 
             swal.success('Borrado!', `El rol ha sido eliminado.`);
 
-            const updatedRoles = roles.filter(role => role?.id != id);
-
-            return state(updatedRoles);
+            return state(perv => perv?.filter(role => role?.id != id));
 
         });
 
@@ -139,4 +137,12 @@ export default class Delete {
         });
 
     }
+
+    cancelPlan(id) {
+        return axios.delete(`orders/${id}`).then(response => {
+            swal.success('Cancelado', `El pedido ha sido cancelado con éxito.`).then(_ => window.location.reload());
+            return response.data;
+        });
+    }
+
 }
