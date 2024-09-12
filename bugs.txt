@@ -1,6 +1,0 @@
-
-after edit navigate him to list in coffee-shop => done 
-add option all in the dropdown of the table and remove search from the list  => done 
-make update origin work
-
-list of update origin
