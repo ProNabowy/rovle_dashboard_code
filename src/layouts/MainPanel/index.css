@@ -1,0 +1,95 @@
+.main-menu {
+    width: 80px;
+    transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), background 0s;
+    backface-visibility: hidden;
+    box-shadow: 0 0 15px 0 rgba(34, 41, 47, 0.05);
+    position: fixed;
+    color: #6e6b7b;
+    z-index: 1031;
+    display: table-cell;
+    height: 100%;
+}
+
+.main-menu.expanded {
+    width: 260px;
+}
+
+.main-menu-content {
+    transition: 1s;
+}
+
+.main-menu-content a.active,
+.main-menu-content .active-mnue {
+    background-color: white !important;
+    color: #45B8EA !important;
+    border-radius: 0 40px 40px 0 !important;
+}
+
+.main-menu-content a.active .nav-icon,
+.main-menu-content .active-mnue .nav-icon {
+    background-color: #45B8EA;
+    color: white !important;
+}
+
+.main-menu-content a.active .nav-icon svg {
+    color: white;
+}
+
+.p-panelmenu .p-panelmenu-header>a {
+    padding: 4px 8px !important;
+    border-radius: 0 40px 40px 0 !important;
+    border: transparent !important;
+    background-color: transparent !important;
+}
+
+.p-panelmenu .p-panelmenu-header-link {
+    justify-content: space-between !important;
+    flex-direction: row-reverse !important;
+}
+
+
+.p-panelmenu .p-panelmenu-content,
+.p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link:not(.p-disabled):hover,
+.p-panelmenu .p-panelmenu-header:not(.p-highlight):not(.p-disabled)>a:hover,
+.p-panelmenu .p-panelmenu-header.p-highlight:not(.p-disabled)>a:hover {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+.p-panelmenu .p-panelmenu-header>a:focus {
+    box-shadow: none !important;
+}
+
+.p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    font-size: 14px !important;
+}
+
+.main-menu-content a.mnue-link.active {
+    background-color: transparent !important;
+}
+
+.p-panelmenu .p-panelmenu-header.p-highlight {
+    background-color: white !important;
+    color: #45B8EA !important;
+    border-radius: 0 40px 40px 0 !important;
+}
+
+.p-panelmenu .p-panelmenu-header .p-menuitem-text {
+    color: #b3b3b3 !important;
+}
+
+.p-panelmenu .p-panelmenu-header.p-highlight .p-menuitem-text {
+    color: #45B8EA !important;
+}
+
+/* nav-icon  */
+
+.p-panelmenu .p-panelmenu-header.p-highlight .p-menuitem-text .nav-icon {
+    background-color: #45B8EA;
+}
+
+.p-panelmenu .p-panelmenu-header.p-highlight .p-menuitem-text .nav-icon svg {
+    color: white;
+}
