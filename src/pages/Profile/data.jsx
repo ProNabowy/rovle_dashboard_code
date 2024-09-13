@@ -108,8 +108,7 @@ const useDataGetter = () => {
         setClassList,
         handleBlur,
         isProvider,
-        user,
-        isProvider
+        user, 
     };
 
 }

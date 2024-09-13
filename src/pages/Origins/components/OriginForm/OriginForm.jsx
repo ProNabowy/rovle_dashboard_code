@@ -48,7 +48,7 @@ export default function OriginForm({ formik, clickHandler }) {
 
             </div>
 
-            <div className='flex-end-container'>
+            <div className='flex-end'>
 
                 <button
                     type='submit'

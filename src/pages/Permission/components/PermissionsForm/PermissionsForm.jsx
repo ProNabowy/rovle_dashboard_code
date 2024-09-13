@@ -70,7 +70,7 @@ export default function PermissionsForm({ asEdit }) {
                     ?
                     null
                     :
-                    <div className='flex-end-container'>
+                    <div className='flex-end'>
 
                         <button type='submit' className='min-btn'>Actualizar</button>
 

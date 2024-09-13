@@ -44,10 +44,10 @@
     border-radius: 50px;
 }
 
-.flex-end-container {
+.flex-end {
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: flex-end;
     padding: 40px;
     padding-bottom: 20px;
 }

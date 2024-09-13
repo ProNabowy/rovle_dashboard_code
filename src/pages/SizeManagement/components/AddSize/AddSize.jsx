@@ -44,7 +44,7 @@ export default function AddSize() {
 
                 </div>
 
-                <div className='flex-end-container'>
+                <div className='flex-end'>
 
                     <button onClick={clickHandler} type='submit' className='min-btn'>
                         Enviar

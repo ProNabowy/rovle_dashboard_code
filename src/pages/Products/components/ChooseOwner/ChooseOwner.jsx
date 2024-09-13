@@ -47,7 +47,7 @@ export default function ChooseOwner() {
 
                 </div>
 
-                <div className='flex-end-container'>
+                <div className='flex-end'>
 
                     <button onClick={handelClick} className='min-btn'>
                         Siguiente
