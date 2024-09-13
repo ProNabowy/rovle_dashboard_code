@@ -5,6 +5,12 @@ class Table {
 
     }
 
+    dateFormat(date) {
+        const formatedDate = new Date(date)?.toLocaleDateString('en-GB') + ' ' + new Date(date)?.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+
+        return formatedDate === 'Invalid Date Invalid Date' || formatedDate === 'Invalid Date' ? date?.toString() : formatedDate;
+    }
+
     idBodyTemplate = (rowData) => {
         return <h2 className='text-[#6f6b7d]'>{rowData.id}</h2>
     };
@@ -44,11 +50,11 @@ class Table {
     };
 
     startDateBodyTemplate = (rowData) => {
-        return <p className='mb-1 capitalize text-[13px] font-medium'>{rowData.created_at?.toString()}</p>
+        return <p className='mb-1 capitalize text-[13px] font-medium'>{this.dateFormat(rowData.created_at)}</p>
     };
 
     lastDateBodyTemplate = (rowData) => {
-        return <p className='mb-1 capitalize text-[13px] font-medium'>{rowData.updated_at}</p>
+        return <p className='mb-1 capitalize text-[13px] font-medium'>{this.dateFormat(new Date(rowData.updated_at))}</p>
     };
 
     countryBodyTemplate = (rowData) => {

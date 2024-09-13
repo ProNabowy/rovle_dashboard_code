@@ -84,7 +84,7 @@ const useDataGetter = _ => {
         { field: "provider.commercial_name", header: "Nombre del Tostador", classNames: "!px-[15px]", tamplate: roasterNameBodyTemplate },
         { field: "status", header: "Estado", classNames: "!px-[15px]", tamplate: statusBodyTemplate },
         { field: "provider.commercial_name", header: "Tallas", classNames: "!px-[15px]", tamplate: sizeBodyTemplate },
-        { field: "rowData.updated_at", header: "Fecha de finalización", classNames: "!px-[15px]", tamplate: tableService.lastDateBodyTemplate },
+        { field: "rowData.updated_at", header: "Fecha de inicio", classNames: "!px-[15px]", tamplate: tableService.lastDateBodyTemplate },
         { field: "action", header: "Acción", classNames: "!px-[15px]", tamplate: useActionsBodyTemplate },
     ];
 

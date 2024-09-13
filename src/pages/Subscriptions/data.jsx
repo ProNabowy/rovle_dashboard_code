@@ -14,7 +14,7 @@ const statusBodyTemplate = (rowData) => {
 
 const usePackageBodyTemplate = (rowData) => {
 
-    return <p className={`mb-1 capitalize text-[13px] font-medium text-[#58291E]`}>{rowData?.plan_size?.size?.weight}Kg = {rowData?.plan_size?.price} Euro</p>
+    return <p className={`mb-1 capitalize text-[13px] font-medium text-[#58291E]`}>{rowData?.plan_size?.size?.weight}g = {rowData?.plan_size?.price} Euro</p>
 
 };
 const actionBodyTemplate = (rowData) => {

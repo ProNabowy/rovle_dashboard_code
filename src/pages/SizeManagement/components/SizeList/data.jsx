@@ -31,7 +31,7 @@ const useDataGetter = _ => {
 
     const weightBodyTemplate = (rowData) => {
 
-        return <p className='mb-1 capitalize text-[13px] font-medium'>{rowData?.weight}</p>
+        return <p className='mb-1 capitalize text-[13px] font-medium'>{parseInt(rowData?.weight)}</p>
 
     };
 
