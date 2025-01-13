@@ -24,8 +24,8 @@ const useDataGetter = () => {
         setIsLoading(true);
 
         if (isProvider) {
-
-            return updateUtailty.updateRoaster(isProvider?.id ,values).finally(_ => setIsLoading(false));
+            console.log(values.address);
+            return updateUtailty.updateRoaster(isProvider?.id, values).finally(_ => setIsLoading(false));
 
         } else {
 
@@ -41,6 +41,7 @@ const useDataGetter = () => {
 
     const locitionLogic = (response) => {
         setCountries(response);
+        formik.setFieldValue('country_id', response?.[0]?.id);
         formik.setFieldValue('province_id', response?.[0]?.provinces?.[0]?.id);
         formik.setFieldValue('city_id', response?.[0]?.provinces?.[0]?.cities?.[0]?.id);
         return null;
@@ -51,7 +52,6 @@ const useDataGetter = () => {
         setIsLoading(true);
 
         if (user?.zip) {
-
             getUtailty.getCitiesByZipCode(user?.zip)
                 .then(response => locitionLogic(response))
                 .finally(_ => setIsLoading(false));
@@ -70,7 +70,15 @@ const useDataGetter = () => {
 
         if (isProvider) {
 
-            formik.setValues({ ...user, provider_nif: isProvider?.nif, provider_commercial_name: isProvider?.commercial_name, provider_official_name: isProvider?.official_name });
+            formik.setValues({
+                ...user,
+                provider_nif: isProvider?.nif,
+                provider_commercial_name: isProvider?.commercial_name,
+                provider_official_name: isProvider?.official_name,
+                provider_address: isProvider?.address,
+                provider_phone: isProvider?.phone,
+                provider_zip: isProvider?.zip,
+            });
 
         } else {
 
@@ -108,7 +116,7 @@ const useDataGetter = () => {
         setClassList,
         handleBlur,
         isProvider,
-        user, 
+        user,
     };
 
 }

@@ -28,7 +28,7 @@ export default function OffeerInfo({ formik }) {
   return (
     <div className='flex-container'>
 
-      <div className='w-full sm:w-[48%] border border-[#28C76F] p-3 py-8 rounded-[10px]'>
+      <div className='w-full md:w-[48%] border border-[#28C76F] p-3 py-8 rounded-[10px]'>
 
         <div className='mb-8'>
 
@@ -37,7 +37,8 @@ export default function OffeerInfo({ formik }) {
             <FontAwesomeIcon icon={faKey} className='ms-3 text-[#252525]' />
           </h1>
 
-          <Dropdown filter value={getSelectedOption(Activa, 'id', formik?.values?.activation_method)} name='activation_method' onChange={(e) => formik.setFieldValue('activation_method', e.target.value?.id)} options={Activa} optionLabel="name"
+          <Dropdown emptyFilterMessage="No hay opciones disponibles"
+            emptyMessage="No hay opciones disponibles" filter value={getSelectedOption(Activa, 'id', formik?.values?.activation_method)} name='activation_method' onChange={(e) => formik.setFieldValue('activation_method', e.target.value?.id)} options={Activa} optionLabel="name"
             className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" placeholder='Elige el método de activación' />
 
         </div>
@@ -65,7 +66,7 @@ export default function OffeerInfo({ formik }) {
 
       </div>
 
-      <div className='w-full sm:w-[48%] border border-[#28C76F] p-3 py-8 rounded-[10px]'>
+      <div className='w-full md:w-[48%] border border-[#28C76F] p-3 py-8 rounded-[10px]'>
 
         <div className='mb-8'>
 
@@ -74,7 +75,8 @@ export default function OffeerInfo({ formik }) {
             <FontAwesomeIcon icon={faTag} className='ms-3 text-[#252525]' />
           </h1>
 
-          <Dropdown filter value={getSelectedOption(Discount, 'id', formik?.values?.discount_type)} name='discount_type' onChange={(e) => formik.setFieldValue('discount_type', e.target.value?.id)} options={Discount} optionLabel="name"
+          <Dropdown emptyFilterMessage="No hay opciones disponibles"
+            emptyMessage="No hay opciones disponibles" filter value={getSelectedOption(Discount, 'id', formik?.values?.discount_type)} name='discount_type' onChange={(e) => formik.setFieldValue('discount_type', e.target.value?.id)} options={Discount} optionLabel="name"
             className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" placeholder='Seleccionar Discount' />
 
         </div>

@@ -26,17 +26,19 @@ export default function ProductsForm() {
 
     return (
 
-        <form onSubmit={e => e.preventDefault()} autoComplete='off' className='px-10 add-product'>
+        <form onSubmit={e => e.preventDefault()} autoComplete='off' className='px-3 sm:px-10 add-product'>
 
-            <div className='mb-8 flex items-center justify-between'>
+            <div className='mb-8 flex items-center justify-between flex-wrap gap-3'>
 
-                <div className={`${user?.provider ? "w-full" : "w-[48%]"}`}>
+                <div className={`${user?.provider ? "w-full" : "w-full sm:w-[48%]"}`}>
 
-                    <label htmlFor={'owner'} className='label'>Roaster From</label>
+                    <label htmlFor={'owner'} className='label'>Desde el tostador</label>
 
                     <Dropdown
                         value={selectedProvider}
                         filter
+                        emptyFilterMessage="No hay opciones disponibles"
+                        emptyMessage="No hay opciones disponibles"
                         onChange={(e) => setSelectedProvider(getSelectedOption(rosters, 'id', e.target.value?.id))}
                         options={roasterFrom} optionLabel="commercial_name"
                         inputId='owner'
@@ -47,9 +49,9 @@ export default function ProductsForm() {
                 {
                     !user?.provider
                         ?
-                        <div className='w-[48%]'>
+                        <div className='w-full sm:w-[48%]'>
 
-                            <label htmlFor={'owner'} className='label'>Roaster To</label>
+                            <label htmlFor={'owner'} className='label'>Al tostador</label>
 
                             <Dropdown
                                 filter
@@ -57,6 +59,8 @@ export default function ProductsForm() {
                                 onChange={(e) => setCurrentRoaster(getSelectedOption(rosters, 'id', e.target.value?.id))}
                                 options={roasterTo} optionLabel="commercial_name"
                                 inputId='owner'
+                                emptyFilterMessage="No hay opciones disponibles"
+                                emptyMessage="No hay opciones disponibles"
                                 placeholder="Seleccionar Tostador" className="w-full p-2  !shadow-none !rounded-none border-[#b3b3b3] !border-t-transparent !border-l-transparent !border-r-transparent" />
 
                         </div>
@@ -76,6 +80,8 @@ export default function ProductsForm() {
                     onChange={(e) => setSelectedProduct(getSelectedOption(selectedProvider?.products, 'id', e.target.value.id))}
                     options={selectedProvider?.products} optionLabel="commercial_name"
                     inputId='name'
+                    emptyFilterMessage="No hay opciones disponibles"
+                    emptyMessage="No hay opciones disponibles"
                     placeholder="Seleccionar Nombre del Producto" className="w-full p-2  !shadow-none !rounded-none border-[#b3b3b3] !border-t-transparent !border-l-transparent !border-r-transparent" />
 
             </div>
@@ -86,7 +92,7 @@ export default function ProductsForm() {
                     <Fragment>
                         <div className='flex-container'>
 
-                            <div className='w-[48%]'>
+                            <div className='w-full sm:w-[48%]'>
 
                                 <label htmlFor={'Code'} className='label'>Código</label>
 
@@ -100,16 +106,16 @@ export default function ProductsForm() {
 
                             </div>
 
-                            <div className='w-[48%]'>
+                            <div className='w-full sm:w-[48%]'>
 
-                                <label htmlFor={'Region'} className='label'>Region</label>
+                                <label htmlFor={'Region'} className='label'>Región</label>
 
                                 <Input
                                     value={productInfo?.region}
                                     disabled
                                     type={'text'}
                                     id={'Region'}
-                                    placeholder={'Ingresar Region'}
+                                    placeholder={'Ingresar Región'}
                                 />
 
                             </div>
@@ -133,7 +139,7 @@ export default function ProductsForm() {
 
                         <div className='flex-container'>
 
-                            <div className='w-[48%]'>
+                            <div className='w-full sm:w-[48%]'>
 
                                 <label htmlFor={'Finca'} className='label'>Finca</label>
 
@@ -147,7 +153,7 @@ export default function ProductsForm() {
 
                             </div>
 
-                            <div className='w-[48%]'>
+                            <div className='w-full sm:w-[48%]'>
 
                                 <label htmlFor={'Nombre'} className='label'>Nombre Comercial</label>
 
@@ -165,7 +171,7 @@ export default function ProductsForm() {
 
                         <div className='flex-container'>
 
-                            <div className='w-[48%]'>
+                            <div className='w-full sm:w-[48%]'>
 
                                 <label htmlFor={'Sca'} className='label'>Puntuación Sca s</label>
 
@@ -179,7 +185,7 @@ export default function ProductsForm() {
 
                             </div>
 
-                            <div className='w-[48%]'>
+                            <div className='w-full sm:w-[48%]'>
 
                                 <label htmlFor={'Altitud'} className='label'>Altitud</label>
 
@@ -197,7 +203,7 @@ export default function ProductsForm() {
 
                         <div className='flex-container'>
 
-                            <div className='w-[48%]'>
+                            <div className='w-full sm:w-[48%]'>
 
                                 <label htmlFor={'Variedad'} className='label'>Variety</label>
 
@@ -211,7 +217,7 @@ export default function ProductsForm() {
 
                             </div>
 
-                            <div className='w-[48%]'>
+                            <div className='w-full sm:w-[48%]'>
 
                                 <label htmlFor={'Proceso'} className='label'>Proceso</label>
 
@@ -247,13 +253,13 @@ export default function ProductsForm() {
 
                             <label htmlFor={'Presentation'} className='text-[18px] mb-2 text-[#252525] font-medium'>Presentación</label>
 
-                            <div className='border border-[b3b3b3] p-10 px-20 rounded-[20px] grid grid-cols-12 gap-5'>
+                            <div className='border border-[#b3b3b3] p-3 sm:p-10 sm:px-20 rounded-md sm:rounded-[20px] grid grid-cols-12 gap-5'>
 
                                 {
                                     productInfo?.presentations?.map((item, index) => {
 
                                         return (
-                                            <div key={index} className='col-span-6 border border-[#58291E] text-center rounded-[5px] p-2'>
+                                            <div key={index} className='col-span-12 sm:col-span-6 border border-[#58291E] text-center rounded-[5px] p-2'>
                                                 {item?.price} Euro por {item?.weight} gm
                                             </div>
                                         )

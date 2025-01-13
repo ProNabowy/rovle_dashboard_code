@@ -17,6 +17,40 @@ export default function OfferList() {
         level_three,
         columns
     } = useDataGetter();
+
+    const exportColumns = offers.map((item) => {
+        return {
+            ["Nombre de la oferta"]: item.name,
+            ["Nombre del tostador"]: item.provider?.commercial_name,
+            ["Recurren"]: item.duration == 0 ? "DIA" : item.duration == 1 ? "Week" : item?.duration == 2 ? "MES" : item?.duration == 3 ? "AÑO" : "UNA VEZ",
+            ["Fecha de inicio"]: item.created_at,
+            ["Fecha de finalización"]: item.updated_at,
+        };
+    });
+
+    const exportPDFColumns = [
+        {
+            title: "Nombre de la oferta",
+            dataKey: "name",
+        },
+        {
+            title: "Nombre del tostador",
+            dataKey: "provider.commercial_name",
+        },
+        {
+            title: "Recurren",
+            dataKey: "duration",
+        },
+        {
+            title: "Fecha de inicio",
+            dataKey: "created_at",
+        },
+        {
+            title: "Fecha de finalización",
+            dataKey: "updated_at",
+        }
+    ]
+
     return (
 
         <PageContent
@@ -25,10 +59,10 @@ export default function OfferList() {
             showActions={true}
             PermissionsKey={'Passports'}
             roleKey={'dashboard.passports.store'}
-            columns={columns}
             table={tableRef}
+            exportedExcelList={exportColumns}
             list={offers}
-            saveName={'Offers'}
+            exportPDFColumns={exportPDFColumns}
         >
 
             <TableHeader

@@ -13,6 +13,8 @@ export default function ProvincesDropDown({ formik, countries, country_Key, prov
                 onChange={(e) => formik.setFieldValue(province_Key, e.target.value?.id)}
                 options={getSelectedOption(countries, 'id', formik?.values?.[country_Key])?.provinces}
                 optionLabel="name"
+                emptyFilterMessage="No hay opciones disponibles"
+                emptyMessage="No hay opciones disponibles"
                 filter
                 inputId='provinces'
                 placeholder="Seleccionar Provincia" className="w-full p-2 !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />

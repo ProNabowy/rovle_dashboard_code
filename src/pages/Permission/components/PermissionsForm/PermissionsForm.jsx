@@ -21,7 +21,7 @@ export default function PermissionsForm({ asEdit }) {
 
                 <label
                     htmlFor='name-input'
-                    className='mb-3 block text-[20px] text-[#234486]' >
+                    className='mb-3 block text-base sm:text-[20px] text-[#234486]' >
                     Nombre del Rol
                 </label>
 
@@ -35,7 +35,6 @@ export default function PermissionsForm({ asEdit }) {
                 />
 
             </div>
-
 
             <label className='block text-[24px] text-[#252525] opacity-70 p-3 sm:p-10 pb-2'>Páginas</label>
 

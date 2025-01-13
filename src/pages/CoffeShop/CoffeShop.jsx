@@ -17,6 +17,35 @@ export default function CoffeShopList() {
         return <Button label="Ok" icon="pi pi-check" onClick={() => setDialogVisible(false)} />;
     };
 
+
+    const exportColumns = shops.map((item) => {
+        return {
+            ["Nombre"]: item.name,
+            ["Código postal"]: item.post_code,
+            ["Dirección"]: item.address,
+            ["Fecha de finalización"]: item.created_at,
+        };
+    });
+
+    const exportPDFColumns = [
+        {
+            title: "Nombre",
+            dataKey: "name",
+        },
+        {
+            title: "Código postal",
+            dataKey: "post_code",
+        },
+        {
+            title: "Dirección",
+            dataKey: "address",
+        },
+        {
+            title: "Fecha de finalización",
+            dataKey: "created_at",
+        },
+    ]
+
     return (
 
         <PageContent
@@ -25,10 +54,10 @@ export default function CoffeShopList() {
             showActions={true}
             PermissionsKey={'Coffee Shops'}
             roleKey={'dashboard.coffeeShops.store'}
-            columns={columns}
-            list={shops}
             table={tableRef}
-            saveName={'Coffee Shops'}
+            exportedExcelList={exportColumns}
+            list={shops}
+            exportPDFColumns={exportPDFColumns}
         >
 
             <Dialog header="Roasters Form"
@@ -53,7 +82,7 @@ export default function CoffeShopList() {
 
             </Dialog>
 
-            <div onClick={() => setDialogVisible(true)} className='flex items-center cursor-pointer text-[#45B8EA] absolute right-6 md:right-10 top-5 md:top-[initial] z-[10]'>
+            <div onClick={() => setDialogVisible(true)} className='flex items-center cursor-pointer text-[#45B8EA] mb-4 md:mb-0 px-8 md:px-0 md:absolute right-6 md:right-10 top-5 md:top-[70px] z-[10]'>
 
                 <h3 className='font-medium me-5'>Mostrar todo</h3>
 

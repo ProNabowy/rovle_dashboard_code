@@ -18,19 +18,19 @@ export default function SecondStep({ setActiveIndex }) {
     return (
         <Fragment>
 
-            <Link to={'/login'} className='flex items-center mb-10 cursor-pointer'>
+            <Link to={'/login'} onClick={() => sessionStorage.clear()} className='flex items-center mb-5 sm:mb-10 cursor-pointer'>
 
                 <FontAwesomeIcon icon={faAngleLeft} />
 
-                <span className='ms-3 text-[#252525]'>Back to log in</span>
+                <span className='ms-3 text-[#252525]'>Volver a iniciar sesión</span>
 
             </Link>
 
             <form onSubmit={handelSubmit} autoComplete='off'>
 
-                <h3 className='text-[24px] text-[#252525] text-center mb-2 font-medium'>Forget password</h3>
+                <h3 className='text-[24px] text-[#252525] text-center mb-2 font-medium'>Olvidar Contraseña</h3>
 
-                <h5 className='text-[#252525] max-w-[380px] text-center mb-8 mx-auto'>Please enter the code sent to your email <br /> {email}</h5>
+                <h5 className='text-[#252525] max-w-[380px] text-center mb-8 mx-auto'>Por favor, introduce el código enviado a tu correo electrónico. <br /> {email}</h5>
 
                 <ConfiremCodeForm
                     setUpdatePasswordData={setCode}

@@ -15,7 +15,6 @@ const useDataGetter = _ => {
     const handleSubmit = (values) => {
 
         if (!values?.provider_id || !values?.level_id || !values?.activation_method || !values?.discount_type || !values?.offer_place) {
-            console.log(values);
             if (!values?.provider_id) return swal.warning('Advertencia', 'El campo del Tostador es necesario, por favor complételo.');
             if (!values?.level_id) return swal.warning('Advertencia', 'El campo del Nivel es necesario, por favor complételo.');
             if (!values?.activation_method) return swal.warning('Advertencia', 'El campo del Activo es necesario, por favor complételo.');
@@ -51,7 +50,7 @@ const useDataGetter = _ => {
         },
         onSubmit: handleSubmit
     });
-console.log(formik.values);
+
 
     useEffect(() => {
 

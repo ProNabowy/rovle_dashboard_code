@@ -20,11 +20,18 @@ const useAxiosConfig = () => {
         },
         (error) => {
             // Handle response errors here
+            const shouldSkipDefaultError = error.config?.headers?.['disable-default-error'];
+
+            if (shouldSkipDefaultError) {
+
+                return Promise.reject(error);
+            }
 
             if (error.response) {
+
                 const { status } = error.response;
 
-                Promise.reject(error).catch(error => swal.rejected(null, error?.data?.message || error?.response?.data?.error || error?.response?.data?.message || `Something went wrong. Please try again later.`));
+                Promise.reject(error).catch(error => swal.rejected(null, error?.data?.message || error?.response?.data?.error || error?.response?.data?.message || `Algo salió mal. Por favor, inténtelo de nuevo más tarde.`));
 
             }
 

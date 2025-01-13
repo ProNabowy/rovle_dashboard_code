@@ -12,7 +12,7 @@ export default function FirstStep({ setData, handelSubmit }) {
 
                 <FontAwesomeIcon icon={faAngleLeft} />
 
-                <span className='ms-3 text-[#252525]'>Back to log in</span>
+                <span className='ms-3 text-[#252525]'>Volver a iniciar sesión</span>
 
             </Link>
 
@@ -20,9 +20,9 @@ export default function FirstStep({ setData, handelSubmit }) {
 
             <form onSubmit={handelSubmit} autoComplete='off'>
 
-                <h3 className='text-[24px] text-[#252525] text-center mb-2 font-medium'>Forget password</h3>
+                <h3 className='text-[24px] text-[#252525] text-center mb-2 font-medium'>Olvidar Contraseña</h3>
 
-                <h5 className='text-[#252525] max-w-[380px] text-center mb-8'>Enter your Email and we will send a code to reset your password</h5>
+                <h5 className='text-[#252525] max-w-[380px] text-center mb-8'>Ingresa tu correo electrónico y te enviaremos un código para restablecer tu contraseña.</h5>
 
                 <label className='block font-[400] text-[14px]' htmlFor='email'>Dirección de correo electrónico</label>
 

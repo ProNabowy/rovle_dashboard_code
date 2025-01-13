@@ -53,7 +53,7 @@ const useDataGetter = _ => {
                         .then(response => setOrigins(response))
                 }).then(_ => setVisible(false));
 
-            } else swal.warning('Oops', 'Debe especificar el origen por el que quiere sustituirlo');
+            } else swal.warning('Advertencia', 'Debe especificar el origen por el que quiere sustituirlo');
         }
 
         return <TableActions
@@ -74,7 +74,7 @@ const useDataGetter = _ => {
 
                         <FontAwesomeIcon onClick={_ => setVisible(true)} icon={faRepeat} className='text-[20px] cursor-pointer ms-5' />
 
-                        <Dialog header="" headerClassName='dialog-cancel-btn' visible={visible} className='w-[400px]' onHide={() => setVisible(false)}>
+                        <Dialog header="" headerClassName='dialog-cancel-btn' visible={visible} className='w-[95vw] sm:w-[400px]' onHide={() => setVisible(false)}>
 
                             <label htmlFor={'origin_to'} className='label'>Cambiar origen a</label>
 
@@ -85,6 +85,8 @@ const useDataGetter = _ => {
                                 options={origins?.filter((item) => item?.id != rowData?.id)}
                                 optionLabel="name"
                                 inputId='origin_to'
+                                emptyFilterMessage="No hay opciones disponibles"
+                                emptyMessage="No hay opciones disponibles"
                                 required
                                 placeholder="" className="w-full p-2 !shadow-none  border-[#b3b3b3] " />
 

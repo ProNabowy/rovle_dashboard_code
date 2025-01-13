@@ -56,6 +56,9 @@ const useDataGetter = () => {
 const phoneBodyTemplate = (rowData) => {
     return <p className='mb-1 capitalize text-[13px] font-medium'>{rowData.phone}</p>
 };
+const addressBodyTemplate = (rowData) => {
+    return <p className='mb-1 capitalize text-[13px] font-medium'>{rowData.addresses?.[0]?.name}</p>
+};
 
 
 const columns = [
@@ -63,7 +66,7 @@ const columns = [
     { field: "name", header: "Nombre", tamplate: tableService.nameBodyTemplate },
     { field: "email", header: "Correo electrónico", tamplate: tableService.emailBodyTemplate },
     { field: "phone", header: "Teléfono", tamplate: phoneBodyTemplate },
-    { field: "address", header: "Ubicaciones", tamplate: tableService.addressBodyTemplate },
+    { field: "address", header: "Ubicaciones", tamplate: addressBodyTemplate },
     { field: "created_at", header: "Fecha de finalización", tamplate: tableService.startDateBodyTemplate },
 ];
 

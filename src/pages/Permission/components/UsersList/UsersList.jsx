@@ -36,7 +36,7 @@ export default function UsersList({ rowData, users, setUsers, visible, setVisibl
 
                 <div className="relative my-5">
 
-                    <input type="search" onChange={e => setSearchTerm(e.target.value)} className="p-2 px-10 w-full rounded-full border border-[#c6c6c6]" placeholder="Search (Ctrl+/)" />
+                    <input type="search" onChange={e => setSearchTerm(e.target.value)} className="p-2 px-10 w-full rounded-full border border-[#c6c6c6]" placeholder="Search" />
 
                     <FontAwesomeIcon icon={faSearch} className="absolute left-3 top-[50%] translate-y-[-50%] text-[18px] opacity-40" />
 

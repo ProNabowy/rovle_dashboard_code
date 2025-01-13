@@ -20,7 +20,7 @@ export default function ProductsForm({ formik, originsList, packagesList }) {
 
     return (
 
-        <form onSubmit={formik.handleSubmit} autoComplete='off' className='px-3 sm:px-10 add-product'>
+        <form onSubmit={formik.handleSubmit} autoComplete='off' className='px-2 sm:px-10 add-product'>
 
             <div className='flex-container'>
 
@@ -38,7 +38,7 @@ export default function ProductsForm({ formik, originsList, packagesList }) {
                                 type={'text'}
                                 onChange={formik.handleChange}
                                 id={'factor'}
-                                placeholder={'Enter factor name'}
+                                placeholder={'Ingresa el nombre del propietario.'}
                             />
 
                         </div>
@@ -49,7 +49,7 @@ export default function ProductsForm({ formik, originsList, packagesList }) {
                 {
                     !isProvider
                         ?
-                        <div className={`w-[48%] ${!isByNewOWner ? "flex-1" : ""}`}>
+                        <div className={`w-full sm:w-[48%] ${!isByNewOWner ? "flex-1" : ""}`}>
 
                             <label htmlFor={'owner'} className='label'>Roaster To</label>
 
@@ -58,6 +58,8 @@ export default function ProductsForm({ formik, originsList, packagesList }) {
                                 onChange={(e) => setSelectedProvider(getSelectedOption(rosters, 'id', e.target.value?.id))}
                                 options={rosters} optionLabel="commercial_name"
                                 inputId='owner'
+                                emptyFilterMessage="No hay opciones disponibles"
+                                emptyMessage="No hay opciones disponibles"
                                 filter
                                 placeholder="Seleccionar Tostador"
                                 className="w-full p-2  !shadow-none !rounded-none border-[#b3b3b3] !border-t-transparent !border-l-transparent !border-r-transparent" />
@@ -112,7 +114,7 @@ export default function ProductsForm({ formik, originsList, packagesList }) {
 
             <div className='mb-8'>
 
-                <label htmlFor={'Region'} className='label'>Region</label>
+                <label htmlFor={'Region'} className='label'>Región</label>
 
                 <Input
                     value={formik?.values?.region}
@@ -120,7 +122,7 @@ export default function ProductsForm({ formik, originsList, packagesList }) {
                     type={'text'}
                     onChange={formik.handleChange}
                     id={'Region'}
-                    placeholder={'Ingresar Region'}
+                    placeholder={'Ingresar Región'}
                 />
 
             </div>
@@ -144,7 +146,7 @@ export default function ProductsForm({ formik, originsList, packagesList }) {
 
                 <div className='w-full sm:w-[48%]'>
 
-                    <label htmlFor={'sca_score'} className='label'>Puntunaction Sca s</label>
+                    <label htmlFor={'sca_score'} className='label'>Puntuación Sca s</label>
 
                     <Input
                         value={formik?.values?.sca_score}
@@ -156,7 +158,7 @@ export default function ProductsForm({ formik, originsList, packagesList }) {
                         step="0.01"
                         onChange={formik.handleChange}
                         id={'sca_score'}
-                        placeholder={'Ingresar Puntunaction Sca s'}
+                        placeholder={'Ingresar Puntuación Sca s'}
                     />
 
                 </div>
@@ -193,7 +195,7 @@ export default function ProductsForm({ formik, originsList, packagesList }) {
                         type={'text'}
                         onChange={formik.handleChange}
                         id={'process'}
-                        placeholder={'Ingresar process'}
+                        placeholder={'Ingresar Proceso'}
                     />
 
                 </div>
@@ -253,7 +255,7 @@ export default function ProductsForm({ formik, originsList, packagesList }) {
 
             <button
                 type='submit'
-                className='min-btn mt-10 block ml-auto'
+                className='min-btn mt-5 sm:mt-10 block ml-auto'
             >
                 Enviar
             </button>

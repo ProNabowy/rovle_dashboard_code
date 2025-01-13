@@ -29,7 +29,7 @@ export default function AddPackageByDropdown({
     } = useAddPackage(formik, formikKey);
 
     return (
-        <div className={`rounded-[20px] mt-20 border border-[#252525] p-3 sm:p-[32px] grid grid-cols-12 gap-3 md:gap-10 ${classNames}`}>
+        <div className={`rounded-md sm:rounded-[20px] mt-5 sm:mt-20 border border-[#252525] p-3 sm:p-[32px] grid grid-cols-12 gap-3 md:gap-10 ${classNames}`}>
 
             <form onSubmit={e => e.preventDefault()} autoComplete='off' className='col-span-12 md:col-span-6'>
 
@@ -57,6 +57,8 @@ export default function AddPackageByDropdown({
                         ref={inputWeightRef}
                         value={selectedSize}
                         filter
+                        emptyFilterMessage="No hay opciones disponibles"
+                        emptyMessage="No hay opciones disponibles"
                         onChange={e => {
                             setAddNewPackage(prev => ({ ...prev, size_id: e.target.value?.id, weight: e.target.value?.weight, name: e.target.value?.name }));
                             setSelectedSize(e.value)
@@ -86,7 +88,7 @@ export default function AddPackageByDropdown({
                 <button
                     type='button'
                     onClick={handelAddNewPackage}
-                    className='bg-[#58291E] text-[20px] text-center text-white font-medium w-full py-[16px] px-[24px] rounded-full'
+                    className='bg-[#58291E] text-[20px] text-center text-white font-medium w-full py-2 sm:py-[16px] px-4 sm:px-[24px] rounded-md sm:rounded-full'
                 >Añadir Paquete</button>
 
             </form>

@@ -56,15 +56,15 @@ const useDataGetter = _ => {
     };
 
     const lastDateBodyTemplate = (rowData) => {
-        return <p className='mb-1 capitalize text-[13px] font-medium'>{rowData.updated_at || "Auto"}</p>
+        return <p className='mb-1 capitalize text-[13px] font-medium'>{rowData.end_date}</p>
     };
 
     const columns = [
         { field: "id", header: "ID", classNames: "!px-[15px]", tamplate: tableService.idBodyTemplate },
         { field: "name", header: "Nombre de la oferta", classNames: "!px-[0px]", tamplate: tableService.nameBodyTemplate },
         { field: "name", header: "Nombre del tostador", classNames: "!px-[15px]", tamplate: roasterNameBodyTemplate },
-        { field: "recurren", header: "Recurren", classNames: "!px-[15px]", tamplate: recurrenBodyTemplate },
-        { field: "created_at", header: "Fecha de inicio", classNames: "!px-[15px]", tamplate: tableService.startDateBodyTemplate },
+        { field: "recurren", header: "Recurrente", classNames: "!px-[15px]", tamplate: recurrenBodyTemplate },
+        { field: "created_at", header: "Fecha de inicio", classNames: "!px-[15px]", tamplate: row => tableService.startDateBodyTemplate(row, 'start_date') },
         { field: "updated_at", header: "Fecha de finalización", classNames: "!px-[15px]", tamplate: lastDateBodyTemplate },
         { field: "status", header: "Acción", classNames: "!px-[15px]", tamplate: useActionsBodyTemplate },
     ];

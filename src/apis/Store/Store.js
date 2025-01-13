@@ -9,19 +9,19 @@ export default class Store {
 
     addOrigin(data, navigate) {
         return axios.post(`origins`, data).then(response => {
-            swal.success('Añadido!', `Tu origen ha sido añadido.`).then(_ => navigate && navigate('/origins/list'));
+            swal.success('Añadido!', response.data.message).then(_ => navigate && navigate('/origins/list'));
             return response.data;
         });
     }
     addProduct(data, navigate) {
         return axios.post(`products`, data).then(response => {
-            swal.success('Añadido!', `Tu producto ha sido añadido.`).then(_ => navigate('/products/list'))
+            swal.success('Añadido!', response.data.message).then(_ => navigate('/products/list'))
             return response.data;
         });
     }
     addPlan(data, navigate) {
         return axios.post(`plans`, data).then(response => {
-            swal.success('Añadido!', `Tu plan ha sido añadido.`).then(_ => navigate('/products/plans/list'));
+            swal.success('Añadido!', response.data.message).then(_ => navigate('/products/plans/list'));
             return response.data;
         });
     }
@@ -32,37 +32,37 @@ export default class Store {
         })
 
         return axios.post(`subscription/${id}/accept`, { presentations: updateData }).then(response => {
-            swal.success('Añadido!', `Tu paquete de suscripción ha sido añadido.`).then(_ => navigate('/products/plans/subscriptions'));
+            swal.success('Añadido!', response.data.message).then(_ => navigate('/products/plans/subscriptions'));
             return response.data;
         });
     }
     addSize(data, navigate) {
         return axios.post(`sizes`, data).then(response => {
-            swal.success('Añadido!', `El tamaño ha sido añadido.`).then(_ => navigate('/products/plans/size/list'));
+            swal.success('Añadido!', response.data.message).then(_ => navigate('/products/plans/size/list'));
             return response.data;
         });
     }
     addUser(data, navigate) {
         return axios.post(`users`, data).then(response => {
-            swal.success('Añadido!', `El usuario ha sido añadido.`).then(_ => navigate('/groups/users'));
+            swal.success('Añadido!', response.data.message).then(_ => navigate('/groups/users'));
             return response.data;
         });
     }
     addRoaster(data, navigate) {
         return axios.post(`providers`, data).then(response => {
-            swal.success('Añadido!', `Tu tostador ha sido añadido.`).then(_ => navigate('/groups/roasters'));
+            swal.success('Añadido!', response.data.message).then(_ => navigate('/groups/roasters'));
             return response.data;
         });
     }
     addCoffee(data, navigate) {
         return axios.post(`coffee-shops`, data).then(response => {
-            swal.success('Añadido!', `Tu café ha sido añadido.`).then(_ => navigate && navigate('/setups/coffee-shop'))
+            swal.success('Añadido!', response.data.message).then(_ => navigate && navigate('/setups/coffee-shop'))
             return response.data;
         });
     }
     addOffeer(data, navigate) {
         return axios.post(`passports`, data).then(response => {
-            swal.success('Añadido!', `Tu oferta ha sido añadida.`).then(_ => navigate("/setups/offers"));
+            swal.success('Añadido!', response.data.message).then(_ => navigate("/setups/offers"));
             return response.data;
         });
     }
@@ -78,7 +78,7 @@ export default class Store {
     }
     switchOrigin(data) {
         return axios.post(`origins/substitute`, data).then(response => {
-            swal.success('Añadido!', `Actualizado exitosamente`);
+            swal.success('Añadido!', response.data.message);
             return response.data;
         });
     }

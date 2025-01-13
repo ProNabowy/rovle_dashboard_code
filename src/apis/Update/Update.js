@@ -14,7 +14,7 @@ export default class Update {
     }
 
     updateRole(id, data) {
-        return axios.put(`roles/${id}`, data).then(response => swal.success('Updated!', `Permissions has been Updated.`));
+        return axios.put(`roles/${id}`, data).then(response => swal.success('Actualizado!', `Se ha actualizado el permiso con éxito !`));
     }
     updateProduct(id, data) {
         return axios.put(`products/${id}`, data).then(response => swal.success('Actualizado!', `Tu producto ha sido actualizado.`));

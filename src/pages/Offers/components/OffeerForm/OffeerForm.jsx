@@ -59,7 +59,8 @@ export default function OffeerForm({ formik }) {
 
                             </div>
 
-                            <Dropdown filter value={getSelectedOption([{ provider_id: "all", id: "all", commercial_name: "Todos los tostadores." }, ...roasters], 'id', formik?.values?.provider_id)} name='provider_id' onChange={(e) => formik.setFieldValue('provider_id', e.target.value?.id)} options={[{ provider_id: "all", id: "all", commercial_name: "Todos los tostadores." }, ...roasters]} optionLabel="commercial_name"
+                            <Dropdown emptyFilterMessage="No hay opciones disponibles"
+                                emptyMessage="No hay opciones disponibles" filter value={getSelectedOption([{ provider_id: "all", id: "all", commercial_name: "Todos los tostadores." }, ...roasters], 'id', formik?.values?.provider_id)} name='provider_id' onChange={(e) => formik.setFieldValue('provider_id', e.target.value?.id)} options={[{ provider_id: "all", id: "all", commercial_name: "Todos los tostadores." }, ...roasters]} optionLabel="commercial_name"
                                 className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" placeholder='Seleccionar Tostador' />
 
                         </div>
@@ -80,6 +81,8 @@ export default function OffeerForm({ formik }) {
                     onChange={(e) => formik.setFieldValue('level_id', e.target.value?.id)}
                     options={Usuario}
                     optionLabel="name"
+                    emptyFilterMessage="No hay opciones disponibles"
+                    emptyMessage="No hay opciones disponibles"
                     className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent"
                     placeholder='Seleccionar Nivel'
                 />
@@ -100,6 +103,8 @@ export default function OffeerForm({ formik }) {
                     options={Recurren}
                     optionLabel="name"
                     inputId='duration'
+                    emptyFilterMessage="No hay opciones disponibles"
+                    emptyMessage="No hay opciones disponibles"
                     className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent"
                     placeholder='Seleccionar Recurrencia'
                 />
@@ -119,6 +124,8 @@ export default function OffeerForm({ formik }) {
                     onChange={(e) => formik.setFieldValue('offer_place', e.target.value?.id)}
                     options={formik?.values?.discount_type === "percentage" ? AppFisico : Fisico}
                     optionLabel="name"
+                    emptyFilterMessage="No hay opciones disponibles"
+                    emptyMessage="No hay opciones disponibles"
                     className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent"
                     placeholder='Seleccionar dónde canjearlo'
                 />

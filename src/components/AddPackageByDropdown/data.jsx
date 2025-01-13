@@ -29,7 +29,7 @@ const useAddPackage = (formik, formikKey) => {
 
         if (!selectedSize?.name || !inputPriceRef.current.value) {
 
-            swal.warning('warning', 'Please Fill The Reqriure Inputs');
+            swal.warning('warning', 'Por favor, completa los campos requeridos.');
 
         } else {
 
@@ -37,7 +37,7 @@ const useAddPackage = (formik, formikKey) => {
 
             if (isDuplicate) {
 
-                swal.warning('warning', `Please Don't Add Duplicate Package`);
+                swal.warning('warning', `No añadas paquetes duplicados`);
 
             } else {
 
@@ -47,7 +47,7 @@ const useAddPackage = (formik, formikKey) => {
                 setSelectedSize({});
                 inputPriceRef.current.value = '';
 
-                swal.success('success', `Package Add Successfully`);
+                swal.success('Bien', `Paquete añadido con éxito.`);
 
             }
         }

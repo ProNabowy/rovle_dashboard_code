@@ -32,6 +32,7 @@ export default function TableActions({
             text: "¡No podrás revertir esto!",
             icon: 'warning',
             confirmButtonText: 'Sí, bórralo.',
+            cancelButtonText: "Cancelar",
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',

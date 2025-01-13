@@ -10,6 +10,14 @@ const useDataGetter = (formik) => {
 
     const [countries, setCounteris] = useState([]);
 
+    const locitionLogic = (response) => {
+        setCounteris(response);
+        formik.setFieldValue('provider_country_id', response?.[0]?.id);
+        formik.setFieldValue('provider_province_id', response?.[0]?.provinces?.[0]?.id);
+        formik.setFieldValue('provider_city_id', response?.[0]?.provinces?.[0]?.cities?.[0]?.id);
+        return null;
+    }
+
     const handleBlur = (e) => {
 
         if (e?.target?.value?.length === 5) {
@@ -29,16 +37,23 @@ const useDataGetter = (formik) => {
 
         setIsLoading(true);
 
-        getUtailty.getCountries().then(response => {
+        if (formik.values?.provider_zip) {
+            getUtailty.getCitiesByZipCode(formik.values?.provider_zip)
+                .then(response => locitionLogic(response))
+                .finally(_ => setIsLoading(false));
+        } else {
 
-            setCounteris(response);
+            getUtailty.getCountries().then(response => {
 
-            formik.setFieldValue('provider_country_id', response?.[0]?.id);
+                setCounteris(response);
 
-        }).finally(_ => setIsLoading(false));
+                formik.setFieldValue('provider_country_id', response?.[0]?.id);
+
+            }).finally(_ => setIsLoading(false));
+        }
 
         return () => { };
-    }, []);
+    }, [formik.values.response_done]);
 
     return { countries, handleBlur }
 }

@@ -15,6 +15,36 @@ export default function RoastersList() {
 
     const dialogFooterTemplate = () => <Button label="Ok" icon="pi pi-check" onClick={() => setDialogVisible(false)} />;
 
+    const exportColumns = roasters.map((item) => {
+        return {
+            ["Nombre oficial"]: item.official_name,
+            ["Control de inventario"]: item.manage_stock,
+            ["Nombre comercial"]: item.commercial_name,
+            ["Correo electrónico"]: item.user?.email,
+            ["Ubicaciones"]: `${item?.country?.name}, ${item?.province?.name}, ${item?.city?.name}`,
+            ["Fecha de finalización"]: item.updated_at,
+        };
+    });
+
+    const exportPDFColumns = [
+        {
+            title: "Nombre oficial",
+            dataKey: "official_name",
+        },
+        {
+            title: "Nombre comercial",
+            dataKey: "commercial_name",
+        },
+        {
+            title: "Correo electrónico",
+            dataKey: "user.email",
+        },
+        {
+            title: "Fecha de finalización",
+            dataKey: "updated_at",
+        },
+    ]
+
     return (
 
         <PageContent
@@ -23,10 +53,10 @@ export default function RoastersList() {
             showActions={true}
             PermissionsKey={'Providers'}
             roleKey={'dashboard.providers.store'}
-            columns={columns}
-            list={roasters}
             table={tableRef}
-            saveName={'Roasters'}
+            exportedExcelList={exportColumns}
+            list={roasters}
+            exportPDFColumns={exportPDFColumns}
         >
 
             <Dialog
@@ -53,7 +83,7 @@ export default function RoastersList() {
 
             </Dialog>
 
-            <div onClick={() => setDialogVisible(true)} className='flex items-center cursor-pointer text-[#45B8EA] absolute right-6 md:right-10 top-5 md:top-[initial] z-[10]'>
+            <div onClick={() => setDialogVisible(true)} className='flex items-center cursor-pointer text-[#45B8EA] mb-4 md:mb-0 px-8 md:px-0 md:absolute right-6 md:right-10 top-5 md:top-[70px] z-[10]'>
 
                 <h3 className='font-medium me-5'>Mostrar todo</h3>
 

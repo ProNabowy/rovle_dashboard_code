@@ -24,6 +24,8 @@ export default function OriginForm({ formik, clickHandler }) {
                             filter
                             value={getSelectedOption(roasters, 'id', formik?.values?.provider_id)}
                             name='provider_id'
+                            emptyFilterMessage="No hay opciones disponibles"
+                            emptyMessage="No hay opciones disponibles"
                             onChange={(e) => formik.setFieldValue('provider_id', e.target.value?.id)}
                             options={roasters}
                             optionLabel="commercial_name"

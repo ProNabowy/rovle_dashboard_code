@@ -20,11 +20,10 @@ const useDataGetter = (setActiveIndex) => {
 
         setIsLoading(true);
 
-        return authUtailty.verifyOtp({ email: email, otp: code })
+        return authUtailty.verifyOtp({ email: email, otp: Number(code.code) })
             .then(_ => {
 
                 setActiveIndex(2);
-                console.log(code);
                 return sessionStorage.setItem('valid-otp', code.code);
 
             })

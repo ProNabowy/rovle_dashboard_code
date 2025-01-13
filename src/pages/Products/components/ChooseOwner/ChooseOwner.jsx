@@ -43,7 +43,8 @@ export default function ChooseOwner() {
                     <label htmlFor='name-input' className='mb-3 block text-[#234486]'>Dueño del Producto</label>
 
                     <Dropdown filter value={selectedOption} onChange={(e) => setSelectedOption(e.value)} options={options} optionLabel=""
-                        placeholder="Seleccionar Propietario" className="w-full p-3 !border-r-[0] !border-l-[0] !border-t-[0] !border-b !border-b-[#b3b3b3] !shadow-none !rounded-none" />
+                        placeholder="Seleccionar Propietario" emptyFilterMessage="No hay opciones disponibles"
+                        emptyMessage="No hay opciones disponibles" className="w-full p-3 !border-r-[0] !border-l-[0] !border-t-[0] !border-b !border-b-[#b3b3b3] !shadow-none !rounded-none" />
 
                 </div>
 

@@ -7,7 +7,7 @@ export default function UserForm({ formik }) {
 
             <div className='flex-container'>
 
-                <div className='sm:w-[48%]'>
+                <div className='w-full sm:w-[48%]'>
 
                     <label htmlFor={'name'} className='label'>Nombre</label>
 
@@ -23,7 +23,7 @@ export default function UserForm({ formik }) {
 
                 </div>
 
-                <div className='sm:w-[48%]'>
+                <div className='w-full sm:w-[48%]'>
 
                     <label htmlFor={'email'} className='label'>Correo electrónico</label>
 
@@ -80,7 +80,7 @@ export default function UserForm({ formik }) {
 
             </div>
 
-            <div className='w-[48%]'>
+            <div className='w-full sm:w-[48%]'>
 
                 <label htmlFor='Permissions' className='label block'>Permisos</label>
 

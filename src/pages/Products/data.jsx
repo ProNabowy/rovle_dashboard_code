@@ -107,9 +107,9 @@ const useDataGetter = _ => {
 
     const columns = [
         { field: "id", header: "ID", classNames: "!px-[15px]", tamplate: tableService.idBodyTemplate },
-        { field: "commercial_name", header: "Productos Nombre", classNames: "!px-[0px]", tamplate: tableService.roasterNameBodyTemplate },
+        { field: "commercial_name", header: "Nombre Productos", classNames: "!px-[0px]", tamplate: tableService.roasterNameBodyTemplate },
         { field: "provider.commercial_name", header: "Tostadores", classNames: "!px-[15px]", tamplate: roastersBodyTemplate },
-        { field: "commercial_name", header: "tiendas", classNames: "!px-[15px]", tamplate: shopsBodyTemplate },
+        { field: "commercial_name", header: "Tiendas", classNames: "!px-[15px]", tamplate: shopsBodyTemplate },
         { field: "commercial_name", header: "Paquetes", classNames: "!px-[15px]", tamplate: packagesBodyTemplate },
         { field: "updated_at", header: "Fecha última", classNames: "!px-[15px]", tamplate: tableService.lastDateBodyTemplate },
         { field: "auction", header: "Acción", classNames: "!px-[15px]", tamplate: useActionsBodyTemplate },

@@ -9,6 +9,31 @@ export default function UsersList() {
 
     const tableRef = useRef();
 
+    const exportColumns = users.map((item) => {
+        return {
+            ["Nombre"]: item.name,
+            ["Correo electrónico"]: item.email,
+            ["Rol"]: item?.roles && item?.roles[0]?.name,
+            ["Fecha de finalización"]: item.updated_at,
+        };
+    });
+
+    const exportPDFColumns = [
+        {
+            title: "Nombre",
+            dataKey: "name",
+        },
+        {
+            title: "Correo electrónico",
+            dataKey: "email",
+        },
+        {
+            title: "Fecha de finalización",
+            dataKey: "updated_at",
+        }
+    ]
+
+
     return (
 
         <PageContent
@@ -17,10 +42,10 @@ export default function UsersList() {
             showActions={true}
             PermissionsKey={'Users'}
             roleKey={'dashboard.users.store'}
-            columns={columns}
-            list={users}
             table={tableRef}
-            saveName={'Users'}
+            exportedExcelList={exportColumns}
+            list={users}
+            exportPDFColumns={exportPDFColumns}
         >
             <RenderTable columns={columns} table={tableRef} list={users} />
 

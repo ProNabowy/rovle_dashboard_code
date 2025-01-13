@@ -19,7 +19,6 @@ export default function Profile() {
         isProvider
     } = useDataGetter();
 
-
     return (
 
         <PageContent
@@ -28,15 +27,15 @@ export default function Profile() {
             titleJsx={
                 isProvider && !user?.stripe_id
                     ?
-                    <Link to={`https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_QFDuMB6yCn5mVkylYcoVu9RIeDhzIjLH&scope=read_write&state=${isProvider?.id}&redirect_uri=https://rovle.eslamghazy.net/onboardingresult`} target='_blank' type='button' className='min-btn text-center'>Haz el onboarding con Stripe</Link>
+                    <Link to={`https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_QFDuMB6yCn5mVkylYcoVu9RIeDhzIjLH&scope=read_write&state=${isProvider?.id}&redirect_uri=https://dashboard.rovle.io/onboardingresult`} target='_blank' type='button' className='min-btn text-center'>Haz el onboarding con Stripe</Link>
                     :
                     null
             }
         >
 
-            <form onSubmit={formik.handleSubmit} autoComplete='off' className='px-10'>
+            <form onSubmit={formik.handleSubmit} autoComplete='off' className='px-3 sm:px-10'>
 
-                <div className='w-[250px] h-[250px] shadow-lg mb-20 m-auto rounded-full flex items-center justify-center relative profile-image overflow-hidden'>
+                <div className='size-[150px] sm:size-[250px] shadow-lg mb-10 sm:mb-20 m-auto rounded-full flex items-center justify-center relative profile-image overflow-hidden'>
 
                     <img
                         src={
@@ -60,7 +59,7 @@ export default function Profile() {
                         className={`w-full h-full object-cover rounded-full ${classList}`}
                     />
 
-                    <div className='w-[250px] h-[250px] flex items-start justify-center rounded-full bg-[#45b9eae1] absolute left-0 z-20 transition bottom-[-250px] uploade-image'>
+                    <div className='size-[150px] sm:size-[250px] flex items-start justify-center rounded-full bg-[#45b9eae1] absolute left-0 z-20 transition bottom-[-150px] sm:bottom-[-250px] uploade-image'>
 
                         <Input
                             type='file'
@@ -74,7 +73,7 @@ export default function Profile() {
 
                         <label htmlFor='uploade-img'>
 
-                            <FontAwesomeIcon icon={faImage} className='text-[40px] mt-8 -ms-3 cursor-pointer text-white' />
+                            <FontAwesomeIcon icon={faImage} className='text-[25px] sm:text-[40px] mt-3 sm:mt-8 -ms-6 sm:-ms-3 cursor-pointer text-white' />
 
                         </label>
 
@@ -94,10 +93,8 @@ export default function Profile() {
                         :
                         <UserForm formik={formik} />
                 }
-                {console.log(isProvider)
-                }
 
-                <button type='submit' className='min-btn block ml-auto'>Guardar cambios</button>
+                <button type='submit' className='min-btn block mt-3 ml-auto'>Guardar cambios</button>
 
             </form>
 

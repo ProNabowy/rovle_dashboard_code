@@ -11,21 +11,21 @@ export default function ThiredStep({ }) {
     return (
         <Fragment>
 
-            <Link to={'/login'} className='flex items-center mb-10 cursor-pointer'>
+            <Link to={'/login'} onClick={_ => sessionStorage.clear()} className='flex items-center mb-10 cursor-pointer'>
 
                 <FontAwesomeIcon icon={faAngleLeft} />
 
-                <span className='ms-3 text-[#252525]'>Back to log in</span>
+                <span className='ms-3 text-[#252525]'>Volver a iniciar sesión</span>
 
             </Link>
 
-            <form onSubmit={handleSubmit} autoComplete='off' className='w-[400px]'>
+            <form onSubmit={handleSubmit} autoComplete='off' className='w-full sm:w-[400px]'>
 
-                <h3 className='text-[24px] text-[#252525] text-center mb-2 font-medium'>Forget password</h3>
+                <h3 className='text-[24px] text-[#252525] text-center mb-2 font-medium'>Olvidar Contraseña</h3>
 
-                <h5 className='text-[#252525] text-center mb-8'>Enter new password for {email}</h5>
+                <h5 className='text-[#252525] text-center mb-8'>Ingresa una nueva contraseña para {email}</h5>
 
-                <label className='block font-[400] text-[14px]' htmlFor='password'>Enter new password</label>
+                <label className='block font-[400] text-[14px]' htmlFor='password'>Ingresa una nueva contraseña</label>
 
                 <input
                     autoFocus
@@ -36,7 +36,7 @@ export default function ThiredStep({ }) {
                     style={{ background: 'linear-gradient(120deg, #FFF -45.57%, rgba(217, 217, 217, 0.00) 134.89%)', backdropFilter: 'blur(12.343469619750977px)' }}
                 />
 
-                <label className='block font-[400] text-[14px]' htmlFor='conf_password'>Confirm password</label>
+                <label className='block font-[400] text-[14px]' htmlFor='conf_password'>Confirmar contraseña</label>
 
                 <input
                     onChange={e => setData(perv => ({ ...perv, password_confirmation: e.target.value }))}

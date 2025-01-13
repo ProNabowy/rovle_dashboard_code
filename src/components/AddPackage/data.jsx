@@ -25,7 +25,7 @@ const useAddPackage = (formik, roasters, provider_id) => {
 
         if (!inputWeightRef.current.value || !inputPriceRef.current.value) {
 
-            swal.warning('warning', 'Please Fill The Reqriure Inputs');
+            swal.warning('Advertencia', 'Por favor, completa los campos requeridos.');
 
         } else {
 
@@ -35,13 +35,13 @@ const useAddPackage = (formik, roasters, provider_id) => {
 
             if (isDuplicate) {
 
-                swal.warning('warning', `Please Don't Add Duplicate Package`);
+                swal.warning('Advertencia', `Por favor, no agregues un paquete duplicado`);
 
             } else {
 
                 if (currentProvider?.manage_stock && !inputQuntiyRef.current?.value) {
 
-                    swal.warning('warning', `Please fill out Quantity Field`);
+                    swal.warning('Advertencia', `Por favor, completa el campo de cantidad.`);
 
                 } else {
                     // Change new Package Id
@@ -59,7 +59,7 @@ const useAddPackage = (formik, roasters, provider_id) => {
                         inputQuntiyRef.current.value = '';
                     }
 
-                    swal.success('success', `Package Add Successfully`);
+                    swal.success('Bien', `Paquete añadido con éxito.`);
                 }
             }
         }

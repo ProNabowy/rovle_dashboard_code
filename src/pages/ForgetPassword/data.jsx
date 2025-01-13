@@ -26,7 +26,7 @@ const useDataGetter = () => {
         setIsLoading(true);
 
         return authUtailty.forgetPassword({ email: data?.email })
-            .then(response => swal.success('Actualizado!', response?.message))
+            .then(response => swal.success('Actualizado!', 'Código de restablecimiento de contraseña enviado a tu correo electrónico.'))
             .then(_ => {
                 setActiveIndex(1);
                 // Set Email To Session 

@@ -91,7 +91,7 @@ export default function SettingsRoutes({
 
                                 <div className={`rounded-[6px] flex items-center ${isExpanded ? "ms-5" : ""}`}>
 
-                                    <div onClick={_ => setVisible(perv => ({ ...perv, groups: !perv?.groups }))} className='nav-icon w-[35px] h-[35px] rounded-full flex items-center justify-center'>
+                                    <div onClick={_ => setVisible(perv => ({ groups: perv?.groups ? false : true }))} className='nav-icon w-[35px] h-[35px] rounded-full flex items-center justify-center'>
 
                                         <img src={permission} alt="" className="w-[20px] h-[20px]" />
 

@@ -15,6 +15,8 @@ function CitiesDropdown({ provinces, formik, province_Key, city_Key, classNames 
                 onChange={(e) => formik.setFieldValue(city_Key, e.target.value?.id)}
                 options={getSelectedOption(provinces, 'id', formik?.values?.[province_Key])?.cities}
                 optionLabel="name"
+                emptyFilterMessage="No hay opciones disponibles"
+                emptyMessage="No hay opciones disponibles"
                 filter
                 inputId='cities'
                 placeholder="Seleccionar Ciudad" className="w-full p-2 !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />

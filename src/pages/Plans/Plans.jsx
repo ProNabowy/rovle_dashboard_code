@@ -9,6 +9,35 @@ export default function PlansList() {
 
     const tableRef = useRef();
 
+    const exportColumns = plans.map((item) => {
+        return {
+            ["Nombre Planes"]: item.name,
+            ["Nombre del Tostador"]: item.provider.commercial_name,
+            ["Estado"]: item.status,
+            ["Tallas"]: item.sizes?.map((item) => `${item.size.name} = ${item.price}`).join(', '),
+            ["Fecha de inicio"]: item.updated_at,
+        };
+    });
+
+    const exportPDFColumns = [
+        {
+            title: "Nombre Planes",
+            dataKey: "name",
+        },
+        {
+            title: "Nombre del Tostador",
+            dataKey: "provider.commercial_name",
+        },
+        {
+            title: "Estado",
+            dataKey: "status",
+        },
+        {
+            title: "Tallas",
+            dataKey: "sizes",
+        },
+    ]
+
     return (
 
         <PageContent
@@ -17,10 +46,10 @@ export default function PlansList() {
             showActions={true}
             PermissionsKey={'Plans'}
             roleKey={'dashboard.plans.store'}
-            columns={columns}
             table={tableRef}
+            exportedExcelList={exportColumns}
             list={plans}
-            saveName={'Plans'}
+            exportPDFColumns={exportPDFColumns}
         >
 
             <RenderTable columns={columns} list={plans} table={tableRef} />

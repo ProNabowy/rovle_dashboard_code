@@ -6,7 +6,7 @@ export default class Auth {
 
     postLogin(data) {
 
-        axios.post('https://api.rovle.io/api/v1/auth/login', data).then(response => {
+        axios.post('https://api.rovle.io/api/v1/auth/login', data, { headers: { 'disable-default-error': true } }).then(response => {
 
             const data = response.data;
 
@@ -16,7 +16,7 @@ export default class Auth {
                 // set user info to localstorage
                 localStorage.setItem('user', JSON.stringify(data.user));
 
-                swal.success(null, response?.data?.message).then(response => window.location.href = '/products/list');
+                swal.success(null, 'Inició sesión con éxito').then(response => window.location.href = '/products/list');
 
             } else {
 
@@ -26,7 +26,9 @@ export default class Auth {
 
             return data;
 
-        });
+        }).catch(err => {
+            return swal.rejected('Oops', 'Email o contraseña no son correctos')
+        })
 
     }
 

@@ -73,7 +73,7 @@ function AddOrigin({ formik, provider_id, classNames }) {
                         />
 
                         <div className='flex items-center justify-center'>
-                            <Button className='!bg-[#45B8EA] !border-[#45B8EA] !px-10' label='Enviar' onClick={handelAddOrigin} />
+                            <Button className='!bg-[#45B8EA] !border-[#45B8EA] w-full sm:w-fit !px-10' label='Enviar' onClick={handelAddOrigin} />
                         </div>
 
                     </Dialog>
@@ -100,6 +100,8 @@ function AddOrigin({ formik, provider_id, classNames }) {
             <Dropdown
                 ref={dropdownRef}
                 value={selectedOrigin}
+                emptyFilterMessage="No hay opciones disponibles"
+                emptyMessage="No hay opciones disponibles"
                 onChange={(e) => {
                     const isDuplicate = formik.values.origins.some((val) => val.id === e.value.id);
                     if (!isDuplicate) setSelectedOrigin(e.value);

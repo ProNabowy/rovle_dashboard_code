@@ -10,7 +10,7 @@ export default function Header({ isExpanded, setIsExpanded }) {
     const { visible, handleOpenMnue, user } = useDataGetter();
 
     return (
-        <header className='relative shadow py-3 px-3 mb-5'>
+        <header className='relative shadow py-3 sm:px-3 mb-5'>
 
             <div className='container rounded-bl rounded-br flex items-center justify-center sm:justify-end lg:justify-between'>
 
@@ -40,7 +40,7 @@ export default function Header({ isExpanded, setIsExpanded }) {
 
                         <div className='me-5'>
 
-                            <h3 className='text-[#252525] text-[13px] font-medium'>{user?.name}</h3>
+                            <h3 className='text-[#252525] text-[13px] font-medium line-clamp-1'>{user?.name}</h3>
 
                             <h4 className='text-[#252525] font-medium text-[12px]'>{user?.roles && user?.roles[0]?.name}</h4>
 

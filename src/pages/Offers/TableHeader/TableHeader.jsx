@@ -45,7 +45,7 @@ export default function TableHeader({ ingredients, setIngredients, data, columns
 
             </Dialog>
 
-            <div className='flex items-start sm:items-center justify-between px-3 sm:px-10 mb-5'>
+            <div className='flex items-start sm:items-center justify-between flex-wrap gap-3 px-3 sm:px-10 mb-5'>
 
                 <div className="flex flex-wrap justify-content-center gap-5">
                     <div className="flex items-center">

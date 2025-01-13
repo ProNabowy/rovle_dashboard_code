@@ -95,7 +95,7 @@ export default function CoffeeFrom({ asEdit, stateList }) {
 
                         <div className='flex items-center me-2 w-full lg:w-fit'>
 
-                            <label htmlFor={'accepts_online_orders'} className='text-[13px] !mb-0 me-3 select-none text-[#252525] font-medium'>Acepta pedidos online</label>
+                            <label htmlFor={'accepts_online_orders'} className='text-[13px] !mb-0 me-3 min-w-[185px] select-none text-[#252525] font-medium'>Acepta pedidos online</label>
 
                             <Checkbox
                                 inputId='accepts_online_orders'
@@ -106,7 +106,7 @@ export default function CoffeeFrom({ asEdit, stateList }) {
                         </div>
                         <div className='flex items-center me-2 w-full lg:w-fit'>
 
-                            <label htmlFor={'accepts_orders_pick_up'} className='text-[13px] me-3 !mb-0 select-none text-[#252525] font-medium'>Acepta recogidas de productos</label>
+                            <label htmlFor={'accepts_orders_pick_up'} className='text-[13px] me-3 !mb-0 select-none min-w-[185px] text-[#252525] font-medium'>Acepta recogidas de productos</label>
 
                             <Checkbox
                                 inputId='accepts_orders_pick_up'
@@ -117,7 +117,7 @@ export default function CoffeeFrom({ asEdit, stateList }) {
                         </div>
                         <div className='flex items-center me-2 w-full lg:w-fit'>
 
-                            <label htmlFor={'default_for_sending'} className='text-[13px] me-3 !mb-0 select-none text-[#252525] font-medium'>Tienda por defecto para envíos</label>
+                            <label htmlFor={'default_for_sending'} className='text-[13px] me-3 !mb-0 select-none min-w-[185px] text-[#252525] font-medium'>Tienda por defecto para envíos</label>
 
                             <Checkbox
                                 inputId='default_for_sending'
@@ -146,7 +146,7 @@ export default function CoffeeFrom({ asEdit, stateList }) {
                         ?
                         <div className='w-full sm:w-[48%]'>
 
-                            <div className='flex items-center justify-between'>
+                            <div className='flex items-center justify-between flex-wrap'>
 
                                 <h2 className='label'>Tostadores</h2>
 
@@ -170,6 +170,8 @@ export default function CoffeeFrom({ asEdit, stateList }) {
                                 value={getSelectedOption(roasters, 'id', formik?.values?.provider_id)}
                                 onChange={(e) => formik.setFieldValue('provider_id', e.target.value?.id)}
                                 options={roasters} optionLabel="commercial_name"
+                                emptyFilterMessage="No hay opciones disponibles"
+                                emptyMessage="No hay opciones disponibles"
                                 placeholder="Seleccionar Tostador" className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
 
                         </div>
@@ -177,7 +179,7 @@ export default function CoffeeFrom({ asEdit, stateList }) {
                         null
                 }
 
-                <div className={`${isProvider ? "w-full" : "sm:w-[48%]"}`}>
+                <div className={`${isProvider ? "w-full" : "w-full sm:w-[48%]"}`}>
 
                     <label htmlFor={'Country'} className='label'>País</label>
 
@@ -185,6 +187,8 @@ export default function CoffeeFrom({ asEdit, stateList }) {
                         value={getSelectedOption(countries, 'id', formik?.values?.country_id)}
                         onChange={(e) => formik.setFieldValue('country_id', e.target.value?.id)}
                         options={countries} optionLabel="name"
+                        emptyFilterMessage="No hay opciones disponibles"
+                        emptyMessage="No hay opciones disponibles"
                         filter
                         placeholder="Seleccionar nombre del país" className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
 

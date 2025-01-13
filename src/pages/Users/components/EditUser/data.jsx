@@ -37,6 +37,7 @@ const useHandleAddUserLogic = () => {
                     user_name: data?.name,
                     user_email: data?.email,
                     role_id: data?.role_id,
+                    coffee_shop_id: data?.stuff?.coffee_shop_id,
                 })
             });
 

@@ -16,11 +16,11 @@ export default function AddPackage({ formik, roasters, provider_id }) {
 
     return (
 
-        <div className='rounded-[20px] mt-20 border border-[#252525] p-4 sm:p-[32px] grid grid-cols-12 gap-3 md:gap-10'>
+        <div className='rounded-md sm:rounded-[20px] mt-5 sm:mt-20 border border-[#252525] p-3 sm:p-[32px] grid grid-cols-12 gap-3 md:gap-10'>
 
             <form onSubmit={e => e.preventDefault()} autoComplete='off' className='col-span-12 md:col-span-6'>
 
-                <div className='mb-8'>
+                <div className='mb-5 sm:mb-8'>
 
                     <label htmlFor={'Weight /gm'} className='label'>Peso</label>
 
@@ -34,7 +34,7 @@ export default function AddPackage({ formik, roasters, provider_id }) {
 
                 </div>
 
-                <div className='mb-8'>
+                <div className='mb-5 sm:mb-8'>
 
                     <label htmlFor={'PriceEuro'} className='label'>Precio</label>
 
@@ -68,7 +68,7 @@ export default function AddPackage({ formik, roasters, provider_id }) {
                         null
                 }
 
-                <button type='button' onClick={handelAddNewPackage} className='bg-[#58291E] text-[20px] text-center text-white font-medium w-full py-[16px] px-[24px] rounded-full'>Añadir Paquete</button>
+                <button type='button' onClick={handelAddNewPackage} className='bg-[#58291E] sm:text-[20px] text-center text-white font-medium w-full py-2 sm:py-[16px] px-4 sm:px-[24px] rounded-md sm:rounded-full'>Añadir Paquete</button>
 
             </form>
 

@@ -16,6 +16,29 @@ export default function Permission() {
 
     const tableRef = useRef();
 
+    const exportColumns = roles.map((item) => {
+        return {
+            ["Nombre del Rol"]: item.name,
+            ["Cuentas"]: item.accounts,
+            ["Fecha última"]: item.updated_at,
+        };
+    });
+
+    const exportPDFColumns = [
+        {
+            title: "Nombre del Rol",
+            dataKey: "name",
+        },
+        {
+            title: "Cuentas",
+            dataKey: "accounts",
+        },
+        {
+            title: "Fecha última",
+            dataKey: "updated_at",
+        }
+    ]
+
     return (
 
         <PageContent
@@ -23,10 +46,10 @@ export default function Permission() {
             title={'Permisos'}
             showActions={true}
             roleKey={'dashboard.roles.store'}
-            columns={columns}
-            list={roles}
             table={tableRef}
-            saveName={'Roles'}
+            exportedExcelList={exportColumns}
+            list={roles}
+            exportPDFColumns={exportPDFColumns}
         >
 
             <RenderTable

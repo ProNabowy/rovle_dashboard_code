@@ -28,6 +28,9 @@ export default class Get {
     getProducts() {
         return axios.get(`products`).then(response => response.data.data);
     }
+    getProductsByProviderId(provider_id) {
+        return axios.post(`products/filter`, { provider_id: [String(provider_id)] }).then(response => response.data.data);
+    }
     getSingleProduct(id) {
         return axios.get(`products/${id}`).then(response => response.data.data);
     }

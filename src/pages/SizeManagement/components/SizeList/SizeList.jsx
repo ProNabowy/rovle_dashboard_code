@@ -11,6 +11,29 @@ export default function SizeList() {
 
     const tableRef = useRef();
 
+    const exportColumns = sizes.map((item) => {
+        return {
+            ["Personaje"]: item.name,
+            ["Peso"]: item.weight,
+            ["Fecha"]: item.updated_at,
+        };
+    });
+
+    const exportPDFColumns = [
+        {
+            title: "Personaje",
+            dataKey: "name",
+        },
+        {
+            title: "Peso",
+            dataKey: "weight",
+        },
+        {
+            title: "Fecha",
+            dataKey: "updated_at",
+        }
+    ]
+
     return (
         <PageContent
             url={'/products/plans/size/list/add-size'}
@@ -18,10 +41,10 @@ export default function SizeList() {
             showActions={true}
             PermissionsKey={'Sizes'}
             roleKey={'dashboard.sizes.store'}
-            columns={columns}
-            list={sizes}
             table={tableRef}
-            saveName={'Sizes'}
+            exportedExcelList={exportColumns}
+            list={sizes}
+            exportPDFColumns={exportPDFColumns}
         >
 
             <RenderTable columns={columns} list={sizes} table={tableRef} />

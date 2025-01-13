@@ -113,7 +113,7 @@ export default class Delete {
 
         return axios.delete(`coffee-shops/${id}`).then(response => {
 
-            swal.success('Borrado!', `Tu tostador ha sido eliminado.`);
+            swal.success('Borrado!', `Tu cafetería ha sido eliminada.`);
 
             const updatedCoffees = coffees.filter(coffee => coffee?.id != id);
 

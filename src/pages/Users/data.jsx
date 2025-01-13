@@ -34,7 +34,7 @@ const useDataGetter = _ => {
 
     const permissionBodyTemplate = (rowData) => {
 
-        return <p className='mb-1 capitalize text-[13px] font-medium '>{rowData?.roles && rowData?.roles[0]?.name}</p>
+        return <p className='mb-1 capitalize text-[13px] font-medium '>{rowData?.role_name}</p>
 
     };
 
@@ -56,7 +56,7 @@ const useDataGetter = _ => {
         { field: "id", header: "ID", classNames: "!px-[15px]", tamplate: tableService.idBodyTemplate },
         { field: "name", header: "Nombre", classNames: "!px-[0px]", tamplate: tableService.nameBodyTemplate },
         { field: "email", header: "Correo electrónico", classNames: "!px-[15px]", tamplate: tableService.emailBodyTemplate },
-        { field: "name", header: "Rol", classNames: "!px-[15px]", tamplate: permissionBodyTemplate },
+        { field: "role_name", header: "Rol", classNames: "!px-[15px]", tamplate: permissionBodyTemplate },
         { field: "updated_at", header: "Fecha de finalización", classNames: "!px-[15px]", tamplate: tableService.lastDateBodyTemplate },
         { field: "actions", header: "Acción", classNames: "!px-[15px]", tamplate: useActionsBodyTemplate },
     ];

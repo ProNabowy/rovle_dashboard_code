@@ -29,7 +29,6 @@ const actionBodyTemplate = (rowData) => {
 
 const columns = [
     { field: "name", header: "Nombre", tamplate: tableService.nameBodyTemplate },
-    { field: "address", header: "Dirección", tamplate: tableService.addressBodyTemplate },
     { field: "created_at", header: "Fecha de inicio", tamplate: tableService.startDateBodyTemplate },
     { field: "updated_at", header: "Fecha de finalización", tamplate: tableService.lastDateBodyTemplate },
     { field: "status", header: "Estado", tamplate: statusBodyTemplate },

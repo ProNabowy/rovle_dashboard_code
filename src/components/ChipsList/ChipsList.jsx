@@ -63,7 +63,7 @@ function ChipsList({
                         resizable={false}
                         header={<h1>Añadir {title}</h1>}
                         headerStyle={{ paddingBottom: '0' }}
-                        className='w-[85vw]'
+                        className='w-[95vw] sm:w-[85vw]'
                     >
 
                         <AddCoffee
@@ -88,6 +88,8 @@ function ChipsList({
 
             <Dropdown
                 ref={dropdownRef}
+                emptyFilterMessage="No hay opciones disponibles"
+                emptyMessage="No hay opciones disponibles"
                 value={selectedShop}
                 onChange={(e) => handleDuplicatedValue(e.value)}
                 options={options}

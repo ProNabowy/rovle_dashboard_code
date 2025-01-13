@@ -67,6 +67,7 @@ const FilterFields = [
     'user.name',
     'user.email',
     'weight',
+    'role_name',
     'shop_name',
     'card_id',
     'roles.name'

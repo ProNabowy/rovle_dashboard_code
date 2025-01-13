@@ -12,13 +12,13 @@ export default function ConfiremCodeForm({ setUpdatePasswordData, invalid }) {
         handleChange,
     } = useDataGetter(setUpdatePasswordData);
 
-    const inputClass = `rounded-[8px] border border-[rgba(255,_255,_255,_0.40)] w-[62px] h-[74px] transition px-4 ${invalid ? "!border-[red] !text-[red]" : ""} text-center text-[30px] me-6 flex items-center justify-center`
+    const inputClass = `rounded-[8px] border border-[rgba(255,_255,_255,_0.40)] w-[calc(100%/6)] sm:w-[62px] h-[40px] sm:h-[74px] transition px-4 ${invalid ? "!border-[red] !text-[red]" : ""} text-center text-[20px] sm:text-[30px] me-2 sm:me-6 flex items-center justify-center`
 
     return (
 
         <div>
 
-            <div className="flex items-center justify-center mb-[48px] ">
+            <div className="flex items-center justify-center mb-7 sm:mb-[48px] ">
 
                 <input
                     type="text"

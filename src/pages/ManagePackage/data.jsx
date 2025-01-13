@@ -39,8 +39,11 @@ const useDataGetter = () => {
 
         setIsLoading(true);
 
-        getUtailty.getSingleSubscription(PackageId).then(response => setSubscription(response))
-            .then(_ => getUtailty.getProducts().then(response => setProducts(response)))
+        getUtailty.getSingleSubscription(PackageId).then(response => {
+            setSubscription(response);
+            return response;
+        })
+            .then(response => getUtailty.getProductsByProviderId(response.plan.provider_id).then(response => setProducts(response)))
             .finally(_ => setIsLoading(false));
 
         return () => { };
@@ -51,7 +54,7 @@ const useDataGetter = () => {
 
         if (parseInt(totalWeightOfPersentations) < parseInt(subscriptionItem?.total)) {
 
-            return swal.warning('warning', 'the Packages Must be the same of the total or more than the total of  subscription Packages');
+            return swal.warning('Advertencia', 'the Packages Must be the same of the total or more than the total of  subscription Packages');
 
         } else {
 
@@ -121,7 +124,7 @@ const useAddPackage = (formik, maxTotalSize, totalWeightOfPersentations) => {
 
         if (!selectedProduct?.commercial_name || !inputWeightRef.current?.value || !addNewPackage.weight) {
 
-            swal.warning('warning', 'Please Fill The Reqriure Inputs');
+            swal.warning('Advertencia', 'Por favor, completa los campos requeridos.');
 
         } else {
 
@@ -132,7 +135,7 @@ const useAddPackage = (formik, maxTotalSize, totalWeightOfPersentations) => {
 
             inputWeightRef.current.value = '';
 
-            swal.success('success', `Package Add Successfully`);
+            swal.success('Bien', `Paquete añadido con éxito.`);
 
         }
 

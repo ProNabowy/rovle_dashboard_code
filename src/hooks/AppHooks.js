@@ -39,7 +39,7 @@ const useTableDefaults = (list) => {
     const entries = [];
 
     // Add Option All
-    entries.push({ name: 'All', code: list?.length })
+    entries.push({ name: 'Todos', code: list?.length })
 
     // Fetch Entries 
     list?.map((item, index) => entries.push({ name: index + 1, code: index + 1 }));

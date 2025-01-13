@@ -307,7 +307,49 @@ div:where(.swal2-container) {
     .p-dropdown-panel .p-dropdown-items .p-dropdown-item {
         max-width: 300px !important;
     }
+
+    .p-paginator {
+        justify-content: center !important;
+    }
+
+    .p-accordion .p-accordion-header .p-accordion-header-link {
+        padding: 12px !important;
+    }
+
+    .flex-end {
+        padding: 15px;
+    }
+
+    .min-btn {
+        padding: 8px 15px;
+        width: 204px;
+        max-width: 90% !important;
+        border-radius: 10px;
+    }
+
+    .label,
+    label {
+        font-size: 16px;
+    }
+
+    .p-dialog .p-dialog-content:last-of-type {
+        padding: 12px !important;
+    }
+
+    .p-dialog-draggable .p-dialog-header {
+        padding: 12px !important;
+    }
+
+    .p-dropdown-panel {
+        width: 200px !important;
+    }
+
+    .profile-image:hover .uploade-image {
+        bottom: -100px !important;
+    }
 }
+
+
 
 /* 
     #----------------------------------------##############################----------------------------------------#

@@ -21,7 +21,7 @@ export default function ForgetPassword() {
 
                 <div className='min-h-[450px] flex items-center justify-center'>
 
-                    <div className='p-[32px] h-full rounded-[10px]' style={{ background: 'linear-gradient(120deg, rgba(241, 241, 241, 0.43) -45.57%, rgba(243, 243, 243, 0.00) 134.89%)', backdropFilter: 'blur(5px)', boxShadow: '0px 1px 2px 0px rgba(0, 0, 0, 0.25)' }}>
+                    <div className='p-4 sm:p-8 h-full rounded-[10px]' style={{ background: 'linear-gradient(120deg, rgba(241, 241, 241, 0.43) -45.57%, rgba(243, 243, 243, 0.00) 134.89%)', backdropFilter: 'blur(5px)', boxShadow: '0px 1px 2px 0px rgba(0, 0, 0, 0.25)' }}>
 
                         {activeIndex === 0 ?
                             <FirstStep

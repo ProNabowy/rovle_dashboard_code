@@ -12,8 +12,9 @@ const useEditProduct = () => {
     const getUtailty = new Get();
 
     const updateUtailty = new Update();
+    const [singleProduct, setSingleProduct] = useState({});
 
-    const { setIsLoading } = useContext(AppContext);
+    const { user, setIsLoading } = useContext(AppContext);
 
     const productId = location.slice(4);
 
@@ -86,10 +87,12 @@ const useEditProduct = () => {
                     presentations: data?.presentations,
                     origins: data?.origins,
                     coffeeShops: data?.coffee_shops,
-                    owner_name: data?.owner_name
+                    owner_name: data?.owner_name,
+                    provider: data?.provider_id
                 }
 
                 formik.setValues(defaultValues);
+
             })
             .finally(_ => setIsLoading(false));
 
@@ -98,6 +101,14 @@ const useEditProduct = () => {
         return () => { };
 
     }, []);
+
+    useEffect(() => {
+
+        if (user?.roles?.[0]?.name === 'admin' && (formik.values?.provider_id !== formik.values?.provider)) {
+            formik.setFieldValue('coffeeShops', []);
+        }
+
+    }, [formik.values?.provider_id]);
 
 
     return { formik }

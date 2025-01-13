@@ -6,11 +6,14 @@ import { Dropdown } from 'primereact/dropdown';
 const ProviderDropdownContainer = ({ selectedRosters, setselectedRosters, rosters }) => {
 
     return (
-        <div className='w-[50%] mb-6 ms-6'>
+        <div className='w-full sm:w-[50%] mb-6 sm:ms-6'>
 
             <label htmlFor='name-input' className='mb-3 block font-medium text-[#234486]'>Tostador</label>
 
-            <Dropdown filter value={selectedRosters} onChange={(e) => setselectedRosters(e.value)} options={rosters} optionLabel="commercial_name"
+            <Dropdown filter value={selectedRosters}
+                emptyFilterMessage="No hay opciones disponibles"
+                emptyMessage="No hay opciones disponibles"
+                onChange={(e) => setselectedRosters(e.value)} options={rosters} optionLabel="commercial_name"
                 placeholder="Seleccionar proveedor" className="w-full p-3 !border-r-[0] !border-l-[0] !border-t-[0] !border-b !border-b-[#b3b3b3] !shadow-none !rounded-none" />
 
         </div>
@@ -18,7 +21,8 @@ const ProviderDropdownContainer = ({ selectedRosters, setselectedRosters, roster
 
 }
 
-export default function Orders() {
+
+export default function Customers() {
 
     const {
         customers,
@@ -29,16 +33,49 @@ export default function Orders() {
 
     const tableRef = useRef();
 
+    const exportColumns = customers.map((item) => {
+        return {
+            ["Nombre"]: item.name,
+            ["Correo electrónico"]: item.email,
+            ["Teléfono"]: item.phone,
+            ["Ubicaciones"]: item.address,
+            ["Fecha de finalización"]: item.created_at,
+        };
+    });
+
+    const exportPDFColumns = [
+        {
+            title: "Nombre",
+            dataKey: "name",
+        },
+        {
+            title: "Correo electrónico",
+            dataKey: "email",
+        },
+        {
+            title: "Teléfono",
+            dataKey: "phone",
+        },
+        {
+            title: "Ubicaciones",
+            dataKey: "address",
+        },
+        {
+            title: "Fecha de finalización",
+            dataKey: "created_at",
+        },
+    ]
+
     return (
 
         <PageContent
             PermissionsKey={'Clientes'}
             title={'Clientes'}
             showActions={true}
-            columns={columns}
-            list={customers}
             table={tableRef}
-            saveName={'Clientes'}
+            exportedExcelList={exportColumns}
+            list={customers}
+            exportPDFColumns={exportPDFColumns}
         >
 
             <RenderTable

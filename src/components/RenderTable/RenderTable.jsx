@@ -28,18 +28,18 @@ export default function RenderTable({
 
         <div className={`relative ${showPaginator ? "" : "pb-10"}`}>
 
-            <div className='flex items-center justify-between'>
+            <div className='flex items-center justify-between flex-wrap p-3 sm:p-0'>
 
                 {filterChildern}
 
-                <div className={`${filterChildern ? "relative sm:me-8 mb-5 w-[90%] sm:w-[400px]" : "relative sm:ms-8 mb-5 w-[90%] m-auto sm:w-[400px]"}`}>
+                <div className={`${filterChildern ? "relative sm:me-8 mb-5 w-full sm:w-[400px]" : "relative sm:ms-8 mb-5 w-[90%] m-auto sm:w-[400px]"}`}>
 
                     <Input
                         type='text'
                         value={globalFilterValue}
-                        placeholder={'Búsqueda (Ctrl+/)'}
+                        placeholder={'Búsqueda'}
                         onChange={onGlobalFilterChange}
-                        classNames="px-10 py-3 rounded-full w-full border border-[#b3b3b3]"
+                        classNames="px-10 py-2 sm:py-3 rounded-md sm:rounded-full w-full border border-[#b3b3b3]"
                     />
 
                     <FontAwesomeIcon icon={faSearch} className='text-[#252525] text-[13px] absolute left-4 top-[50%] translate-y-[-50%]' />
@@ -63,7 +63,7 @@ export default function RenderTable({
             {
                 list?.length
                     ?
-                    <div className={`flex items-center w-fit ms-3 lg:ms-0 lg:absolute ${showPaginator ? "bottom-5" : "-bottom-5"} left-8`}>
+                    <div className={`flex items-center w-fit m-auto md:ms-3 lg:ms-0 md:absolute ${showPaginator ? "bottom-2 xl:bottom-0" : "-bottom-5"} left-8`}>
 
                         <h2 htmlFor="entries-dropdown" className='text-[#252525] font-medium me-3'>Mostrar</h2>
 
@@ -80,6 +80,7 @@ export default function RenderTable({
                                 :
                                 <div className="ps-2 !rounded-full">
                                     <Dropdown
+
                                         value={selectedEntries}
                                         onChange={(e) => setSelectedEntries(e.value)}
                                         options={entries}

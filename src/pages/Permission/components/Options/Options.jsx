@@ -24,11 +24,11 @@ export default function Options({ items, options, formik, onOptionChange, isDisa
 
                     return (
 
-                        <div key={index} className="flex items-center">
+                        <div key={index} className="flex items-center w-fit">
 
                             <Checkbox disabled={item?.id === 517 || item?.id === 518 || item?.id === 520 || isDisabled} inputId={item?.id} name={item?.id} value={item?.title} onChange={e => onOptionChange(e, item)} checked={options?.includes(item?.id)} />
 
-                            <label htmlFor={item?.id} className={`ms-2 !mb-0 select-none ${isDisabled ? "cursor-not-allowed" : "cursor-pointer"}`}>{item?.title}</label>
+                            <label htmlFor={item?.id} className={`ms-2 !mb-0 select-none text-[14px] min-w-[50px] sm:text-base ${isDisabled ? "cursor-not-allowed" : "cursor-pointer"}`}>{item?.title}</label>
 
                         </div>
 

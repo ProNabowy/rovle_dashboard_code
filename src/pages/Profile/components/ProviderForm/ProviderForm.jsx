@@ -4,6 +4,7 @@ import { Dropdown } from 'primereact/dropdown'
 import { getSelectedOption } from '../../../../assets/utils/utils'
 
 export default function ProviderForm({ formik, counteris, handleBlur }) {
+
   return (
     <Fragment>
 
@@ -11,11 +12,28 @@ export default function ProviderForm({ formik, counteris, handleBlur }) {
 
         <div className='w-full sm:w-[48%]'>
 
+          <label htmlFor={'email'} className='label'>Correo electrónico</label>
+
+          <Input
+            value={formik?.values?.email}
+            name={'email'}
+            type={'email'}
+            disabled
+            required={true}
+            onChange={formik.handleChange}
+            id={'email'}
+            placeholder={'example@gmail.com'}
+          />
+
+        </div>
+
+        <div className='w-full sm:w-[48%]'>
+
           <label htmlFor={'password'} className='label'>Contraseña</label>
 
           <Input
-            value={formik?.values?.password}
-            name={'password'}
+            value={formik?.values?.user_password}
+            name={'user_password'}
             type={'password'}
             required={true}
             onChange={formik.handleChange}
@@ -26,7 +44,7 @@ export default function ProviderForm({ formik, counteris, handleBlur }) {
 
         </div>
 
-        <div className='w-full sm:w-[48%]'>
+        {/* <div className='w-full sm:w-[48%]'>
 
           <label htmlFor={'password_confirmation'} className='label'>Confirmación de contraseña</label>
 
@@ -41,13 +59,13 @@ export default function ProviderForm({ formik, counteris, handleBlur }) {
             placeholder={'Ingresar Confirmación de contraseña'}
           />
 
-        </div>
+        </div> */}
 
       </div>
 
       <div className='flex-container'>
 
-        <div className='sm:w-[48%]'>
+        <div className='w-full sm:w-[48%]'>
 
           <label htmlFor={'provider_nif'} className='label'>NIF</label>
 
@@ -63,7 +81,7 @@ export default function ProviderForm({ formik, counteris, handleBlur }) {
 
         </div>
 
-        <div className='sm:w-[48%]'>
+        <div className='w-full sm:w-[48%]'>
 
           <label htmlFor={'provider_commercial_name'} className='label'>Nombre comercial</label>
 
@@ -83,7 +101,7 @@ export default function ProviderForm({ formik, counteris, handleBlur }) {
 
       <div className='flex-container'>
 
-        <div className='sm:w-[48%]'>
+        <div className='w-full sm:w-[48%]'>
 
           <label htmlFor={'provider_official_name'} className='label'>Nombre oficial</label>
 
@@ -99,13 +117,13 @@ export default function ProviderForm({ formik, counteris, handleBlur }) {
 
         </div>
 
-        <div className='sm:w-[48%]'>
+        <div className='w-full sm:w-[48%]'>
 
           <label htmlFor={'address'} className='label'>Dirección</label>
 
           <Input
-            value={formik?.values?.address}
-            name={'address'}
+            value={formik?.values?.provider_address}
+            name={'provider_address'}
             type={'text'}
             required={true}
             onChange={formik.handleChange}
@@ -119,13 +137,13 @@ export default function ProviderForm({ formik, counteris, handleBlur }) {
 
       <div className='flex-container'>
 
-        <div className='sm:w-[48%]'>
+        <div className='w-full sm:w-[48%]'>
 
           <label htmlFor={'zip'} className='label'>Código postal</label>
 
           <Input
-            value={formik?.values?.zip}
-            name={'zip'}
+            value={formik?.values?.provider_zip}
+            name={'provider_zip'}
             onBlur={handleBlur}
             type={'text'}
             required={true}
@@ -140,13 +158,13 @@ export default function ProviderForm({ formik, counteris, handleBlur }) {
 
         </div>
 
-        <div className='sm:w-[48%]'>
+        <div className='w-full sm:w-[48%]'>
 
           <label htmlFor={'phone'} className='label'>Teléfono</label>
 
           <Input
-            value={formik?.values?.phone}
-            name={'phone'}
+            value={formik?.values?.provider_phone}
+            name={'provider_phone'}
             type={'text'}
             required={true}
             onChange={formik.handleChange}
@@ -158,26 +176,9 @@ export default function ProviderForm({ formik, counteris, handleBlur }) {
 
       </div>
 
-      <div className='sm:w-[48%] mb-6'>
+      <div className='flex items-center justify-between flex-wrap gap-3 mb-8'>
 
-        <label htmlFor={'email'} className='label'>Correo electrónico</label>
-
-        <Input
-          value={formik?.values?.email}
-          name={'email'}
-          type={'email'}
-          disabled
-          required={true}
-          onChange={formik.handleChange}
-          id={'email'}
-          placeholder={'example@gmail.com'}
-        />
-
-      </div>
-
-      <div className='flex items-center justify-between mb-8'>
-
-        <div className='w-[48%]'>
+        <div className='w-full sm:w-[48%]'>
 
           <label className='text-[18px] text-[#252525] font-medium block'>País</label>
 
@@ -186,6 +187,8 @@ export default function ProviderForm({ formik, counteris, handleBlur }) {
             onChange={(e) => formik.setFieldValue('country_id', e.target.value?.id)}
             options={counteris} optionLabel="name"
             filter
+            emptyFilterMessage="No hay opciones disponibles"
+            emptyMessage="No hay opciones disponibles"
             placeholder="Seleccionar nombre de país" className="p-2 w-full !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
 
         </div>
@@ -199,7 +202,7 @@ export default function ProviderForm({ formik, counteris, handleBlur }) {
 
       </div>
 
-      <div className='flex items-center justify-between mb-8'>
+      <div className='flex items-center justify-between flex-wrap mb-8'>
 
         <CitiesDropdown
           formik={formik}
@@ -209,7 +212,7 @@ export default function ProviderForm({ formik, counteris, handleBlur }) {
         />
 
 
-        <div className='w-[48%]'>
+        <div className='w-full sm:w-[48%]'>
 
           <label htmlFor='Permissions' className='label block'>Permisos</label>
 

@@ -50,16 +50,16 @@ export default function PlanForm({ formik }) {
                     ?
                     <div className='mb-8'>
 
-                        <div className='flex items-center justify-between'>
+                        <div className='flex items-center justify-between gap-2'>
 
-                            <h2 className='label'>Nombre del Tostador</h2>
+                            <h2 className='label line-clamp-1'>Nombre del Tostador</h2>
 
                             {
                                 isHasPermissions('dashboard.providers.store')
                                     ?
-                                    <Link to={'/groups/roasters/add-roaster'} className='flex items-center cursor-pointer'>
+                                    <Link to={'/groups/roasters/add-roaster'} className='flex items-center cursor-pointer '>
 
-                                        <h2 className='font-medium underline text-[#45B8EA] me-3'>Añadir Tostador</h2>
+                                        <h2 className='font-medium underline text-[#45B8EA] line-clamp-1 me-3'>Añadir Tostador</h2>
 
                                     </Link>
                                     :
@@ -72,6 +72,8 @@ export default function PlanForm({ formik }) {
                             value={getSelectedOption(roasters, 'id', formik?.values?.provider_id)}
                             onChange={handleChangeProvider}
                             filter
+                            emptyFilterMessage="No hay opciones disponibles"
+                            emptyMessage="No hay opciones disponibles"
                             options={roasters} optionLabel="commercial_name"
                             placeholder="Seleccionar Tostador Name" className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
 

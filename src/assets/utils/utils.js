@@ -79,7 +79,7 @@ class SwalControlar {
 
         return Swal.fire({
             icon: 'success',
-            title: title || 'Good...',
+            title: title || 'Bien...',
             text: message,
         })
 
@@ -89,7 +89,7 @@ class SwalControlar {
 
         return Swal.fire({
             icon: 'warning',
-            title: title || 'Warning...',
+            title: title || 'Advertencia...',
             text: message,
         })
 
@@ -137,7 +137,7 @@ const handleDelete = (callback) => {
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        cancelButtonText: "Cancel",
+        cancelButtonText: "Cancelar",
         confirmButtonText: "Sí, bórralo."
     }).then((result) => {
 

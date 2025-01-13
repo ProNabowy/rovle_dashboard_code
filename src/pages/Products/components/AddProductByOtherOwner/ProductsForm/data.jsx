@@ -121,7 +121,7 @@ const useFormDataGetter = () => {
 
     const handelSubmit = values => {
 
-        const updatedData = { ...values };
+        const updatedData = { ...values, product_id: selectedProduct?.id || values?.product_id };
 
         // Convert Objects To Arr Of Ids
         updatedData.origins = updatedData?.origins.map(item => item?.id || item);

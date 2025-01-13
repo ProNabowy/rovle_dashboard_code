@@ -29,11 +29,11 @@ export default function ManagePackage() {
             title={`Gestionar paquetes ( ${subscriptionItem?.user?.name} / ${subscriptionItem?.plan_size?.size?.weight} = ${subscriptionItem?.price} )`}
             showActions={false}>
 
-            <div className={`grid grid-cols-12 gap-10 p-4 px-10`}>
+            <div className={`grid grid-cols-12 gap-3 sm:gap-10 p-3 sm:p-4 sm:px-10`}>
 
-                <form onSubmit={e => e.preventDefault()} autoComplete='off' className='col-span-6'>
+                <form onSubmit={e => e.preventDefault()} autoComplete='off' className='col-span-12 md:col-span-6'>
 
-                    <div className='mb-8'>
+                    <div className='mb-4 sm:mb-8'>
 
                         <label className='label'>Nombre del Producto</label>
 
@@ -44,6 +44,8 @@ export default function ManagePackage() {
                                 setSelectProduct(e.value);
                             }}
                             filter
+                            emptyFilterMessage="No hay opciones disponibles"
+                            emptyMessage="No hay opciones disponibles"
                             options={products}
                             optionLabel={"commercial_name"}
                             panelClassName='max-w-full'
@@ -53,7 +55,7 @@ export default function ManagePackage() {
 
                     </div>
 
-                    <div className='mb-8'>
+                    <div className='mb-4 sm:mb-8'>
 
                         <label htmlFor={'weight'} className='label'>Peso / gm </label>
 
@@ -64,13 +66,15 @@ export default function ManagePackage() {
                                 setAddNewPackage(perv => ({ ...perv, weight: e.value?.weight, presentationId: e.value?.id }))
                                 setSelectWeight(e.value)
                             }}
+                            emptyFilterMessage="No hay opciones disponibles"
+                            emptyMessage="No hay opciones disponibles"
                             filter
                             options={selectedProduct?.presentations} optionLabel={"weight"}
-                            placeholder={"Seleccionar Peso"} className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
+                            placeholder={"Seleccionar Peso"} className="w-full p-2 !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
 
                     </div>
 
-                    <div className='mb-8'>
+                    <div className='mb-4 sm:mb-8'>
 
                         <label htmlFor={'Quantity'} className='label'>Cantidad</label>
 
@@ -84,7 +88,7 @@ export default function ManagePackage() {
 
                     </div>
 
-                    <button type='button' onClick={handelAddNewPackage} className='bg-[#58291E] text-[20px] text-center text-white font-medium w-full py-[16px] px-[24px] rounded-full'>Agregar paquete</button>
+                    <button type='button' onClick={handelAddNewPackage} className='bg-[#58291E] sm:text-[20px] text-center text-white font-medium w-full py-2 md:py-[16px] px-3 md:px-[24px] rounded-md md:rounded-full'>Agregar paquete</button>
 
                 </form>
 
@@ -93,10 +97,9 @@ export default function ManagePackage() {
             </div>
 
 
-            <div className='flex flex-col items-end justify-center px-10 mt-3 mb-10'>
+            <div className='flex flex-col items-end justify-center px-3 sm:px-10 mt-3 mb-5 sm:mb-10'>
 
-                <h3 className='text-[24px] text-[#58291E] mb-24'>{totalWeightOfPersentations} / {subscriptionItem?.plan_size?.size?.weight} gm</h3>
-
+                <h3 className='sm:text-[24px] text-[#58291E] mb-10 sm:mb-24'>{totalWeightOfPersentations} / {subscriptionItem?.plan_size?.size?.weight} gm</h3>
 
                 <button onClick={clickHandler} type='submit' className='min-btn'>
                     Enviar

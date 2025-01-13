@@ -9,90 +9,94 @@ export default function OrderDetails({ visible, setVisible, row }) {
 
     return (
 
-        <Dialog header={`Detalles del pedido (${row?.name})`} headerClassName='text-center !bg-[#58291E] !text-white' visible={visible} style={{ width: '50vw' }} onHide={() => setVisible(false)}>
+        <Dialog header={`Detalles del pedido (${row?.name})`} className='w-[95vw] md:w-[700px]' headerClassName='text-center !bg-[#58291E] !text-white' visible={visible} onHide={() => setVisible(false)}>
 
             <div className='grid grid-cols-12 gap-5 mt-5'>
 
-                <div className='col-span-12 grid grid-cols-12 gap-5'>
+                <div className='grid grid-cols-12 gap-5 mt-5 col-span-12 overflow-auto max-w-[300px] md:max-w-full'>
 
-                    <div className='col-span-6'>
+                    <div className='col-span-12 grid grid-cols-12 gap-5 w-[500px] sm:w-fit'>
 
-                        <h3 className='text-[#252525] opacity-70 mb-[32px]'>Nombre del Producto</h3>
+                        <div className='col-span-6'>
+
+                            <h3 className='text-[#252525] opacity-70 mb-[32px]'>Nombre del Producto</h3>
+
+                        </div>
+
+                        <div className='col-span-2'>
+
+                            <h3 className='text-[#252525] opacity-70 mb-[32px]'>Peso</h3>
+
+                        </div>
+
+                        <div className='col-span-2'>
+
+                            <h3 className='text-[#252525] opacity-70 mb-[32px]'>Cantidad</h3>
+
+                        </div>
+
+
+                        <div className='col-span-2'>
+
+                            <h3 className='text-[#252525] opacity-70 mb-[32px]'>Precio</h3>
+
+                        </div>
 
                     </div>
 
-                    <div className='col-span-2'>
+                    {
+                        row?.products?.map((item, index) => {
 
-                        <h3 className='text-[#252525] opacity-70 mb-[32px]'>Peso</h3>
+                            return (
+                                <div key={index} className='grid grid-cols-12 gap-5 col-span-12 w-[500px] sm:w-fit'>
 
-                    </div>
+                                    <div className='col-span-4 sm:col-span-6'>
 
-                    <div className='col-span-2'>
+                                        <h5 className='text-[#58291E] text-[16px] font-medium line-clamp-3'>{item?.product_name}</h5>
 
-                        <h3 className='text-[#252525] opacity-70 mb-[32px]'>Cantidad</h3>
+                                    </div>
 
-                    </div>
+                                    <div className='col-span-8 sm:col-span-6'>
+                                        {
+                                            row?.products?.[index]?.items?.map((order, i) => {
+
+                                                return (
+                                                    <div key={i} className='grid grid-cols-12 gap-5'>
+
+                                                        <div className='col-span-4 mb-1'>
+
+                                                            <h5 className='text-[#58291E] text-[16px] font-medium'>{order?.presentation?.weight}</h5>
+
+                                                        </div>
+
+                                                        <div className='col-span-4 mb-1'>
+
+                                                            <h5 className='text-[#58291E] text-[16px] font-medium'>{order?.units} Paquete</h5>
+
+                                                        </div>
+
+                                                        <div className='col-span-4 mb-1'>
+
+                                                            <h5 className='text-[#58291E] text-[16px] font-medium'>{numberFormat(order?.total)} €</h5>
+
+                                                        </div>
+
+                                                    </div>
+                                                )
+
+                                            })
+                                        }
+
+                                    </div>
 
 
-                    <div className='col-span-2'>
+                                </div>
+                            )
 
-                        <h3 className='text-[#252525] opacity-70 mb-[32px]'>Precio</h3>
-
-                    </div>
+                        })
+                    }
 
                 </div>
-
-                {
-                    row?.products?.map((item, index) => {
-
-                        return (
-                            <div key={index} className='grid grid-cols-12 gap-5 col-span-12'>
-
-                                <div className='col-span-6'>
-
-                                    <h5 className='text-[#58291E] text-[16px] font-medium'>{item?.product_name}</h5>
-
-                                </div>
-
-                                <div className='col-span-6'>
-                                    {
-                                        row?.products?.[index]?.items?.map((order, i) => {
-
-                                            return (
-                                                <div key={i} className='grid grid-cols-12 gap-5'>
-
-                                                    <div className='col-span-4 mb-1'>
-
-                                                        <h5 className='text-[#58291E] text-[16px] font-medium'>{order?.presentation?.weight}</h5>
-
-                                                    </div>
-
-                                                    <div className='col-span-4 mb-1'>
-
-                                                        <h5 className='text-[#58291E] text-[16px] font-medium'>{order?.units} Paquete</h5>
-
-                                                    </div>
-
-                                                    <div className='col-span-4 mb-1'>
-
-                                                        <h5 className='text-[#58291E] text-[16px] font-medium'>{numberFormat(order?.total)} €</h5>
-
-                                                    </div>
-
-                                                </div>
-                                            )
-
-                                        })
-                                    }
-
-                                </div>
-
-
-                            </div>
-                        )
-
-                    })
-                }
 
                 <h2 className='col-span-12 mt-5'>
 
@@ -129,41 +133,45 @@ export default function OrderDetails({ visible, setVisible, row }) {
                         null
                 }
 
-                <div className='col-span-12 mt-12' >
+                <div className='col-span-12 mt-12 max-w-[300px] sm:max-w-full overflow-auto' >
 
-                    <h1 className='text-[#252525] mb-4 font-medium text-[18px]'>Dirección de envío</h1>
+                    <div className='w-[600px] sm:w-full'>
 
-                    <div className='grid grid-cols-12 gap-5'>
+                        <h1 className='text-[#252525] mb-4 font-medium text-[18px]'>Dirección de envío</h1>
 
-                        <div className='col-span-6 flex items-center'>
+                        <div className='grid grid-cols-12 gap-5'>
 
-                            <h3 className='text-[#252525] font-medium me-4'>Dirección</h3>
-                            <h3 className='text-[#252525] font-medium'>{row?.address}</h3>
+                            <div className='col-span-6 flex items-center'>
 
-                        </div>
+                                <h3 className='text-[#252525] font-medium me-4'>Dirección</h3>
+                                <h3 className='text-[#252525] font-medium'>{row?.address}</h3>
 
-                        <div className='col-span-6 flex items-center'>
+                            </div>
 
-                            <h3 className='text-[#252525] font-medium me-4'>C.P.</h3>
-                            <h3 className='text-[#252525] font-medium'>{row?.zip_code}</h3>
+                            <div className='col-span-6 flex items-center'>
 
-                        </div>
-                        <div className='col-span-6 flex items-center'>
+                                <h3 className='text-[#252525] font-medium me-4'>C.P.</h3>
+                                <h3 className='text-[#252525] font-medium'>{row?.zip_code}</h3>
 
-                            <h3 className='text-[#252525] font-medium me-4'>Nombre</h3>
-                            <h3 className='text-[#252525] font-medium'>{row?.name}</h3>
+                            </div>
+                            <div className='col-span-6 flex items-center'>
 
-                        </div>
-                        <div className='col-span-6 flex items-center'>
+                                <h3 className='text-[#252525] font-medium me-4'>Nombre</h3>
+                                <h3 className='text-[#252525] font-medium'>{row?.name}</h3>
 
-                            <h3 className='text-[#252525] font-medium me-4'>Email</h3>
-                            <h3 className='text-[#252525] font-medium'>{row?.email}</h3>
+                            </div>
+                            <div className='col-span-6 flex items-center'>
 
-                        </div>
-                        <div className='col-span-6 flex items-center'>
+                                <h3 className='text-[#252525] font-medium me-4'>Email</h3>
+                                <h3 className='text-[#252525] font-medium'>{row?.email}</h3>
 
-                            <h3 className='text-[#252525] font-medium me-4'>Teléfono</h3>
-                            <h3 className='text-[#252525] font-medium'>{row?.phone}</h3>
+                            </div>
+                            <div className='col-span-6 flex items-center'>
+
+                                <h3 className='text-[#252525] font-medium me-4'>Teléfono</h3>
+                                <h3 className='text-[#252525] font-medium'>{row?.phone}</h3>
+
+                            </div>
 
                         </div>
 
@@ -171,20 +179,20 @@ export default function OrderDetails({ visible, setVisible, row }) {
 
                 </div>
 
-                <div className='col-span-12 flex items-center justify-between mt-10'>
+                <div className='col-span-12 flex items-center justify-between flex-wrap gap-2 mt-10'>
 
                     {
                         row?.status === "Pending"
                             ?
                             <Fragment>
 
-                                <button onClick={handleAcspetPlan} className='bg-[#45B8EA] text-white py-4 px-6 text-[20px] rounded-full w-[48%]'>Servir y enviar</button>
-                                <button onClick={_ => setVisible(false)} className='bg-[#FF5C34] text-white py-4 px-6 text-[20px] rounded-full w-[48%]'>No servir ni enviar por ahora</button>
+                                <button onClick={handleAcspetPlan} className='bg-[#45B8EA] text-white py-2 sm:py-4 px-6 text-[20px] rounded-md sm:rounded-full w-full sm:w-[48%]'>Servir y enviar</button>
+                                <button onClick={_ => setVisible(false)} className='bg-[#FF5C34] text-white py-2 sm:py-4 px-6 text-[20px] rounded-md sm:rounded-full w-full sm:w-[48%]'>No servir ni enviar por ahora</button>
 
                             </Fragment>
 
                             :
-                            <button onClick={_ => setVisible(false)} className='bg-[#45B8EA] text-white py-4 px-6 text-[20px] rounded-full w-[48%] m-auto'>Aceptar</button>
+                            <button onClick={_ => setVisible(false)} className='bg-[#45B8EA] text-white py-2 sm:py-4 px-6 text-[20px] rounded-md sm:rounded-full w-full sm:w-[48%] m-auto'>Aceptar</button>
                     }
                 </div>
 

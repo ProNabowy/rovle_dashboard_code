@@ -1,12 +1,12 @@
 import { Dropdown } from 'primereact/dropdown';
-import { ChipsList, Input } from '../../../../components';
+import { Input } from '../../../../components';
 import { getSelectedOption } from '../../../../assets/utils/utils';
 import { useDataGetter } from './data';
 
 
 export default function UserForm({ formik, asEdit }) {
 
-    const { roles, user } = useDataGetter();
+    const { roles, user, shops } = useDataGetter();
 
     return (
 
@@ -90,6 +90,29 @@ export default function UserForm({ formik, asEdit }) {
                     </div>
             }
 
+            <div className='flex items-center gap-3'>
+
+                <div className='mb-8 flex-1'>
+
+                    <h2 className='label'>Permisos</h2>
+
+                    <Dropdown
+                        value={getSelectedOption(roles, 'id', formik?.values?.role_id)}
+                        onChange={(e) => {
+                            formik.setFieldValue('role_id', e.target.value?.id)
+                            formik.setFieldValue('coffee_shop_id', undefined)
+                        }}
+                        options={roles} optionLabel="name"
+                        filter
+                        emptyFilterMessage="No hay opciones disponibles"
+                        emptyMessage="No hay opciones disponibles"
+                        placeholder="Seleccionar Permiso" className="w-full p-2 !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
+
+                </div>
+
+            </div>
+
+
             {
                 user?.provider?.id
                     ?
@@ -103,26 +126,14 @@ export default function UserForm({ formik, asEdit }) {
                             options={user?.provider?.coffee_shops}
                             optionLabel="name"
                             filter
+                            emptyFilterMessage="No hay opciones disponibles"
+                            emptyMessage="No hay opciones disponibles"
                             placeholder="Seleccionar Cafeterías" className="w-full p-2 !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
 
                     </div>
                     :
                     null
             }
-
-
-            <div className='mb-8'>
-
-                <h2 className='label'>Permisos</h2>
-
-                <Dropdown
-                    value={getSelectedOption(roles, 'id', formik?.values?.role_id)}
-                    onChange={(e) => formik.setFieldValue('role_id', e.target.value?.id)}
-                    options={roles} optionLabel="name"
-                    filter
-                    placeholder="Seleccionar Permiso" className="w-full p-2 !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
-
-            </div>
 
             <button type='submit' className='min-btn block !mt-10 ml-auto'>Enviar</button>
 

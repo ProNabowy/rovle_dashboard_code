@@ -55,7 +55,7 @@ export default function SettingsRoutes({
 
                                 <div className={`rounded-[6px] flex items-center ${isExpanded ? "ms-5" : ""}`}>
 
-                                    <div onClick={_ => setVisible(perv => ({ ...perv, products: !perv?.products }))} className='nav-icon w-[35px] h-[35px] rounded-full flex items-center justify-center'>
+                                    <div onClick={_ => setVisible(perv => ({ products: perv?.products ? false : true }))} className='nav-icon w-[35px] h-[35px] rounded-full flex items-center justify-center'>
 
                                         <img src={products} alt="" className="w-[20px] h-[20px]" />
 
@@ -99,7 +99,7 @@ export default function SettingsRoutes({
 
                                 <div className={`rounded-[6px] flex items-center ${isExpanded ? "ms-5" : ""}`}>
 
-                                    <div onClick={_ => setVisible(perv => ({ ...perv, plans: !perv?.plans }))} className='nav-icon w-[35px] h-[35px] rounded-full flex items-center justify-center'>
+                                    <div onClick={_ => setVisible(perv => ({ plans: perv?.plans ? false : true }))} className='nav-icon w-[35px] h-[35px] rounded-full flex items-center justify-center'>
 
                                         <img src={plans} alt="" className="w-[20px] h-[20px]" />
 

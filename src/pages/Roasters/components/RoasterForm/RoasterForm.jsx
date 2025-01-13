@@ -10,11 +10,11 @@ export default function RoasterForm({ formik, isRenderPassword }) {
 
     return (
 
-        <form onSubmit={formik.handleSubmit} autoComplete='off' className='px-10'>
+        <form onSubmit={formik.handleSubmit} autoComplete='off' className='px-3 sm:px-10'>
 
             <div className='flex-container'>
 
-                <div className='w-[48%]'>
+                <div className='w-full sm:w-[48%]'>
 
                     <label htmlFor={'user_email'} className='label'>Email de login</label>
 
@@ -30,7 +30,7 @@ export default function RoasterForm({ formik, isRenderPassword }) {
 
                 </div>
 
-                <div className='w-[48%]'>
+                <div className='w-full sm:w-[48%]'>
 
                     <label htmlFor={'provider_email'} className='label'>Email de contacto</label>
 
@@ -99,7 +99,7 @@ export default function RoasterForm({ formik, isRenderPassword }) {
                     <Input
                         value={formik?.values?.provider_nif}
                         name={'provider_nif'}
-                        type={'text'}
+                        type={'number'}
                         required={true}
                         onChange={formik.handleChange}
                         id={'provider_nif'}
@@ -172,7 +172,7 @@ export default function RoasterForm({ formik, isRenderPassword }) {
                         onChange={formik.handleChange}
                         value={formik.values?.provider_phone}
                         name='provider_phone'
-                        type='text'
+                        type='number'
                         required
                         id={'provider_phone'}
                         placeholder={'Ingresar Teléfono'}
@@ -188,7 +188,7 @@ export default function RoasterForm({ formik, isRenderPassword }) {
                         onChange={formik.handleChange}
                         value={formik.values?.user_phone}
                         name='user_phone'
-                        type='text'
+                        type='number'
                         required
                         id={'user_phone'}
                         placeholder={'Ingresar Teléfono'}
@@ -209,6 +209,8 @@ export default function RoasterForm({ formik, isRenderPassword }) {
                         onChange={(e) => formik.setFieldValue('provider_country_id', e.target.value?.id)}
                         options={countries} optionLabel="name"
                         filter
+                        emptyFilterMessage="No hay opciones disponibles"
+                        emptyMessage="No hay opciones disponibles"
                         placeholder="Seleccionar País" className="w-full p-2  !shadow-none !rounded-none !border-t-transparent !border-l-transparent !border-r-transparent" />
 
                 </div>

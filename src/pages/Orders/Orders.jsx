@@ -9,6 +9,35 @@ export default function Orders() {
 
     const tableRef = useRef();
 
+    const exportColumns = orders.map((item) => {
+        return {
+            ["Nombre de usuario"]: item.name,
+            ["Dirección"]: item.delivery_type,
+            ["Estado"]: item.status,
+            ["Tienda asignada"]: item.coffee_shop?.name,
+            ["Fecha de finalización"]: item.created_at,
+        };
+    });
+
+    const exportPDFColumns = [
+        {
+            title: "Nombre de usuario",
+            dataKey: "name",
+        },
+        {
+            title: "Dirección",
+            dataKey: "delivery_type",
+        },
+        {
+            title: "Estado",
+            dataKey: "status",
+        },
+        {
+            title: "Fecha de finalización",
+            dataKey: "created_at",
+        },
+    ]
+
     return (
 
         <PageContent
@@ -16,10 +45,10 @@ export default function Orders() {
             roleKey={'dashboard.orders.store'}
             title={'Listado de pedidos'}
             showActions={true}
-            columns={columns}
-            list={orders}
             table={tableRef}
-            saveName={'Orders'}
+            exportedExcelList={exportColumns}
+            list={orders}
+            exportPDFColumns={exportPDFColumns}
         >
 
             <RenderTable columns={columns} list={orders} table={tableRef} />

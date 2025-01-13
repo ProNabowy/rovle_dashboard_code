@@ -27,7 +27,7 @@ const useDataGetter = () => {
         return authUtailty.resetPassword({ ...data, email, otp })
             .then(response => {
 
-                return swal.success('Actualizado!', response?.message)
+                return swal.success('Actualizado!', 'Contraseña cambiada con éxito.')
                     .then(_ => {
 
                         sessionStorage.clear();

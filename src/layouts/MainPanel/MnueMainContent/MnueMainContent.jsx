@@ -1,13 +1,16 @@
 import { useDataGetter, renderCollaction, settings, setups, groups } from './data';
 import { GroupsRoutes, SettingsRoutes } from './components';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../../context/AppContext';
+import { useLocation } from 'react-router-dom';
 
 export default function MnueMainContent({ isExpanded }) {
 
     const { user } = useContext(AppContext);
 
     const isAdmin = user?.roles?.[0]?.name === 'admin';
+
+    const { pathname } = useLocation()
 
     const { isRenderRouteCollactions, isHasPermissions, linkStyle } = useDataGetter(isExpanded);
 
@@ -16,6 +19,12 @@ export default function MnueMainContent({ isExpanded }) {
         products: false,
         groups: false
     });
+
+    useEffect(() => {
+        setVisible({});
+
+        return () => { };
+    }, [pathname]);
 
     return (
 

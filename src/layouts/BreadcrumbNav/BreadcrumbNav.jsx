@@ -78,7 +78,7 @@ export default function BreadcrumbNav() {
 
                                 </span>
 
-                                <h1 className='text-[25px] ms-5 font-medium capitalize'>{spanishPaths[improvePathname.slice(-1).toString()] || improvePathname.slice(-1).toString()?.replace("-", " ")}</h1>
+                                <h1 className='text-[20px] sm:text-[25px] ms-5 font-medium capitalize'>{spanishPaths[improvePathname.slice(-1).toString()] || improvePathname.slice(-1).toString()?.replace("-", " ")}</h1>
 
                             </div>
 

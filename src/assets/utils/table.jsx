@@ -25,7 +25,7 @@ class Table {
 
     fullLocationBodyTemplate = (rowData) => {
 
-        const items = ['Country', 'Provice', 'City'];
+        const items = ['País', 'Provincia', 'Ciudad'];
 
         const location = [rowData?.country?.name, rowData?.province?.name, rowData?.city?.name];
 
@@ -49,12 +49,12 @@ class Table {
         return <p className='mb-1 text-[13px] font-medium'>{rowData.email}</p>
     };
 
-    startDateBodyTemplate = (rowData) => {
-        return <p className='mb-1 capitalize text-[13px] font-medium'>{this.dateFormat(rowData.created_at)}</p>
+    startDateBodyTemplate = (rowData, key) => {
+        return <p className='mb-1 capitalize text-[13px] font-medium'>{rowData[key || 'created_at']}</p>
     };
 
     lastDateBodyTemplate = (rowData) => {
-        return <p className='mb-1 capitalize text-[13px] font-medium'>{this.dateFormat(new Date(rowData.updated_at))}</p>
+        return <p className='mb-1 capitalize text-[13px] font-medium'>{rowData.updated_at}</p>
     };
 
     countryBodyTemplate = (rowData) => {

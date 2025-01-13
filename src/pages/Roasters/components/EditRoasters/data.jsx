@@ -49,6 +49,7 @@ const useDataGetter = _ => {
                     provider_country_id: currentRoaster?.country?.id,
                     provider_province_id: currentRoaster?.province?.id,
                     provider_city_id: currentRoaster?.city?.id,
+                    response_done: true,
                 })
 
             });
