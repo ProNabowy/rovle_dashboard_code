@@ -51,7 +51,7 @@ export default function ProductsForm({ formik, originsList, packagesList }) {
                         ?
                         <div className={`w-full sm:w-[48%] ${!isByNewOWner ? "flex-1" : ""}`}>
 
-                            <label htmlFor={'owner'} className='label'>Roaster To</label>
+                            <label htmlFor={'owner'} className='label'>Tostador</label>
 
                             <Dropdown
                                 value={selectedProvider}

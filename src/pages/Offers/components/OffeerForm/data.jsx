@@ -9,13 +9,13 @@ const useDataGetter = formik => {
 
     const getUtailty = new Get();
 
-    const [autoSelectStartData, setAutoSelectStartData] = useState(true);
+    const [autoSelectStartData, setAutoSelectStartData] = useState(false);
 
     const { setIsLoading, userPeressmisons, user } = useContext(AppContext);
 
     const isHasPermissions = (permissionKey) => hasRoutePermissions(userPeressmisons, permissionKey);
 
-    const [autoSelectEndData, setAutoSelectEndData] = useState(true);
+    const [autoSelectEndData, setAutoSelectEndData] = useState(false);
 
     const isProvider = user?.provider;
 
@@ -28,6 +28,7 @@ const useDataGetter = formik => {
         return () => { };
     }, []);
 
+
     const handleStartDate = e => {
 
         setAutoSelectStartData(e.checked);
@@ -39,7 +40,7 @@ const useDataGetter = formik => {
 
         } else {
 
-            formik.setFieldValue('start_date', '');
+            formik.setFieldValue('start_date', null);
 
         }
 

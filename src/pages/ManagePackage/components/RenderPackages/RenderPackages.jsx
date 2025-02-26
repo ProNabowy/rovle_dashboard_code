@@ -17,7 +17,7 @@ function RenderPackages({ formik, removePackage }) {
                                 <div>
 
                                     <p className='font-medium text-[#252525] mb-3 line-clamp-2'>{item?.commercial_name}</p>
-                                    <p className='font-medium text-[#252525] line-clamp-2'> {item?.units} x {item?.weight} gm</p>
+                                    <p className='font-medium text-[#252525] line-clamp-2'> {item?.units} x {item?.weight} Gr</p>
 
                                 </div>
 

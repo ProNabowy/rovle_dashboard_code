@@ -16,6 +16,8 @@ const useDataGetter = _ => {
 
     const offeerId = location.slice(4);
 
+
+
     const handleSubmit = (values) => {
 
         if (!values?.provider_id || !values?.level_id || !values?.activation_method || !values?.discount_type || !values?.offer_place) {

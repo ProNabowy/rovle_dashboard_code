@@ -19,7 +19,7 @@ const useDataGetter = _ => {
             if (!values?.level_id) return swal.warning('Advertencia', 'El campo del Nivel es necesario, por favor complételo.');
             if (!values?.activation_method) return swal.warning('Advertencia', 'El campo del Activo es necesario, por favor complételo.');
             if (!values?.discount_type) return swal.warning('Advertencia', 'El campo del T.Promo es necesario, por favor complételo.');
-            if (!values?.offer_place) return swal.warning('Advertencia', 'El campo del Recurrencia es necesario, por favor complételo.');
+            if (!values?.offer_place) return swal.warning('Advertencia', 'El campo de "Dónde canjearlo" es necesario, por favor complételo.');
 
 
         } else {

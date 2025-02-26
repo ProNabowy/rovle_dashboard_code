@@ -4,82 +4,75 @@ import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../../../context/AppContext";
 import { useFormik } from "formik";
 const useAddPlan = () => {
+  const { user, setIsLoading } = useContext(AppContext);
 
-    const { user, setIsLoading } = useContext(AppContext);
+  const storeUtailty = new Store();
 
-    const storeUtailty = new Store();
+  const provider = user?.provider;
 
-    const provider = user?.provider;
+  const is_created_by_provider = user?.created_by_provider;
 
-    const is_created_by_provider = user?.created_by_provider;
+  const handleSubmit = (values) => {
+    if (!values?.provider_id || !values?.sizes?.length) {
+      if (!values?.provider_id) {
+        return swal.warning(
+          "Advertencia",
+          "El campo del tostador es necesario, por favor complételo."
+        );
+      }
 
-    const handleSubmit = (values) => {
+      if (!values?.sizes?.length) {
+        return swal.warning(
+          "Advertencia",
+          "Es necesario completar el campo de Talla y precio, por favor."
+        );
+      }
+    } else {
+      setIsLoading(true);
 
-        if ((!values?.provider_id) || !values?.sizes?.length) {
+      const updatedData = { ...values };
 
-            if (!values?.provider_id) {
+      // Convert Products To Ids
+      updatedData.products = updatedData.products?.map((item) => {
+        const newProductArct = { id: item?.id || item };
+        return newProductArct;
+      });
 
-                return swal.warning('Advertencia', 'El campo del tostador es necesario, por favor complételo.');
+      // Convert Coffee Shops To Ids
+      updatedData.coffee_shops = updatedData.coffee_shops?.map((item) => {
+        return item?.id || item;
+      });
 
-            }
-
-            if (!values?.sizes?.length) {
-
-                return swal.warning('Advertencia', 'Es necesario completar el campo de Talla, por favor.');
-
-            }
-
-        } else {
-
-            setIsLoading(true);
-
-            const updatedData = { ...values };
-
-            // Convert Products To Ids
-            updatedData.products = updatedData.products?.map(item => {
-                const newProductArct = { id: item?.id || item };
-                return newProductArct;
-            });
-
-            // Convert Coffee Shops To Ids
-            updatedData.coffee_shops = updatedData.coffee_shops?.map(item => {
-                return item?.id || item;
-            });
-
-            return storeUtailty.addPlan(updatedData, navigate).finally(_ => setIsLoading(false));
-
-        };
+      return storeUtailty
+        .addPlan(updatedData, navigate)
+        .finally((_) => setIsLoading(false));
     }
+  };
 
-    const [initialValues, setInitialValues] = useState({
-        name: "",
-        status: "active",
-        description: "",
-        provider_id: provider?.id,
-        sizes: [],
-        coffee_shops: [],
-        products: []
-    });
+  const [initialValues, setInitialValues] = useState({
+    name: "",
+    status: "active",
+    description: "",
+    provider_id: provider?.id,
+    sizes: [],
+    coffee_shops: [],
+    products: [],
+  });
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const formik = useFormik({
-        initialValues: {},
-        onSubmit: handleSubmit
-    });
+  const formik = useFormik({
+    initialValues: {},
+    onSubmit: handleSubmit,
+  });
 
-    useEffect(() => {
+  useEffect(() => {
+    formik.setValues(initialValues);
 
-        formik.setValues(initialValues);
+    return () => {};
+  }, []);
 
-        return () => { };
-    }, []);
+  return { formik };
+};
 
-
-    return { formik, };
-
-}
-
-export {
-    useAddPlan
-}
+export { useAddPlan };

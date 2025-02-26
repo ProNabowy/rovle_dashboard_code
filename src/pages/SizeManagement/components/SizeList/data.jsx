@@ -6,68 +6,88 @@ import Table from "../../../../assets/utils/table";
 
 const tableService = new Table();
 
-const useDataGetter = _ => {
+const useDataGetter = (_) => {
+  const getUtailty = new Get();
 
-    const getUtailty = new Get();
+  const deleteUtailty = new Delete();
 
-    const deleteUtailty = new Delete();
+  const { setIsLoading, user } = useContext(AppContext);
 
-    const { setIsLoading, user } = useContext(AppContext);
+  const provider = user?.provider;
 
-    const provider = user?.provider;
+  const [sizes, setSizes] = useState([]);
 
-    const [sizes, setSizes] = useState([]);
+  useEffect(() => {
+    setIsLoading(true);
 
-    useEffect(() => {
+    getUtailty
+      .getSizes()
+      .then((response) => setSizes(response))
+      .finally((_) => setIsLoading(false));
 
-        setIsLoading(true);
+    return () => {};
+  }, []);
 
-        getUtailty.getSizes().then(response => setSizes(response))
-            .finally(_ => setIsLoading(false));
+  const weightBodyTemplate = (rowData) => {
+    return (
+      <p className="mb-1 capitalize text-[13px] font-medium">
+        {parseInt(rowData?.weight)}
+      </p>
+    );
+  };
 
-        return () => { };
-    }, []);
+  const useActionsBodyTemplate = (rowData) => {
+    return (
+      <TableActions
+        disableEdit={true}
+        handelDeleteFunction={deleteUtailty.deleteSize}
+        rowData={rowData}
+        deleteKey={"dashboard.sizes.destroy"}
+        PagePermissionKey={"Sizes"}
+        state={setSizes}
+        list={sizes}
+      ></TableActions>
+    );
+  };
 
+  const columns = [
+    {
+      field: "id",
+      header: "ID",
+      classNames: "!px-[15px]",
+      tamplate: tableService.idBodyTemplate,
+    },
+    {
+      field: "name",
+      header: "Personaje",
+      classNames: "!px-[0px]",
+      tamplate: tableService.nameBodyTemplate,
+    },
+    {
+      field: "weight",
+      header: "Peso",
+      classNames: "!px-[15px]",
+      tamplate: weightBodyTemplate,
+    },
+    {
+      field: "updated_at",
+      header: "Fecha",
+      classNames: "!px-[15px]",
+      tamplate: tableService.lastDateBodyTemplate,
+    },
+    {
+      field: "status",
+      header: "Acción",
+      classNames: "!px-[15px]",
+      tamplate: useActionsBodyTemplate,
+    },
+  ];
 
-    const weightBodyTemplate = (rowData) => {
+  return {
+    sizes,
+    provider,
+    columns,
+  };
+};
 
-        return <p className='mb-1 capitalize text-[13px] font-medium'>{parseInt(rowData?.weight)}</p>
-
-    };
-
-    const useActionsBodyTemplate = (rowData) => {
-
-        return <TableActions
-            disableEdit={true}
-            handelDeleteFunction={deleteUtailty.deleteSize}
-            rowData={rowData}
-            deleteKey={'dashboard.sizes.destroy'}
-            PagePermissionKey={'Sizes'}
-            state={setSizes}
-            list={sizes}
-        ></TableActions>
-
-    };
-
-    const columns = [
-        { field: "id", header: "ID", classNames: "!px-[15px]", tamplate: tableService.idBodyTemplate },
-        { field: "name", header: "Personaje", classNames: "!px-[0px]", tamplate: tableService.nameBodyTemplate },
-        { field: "weight", header: "Peso", classNames: "!px-[15px]", tamplate: weightBodyTemplate },
-        { field: "updated_at", header: "Fecha", classNames: "!px-[15px]", tamplate: tableService.lastDateBodyTemplate },
-        { field: "status", header: "Acción", classNames: "!px-[15px]", tamplate: useActionsBodyTemplate },
-    ];
-
-
-    return {
-        sizes,
-        provider,
-        columns
-    };
-
-}
-
-
-
-export {
-    useDataGetter
-}
+export { useDataGetter };

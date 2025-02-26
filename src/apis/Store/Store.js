@@ -28,7 +28,7 @@ export default class Store {
     acceptSubscription(id, data, navigate) {
 
         const updateData = data?.map(item => {
-            return { ...item, id: item?.presentationId, units: item.units, presentationId: null };
+            return { ...item, presentations_id: item.presentationId || item.presentation_id, id: item.presentationId || item.presentation_id };
         })
 
         return axios.post(`subscription/${id}/accept`, { presentations: updateData }).then(response => {

@@ -114,11 +114,11 @@ const useFormDataGetter = () => {
             presentations: productInfo?.presentations || [],
             origins: productInfo?.origins || [],
             coffeeShops: [],
-            parent_id: selectedProvider?.id
+            parent_id: productInfo?.id
         });
 
     }, [productInfo]);
-
+console.log(productInfo);
     const handelSubmit = values => {
 
         const updatedData = { ...values, product_id: selectedProduct?.id || values?.product_id };

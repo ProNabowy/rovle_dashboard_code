@@ -57,7 +57,7 @@ export default function ManagePackage() {
 
                     <div className='mb-4 sm:mb-8'>
 
-                        <label htmlFor={'weight'} className='label'>Peso / gm </label>
+                        <label htmlFor={'weight'} className='label'>Peso / Gr </label>
 
                         {/* Don't Forget To Ask What U render Here */}
                         <Dropdown
@@ -99,7 +99,7 @@ export default function ManagePackage() {
 
             <div className='flex flex-col items-end justify-center px-3 sm:px-10 mt-3 mb-5 sm:mb-10'>
 
-                <h3 className='sm:text-[24px] text-[#58291E] mb-10 sm:mb-24'>{totalWeightOfPersentations} / {subscriptionItem?.plan_size?.size?.weight} gm</h3>
+                <h3 className='sm:text-[24px] text-[#58291E] mb-10 sm:mb-24'>{totalWeightOfPersentations} / {subscriptionItem?.plan_size?.size?.weight} Gr</h3>
 
                 <button onClick={clickHandler} type='submit' className='min-btn'>
                     Enviar

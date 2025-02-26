@@ -30,7 +30,7 @@ const useEditPlan = () => {
 
             if (!values?.sizes?.length) {
 
-                return swal.warning('Advertencia', 'Es necesario completar el campo de Talla, por favor.');
+                return swal.warning('Advertencia', 'Es necesario completar el campo de Talla y precio, por favor.');
 
             }
 

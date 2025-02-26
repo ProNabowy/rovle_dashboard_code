@@ -2,147 +2,125 @@ import axios from "axios";
 import { swal } from "../apis";
 
 export default class Delete {
+  deleteUserFromRole(userID, rowData) {
+    return axios.delete(`roles/${userID}/accounts`).then((response) => {
+      swal.success("Borrado!", `El rol ha sido eliminado.`);
 
-    deleteUserFromRole(userID, rowData) {
+      return response.data;
+    });
+  }
+  deleteRole(id, roles, state) {
+    return axios.delete(`roles/${id}`).then((response) => {
+      swal.success("Borrado!", `El rol ha sido eliminado.`);
 
-        return axios.delete(`roles/${userID}/accounts`).then(response => {
+      return state((perv) => perv?.filter((role) => role?.id != id));
+    });
+  }
+  deleteProduct(id, products, setProducts) {
+    return axios.delete(`products/${id}`).then((response) => {
+      swal.success("Borrado!", `Tu producto ha sido eliminado.`);
 
-            swal.success('Borrado!', `El rol ha sido eliminado.`);
+      const updatedProducts = products.filter((product) => product?.id != id);
 
-            return response.data
+      setProducts(updatedProducts);
 
-        });
+      return updatedProducts;
+    });
+  }
+  deleteOrigin(id, origins, setOrigins) {
+    return axios.delete(`origins/${id}`).then((response) => {
+      swal.success("Borrado!", `Tu café ha sido eliminado.`);
 
-    }
-    deleteRole(id, roles, state) {
+      const updatedOrigins = origins.filter((origin) => origin?.id != id);
 
-        return axios.delete(`roles/${id}`).then(response => {
+      setOrigins(updatedOrigins);
 
-            swal.success('Borrado!', `El rol ha sido eliminado.`);
+      return updatedOrigins;
+    });
+  }
+  deletePlan(id, plans, setPlans) {
+    return axios.delete(`plans/${id}`).then((response) => {
+      swal.success("Borrado!", `Tu plan ha sido eliminado.`);
 
-            return state(perv => perv?.filter(role => role?.id != id));
+      const updatedPlans = plans.filter((plan) => plan?.id != id);
 
-        });
+      setPlans(updatedPlans);
 
-    }
-    deleteProduct(id, products, setProducts) {
+      return updatedPlans;
+    });
+  }
+  deleteSize(id, sizes, setSizes) {
+    return axios.delete(`sizes/${id}`).then((response) => {
+      swal.success("Borrado!", `El tamaño ha sido eliminado.`);
 
-        return axios.delete(`products/${id}`).then(response => {
+      const updatedSizes = sizes.filter((size) => size?.id != id);
 
-            swal.success('Borrado!', `Tu producto ha sido eliminado.`);
+      setSizes(updatedSizes);
 
-            const updatedProducts = products.filter(product => product?.id != id);
+      return updatedSizes;
+    });
+  }
+  deleteUser(id, users, setUsers) {
+    return axios.delete(`users/${id}`).then((response) => {
+      swal.success("Borrado!", `El usuario ha sido eliminado.`);
 
-            setProducts(updatedProducts);
+      const updatedUsers = users.filter((user) => user?.id != id);
 
-            return updatedProducts;
-        });
+      setUsers(updatedUsers);
 
-    }
-    deleteOrigin(id, origins, setOrigins) {
+      return updatedUsers;
+    });
+  }
+  deleteRoaster(id, roasters, setRoasters) {
+    return axios.delete(`providers/${id}`).then((response) => {
+      swal.success("Borrado!", `Tu tostador ha sido eliminado.`);
 
-        return axios.delete(`origins/${id}`).then(response => {
+      const updatedRoasters = roasters.filter((roaster) => roaster?.id != id);
 
-            swal.success('Borrado!', `Tu café ha sido eliminado.`);
+      setRoasters(updatedRoasters);
 
-            const updatedOrigins = origins.filter(origin => origin?.id != id);
+      return updatedRoasters;
+    });
+  }
+  deleteCoffee(id, coffees, setCoffees) {
+    return axios.delete(`coffee-shops/${id}`).then((response) => {
+      swal.success("Borrado!", `Tu cafetería ha sido eliminada.`);
 
-            setOrigins(updatedOrigins);
+      const updatedCoffees = coffees.filter((coffee) => coffee?.id != id);
 
-            return updatedOrigins;
-        });
+      setCoffees(updatedCoffees);
 
-    }
-    deletePlan(id, plans, setPlans) {
+      return updatedCoffees;
+    });
+  }
+  deleteOffeer(id, offeers, setOffeer) {
+    return axios
+      .delete(`passports/${id}`)
+      .then((response) => {
+        swal.success("Borrado!", `Tu oferta ha sido eliminada.`);
 
-        return axios.delete(`plans/${id}`).then(response => {
+        const updatedOffeers = offeers.filter((coffee) => coffee?.id != id);
 
-            swal.success('Borrado!', `Tu plan ha sido eliminado.`);
+        setOffeer(updatedOffeers);
 
-            const updatedPlans = plans.filter(plan => plan?.id != id);
+        return updatedOffeers;
+      })
+      .catch((error) => {
+        if (error.response.data.message === "foreign key constraint fails") {
+          return swal.rejected(
+            "Oops",
+            "No puedes borrar esta oferta. Está canjeado por algunos clientes."
+          );
+        }
+      });
+  }
 
-            setPlans(updatedPlans);
-
-            return updatedPlans;
-        });
-
-    }
-    deleteSize(id, sizes, setSizes) {
-
-        return axios.delete(`sizes/${id}`).then(response => {
-
-            swal.success('Borrado!', `El tamaño ha sido eliminado.`);
-
-            const updatedSizes = sizes.filter(size => size?.id != id);
-
-            setSizes(updatedSizes);
-
-            return updatedSizes;
-        });
-
-    }
-    deleteUser(id, users, setUsers) {
-
-        return axios.delete(`users/${id}`).then(response => {
-
-            swal.success('Borrado!', `El usuario ha sido eliminado.`);
-
-            const updatedUsers = users.filter(user => user?.id != id);
-
-            setUsers(updatedUsers);
-
-            return updatedUsers;
-        });
-
-    }
-    deleteRoaster(id, roasters, setRoasters) {
-
-        return axios.delete(`providers/${id}`).then(response => {
-
-            swal.success('Borrado!', `Tu tostador ha sido eliminado.`)
-
-            const updatedRoasters = roasters.filter(roaster => roaster?.id != id);
-
-            setRoasters(updatedRoasters);
-
-            return updatedRoasters;
-        });
-
-    }
-    deleteCoffee(id, coffees, setCoffees) {
-
-        return axios.delete(`coffee-shops/${id}`).then(response => {
-
-            swal.success('Borrado!', `Tu cafetería ha sido eliminada.`);
-
-            const updatedCoffees = coffees.filter(coffee => coffee?.id != id);
-
-            setCoffees(updatedCoffees);
-
-            return updatedCoffees;
-        });
-
-    }
-    deleteOffeer(id, offeers, setOffeer) {
-
-        return axios.delete(`passports/${id}`).then(response => {
-
-            swal.success('Borrado!', `Tu oferta ha sido eliminada.`);
-
-            const updatedOffeers = offeers.filter(coffee => coffee?.id != id);
-
-            setOffeer(updatedOffeers);
-
-            return updatedOffeers;
-        });
-
-    }
-
-    cancelPlan(id) {
-        return axios.delete(`orders/${id}`).then(response => {
-            swal.success('Cancelado', `El pedido ha sido cancelado con éxito.`).then(_ => window.location.reload());
-            return response.data;
-        });
-    }
-
+  cancelPlan(id) {
+    return axios.delete(`orders/${id}`).then((response) => {
+      swal
+        .success("Cancelado", `El pedido ha sido cancelado con éxito.`)
+        .then((_) => window.location.reload());
+      return response.data;
+    });
+  }
 }

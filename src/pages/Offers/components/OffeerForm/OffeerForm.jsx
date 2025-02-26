@@ -40,7 +40,7 @@ export default function OffeerForm({ formik }) {
 
                             <div className='flex items-center justify-between'>
 
-                                <h2 className='label'>Tostadors</h2>
+                                <h2 className='label'>Tostadores</h2>
 
                                 {
                                     isHasPermissions('dashboard.providers.store')
