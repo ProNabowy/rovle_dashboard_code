@@ -107,33 +107,33 @@ const useDataGetter = () => {
                 }
 
                 {
-                    rowData?.status?.toLowerCase() === 'sending'
+                    rowData?.status?.toLowerCase() === 'enviando'
                         ?
                         <FontAwesomeIcon onClick={_ => {
 
-                            window.open(`https://rovle.eslamghazy.net/web/orders/${rowData?.id}/order_onetime_code/${rowData?.order_onetime_code}/label`, '_blank');
+                            let sessionToken = sessionStorage.getItem('token');
+                            
+                            fetch(
+                                 `https://api.rovle.io/api/dashboard/orders/${rowData?.id}/order_onetime_code/${rowData?.order_onetime_code}/label`,
+                                 {
+                                     method: "GET",
+                                     headers:{
+                                         "Accept" : "application/pdf",
+                                         "Authorization": `Bearer ${sessionToken || AUTH_TOKEN}`
 
-                            // fetch(
-                            //     `https://rovle.eslamghazy.net/web/orders/${rowData?.id}/label`,
-                            //     {
-                            //         method: "GET",
-                            //         headers:{
-                            //             "Accept" : "application/pdf",
-                            //             "Authorization": AUTH_TOKEN
+                                     }
+                                 }
 
-                            //         }
-                            //     }
-
-                            // )
-                            // .then( response => response.text())
-                            // .then( t => {
-                            //     console.log(t);
-                            //     var b = new Blob([t], {"type": "application/pdf"});
-                            //     var a=document.createElement("A");
-                            //     a.download=`etiqueta_${rowData?.id}.pdf`;
-                            //     a.href=window.URL.createObjectURL(b);
-                            //     a.click();
-                            // });
+                             )
+                             .then( response => response.blob())
+                             .then( b => {
+                                 console.log(b);
+                                 //var b = new Blob([t], {"type": "application/pdf"});
+                                 var a=document.createElement("A");
+                                 a.download=`etiqueta_${rowData?.id}.pdf`;
+                                 a.href=window.URL.createObjectURL(b);
+                                 a.click();
+                             }); 
 
                         }} icon={faPrint} className='text-[var(--primary-color)] cursor-pointer text-[20px]' />
                         :

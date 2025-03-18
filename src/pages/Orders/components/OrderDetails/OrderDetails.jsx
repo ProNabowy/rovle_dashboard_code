@@ -182,7 +182,7 @@ export default function OrderDetails({ visible, setVisible, row }) {
                 <div className='col-span-12 flex items-center justify-between flex-wrap gap-2 mt-10'>
 
                     {
-                        row?.status === "Pending"
+                        row?.status === "Pendiente"
                             ?
                             <Fragment>
 
